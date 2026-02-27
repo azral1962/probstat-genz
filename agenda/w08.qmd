@@ -1,0 +1,206 @@
+Week 08: Pengujian Hipotesis Statistik
+
+## Agenda Perkuliahan Minggu 08
+
+**Topik:** Pengujian Hipotesis Statistik (*Hypothesis Testing*)
+**Tema Misi:** "Myth Busters: Is It Real or Just Random Noise?"
+
+### Pertemuan 1: Senin (1 Jam) - The Intuition & The Logic
+**Fokus:** Membangun intuisi tentang P-value dan keputusan biner tanpa terjebak rumus rumit di awal.
+
+- **00:00 - 00:10 | The Hook: "Skepticism as a Tool"**
+    - Aktivitas: Tampilkan klaim marketing bombastis, misal: "Algoritma baru kami meningkatkan kecepatan internet 200%!"
+    - Diskusi: "Sebagai engineer, bagaimana kita membuktikan ini bohong atau benar? Apakah cukup dengan satu kali tes speedtest?"
+    - Konsep: Perkenalkan $H_0$ (Status Quo/Skeptis) vs $H_1$ (Klaim Baru). Sikap dasar statistik adalah skeptis sampai data memaksanya percaya.
+
+- **00:10 - 00:30 | Live Demo: "The Coin Toss Judge"**
+    - Dosen (Python): Simulasikan koin yang diklaim "curang". Lakukan 10 lemparan, dapat 8 Heads.
+    - Pertanyaan: "Apakah koin ini curang, atau kita sedang beruntung?"
+    - Simulasi: Jalankan 10.000 kali lemparan koin fair di Python. Hitung berapa kali muncul 8 Heads secara kebetulan.
+    - Hasil: Jika kejadian itu sering muncul (misal 5%), kita tidak bisa menuduh koin curang. Inilah intuisi P-value.
+
+- **00:30 - 00:50 | Konsep: P-value & Error Types**
+    - Jelaskan Galat Tipe I (Menuduh orang tidak bersalah/False Positive) dan Galat Tipe II (Membebaskan penjahat/False Negative).
+    - Definisikan Signifikansi ($\alpha$): Batas toleransi kita terhadap risiko menuduh salah (biasanya 0.05 atau 5%).
+
+- **00:50 - 01:00 | Pod Formation & Mission Brief**
+    - Misi GitHub: "The A/B Test Analyst". Mahasiswa akan menganalisis data eksperimen UI/UX untuk memutuskan fitur mana yang dirilis ke publik.
+
+### Pertemuan 2: Rabu (2 Jam) - Decision Lab
+**Fokus:** Menggunakan Python (`scipy.stats`) untuk melakukan A/B Testing pada data riil.
+
+- **00:00 - 00:20 | Micro-Lecture: T-Test Setup**
+    - Konsep: Kapan pakai Z-test (populasi tahu) vs T-test (sampel kecil/populasi tidak tahu). Di dunia IT, kita hampir selalu pakai T-test.
+    - Python Tool: `scipy.stats.ttest_ind` (untuk dua grup independen).
+
+- **00:20 - 01:10 | Pod Challenge: "Dark Mode vs. Light Mode"**
+    - Skenario: Tim desain mengklaim "Dark Mode" menghemat baterai HP user secara signifikan.
+    - Data: Dua dataset array (konsumsi baterai grup A/Light dan grup B/Dark).
+    - Tugas (Python):
+        1. Visualisasikan kedua distribusi (Histogram tumpang tindih).
+        2. Lakukan Uji Hipotesis (T-test).
+        3. Cek P-value. Jika $P < 0.05$, apakah perbedaan itu "signifikan"?
+        4. Critical Thinking: Apakah perbedaan 1% baterai walau signifikan secara statistik, signifikan secara bisnis?
+
+- **01:10 - 01:40 | Studi Kasus: "Server Response Time"**
+    - Membandingkan performa server lama vs server baru. Hati-hati dengan jumlah sampel ($n$). Sampel terlalu besar bisa membuat beda kecil (0.001 ms) jadi "signifikan" (P-value hacking).
+
+- **01:40 - 01:50 | Debat & Keputusan**
+    - Perwakilan Pods mempresentasikan keputusan rilis fitur mereka. "Launch" atau "Rollback"?
+
+- **01:50 - 02:00 | Exit Ticket**
+    - Pertanyaan: "Jelaskan P-value kepada nenekmu." (Jawaban ideal: Seberapa kaget kita melihat data ini jika tebakan awal kita benar).
+
+---
+
+## Materi Kuliah: Konsep, Aplikasi, & Komputasi
+
+### 1. Konsep Dasar
+- **Hipotesis Nol ($H_0$):** Asumsi dasar bahwa tidak ada efek atau perbedaan (misal: "Obat tidak bekerja", "Server baru sama saja").
+- **Hipotesis Alternatif ($H_1$):** Klaim yang ingin dibuktikan (misal: "Obat efektif", "Server baru lebih cepat").
+- **P-value:** Probabilitas melihat data se-ekstrim ini jika $H_0$ benar. P-value kecil (< 0.05) $\to$ Data sangat aneh/jarang $\to$ Tolak $H_0$.
+- **Galat Tipe I ($\alpha$):** False Positive. Menolak $H_0$ padahal $H_0$ benar (Melaporkan bug padahal tidak ada).
+- **Galat Tipe II ($\beta$):** False Negative. Gagal menolak $H_0$ padahal $H_1$ benar (Melewatkan bug yang ada).
+
+### 2. Aplikasi Sistem Informasi
+- **A/B Testing:** Standar industri untuk peluncuran fitur (Google, Netflix, Tokopedia). Membandingkan metrik (klik, durasi tonton) antara Grup Kontrol dan Eksperimen.
+- **Performance Benchmarking:** Membuktikan secara statistik bahwa algoritma kompresi baru lebih cepat daripada yang lama, bukan sekadar kebetulan pada satu file.
+- **Security Anomaly:** Menguji apakah lonjakan trafik pada jam 2 pagi berbeda signifikan dari rata-rata historis (potensi DDoS).
+
+### 3. Komputasi (Python)
+- **Library:** `scipy.stats` adalah alat utama.
+- **Fungsi:**
+    - `ttest_1samp`: Uji satu sampel terhadap rata-rata populasi.
+    - `ttest_ind`: Uji dua sampel independen (A/B Testing).
+    - `ttest_rel`: Uji pasangan (Before/After pada user yang sama).
+- **Interpretasi:** Python memberikan `statistic` dan `pvalue`. Mahasiswa harus membandingkan `pvalue` dengan alpha (0.05) untuk mengambil keputusan Boolean (Tolak/Terima).
+
+---
+
+## Tugas Kelompok (GitHub Classroom)
+**Judul:** Week 8 Mission: The Data-Driven Product Manager
+
+**Deskripsi:**
+Mahasiswa diberikan data log dari aplikasi e-commerce yang baru saja mengubah tata letak tombol "Beli". Tugas mereka adalah menentukan apakah perubahan ini meningkatkan penjualan atau justru membingungkan user.
+
+**Soal Python (Notebook):**
+1. **Data Exploration:** Load data `ab_test_data.csv`. Hitung rata-rata konversi (*conversion_rate*) untuk Grup A (Lama) dan Grup B (Baru). Buat boxplot perbandingan.
+2. **Hypothesis Formulation:** Tuliskan $H_0$ dan $H_1$ dalam kalimat bisnis dan simbol matematika. Tentukan $\alpha$.
+3. **Testing:**
+    - Gunakan `ttest_ind` untuk menguji perbedaan rata-rata.
+    - Hitung Confidence Interval selisih rata-rata kedua grup.
+4. **Business Decision:**
+    - Jika P-value < 0.05, apakah kita pasti harus rilis fitur baru?
+    - Hitung Lift (kenaikan persentase). Jika kenaikan hanya 0.1% tapi signifikan, apakah sepadan dengan biaya dev? Tulis rekomendasi akhir kepada CTO.
+
+---
+
+## 15 Soal & Solusi
+
+### A. Pertanyaan Konseptual
+
+1. **Soal:** Jelaskan perbedaan filosofis antara hipotesis nol ($H_0$) dan hipotesis alternatif ($H_1$).
+   - **Solusi:** $H_0$ adalah pernyataan "status quo" atau "tidak ada efek" yang diasumsikan benar sampai terbukti salah (pendekatan skeptis). $H_1$ adalah klaim baru atau efek yang ingin dibuktikan oleh peneliti. Kita hanya bisa menolak $H_0$, tidak pernah "membuktikan" $H_0$ benar.
+
+2. **Soal:** Apa yang dimaksud dengan tingkat signifikansi ($\alpha$) dan hubungannya dengan Galat Tipe I?
+   - **Solusi:** Tingkat signifikansi ($\alpha$) adalah probabilitas maksimum yang kita izinkan untuk melakukan Galat Tipe I (False Positive). Jika kita set $\alpha=0.05$, kita rela salah menuduh ada efek (padahal tidak ada) sebanyak 5% dari waktu eksperimen.
+
+3. **Soal:** Jelaskan konsep p-value dan bagaimana ia digunakan sebagai dasar penolakan $H_0$.
+   - **Solusi:** P-value adalah peluang mendapatkan data seperti yang kita amati (atau lebih ekstrim) jika $H_0$ benar. Jika p-value sangat kecil ($< \alpha$), artinya data tersebut sangat mustahil terjadi secara kebetulan, sehingga kita menolak $H_0$.
+
+4. **Soal:** Apa itu Galat Tipe II ($\beta$) dan bagaimana hubungannya dengan kekuatan uji (power of test)?
+   - **Solusi:** Galat Tipe II adalah kegagalan menolak $H_0$ padahal $H_1$ benar (gagal mendeteksi efek yang nyata). Kekuatan uji (Power) adalah $1 - \beta$, yaitu kemampuan tes untuk mendeteksi efek jika efek itu benar-benar ada.
+
+5. **Soal:** Mengapa pengujian satu arah (one-tailed) terkadang lebih kuat daripada pengujian dua arah (two-tailed)?
+   - **Solusi:** Karena pada uji satu arah, seluruh wilayah kritis ($\alpha$) dikumpulkan di satu sisi ekor distribusi. Ini membuat nilai kritis lebih mudah dicapai (lebih sensitif) untuk mendeteksi perubahan ke arah tertentu, namun butuh asumsi kuat bahwa perubahan ke arah sebaliknya tidak mungkin/tidak relevan.
+
+### B. Pertanyaan Aplikatif
+
+6. **Soal:** Sebuah ISP mengklaim kecepatan rata-rata mereka adalah 100 Mbps. Dari sampel 50 user, didapat rata-rata 95 Mbps. Ujilah klaim ISP tersebut dengan $\alpha=0.05$.
+   - **Solusi:**
+     - $H_0: \mu=100$, $H_1: \mu \neq 100$.
+     - Hitung statistik t: $t=(95-100)/(s/\sqrt{50})$.
+     - Bandingkan dengan $t_{kritis}$. Jika $|t| > t_{kritis}$ atau p-value < 0.05, klaim ditolak (kecepatan tidak sama dengan 100).
+
+7. **Soal:** Perusahaan startup mengklaim fitur baru mereka meningkatkan durasi sesi user. Lakukan uji hipotesis untuk membandingkan rata-rata durasi sebelum dan sesudah fitur dirilis.
+   - **Solusi:** Gunakan Paired T-test (Uji t berpasangan) karena subjeknya sama (sebelum vs sesudah). $H_0: \mu_{diff} \le 0$, $H_1: \mu_{diff} > 0$ (One-tailed). Jika p-value < $\alpha$, fitur terbukti meningkatkan durasi.
+
+8. **Soal:** Analisis apakah proporsi kegagalan transaksi di sistem pembayaran baru lebih kecil daripada sistem lama dengan tingkat signifikansi 1%.
+   - **Solusi:** Gunakan Z-test untuk dua proporsi.
+     - $H_0: p_{baru} \ge p_{lama}$. $H_1: p_{baru} < p_{lama}$.
+     - Jika Z-score berada di wilayah penolakan (kiri jauh) dengan $\alpha=0.01$, maka sistem baru terbukti lebih andal.
+
+9. **Soal:** Uji apakah rata-rata penggunaan data mahasiswa STI berbeda secara signifikan dari rata-rata mahasiswa program studi lain.
+   - **Solusi:** Gunakan Independent T-test (dua sampel bebas). Asumsikan varians bisa sama atau beda (Welch's t-test lebih aman). $H_0: \mu_{STI} = \mu_{Lain}$. Cari p-value dua arah.
+
+10. **Soal:** Gunakan uji hipotesis untuk memvalidasi apakah sebuah koin adil atau berat sebelah berdasarkan 100 lemparan.
+    - **Solusi:** Uji proporsi satu sampel.
+      - $H_0: p=0.5$. $H_1: p \neq 0.5$.
+      - Jika dari 100 lemparan muncul 60 Heads, hitung Z-score. Jika p-value > 0.05, kita tidak punya cukup bukti untuk mengatakan koin curang (terima $H_0$).
+
+### C. Pertanyaan Komputasional
+
+11. **Soal:** Tulis skrip Python untuk menghitung nilai t-statistik dan p-value secara manual untuk uji satu sampel.
+    - **Solusi:**
+```python
+import numpy as np  
+from scipy import stats  
+data = [52, 55, 49, 58, 54]  
+mu_0 = 50  
+t_stat = (np.mean(data) - mu_0) / (np.std(data, ddof=1) / np.sqrt(len(data)))  
+p_val = 2 * (1 - stats.t.cdf(abs(t_stat), df=len(data)-1))  
+print(f"t-stat: {t_stat}, p-val: {p_val}")  
+```
+
+12. **Soal:** Gunakan `scipy.stats.ttest_ind` untuk melakukan uji t dua sampel independen pada dataset performa server.
+    - **Solusi:**
+```python
+from scipy import stats  
+server_A = [120, 115, 122, 118, 119]  
+server_B = [110, 112, 108, 115, 111]  
+stat, pval = stats.ttest_ind(server_A, server_B)  
+print(f"P-value: {pval}")  
+# Jika pval < 0.05, performa berbeda signifikan.  
+```
+
+13. **Soal:** Visualisasikan daerah penolakan pada kurva distribusi Normal untuk uji dua arah.
+    - **Solusi:**
+```python
+import matplotlib.pyplot as plt  
+import numpy as np  
+from scipy.stats import norm  
+x = np.linspace(-4, 4, 1000)  
+plt.plot(x, norm.pdf(x))  
+plt.fill_between(x, 0, norm.pdf(x), where=(x > 1.96) | (x < -1.96), color='red')  
+plt.title("Daerah Penolakan (Alpha=0.05)")  
+plt.show()  
+```
+
+14. **Soal:** Buat simulasi untuk menghitung probabilitas Galat Tipe I dengan melakukan pengujian berulang pada data yang ditarik dari populasi yang sama.
+    - **Solusi:**
+```python
+# Simulasi A/A Testing  
+false_positives = 0  
+for _ in range(1000):  
+    # Ambil 2 sampel dari populasi SAMA  
+    a = np.random.normal(0, 1, 100)  
+    b = np.random.normal(0, 1, 100)  
+    _, p = stats.ttest_ind(a, b)  
+    if p < 0.05: false_positives += 1  
+print(f"Type I Error Rate: {false_positives/1000}")  
+# Hasil harus mendekati 0.05  
+```
+
+15. **Soal:** Implementasikan uji proporsi dua sampel menggunakan pustaka statsmodels.
+    - **Solusi:**
+```python
+from statsmodels.stats.proportion import proportions_ztest  
+# Sukses A=40/100, Sukses B=50/100  
+count = [40, 50]  
+nobs = [100, 100]  
+stat, pval = proportions_ztest(count, nobs)  
+print(f"P-value: {pval}")  
+```
+
+
+

@@ -1,0 +1,12 @@
+{
+  "hash": "bedc9586785763e13d6567e4614ce173",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Randomness: Acak itu bukan asal\"\n---\n\n## Try First — Lempar koin (Python)\n\n::: {#525c3f50 .cell execution_count=1}\n``` {.python .cell-code}\nimport random\n[random.choice([\"H\",\"T\"]) for _ in range(20)]\n```\n\n::: {.cell-output .cell-output-display execution_count=1}\n```\n['T',\n 'H',\n 'T',\n 'T',\n 'H',\n 'T',\n 'T',\n 'H',\n 'H',\n 'H',\n 'H',\n 'T',\n 'T',\n 'T',\n 'T',\n 'T',\n 'H',\n 'T',\n 'H',\n 'H']\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "01-randomness_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

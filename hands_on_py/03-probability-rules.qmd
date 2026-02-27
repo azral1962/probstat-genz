@@ -1,0 +1,8 @@
+---
+title: "Aturan Probabilitas"
+---
+
+```{python}
+import random
+random.randint(1,6)
+```

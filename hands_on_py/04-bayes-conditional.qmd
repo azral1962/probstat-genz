@@ -1,0 +1,660 @@
+---
+title: "Teorema Bayes dan Porbabilitas Kondisional"
+---
+
+The Hook: “Jebakan Tes DNA/Wajah”
+Aktivitas: Tampilkan skenario FaceID/Biometrik. “Jika sistem keamanan punya akurasi 99%, dan alarm berbunyi mendeteksi teroris, berapa persen kemungkinan orang itu benar-benar teroris?”
+Tebakan Mahasiswa: Kebanyakan akan menjawab 99%.
+Realita: Tunjukkan bahwa jika teroris sangat langka (misal 1 dari 10.000), peluangnya mungkin di bawah 1%. Ini adalah Base-Rate Fallacy.
+
+
+```{python}
+import numpy as np
+
+teroris_rate = 1/10000
+N = 100000 # Populasi
+nik = np.arange(N)
+status=["teroris","biasa"]
+prevalensi=[teroris_rate,1-teroris_rate]
+nik_teroris = np.random.choice(status,size=N,p=prevalensi)
+
+# print(teroris_rate, 1-teroris_rate, nik_teroris)
+hitung_teroris = list(nik_teroris).count("teroris")
+hitung_biasa = list(nik_teroris).count("biasa")
+print("teroris dan biasa:",hitung_teroris, hitung_biasa)
+
+# Deteksi
+akurasi = 99/100
+
+false_positive = 0
+false_negative = 0
+true_positive = 0
+true_negative = 0
+
+for i in nik:
+   rand = np.random.random()
+
+```
+
+
+```{python}
+import matplotlib.pyplot as plt
+
+def simulasi_base_rate_fallacy():
+    # 1. Parameter Input
+    populasi_total = 10000
+    prevalensi_teroris = 1 / 10000  # 1 teroris dari 10.000 orang
+    akurasi_sistem = 0.99           # 99%
+    
+    # 2. Perhitungan Logika
+    # Jumlah teroris dan orang biasa dalam populasi
+    jumlah_teroris = populasi_total * prevalensi_teroris
+    jumlah_orang_biasa = populasi_total - jumlah_teroris
+    
+    # Kasus A: Alarm bunyi karena BENAR teroris (True Positive)
+    # Sistem mendeteksi 99% dari 1 teroris yang ada
+    alarm_benar = jumlah_teroris * akurasi_sistem
+    
+    # Kasus B: Alarm bunyi padahal orang biasa (False Positive)
+    # Sistem salah mendeteksi 1% dari 9.999 orang biasa
+    alarm_salah = jumlah_orang_biasa * (1 - akurasi_sistem)
+    
+    # Total alarm yang berbunyi
+    total_alarm_bunyi = alarm_benar + alarm_salah
+    
+    # 3. Hasil Akhir (Peluang Aktual)
+    prob_aktual = (alarm_benar / total_alarm_bunyi) * 100
+
+    # 4. Tampilkan Hasil Ke Konsol
+    print("=== SIMULASI BASE-RATE FALLACY ===")
+    print(f"Total Populasi        : {populasi_total} orang")
+    print(f"Jumlah Teroris Nyata  : {int(jumlah_teroris)} orang")
+    print(f"Akurasi Sistem        : {akurasi_sistem*100}%")
+    print("-" * 35)
+    print(f"Alarm Berbunyi Benar  : {alarm_benar:.2f} kali")
+    print(f"Alarm Berbunyi Salah  : {alarm_salah:.2f} kali (False Positive)")
+    print(f"Total Alarm Berbunyi  : {total_alarm_bunyi:.2f} kali")
+    print("-" * 35)
+    print(f"TEBAKAN UMUM          : 99%")
+    print(f"REALITA (Probabilitas): {prob_aktual:.2f}%")
+    print("-" * 35)
+
+    # 5. Visualisasi
+    labels = ['Salah Tangkap\n(Bukan Teroris)', 'Benar Teroris']
+    sizes = [alarm_salah, alarm_benar]
+    colors = ['#ff9999', '#66b3ff']
+    
+    plt.figure(figsize=(7, 5))
+    plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140, colors=colors, explode=(0, 0.2))
+    plt.title('Siapa yang sebenarnya memicu alarm?')
+    plt.show()
+
+if __name__ == "__main__":
+    simulasi_base_rate_fallacy()
+
+```
+
+**Naive Bayes Classifier** adalah algoritma pembelajaran mesin (machine learning) yang digunakan untuk klasifikasi, berdasarkan **Teorema Bayes**.
+
+Disebut "Naive" (lugu/polos) karena algoritma ini membuat asumsi yang sangat kuat bahwa setiap fitur (variabel) dalam data bersifat **independen** satu sama lain. Artinya, keberadaan satu fitur dianggap tidak ada hubungannya dengan keberadaan fitur lainnya.
+
+
+
+### Konsep Dasar: Teorema Bayes
+
+Secara matematis, Naive Bayes bekerja dengan menghitung peluang suatu kelas berdasarkan sekumpulan fitur yang ada. Rumus dasarnya adalah:
+
+$$P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}$$
+
+* **$P(A|B)$**: Peluang kejadian A terjadi setelah B terjadi (Posterior).
+* **$P(B|A)$**: Peluang kejadian B terjadi jika A benar (Likelihood).
+* **$P(A)$**: Peluang awal kejadian A (Prior).
+* **$P(B)$**: Peluang awal kejadian B (Evidence).
+
+
+
+Dalam konteks *Peer-to-Peer (P2P) Lending*, **Naive Bayes Classifier** sering digunakan sebagai model awal (baseline) untuk menentukan apakah seorang calon peminjam (borrower) berisiko gagal bayar (*Default*) atau tidak (*Success*).
+
+Berikut adalah simulasi kasus sederhana menggunakan data profil peminjam.
+
+
+
+### 1. Skenario Data Peminjam
+
+Misalkan kita memiliki data historis dengan fitur-fitur berikut:
+
+* **Penghasilan:** Tinggi, Sedang, Rendah.
+* **Status Rumah:** Milik Sendiri, Sewa.
+* **Riwayat Kredit:** Lancar, Macet.
+
+
+Tentu saja! Membuat Naive Bayes dari nol (*from scratch*) sebenarnya adalah cara terbaik untuk memahami cara kerja probabilitas di balik layar. Kita hanya perlu menggunakan prinsip dasar **Teorema Bayes**.
+
+Dalam kasus *Credit Scoring*, kita akan menghitung:
+
+1. **Prior Probability**: Peluang awal seseorang "Lancar" atau "Gagal" bayar.
+2. **Likelihood**: Peluang munculnya fitur tertentu (misal: Penghasilan Rendah) jika diketahui orang tersebut "Gagal".
+
+
+
+### Kode Python: Naive Bayes Manual (Tanpa Sklearn)
+
+```python
+import pandas as pd
+
+# 1. Data Historis P2P Lending
+data = {
+    'Penghasilan': ['Tinggi', 'Rendah', 'Sedang', 'Rendah', 'Tinggi', 'Sedang', 'Rendah'],
+    'Status_Rumah': ['Milik', 'Sewa', 'Sewa', 'Sewa', 'Milik', 'Milik', 'Sewa'],
+    'Target': ['Lancar', 'Gagal', 'Lancar', 'Gagal', 'Lancar', 'Lancar', 'Gagal']
+}
+df = pd.DataFrame(data)
+
+def hitung_naive_bayes(data_baru):
+    # --- STEP 1: Hitung Prior P(Lancar) dan P(Gagal) ---
+    total_data = len(df)
+    p_lancar = len(df[df['Target'] == 'Lancar']) / total_data
+    p_gagal = len(df[df['Target'] == 'Gagal']) / total_data
+    
+    # --- STEP 2: Hitung Likelihood untuk setiap Fitur ---
+    # Kita akan menghitung P(Fitur | Lancar) dan P(Fitur | Gagal)
+    
+    prob_lancar = p_lancar
+    prob_gagal = p_gagal
+    
+    for kolom, nilai in data_baru.items():
+        # Likelihood untuk Lancar
+        count_fitur_lancar = len(df[(df[kolom] == nilai) & (df['Target'] == 'Lancar')])
+        likelihood_lancar = count_fitur_lancar / len(df[df['Target'] == 'Lancar'])
+        prob_lancar *= likelihood_lancar
+        
+        # Likelihood untuk Gagal
+        count_fitur_gagal = len(df[(df[kolom] == nilai) & (df['Target'] == 'Gagal')])
+        likelihood_gagal = count_fitur_gagal / len(df[df['Target'] == 'Gagal'])
+        prob_gagal *= likelihood_gagal
+    
+    # --- STEP 3: Normalisasi (Agar total probabilitas = 100%) ---
+    total_prob = prob_lancar + prob_gagal
+    hasil_lancar = (prob_lancar / total_prob) * 100
+    hasil_gagal = (prob_gagal / total_prob) * 100
+    
+    return hasil_lancar, hasil_gagal
+
+# --- UJI COBA ---
+# Peminjam baru: Penghasilan Rendah, Status Rumah Sewa
+calon_peminjam = {'Penghasilan': 'Rendah', 'Status_Rumah': 'Sewa'}
+lancar, gagal = hitung_naive_bayes(calon_peminjam)
+
+print(f"Hasil Analisis Risiko:")
+print(f"- Peluang Lancar: {lancar:.2f}%")
+print(f"- Peluang Gagal : {gagal:.2f}%")
+print(f"Keputusan: {'DITERIMA' if lancar > gagal else 'DITOLAK'}")
+
+```
+
+
+
+### Penjelasan Logika Matematikanya
+
+Ketika Anda menjalankan kode di atas, inilah yang dilakukan sistem secara manual:
+
+1. **Mencari "Prior":** Sistem melihat dari 7 data, berapa yang "Lancar" (4/7) dan "Gagal" (3/7).
+2. **Mencari "Likelihood":** * Dari semua orang yang **Gagal**, berapa yang **Penghasilannya Rendah**? (Sangat sering).
+* Dari semua orang yang **Lancar**, berapa yang **Rumahnya Sewa**? (Jarang).
+
+
+3. **Perkalian Berantai:** Sesuai rumus Naive Bayes, semua peluang tersebut dikalikan.
+* Jika hasil perkalian untuk kategori "Gagal" lebih besar, maka sistem akan menolak pinjaman tersebut.
+
+
+
+### Keuntungan Membuat Sendiri:
+
+* **Transparansi:** Anda bisa melihat persis mengapa seseorang ditolak (misalnya karena nilai Likelihood pada fitur tertentu nol).
+* **Tanpa Dependency:** Kode ini sangat ringan karena tidak membutuhkan library besar, cukup Python dasar (atau Pandas untuk mempermudah tabel).
+* **Laplace Smoothing:** Jika ada fitur yang belum pernah muncul di data latih (peluang = 0), Anda bisa dengan mudah menambahkan "+1" pada perhitungan (teknik *Laplace Smoothing*) agar hasil perkalian tidak menjadi nol semua.
+
+**Apakah Anda ingin saya tunjukkan cara menambahkan "Laplace Smoothing" agar kode ini lebih stabil saat menghadapi data yang tidak dikenal?**
+
+Komponen,Tanpa Smoothing,Dengan Laplace Smoothing
+Pembilang,count,count + 1
+Penyebut,total_kategori,total_kategori + jumlah_variasi_fitur
+Hasil jika data baru,0 (Error/Buntu),Tetap menghasilkan angka kecil (Stabil)
+
+### 2. Kode Python: Credit Scoring Model
+
+```python
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.naive_bayes import GaussianNB
+
+# 1. Dataset Historis P2P Lending
+data = {
+    'Penghasilan': ['Tinggi', 'Rendah', 'Sedang', 'Rendah', 'Tinggi', 'Sedang', 'Rendah'],
+    'Status_Rumah': ['Milik', 'Sewa', 'Sewa', 'Sewa', 'Milik', 'Milik', 'Sewa'],
+    'Riwayat_Kredit': ['Lancar', 'Macet', 'Lancar', 'Lancar', 'Lancar', 'Macet', 'Macet'],
+    'Target': ['Lancar', 'Gagal', 'Lancar', 'Gagal', 'Lancar', 'Lancar', 'Gagal']
+}
+
+df = pd.DataFrame(data)
+
+# 2. Encoding: Mengubah Teks menjadi Angka
+# Naive Bayes memerlukan input numerik
+le = LabelEncoder()
+df_encoded = df.apply(le.fit_transform)
+
+X = df_encoded.drop('Target', axis=1)
+y = df_encoded['Target']
+
+# 3. Membuat Model Naive Bayes
+model_credit = GaussianNB()
+model_credit.fit(X, y)
+
+# 4. Prediksi untuk Calon Peminjam Baru
+# Misal: Penghasilan Sedang (1), Status Sewa (1), Riwayat Macet (1)
+peminjam_baru = [[1, 1, 1]] 
+prediksi = model_credit.predict(peminjam_baru)
+probabilitas = model_credit.predict_proba(peminjam_baru)
+
+# Hasil
+status = le.inverse_transform(prediksi)[0]
+print(f"Prediksi untuk Peminjam Baru: {status}")
+print(f"Probabilitas Gagal Bayar: {probabilitas[0][0]*100:.2f}%")
+print(f"Probabilitas Lancar Bayar: {probabilitas[0][1]*100:.2f}%")
+
+```
+
+
+
+### 3. Logika "Naive" dalam Credit Scoring
+
+Mengapa algoritma ini disebut "Naive" dalam kasus pinjaman?
+
+1. **Asumsi Independensi:** Model menganggap **Penghasilan** tidak ada hubungannya dengan **Status Rumah**. Padahal, di dunia nyata, orang berpenghasilan tinggi biasanya lebih cenderung memiliki rumah sendiri.
+2. **Kecepatan vs Akurasi:** Meskipun asumsinya "polos", Naive Bayes sangat cepat untuk memproses ribuan pengajuan pinjaman secara *real-time* di aplikasi P2P Lending.
+
+
+
+### 4. Interpretasi Hasil untuk Keputusan Bisnis
+
+Dalam praktiknya, perusahaan P2P Lending tidak hanya melihat hasil "Lancar" atau "Gagal", tetapi melihat **Probabilitas (Score)**:
+
+| Probabilitas Lancar | Kategori Risiko | Tindakan Sistem |
+| --- | --- | --- |
+| > 80% | Low Risk | Pinjaman langsung disetujui (Auto-approve) |
+| 50% - 80% | Medium Risk | Perlu verifikasi manual oleh tim analis |
+| < 50% | High Risk | Pinjaman ditolak secara otomatis |
+
+
+
+### Keuntungan untuk Riset Engineering/Ekonomi:
+
+Model ini sangat berguna jika Anda ingin membangun sistem *early warning* yang ringan di sisi server. Karena perhitungannya hanya berbasis probabilitas kondisional, ia tidak membebani memori server meskipun volume data peminjam sangat besar.
+
+**Apakah Anda ingin saya menambahkan fitur "Cross-Validation" untuk menguji seberapa akurat model ini jika diterapkan pada data yang lebih besar?**
+
+**Simulasi kode Python sederhana untuk menghitung Naive Bayes ini menggunakan library Scikit-Learn**
+
+Tentu! Kita akan menggunakan library `scikit-learn`, yang merupakan standar industri untuk *machine learning* di Python.
+
+Berikut adalah simulasi sederhana untuk mengklasifikasikan apakah sebuah pesan adalah **"Promo"** atau **"Pesan Biasa"** berdasarkan kata-kata di dalamnya.
+
+
+
+### Contoh Sederhana: Klasifikasi Email (Spam atau Bukan)
+
+Bayangkan kita ingin menentukan apakah sebuah email adalah **Spam** atau **Bukan Spam** berdasarkan kata-kata yang muncul di dalamnya.
+
+#### 1. Data Latihan (Skenario)
+
+Misalkan dari 100 email yang kita miliki:
+
+* **20 email adalah Spam.**
+* **80 email adalah Bukan Spam.**
+* Dalam email **Spam**, kata "Hadiah" muncul 15 kali.
+* Dalam email **Bukan Spam**, kata "Hadiah" hanya muncul 4 kali.
+
+#### 2. Pertanyaan
+
+Jika ada email baru masuk dengan kata **"Hadiah"**, apakah email tersebut termasuk Spam?
+
+#### 3. Perhitungan Cepat
+
+Algoritma akan membandingkan dua peluang:
+
+1. **Peluang Spam jika ada kata "Hadiah":** Dihitung dari seberapa sering "Hadiah" muncul di kategori Spam dikali dengan total peluang email itu Spam.
+2. **Peluang Bukan Spam jika ada kata "Hadiah":** Dihitung dari seberapa sering "Hadiah" muncul di kategori Bukan Spam dikali dengan total peluang email itu Bukan Spam.
+
+#### 4. Keputusan
+
+Meskipun kata "Hadiah" muncul di kedua jenis email, karena frekuensinya jauh lebih tinggi di kategori Spam ($15/20$ dibandingkan $4/80$), Naive Bayes akan menyimpulkan bahwa email tersebut memiliki probabilitas lebih tinggi sebagai **Spam**.
+
+
+
+### Mengapa Algoritma Ini Populer?
+
+* **Sangat Cepat:** Karena perhitungannya sederhana (hanya perkalian probabilitas).
+* **Hemat Data:** Tetap bekerja dengan baik meskipun jumlah data latihnya sedikit.
+* **Efisien untuk Teks:** Sangat sering digunakan untuk analisis sentimen, filter spam, dan kategorisasi berita.
+
+
+
+
+
+### Kode Python: Naive Bayes Sederhana
+
+```python
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+# 1. Data Latih (Kalimat dan Labelnya)
+# 0 = Pesan Biasa, 1 = Promo
+pesan = [
+    "Halo apa kabar hari ini", 
+    "Rapat dosen jam sepuluh pagi", 
+    "Dapatkan diskon hadiah pulsa sekarang", 
+    "Promo beli satu gratis satu",
+    "Jangan lupa kerjakan tugas kuliah"
+]
+label = [0, 0, 1, 1, 0] 
+
+# 2. Mengubah teks menjadi angka (Vektorisasi)
+# Naive Bayes butuh angka, bukan kata-kata mentah
+vectorizer = CountVectorizer()
+X_train = vectorizer.fit_transform(pesan)
+
+# 3. Membuat dan Melatih Model (Multinomial Naive Bayes)
+model = MultinomialNB()
+model.fit(X_train, label)
+
+# 4. Uji Coba dengan Pesan Baru
+pesan_baru = ["Ada hadiah diskon khusus untuk Anda"]
+X_test = vectorizer.transform(pesan_baru)
+prediksi = model.predict(X_test)
+
+# Output Hasil
+kategori = "Promo" if prediksi[0] == 1 else "Pesan Biasa"
+print(f"Pesan: '{pesan_baru[0]}'")
+print(f"Hasil Klasifikasi: {kategori}")
+
+```
+
+
+
+### Penjelasan Singkat Alur Kerja:
+
+1. **`CountVectorizer`**: Karena komputer tidak paham kata-kata, kita mengubah kalimat menjadi tabel frekuensi kata (sering disebut *Bag of Words*).
+2. **`MultinomialNB`**: Ini adalah varian Naive Bayes yang paling cocok untuk data teks (menghitung kemunculan kata).
+3. **`fit`**: Model mempelajari pola kata mana yang sering muncul di kategori "Promo" dan mana yang di "Pesan Biasa".
+4. **`predict`**: Model menghitung probabilitas berdasarkan kata-kata di `pesan_baru` (seperti kata "hadiah" dan "diskon") untuk menentukan kategori akhirnya.
+
+### Keuntungan untuk Penelitian/Pengajaran:
+
+Dalam konteks akademik, Naive Bayes sangat berguna sebagai **baseline model**. Sebelum menggunakan algoritma yang lebih kompleks (seperti Neural Networks), peneliti biasanya menjalankan Naive Bayes terlebih dahulu untuk melihat performa dasarnya karena sangat cepat dan efisien.
+
+
+
+**Apakah Anda ingin saya membantu membuatkan visualisasi grafik (seperti bar chart) untuk menunjukkan bagaimana probabilitas kata-kata tersebut didistribusikan dalam model ini?**
+
+Analisis sentimen adalah penggunaan **Naive Bayes** untuk menentukan apakah sebuah teks (seperti ulasan produk atau cuitan media sosial) bernada **Positif** atau **Negatif**.
+
+Ini sangat populer karena dalam bahasa manusia, kata-kata tertentu seperti "kecewa", "lambat", atau "puas" memiliki bobot probabilitas yang sangat kuat terhadap sentimen tertentu.
+
+
+
+### Kode Python: Analisis Sentimen Ulasan Produk
+
+Berikut adalah simulasi sederhana menggunakan data ulasan fiktif:
+
+```python
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+# 1. Dataset Latih (Review Produk)
+# 0 = Negatif, 1 = Positif
+data_review = {
+    'ulasan': [
+        "Barang bagus sekali, pengiriman cepat",
+        "Sangat puas dengan kualitasnya",
+        "Pelayanan ramah dan respon kilat",
+        "Kecewa, barang rusak saat sampai",
+        "Pengiriman lambat sekali, kapok belanja di sini",
+        "Kualitas buruk, tidak sesuai foto",
+        "Sesuai pesanan dan berfungsi baik"
+    ],
+    'sentimen': [1, 1, 1, 0, 0, 0, 1]
+}
+
+df_review = pd.DataFrame(data_review)
+
+# 2. Vektorisasi
+vectorizer = CountVectorizer()
+X_latih = vectorizer.fit_transform(df_review['ulasan'])
+
+# 3. Training Model
+model_sentimen = MultinomialNB()
+model_sentimen.fit(X_latih, df_review['sentimen'])
+
+# 4. Uji Coba Ulasan Baru
+ulasan_baru = ["Barangnya jelek, saya sangat menyesal beli ini"]
+X_baru = vectorizer.transform(ulasan_baru)
+prediksi = model_sentimen.predict(X_baru)
+
+# Output
+hasil = "Positif" if prediksi[0] == 1 else "Negatif"
+print(f"Ulasan: '{ulasan_baru[0]}'")
+print(f"Prediksi Sentimen: {hasil}")
+
+```
+
+
+
+### Bagaimana Naive Bayes Menilai Sentimen?
+
+Naive Bayes bekerja seperti **"Kamus Probabilitas"**:
+
+1. **Pemisahan Kata (Tokenization):** Model memecah kalimat menjadi: "Barangnya", "jelek", "saya", "sangat", "menyesal", "beli", "ini".
+2. **Pencarian Nilai:** Model mencari kata **"jelek"** dan **"menyesal"** di dalam memori data latihnya.
+3. **Akumulasi Skor:** * Kata **"jelek"** hampir 100% muncul di ulasan berlabel **0 (Negatif)**.
+* Meskipun ada kata netral seperti "saya" atau "beli", keberadaan kata bermuatan negatif yang kuat akan menarik skor probabilitas ke arah **Negatif**.
+
+
+4. **Independensi:** Naive Bayes tidak peduli urutan kata (itulah sebabnya disebut *Naive*). Ia hanya peduli bahwa kata "jelek" muncul, terlepas dari apakah itu di awal atau di akhir kalimat.
+
+### Tantangan dalam Analisis Sentimen
+
+Naive Bayes terkadang kesulitan dengan **Sarkasme**. Contoh: *"Wah, barangnya datang cepat sekali, cuma butuh waktu 3 minggu!"* Secara harfiah ada kata "cepat", sehingga Naive Bayes mungkin mengira itu **Positif**, padahal maksudnya **Negatif**.
+
+
+
+**Apakah Anda ingin saya menunjukkan cara menangani masalah "kata-kata umum" (seperti 'dan', 'yang', 'di') yang sering mengganggu akurasi model menggunakan teknik TF-IDF?**
+
+Tentu, mari kita tingkatkan simulasinya menggunakan **TF-IDF (Term Frequency-Inverse Document Frequency)**.
+
+Dalam Naive Bayes sederhana (Count Vectorizer), kita hanya menghitung frekuensi kata. Masalahnya, kata-kata umum seperti "yang", "dan", "di", atau "saya" sering muncul di semua kategori sehingga tidak membantu menentukan sentimen (malah mengaburkan prediksi).
+
+**TF-IDF** memberikan bobot tinggi pada kata yang *unik* dan *bermakna* (seperti "kecewa" atau "puas") dan memberikan bobot rendah pada kata-kata umum.
+
+
+
+### Kode Python: Naive Bayes + TF-IDF
+
+```python
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+# 1. Dataset Latih (Review Produk Lebih Beragam)
+data_ulasan = {
+    'teks': [
+        "Barang bagus sekali, saya sangat puas dan senang",
+        "Layanan lambat, saya sangat kecewa dan tidak puas",
+        "Kualitas produk ini sangat luar biasa, rekomended",
+        "Penjual tidak ramah, respon sangat lama sekali",
+        "Sesuai dengan deskripsi, barang berfungsi normal",
+        "Barang rusak, jangan beli di toko ini, parah"
+    ],
+    'sentimen': [1, 0, 1, 0, 1, 0] # 1: Positif, 0: Negatif
+}
+
+df = pd.DataFrame(data_ulasan)
+
+# 2. Menggunakan TF-IDF Vectorizer
+# Kita buang kata umum (stop_words) dalam bahasa Indonesia secara manual atau otomatis
+tfidf = TfidfVectorizer()
+X_tfidf = tfidf.fit_transform(df['teks'])
+
+# 3. Training Model Naive Bayes
+model_tfidf = MultinomialNB()
+model_tfidf.fit(X_tfidf, df['sentimen'])
+
+# 4. Uji Coba dengan Kalimat yang Mengandung Kata Umum
+kalimat_uji = ["Saya sebenarnya suka barangnya, tapi sayang pengiriman sangat lambat"]
+X_uji = tfidf.transform(kalimat_uji)
+prediksi = model_tfidf.predict(X_uji)
+prob = model_tfidf.predict_proba(X_uji)
+
+# Output
+hasil = "Positif" if prediksi[0] == 1 else "Negatif"
+print(f"Kalimat: '{kalimat_uji[0]}'")
+print(f"Hasil Prediksi: {hasil}")
+print(f"Skor Keyakinan: Negatif ({prob[0][0]:.2f}), Positif ({prob[0][1]:.2f})")
+
+```
+
+
+
+### Mengapa TF-IDF Lebih Baik?
+
+1. **Term Frequency (TF):** Seberapa sering kata muncul dalam satu dokumen.
+2. **Inverse Document Frequency (IDF):** Seberapa jarang kata tersebut muncul di seluruh kumpulan data.
+* Kata **"Saya"** muncul di hampir semua ulasan -> Skor IDF **rendah** (dianggap kurang penting).
+* Kata **"Lambat"** hanya muncul di ulasan negatif -> Skor IDF **tinggi** (dianggap fitur kunci).
+
+
+
+Dengan kombinasi ini, Naive Bayes menjadi jauh lebih "cerdas" karena ia mengabaikan kebisingan kata-kata formalitas dan fokus pada kata-kata yang benar-benar membawa emosi atau sentimen.
+
+
+
+### Perbandingan Visual: Count vs TF-IDF
+
+| Fitur | Count Vectorizer | TF-IDF Vectorizer |
+| --- | --- | --- |
+| **Cara Kerja** | Menghitung jumlah kata | Menghitung kepentingan kata |
+| **Kata Umum** | Dianggap penting jika sering muncul | Dianggap tidak penting (bobot dikurangi) |
+| **Akurasi** | Standar | Biasanya lebih tinggi untuk teks panjang |
+
+
+
+**Apakah Anda ingin mencoba menerapkan ini pada data asli? Saya bisa membantu membuatkan fungsi "Scraper" sederhana atau cara mengimpor file Excel/CSV ke dalam model ini.**
+
+Membuat deteksi spam tanpa `sklearn` berarti kita akan membangun **Multinomial Naive Bayes** dari nol. Perbedaan utama dengan kasus *Credit Scoring* sebelumnya adalah kita harus berurusan dengan **frekuensi kata** (berapa kali kata "PROMO" muncul) bukan sekadar kategori.
+
+Berikut adalah implementasi lengkap menggunakan Python murni:
+
+
+
+### 1. Dataset Sederhana (Internal)
+
+Kita akan menggunakan beberapa contoh kalimat sebagai data latih.
+
+```python
+# 0 = Bukan Spam (Ham), 1 = Spam
+data_latih = [
+    ("Halo apa kabar hari ini", 0),
+    ("Rapat dosen jam sepuluh pagi", 0),
+    ("Dapatkan hadiah diskon pulsa sekarang", 1),
+    ("Promo beli satu gratis satu", 1),
+    ("Jangan lupa kerjakan tugas kuliah", 0),
+    ("Pemenang undian berhadiah mobil", 1),
+    ("Ayo kumpul di kantin siang ini", 0),
+    ("Klik link ini untuk klaim hadiah Anda", 1)
+]
+
+```
+
+
+
+### 2. Kode Python: Spam Detector dari Nol
+
+```python
+import math
+from collections import Counter
+
+class SimpleSpamDetector:
+    def __init__(self, alpha=1.0):
+        self.alpha = alpha  # Parameter Laplace Smoothing
+        self.vocab = set()
+        self.word_counts = {0: Counter(), 1: Counter()}
+        self.class_counts = {0: 0, 1: 0}
+
+    def train(self, data):
+        for teks, label in data:
+            kata_kata = teks.lower().split()
+            self.class_counts[label] += 1
+            for kata in kata_kata:
+                self.vocab.add(kata)
+                self.word_counts[label][kata] += 1
+
+    def predict(self, teks_baru):
+        kata_uji = teks_baru.lower().split()
+        total_latih = sum(self.class_counts.values())
+        
+        # Log-Probability untuk menghindari angka yang terlalu kecil (underflow)
+        log_prob_ham = math.log(self.class_counts[0] / total_latih)
+        log_prob_spam = math.log(self.class_counts[1] / total_latih)
+
+        v = len(self.vocab) # Jumlah kata unik untuk Laplace Smoothing
+
+        for kata in kata_uji:
+            # Hitung P(Kata | Ham) dengan Laplace Smoothing
+            p_kata_ham = (self.word_counts[0][kata] + self.alpha) / \
+                         (sum(self.word_counts[0].values()) + self.alpha * v)
+            log_prob_ham += math.log(p_kata_ham)
+
+            # Hitung P(Kata | Spam) dengan Laplace Smoothing
+            p_kata_spam = (self.word_counts[1][kata] + self.alpha) / \
+                          (sum(self.word_counts[1].values()) + self.alpha * v)
+            log_prob_spam += math.log(p_kata_spam)
+
+        # Konversi kembali dari log ke probabilitas normal (untuk persentase)
+        prob_spam = 1 / (1 + math.exp(log_prob_ham - log_prob_spam))
+        return "SPAM" if log_prob_spam > log_prob_ham else "BUKAN SPAM", prob_spam
+
+# --- EKSEKUSI ---
+detector = SimpleSpamDetector()
+detector.train(data_latih)
+
+test_email = "Selamat! Anda menang hadiah promo hari ini"
+hasil, skor = detector.predict(test_email)
+
+print(f"Email: '{test_email}'")
+print(f"Hasil: {hasil}")
+print(f"Keyakinan Spam: {skor * 100:.2f}%")
+
+```
+
+
+
+### 3. Apa yang Terjadi di Balik Layar?
+
+1. **Vocabulary Building:** Sistem mencatat semua kata unik dari seluruh email (misal: "halo", "promo", "hadiah", "rapat").
+2. **Word Counting:** Sistem menghitung seberapa sering kata "hadiah" muncul di kategori **Spam** vs **Bukan Spam**.
+3. **Log-Probability Trick:** Kita menggunakan `math.log` dan penjumlahan, bukan perkalian langsung. Mengapa? Karena jika kita mengalikan banyak angka desimal kecil (misal: $0.001 \times 0.0005 \dots$), hasilnya akan menjadi sangat kecil hingga komputer tidak bisa membacanya (*Floating Point Underflow*). Penjumlahan logaritma adalah solusi standar dalam teknik mesin.
+4. **Laplace Smoothing:** Jika email baru mengandung kata yang tidak ada di data latih (misal: "klaim"), rumus `(0 + 1) / (total + v)` memastikan perhitungan tidak hancur menjadi nol.
+
+
+
+### Analisis Hasil
+
+Jika Anda memasukkan kata **"hadiah"** dan **"promo"**, skor spam akan melonjak drastis. Namun, jika Anda memasukkan kata **"dosen"** atau **"kuliah"**, model akan cenderung melabelinya sebagai "Bukan Spam".
+
+### Mengapa Tanpa Sklearn Itu Bagus?
+
+* **Transparansi:** Anda bisa melihat `self.word_counts` untuk tahu kata apa yang paling "beracun" (paling sering memicu label spam).
+* **Kecepatan:** Model ini bisa berjalan di perangkat dengan memori sangat rendah (seperti Arduino atau modul IoT sederhana).
+
+**Apakah Anda ingin saya tunjukkan cara membuang "Stopwords" (kata-kata tidak bermakna seperti 'di', 'ke', 'ini') agar akurasi deteksi spam ini menjadi lebih tajam?**
+

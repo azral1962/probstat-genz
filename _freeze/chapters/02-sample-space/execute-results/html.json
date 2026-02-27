@@ -1,0 +1,12 @@
+{
+  "hash": "6f5bd2e77f59dedc0a1213ef1da1942f",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Ruang Sampel & Kejadian\"\n---\n\n::: {#bc0dfe1e .cell execution_count=1}\n``` {.python .cell-code}\nimport itertools\nlist(itertools.product([\"H\",\"T\"], repeat=2))\n```\n\n::: {.cell-output .cell-output-display execution_count=1}\n```\n[('H', 'H'), ('H', 'T'), ('T', 'H'), ('T', 'T')]\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "02-sample-space_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

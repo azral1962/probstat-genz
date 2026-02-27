@@ -1,0 +1,32 @@
+---
+title: "Minggu 09: Fungsi Variabel Acak"
+subtitle: "Function of Random Variables, PDF of new random variable"
+
+---
+
+![“Kesalahan ukur arus itu kecil. Tapi daya listrik P = I²R. Kuadrat itu pengganda masalah. Jadi, kalau I random, P jadi random dengan karakter berbeda. Hari ini kamu belajar trik penting: kalau Y = g(X), bagaimana distribusi Y? Ini skill yang sering dipakai untuk batas toleransi keamanan komponen. Kita mau jawab: seberapa sering P melewati batas berbahaya? Ini statistik yang langsung nyambung ke keselamatan.”](../The_Decision_Engineer.png/image9.png)
+
+
+{{< include ../agenda/w09.qmd >}}
+
+## 1. Konsep Pengetahuan
+Menentukan distribusi probabilitas dari variabel baru Y yang merupakan fungsi dari variabel acak X (misal Y = g(X)).
+
+## 2. Tipikal Problem
+Diketahui distribusi kesalahan pengukuran arus listrik (X). Bagaimana distribusi kesalahan daya listrik (P), jika P = I^2 * R?
+
+## 3. Solusi & Pengambilan Keputusan
+Menggunakan metode transformasi atau fungsi pembangkit momen untuk menurunkan PDF dari P. Ini penting bagi insinyur untuk menentukan batas toleransi keamanan komponen agar tidak terbakar akibat fluktuasi daya.
+
+## 4. Eksplorasi Komputasi (Python)
+*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
+
+```{python}
+# Tulis kode Python Anda di sini
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+print("Siap untuk komputasi Minggu 09!")
+```

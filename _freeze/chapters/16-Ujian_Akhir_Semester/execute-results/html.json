@@ -1,0 +1,12 @@
+{
+  "hash": "c291c3dc45de7d1fd22b0ecc8d5ef284",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Minggu 16: Ujian Akhir Semester\"\nsubtitle: \"Final Exam\"\n\n---\n\n![“Final ini menilai satu hal: apakah kamu bisa memodelkan dunia yang tidak pasti lalu mengambil keputusan yang bisa dipertanggungjawabkan. Kamu akan dapat kasus besar. Tugasmu: pilih model, jalankan analisis, tulis keputusan, dan jelaskan konsekuensinya. Ini bukan akhir materi—ini awal cara berpikir.”](../The_Decision_Engineer.png/image15.png)\n\n## 1. Konsep Pengetahuan\nEvaluasi menyeluruh materi satu semester.\n\n## 2. Tipikal Problem\nUjian komprehensif studi kasus.\n\n## 3. Solusi & Pengambilan Keputusan\nMenerapkan seluruh konsep probabilitas dan statistik untuk menyelesaikan masalah rekayasa.\n\n## 4. Eksplorasi Komputasi (Python)\n*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*\n\n::: {#fc765216 .cell execution_count=1}\n``` {.python .cell-code}\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 16!\")\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nSiap untuk komputasi Minggu 16!\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "16-Ujian_Akhir_Semester_files\\figure-html"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

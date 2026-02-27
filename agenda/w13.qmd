@@ -1,0 +1,190 @@
+ Week 13: Regresi Linear Sederhana dan Korelasi
+
+## Agenda Perkuliahan Minggu 13
+**Topik:** Regresi Linear Sederhana & Korelasi
+**Tema Misi:** "Predicting the Future: From Data Points to Crystal Balls"
+
+### Pertemuan 1: Senin (1 Jam) - The Intuition & The Pattern
+**Fokus:** Memahami perbedaan korelasi dan kausalitas, serta konsep dasar "garis terbaik" untuk prediksi.
+
+- **00:00 - 00:10 | The Hook: "Spurious Correlations"**
+    - Aktivitas: Tampilkan grafik korelasi konyol (misal: "Jumlah film Nicolas Cage vs. Orang tenggelam di kolam renang"). Korelasinya tinggi (r=0.66), tapi apakah berhubungan?
+    - Poin: Correlation $\neq$ Causation. Sebagai Data Scientist, tugas kita membedakan pola nyata dari kebetulan.
+
+- **00:10 - 00:30 | Konsep: Garis Terbaik (Least Squares)**
+    - Masalah: Kita punya data server load dan latency. Bagaimana memprediksi latency jika load naik 2x lipat?
+    - Visual: Tunjukkan Scatter Plot. Tantang mahasiswa menarik garis lurus di layar/papan. Garis mana yang "paling benar"?
+    - Definisi: Metode Kuadrat Terkecil (Ordinary Least Squares - OLS) meminimalkan total kuadrat jarak vertikal (error/residual) antara data dan garis.
+
+- **00:30 - 00:50 | Deep Dive: $R^2$ (The Scoreboard)**
+    - Analogi: $R^2$ (Koefisien Determinasi) adalah "skor ujian" model kita.
+        - $R^2=1$: Peramal sempurna (God mode).
+        - $R^2=0$: Tebakan acak (Useless).
+    - Diskusi: Apakah $R^2$ tinggi selalu baik? (Intro ke Overfitting).
+
+- **00:50 - 01:00 | Pod Formation & Mission Brief**
+    - Misi GitHub: "The Price Predictor". Mahasiswa akan membangun model ML pertama mereka untuk memprediksi harga laptop/gadget berdasarkan spesifikasi.
+
+### Pertemuan 2: Rabu (2 Jam) - Prediction Lab
+**Fokus:** Menggunakan Python (scikit-learn) untuk membangun model regresi linear dan interpretasi bisnis.
+
+- **00:00 - 00:20 | Micro-Lecture: Membaca Model ($y=\beta_0+\beta_1x$)**
+    - Intersep ($\beta_0$): Nilai dasar (misal: Harga laptop tanpa RAM? Mungkin biaya casing).
+    - Slope ($\beta_1$): Dampak marjinal (misal: Setiap tambah 1GB RAM, harga naik Rp 500rb). Ini yang paling penting untuk bisnis.
+
+- **00:20 - 01:10 | Pod Challenge: "Tech Pricing Algorithm"**
+    - Skenario: Anda bekerja di e-commerce barang bekas. Buat fitur "Saran Harga" otomatis.
+    - Data: `laptop_prices.csv` (Kolom: RAM, Storage, Screen Size, Price).
+    - Tugas (Python):
+        1. EDA: Buat Heatmap korelasi. Fitur mana yang paling ngaruh ke harga? (RAM? Storage?).
+        2. Modelling: Gunakan `LinearRegression` dari sklearn untuk melatih model.
+        3. Evaluasi: Berapa MSE dan $R^2$-nya?
+        4. Prediction: Jika ada laptop RAM 16GB dan Storage 512GB, berapa harganya menurut modelmu?
+
+- **01:10 - 01:40 | Studi Kasus: Residual Analysis**
+    - Masalah: Apakah model kita bias?
+    - Visualisasi: Plot Residual ($y_{pred}-y_{actual}$). Jika bentuknya acak (noise), model bagus. Jika membentuk pola (kurva U), berarti kita butuh model non-linear.
+
+- **01:40 - 01:50 | Showcase & Debat**
+    - "Apakah RAM 64GB harganya masuk akal di model linear?" (Diskusi tentang ekstrapolasi).
+
+- **01:50 - 02:00 | Exit Ticket**
+    - Pertanyaan: "Jika $R^2=0.8$, apa artinya bagi variansi data?" (Jawab: 80% variasi harga bisa dijelaskan oleh spesifikasi, 20% sisanya misteri/faktor lain).
+
+---
+
+## Materi Kuliah: Konsep, Aplikasi, & Komputasi
+
+### 1. Konsep Dasar
+- **Korelasi (r):** Mengukur kekuatan dan arah hubungan linear antara dua variabel (-1 s.d +1). Korelasi 0 berarti tidak ada hubungan linear (bisa jadi ada hubungan non-linear).
+- **Regresi Linear Sederhana:** Memodelkan hubungan kausal (sebab-akibat) atau prediktif: $Y = \beta_0 + \beta_1X + \epsilon$.
+    - $\beta_1$ (Slope): Perubahan Y untuk setiap 1 unit perubahan X.
+- **Koefisien Determinasi ($R^2$):** Proporsi variansi Y yang dapat dijelaskan oleh X. $R^2=0.85$ berarti 85% perubahan output dijelaskan oleh input.
+- **Residual:** Selisih antara nilai asli dan prediksi ($e=y-\hat{y}$). Analisis residual digunakan untuk memvalidasi asumsi model (homoskedastisitas, normalitas error).
+
+### 2. Aplikasi Sistem Informasi
+- **Capacity Planning:** Memprediksi beban CPU (Y) berdasarkan jumlah Request per Second (X). Jika slope curam, server cepat panas/penuh.
+- **Software Estimation:** Mengestimasi waktu pengerjaan proyek (Y) berdasarkan jumlah Function Point atau baris kode (X).
+- **Business Intelligence:** Prediksi Customer Lifetime Value (CLV) berdasarkan frekuensi pembelian bulan pertama. Regresi adalah algoritma Machine Learning paling dasar (Supervised Learning).
+
+### 3. Komputasi (Python)
+- **Libraries:** `pandas` (data), `seaborn` (plot), `scikit-learn` (model).
+- **Fungsi Kunci:**
+    - `df.corr()`: Matriks korelasi.
+    - `sns.regplot(x, y)`: Scatter plot dengan garis regresi otomatis.
+    - `model.fit(X, y)` & `model.predict(X)`: Training dan prediksi.
+    - `mean_squared_error(y_true, y_pred)`: Metrik kesalahan.
+
+---
+
+## Tugas Kelompok (GitHub Classroom)
+**Judul:** Week 13 Mission: The Algo-Trader - Predicting Trends
+
+**Deskripsi:**
+Mahasiswa menganalisis data historis kinerja server cloud (atau data saham fiktif). Mereka harus menemukan faktor apa yang paling mempengaruhi biaya operasional dan membuat model prediksi biaya bulan depan.
+
+**Set Soal (Notebook):**
+1. **Correlation Detective (20 poin):** Load data `server_metrics.csv` (CPU, RAM, Disk I/O, Energy Cost). Hitung matriks korelasi. Variabel mana yang paling kuat hubungannya dengan Energy Cost?
+2. **Building the Regressor (30 poin):**
+    - Bagi data menjadi Train (80%) dan Test (20%).
+    - Latih `LinearRegression` menggunakan variabel terkuat tadi.
+    - Tampilkan persamaan regresi ($y = \dots$).
+3. **Evaluation & Visualization (30 poin):**
+    - Hitung Mean Squared Error (MSE) pada data Test.
+    - Buat plot: Garis Regresi di atas Scatter Plot data asli.
+4. **Interpretation (20 poin):**
+    - Jelaskan arti Slope dalam bahasa bisnis. (Contoh: "Setiap kenaikan 1% CPU menaikkan tagihan listrik sebesar $5").
+    - Cek plot residual: Apakah error menyebar rata atau membesar di nilai tinggi (heteroskedastisitas)?
+
+---
+
+## 15 Soal & Solusi
+
+### A. Pertanyaan Konseptual
+
+1. **Soal:** Apa perbedaan antara korelasi dan regresi dalam hal tujuan analisisnya?
+   - **Solusi:** Korelasi bertujuan untuk mengukur kekuatan dan arah hubungan linear antara dua variabel (seberapa erat mereka bergerak bersama), tanpa menyiratkan sebab-akibat. Regresi bertujuan untuk memprediksi nilai satu variabel (dependen) berdasarkan variabel lain (independen) dan memodelkan bentuk hubungan matematisnya.
+
+2. **Soal:** Jelaskan asumsi least squares (kuadrat terkecil) dalam menentukan garis regresi terbaik.
+   - **Solusi:** Metode least squares mencari garis yang meminimalkan jumlah kuadrat dari selisih vertikal (residual) antara setiap titik data aktual dan garis prediksi. Asumsinya adalah bahwa garis terbaik adalah garis yang total kesalahan kuadratnya paling kecil.
+
+3. **Soal:** Apa makna dari koefisien determinasi ($R^2$) dalam mengevaluasi kualitas model regresi?
+   - **Solusi:** $R^2$ menunjukkan proporsi variasi dalam variabel dependen (Y) yang dapat dijelaskan oleh variabel independen (X) dalam model. Nilai $R^2=0.8$ berarti 80% perubahan pada Y disebabkan oleh X (menurut model), sedangkan 20% sisanya oleh faktor lain.
+
+4. **Soal:** Mengapa "korelasi tidak berarti kausalitas"? Berikan contoh dalam konteks teknologi.
+   - **Solusi:** Korelasi hanya menunjukkan bahwa dua variabel bergerak bersamaan, tetapi tidak membuktikan satu menyebabkan yang lain; bisa jadi ada faktor ketiga (confounding variable). Contoh: Jumlah bug software berkorelasi positif dengan jumlah user. Bukan berarti user menyebabkan bug, tetapi keduanya meningkat karena popularitas aplikasi.
+
+5. **Soal:** Jelaskan peran residual dalam memeriksa validitas asumsi model regresi linear.
+   - **Solusi:** Residual adalah selisih nilai asli dan prediksi. Memeriksa plot residual membantu memvalidasi asumsi: jika residual tersebar acak di sekitar nol, model linear valid. Jika residual membentuk pola (misal kurva), berarti hubungan data sebenarnya non-linear dan model linear tidak cocok.
+
+### B. Pertanyaan Aplikatif
+
+6. **Soal:** Buatlah model regresi untuk memprediksi harga laptop berdasarkan kapasitas RAM dan penyimpanan.
+   - **Solusi:** Modelnya berbentuk $Harga = \beta_0 + \beta_1(RAM) + \beta_2(Storage) + \epsilon$. Kita menggunakan data historis untuk mengestimasi $\beta_1$ dan $\beta_2$, yang menunjukkan seberapa mahal harga memori per GB.
+
+7. **Soal:** Analisis hubungan antara biaya iklan digital dan jumlah klik yang didapatkan perusahaan.
+   - **Solusi:** Gunakan regresi linear sederhana ($Klik = \beta_0 + \beta_1 \cdot Biaya$). Jika $\beta_1$ positif dan signifikan, iklan efektif. $R^2$ akan memberitahu seberapa besar variasi klik yang benar-benar dikontrol oleh anggaran iklan.
+
+8. **Soal:** Gunakan regresi untuk mengestimasi waktu penyelesaian proyek software berdasarkan jumlah modul yang dikerjakan.
+   - **Solusi:** $Waktu = \beta_0 + \beta_1(Modul)$. Intersep $\beta_0$ bisa diartikan sebagai waktu setup awal, dan $\beta_1$ adalah rata-rata waktu per modul. Ini membantu manajer proyek membuat timeline yang realistis.
+
+9. **Soal:** Hitung korelasi antara suhu ruangan data center dan jumlah kegagalan hardware tahunan.
+   - **Solusi:** Ambil data suhu rata-rata harian dan log kerusakan. Hitung korelasi Pearson (r). Jika r mendekati +1, ada bukti kuat bahwa suhu panas berhubungan dengan kerusakan, membenarkan investasi pendingin tambahan.
+
+10. **Soal:** Prediksikan nilai IPK mahasiswa berdasarkan jam belajar mingguan menggunakan data historis.
+    - **Solusi:** Lakukan regresi $IPK = \beta_0 + \beta_1(JamBelajar)$. Prediksi nilai IPK untuk mahasiswa baru dengan memasukkan jam belajar mereka ke persamaan. Namun, hati-hati dengan faktor lain (bakat, kesehatan) yang masuk ke error $\epsilon$.
+
+### C. Pertanyaan Komputasional
+
+11. **Soal:** Gunakan pustaka scikit-learn untuk melatih model regresi linear sederhana dan tampilkan koefisien serta intersepnya.
+    - **Solusi:**
+```python
+from sklearn.linear_model import LinearRegression  
+import numpy as np  
+X = np.array([[7], [8], [9]]); y = np.array([8, 10, 11])  
+model = LinearRegression().fit(X, y)  
+print(f"Coef: {model.coef_}, Intercept: {model.intercept_}")  
+```
+
+12. **Soal:** Tulis fungsi Python untuk menghitung koefisien korelasi Pearson secara manual dari dua list data.
+    - **Solusi:**
+```python
+import numpy as np  
+def pearson_r(x, y):  
+    x_mean, y_mean = np.mean(x), np.mean(y)  
+    num = np.sum((x - x_mean) * (y - y_mean))  
+    den = np.sqrt(np.sum((x - x_mean)**2) * np.sum((y - y_mean)**2))  
+    return num / den  
+```
+
+13. **Soal:** Visualisasikan garis regresi di atas scatter plot menggunakan seaborn.regplot.
+    - **Solusi:**
+```python
+import seaborn as sns; import matplotlib.pyplot as plt  
+# asumsikan df adalah DataFrame pandas  
+sns.regplot(x="jam_belajar", y="nilai_ujian", data=df)  
+plt.show()  
+```
+
+14. **Soal:** Hitung nilai Mean Squared Error (MSE) dari prediksi model regresi pada data testing.
+    - **Solusi:**
+```python
+from sklearn.metrics import mean_squared_error  
+y_pred = model.predict(X_test)  
+mse = mean_squared_error(y_test, y_pred)  
+print(f"MSE: {mse}")  
+```
+
+15. **Soal:** Buat plot residual untuk mengecek apakah ada pola tertentu yang melanggar asumsi linearitas.
+    - **Solusi:**
+```python
+residuals = y_test - y_pred  
+plt.scatter(y_pred, residuals)  
+plt.axhline(0, color='red', linestyle='--')  
+plt.xlabel("Predicted"); plt.ylabel("Residuals")  
+plt.show()  
+# Harusnya menyebar acak tanpa pola  
+```
+
+
+

@@ -1,0 +1,33 @@
+---
+title: "Minggu 03: Studi Kasus Aplikasi Teknik"
+subtitle: "Probabilistic Framework in Engineering Application (Data Center, Generator Backup, Reliability)"
+
+---
+
+![“Data center mati 3 menit bisa rugi besar. Kamu punya 2 generator—pasang seri atau paralel? Ini bukan selera desain; ini soal peluang gagal total. Kalau seri, satu komponen drop—habis. Kalau paralel, sistem masih hidup selama ada satu yang bertahan. Hari ini probabilitas berubah jadi ‘bahasa keputusan engineering’: kita hitung peluang kegagalan sistem dan memilih arsitektur yang paling masuk akal. Ending-nya bukan rumus—ending-nya rekomendasi desain.”](../The_Decision_Engineer.png/image3.png)
+
+{{< include ../agenda/w03.qmd >}}
+
+{{< include ../hands_on_py/03-probability-rules.qmd >}}
+
+## 1. Konsep Pengetahuan
+Keandalan sistem (reliability), sistem seri vs paralel. Dalam sistem paralel, sistem bekerja jika setidaknya satu komponen bekerja, sedangkan seri membutuhkan semua komponen bekerja.
+
+## 2. Tipikal Problem
+Sebuah pusat data memiliki dua generator listrik. Apakah lebih baik menyusunnya secara seri atau paralel untuk menjamin ketersediaan daya?
+
+## 3. Solusi & Pengambilan Keputusan
+Menghitung probabilitas kegagalan sistem. Pada desain paralel, peluang kegagalan total adalah hasil kali peluang kegagalan masing-masing unit (yang jauh lebih kecil). Keputusan optimalnya adalah menggunakan konfigurasi paralel untuk meningkatkan reliabilitas sistem secara drastis.
+
+## 4. Eksplorasi Komputasi (Python)
+*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
+
+```{python}
+# Tulis kode Python Anda di sini
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+print("Siap untuk komputasi Minggu 03!")
+```

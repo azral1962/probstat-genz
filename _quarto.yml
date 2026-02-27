@@ -1,0 +1,58 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Probabilitas & Statistika (Python)"
+  subtitle: "Belajar lewat eksperimen, visual, dan proyek kecil"
+  author: "Armein Z. R. Langi"
+  date: last-modified
+  chapters:
+    - index.qmd
+    - chapters/01-Pola_Pikir_Probabilistik_vs_Deterministik.qmd
+    - chapters/02-Kerangka_Probabilitas_dan_Statistik.qmd
+    - chapters/03-Studi_Kasus_Aplikasi_Teknik.qmd
+    - chapters/04-Teorema_Probabilitas_dan_Bayes.qmd
+    - chapters/05-Variabel_Acak.qmd
+    - chapters/06-Variabel_Acak_Diskrit.qmd
+    - chapters/07-Variabel_Acak_Kontinu.qmd
+    - chapters/08-Ujian_Tengah_Semester.qmd
+    - chapters/09-Fungsi_Variabel_Acak.qmd
+    - chapters/10-Distribusi_Sampling_dan_Teorema_Limit_Pusat.qmd
+    - chapters/11-Estimasi.qmd
+    - chapters/12-Pengujian_Hipotesis.qmd
+    - chapters/13-Regresi.qmd
+    - chapters/14-Studi_Kasus_Lanjutan.qmd
+    - chapters/15-Studi_Kasus_Lanjutan.qmd
+    - chapters/16-Ujian_Akhir_Semester.qmd
+
+
+
+
+
+    - about.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: true
+    code-summary: "Lihat kode"
+    code-tools: true
+    smooth-scroll: true
+    callout-appearance: simple
+    page-layout: article
+    link-external-newwindow: true
+
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto

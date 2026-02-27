@@ -1,0 +1,196 @@
+Week 07: Distribusi Kontinu: Kurva Normal dan Eksponensial dalam Rekayasa
+
+## Agenda Perkuliahan Minggu 7
+**Tema Misi:** "Predicting the Unpredictable: From Bell Curves to Waiting Games"
+
+### Pertemuan 1: Senin (1 Jam) - The Intuition & The Bell Curve
+**Fokus:** Memahami mengapa Distribusi Normal adalah "raja" distribusi dan kapan menggunakan Eksponensial untuk waktu.
+
+- **00:00 - 00:10 | The Hook: "Misteri Tinggi Badan & Error GPS"**
+    - Aktivitas: Tampilkan histogram data tinggi badan 10.000 orang (atau data error GPS). Bentuknya selalu lonceng simetris.
+    - Pertanyaan: "Kenapa fenomena yang tampak acak ini selalu membentuk pola yang sama? Kenapa tidak kotak atau segitiga?"
+    - Konsep: Perkenalkan Distribusi Normal (Gaussian) sebagai hasil akumulasi banyak faktor kecil (prekursor Teorema Limit Pusat).
+
+- **00:10 - 00:30 | Live Coding: "Normal is Everywhere"**
+    - Dosen (Python Demo):
+        1. Generate data acak `numpy.random.normal`.
+        2. Tunjukkan aturan empiris: 68% data ada di $\mu \pm \sigma$, 95% di $\mu \pm 2\sigma$.
+        3. Visualisasi: Plot kurva lonceng dengan seaborn dan arsir area probabilitas.
+
+- **00:30 - 00:50 | Deep Dive: Menunggu Bus (Eksponensial)**
+    - Skenario: "Kamu menunggu bus. Sudah 10 menit berlalu. Apakah peluang bus datang 5 menit lagi jadi lebih besar?"
+    - Konsep: Perkenalkan Distribusi Eksponensial dan sifat *Memoryless*. Jika bus datang secara acak (Poisson), waktu tunggunya tidak peduli masa lalu.
+
+- **00:50 - 01:00 | Pod Formation & Mission Brief**
+    - Misi GitHub: "The Warranty Game". Mahasiswa harus menentukan masa garansi produk agar perusahaan tidak rugi bandar.
+
+### Pertemuan 2: Rabu (2 Jam) - Simulation Lab
+**Fokus:** Menggunakan Python untuk analisis reliabilitas produk dan menghitung probabilitas 'ekor' (*tail events*).
+
+- **00:00 - 00:20 | Setup & Micro-Lecture: PDF vs Probabilitas**
+    - Konsep: Ingatkan bahwa untuk kontinu, $P(X=x)=0$. Probabilitas adalah Luas Area ($P(a < X < b)$).
+    - Python Tool: `scipy.stats.norm.cdf` (Cumulative Distribution Function) adalah teman terbaik kita.
+
+- **00:20 - 01:10 | Pod Challenge: "Product Reliability Engineer"**
+    - Skenario: Anda Insinyur Kualitas di pabrik SSD (Solid State Drive).
+    - Data: Umur SSD berdistribusi Normal ($\mu=5$ tahun, $\sigma=1$ tahun).
+    - Tugas (Python):
+        1. Hitung berapa persen SSD yang rusak sebelum 3 tahun.
+        2. Tentukan masa garansi (dalam tahun) agar klaim garansi maksimal hanya 1% dari total produksi (Cari $x$ dimana $P(X < x) = 0.01$).
+        3. Simulasi: Generate 10.000 umur SSD, hitung biaya penggantian jika garansi diset 3 tahun vs 2 tahun.
+
+- **01:10 - 01:40 | Studi Kasus: "Latency & SLA"**
+    - Analisis performa server. Jika latency rata-rata 200ms ($\sigma=50$ms), berapa peluang request timeout (>350ms)? (Aplikasi Z-score).
+
+- **01:40 - 01:50 | Share & Interpretasi**
+    - Pods mempresentasikan keputusan garansi mereka.
+
+- **01:50 - 02:00 | Exit Ticket**
+    - Pertanyaan: "Sebutkan satu kejadian di dunia nyata yang kira-kira mengikuti distribusi Normal dan satu yang Eksponensial."
+
+---
+
+## Materi Kuliah: Konsep, Aplikasi, & Komputasi
+
+### 1. Konsep Dasar
+- **Distribusi Normal (Gaussian):** Distribusi paling penting, berbentuk lonceng simetris. Ditentukan oleh dua parameter: Mean ($\mu$) menentukan pusat, Standar Deviasi ($\sigma$) menentukan lebar/sebaran.
+    - **Standard Normal (Z):** Distribusi normal dengan $\mu=0, \sigma=1$.
+- **Distribusi Eksponensial:** Memodelkan waktu tunggu antar kejadian dalam proses Poisson. Parameter $\lambda$ (laju kejadian).
+    - **Sifat Memoryless:** $P(X > t+s | X > t) = P(X > s)$. Sejarah tidak mempengaruhi masa depan.
+- **Probabilitas Kontinu:** Peluang pada satu titik spesifik adalah nol. Peluang dihitung sebagai integral dari fungsi kepadatan peluang (PDF).
+
+### 2. Aplikasi Sistem Informasi
+- **SLA (Service Level Agreement):** Menjamin bahwa "99% request akan selesai dalam < 300ms". Ini menggunakan perhitungan ekor distribusi Normal/Log-Normal.
+- **MTTF (Mean Time To Failure):** Memodelkan umur komponen perangkat keras (hard disk, server) menggunakan distribusi Eksponensial untuk perencanaan maintenance.
+- **Anomaly Detection:** Menggunakan skor-Z. Jika data poin memiliki $|Z| > 3$ (jauh dari rata-rata), itu dicurigai sebagai anomali atau serangan siber.
+
+### 3. Komputasi (Python)
+- **Scipy Stats:**
+    - `norm.pdf(x, loc, scale)`: Tinggi kurva.
+    - `norm.cdf(x, loc, scale)`: Luas area di kiri $x$ (Probabilitas kumulatif).
+    - `norm.ppf(q, loc, scale)`: Kebalikan CDF (Mencari nilai $x$ dari persentase).
+- **Visualisasi:** Menggunakan `seaborn.kdeplot` untuk melihat apakah data empiris mendekati bentuk lonceng.
+
+---
+
+## Tugas Kelompok (GitHub Classroom)
+**Judul:** Week 7: The Guarantee Gambler - Optimizing Warranty Risks
+
+**Deskripsi:**
+Mahasiswa berperan sebagai tim Analis Risiko untuk peluncuran Smart Lamp baru. Mereka harus menyeimbangkan antara daya tarik marketing (garansi lama) dan risiko kebangkrutan (klaim garansi meledak).
+
+**Set Soal (Notebook):**
+1. **Analisis Normal (30 poin):**
+    - Diketahui umur lampu $N(\mu=10.000 \text{ jam}, \sigma=1.000 \text{ jam})$.
+    - Hitung probabilitas lampu mati sebelum 8.000 jam.
+    - Cari "titik aman" jam ke berapa sehingga 95% lampu masih hidup.
+2. **Analisis Eksponensial (30 poin):**
+    - Modul Wi-Fi pada lampu memiliki laju kegagalan $\lambda=0.00005$ per jam.
+    - Hitung probabilitas modul ini bertahan lebih dari 20.000 jam.
+    - Buktikan sifat *memoryless* dengan simulasi: Bandingkan peluang bertahan 1000 jam lagi untuk modul baru vs modul yang sudah nyala 5000 jam.
+3. **Keputusan Bisnis (40 poin):**
+    - Biaya produksi = $5. Harga jual = $15. Biaya ganti rugi garansi = $10 (rugi total).
+    - Simulasikan profit total untuk 10.000 unit dengan opsi Garansi A (9.000 jam) vs Garansi B (8.000 jam).
+    - Buat rekomendasi: Mana yang memberikan profit bersih terbesar?
+
+---
+
+## 15 Soal & Solusi
+
+### A. Pertanyaan Konseptual
+
+1. **Soal:** Mengapa probabilitas $P(X=x)$ pada distribusi kontinu selalu bernilai nol?
+   - **Solusi:** Karena pada distribusi kontinu, probabilitas didefinisikan sebagai luas area di bawah kurva PDF. Untuk satu titik tunggal (garis vertikal), lebarnya adalah nol, sehingga luas areanya (integral dari $x$ ke $x$) adalah nol. Probabilitas hanya bermakna dalam interval $P(a < X < b)$.
+
+2. **Soal:** Jelaskan makna fisis dari parameter $\mu$ dan $\sigma$ pada kurva lonceng distribusi Normal.
+   - **Solusi:**
+     - $\mu$ (Mean): Menunjukkan lokasi pusat atau puncak dari kurva lonceng (nilai yang paling mungkin muncul).
+     - $\sigma$ (Standar Deviasi): Menunjukkan seberapa lebar atau gemuk kurva tersebut. $\sigma$ besar berarti kurva landai (data menyebar), $\sigma$ kecil berarti kurva lancip (data terpusat di sekitar mean).
+
+3. **Soal:** Apa itu skor-Z dan mengapa kita perlu menstandarisasi variabel acak Normal?
+   - **Solusi:** Skor-Z ($z=(x-\mu)/\sigma$) mengukur berapa standar deviasi suatu nilai data berada dari rata-ratanya. Kita menstandarisasi variabel ke Normal Standar ($Z \sim N(0,1)$) agar bisa membandingkan data dari distribusi yang berbeda (misal: membandingkan nilai ujian Matematika dan Fisika) dan menggunakan tabel probabilitas standar.
+
+4. **Soal:** Jelaskan sifat memoryless (tidak memiliki memori) pada distribusi Eksponensial dalam konteks kegagalan komponen.
+   - **Solusi:** Sifat memoryless berarti peluang komponen akan rusak dalam $t$ jam ke depan tidak dipengaruhi oleh sudah berapa lama komponen itu bekerja. Komponen bekas (yang masih berfungsi) dianggap memiliki reliabilitas yang sama dengan komponen baru. $P(X > t+s | X > s) = P(X > t)$.
+
+5. **Soal:** Bagaimana hubungan antara distribusi Normal dan Teorema Limit Pusat secara intuitif?
+   - **Solusi:** Teorema Limit Pusat (CLT) menyatakan bahwa jika kita menjumlahkan banyak variabel acak independen (apa pun distribusi aslinya), hasil penjumlahannya akan cenderung berdistribusi Normal. Ini menjelaskan mengapa distribusi Normal muncul di mana-mana di alam (seperti tinggi badan), karena fenomena tersebut adalah hasil akumulasi dari banyak faktor genetik dan lingkungan yang kecil-kecil.
+
+### B. Pertanyaan Aplikatif
+
+6. **Soal:** Waktu respons server berdistribusi Normal dengan mean 200ms dan standar deviasi 50ms. Berapa persen respons yang memakan waktu lebih dari 300ms?
+   - **Solusi:** Hitung skor-Z: $Z=(300-200)/50=2$. Cari peluang $P(Z > 2)$. Dari tabel/rumus, $P(Z < 2) \approx 0.9772$. Maka $P(X > 300) = 1 - 0.9772 = 0.0228$ atau 2.28%.
+
+7. **Soal:** Umur pakai sebuah baterai laptop berdistribusi Eksponensial dengan rata-rata 5 tahun. Berapa probabilitas baterai bertahan lebih dari 8 tahun?
+   - **Solusi:** Rata-rata ($\mu$) = $1/\lambda=5 \rightarrow \lambda=0.2$. Fungsi reliabilitas (survival): $P(X > x) = e^{-\lambda x}$. $P(X > 8) = e^{-0.2 \times 8} = e^{-1.6} \approx 0.2019$ atau 20.19%.
+
+8. **Soal:** Skor ujian masuk sebuah universitas berdistribusi Normal dengan rata-rata 500 dan simpangan baku 100. Jika diambil 10% terbaik, berapakah skor minimumnya?
+   - **Solusi:** Kita mencari nilai $x$ dimana $P(X > x) = 0.10$, atau $P(X < x) = 0.90$. Dari tabel Z invers, nilai Z untuk area 0.90 adalah $\approx 1.28$. $x = \mu + Z\sigma = 500 + (1.28 \times 100) = 628$. Skor minimum 628.
+
+9. **Soal:** Analisis lebar pita (bandwidth) yang digunakan oleh user di mana penggunaan rata-rata adalah 10 Mbps dengan distribusi Normal.
+   - **Solusi:** Karena bandwidth tidak bisa negatif, distribusi Normal murni mungkin kurang tepat jika $\sigma$ besar (karena ekor kiri bisa masuk area negatif). Namun, sebagai pendekatan, kita bisa menghitung peluang penggunaan melebihi kapasitas tertentu (misal 15 Mbps) untuk capacity planning.
+
+10. **Soal:** Gunakan distribusi Eksponensial untuk memodelkan waktu antar-kedatangan (inter-arrival time) permintaan ke server web.
+    - **Solusi:** Jika server menerima rata-rata 5 request per detik ($\lambda=5$), maka waktu antar-kedatangan mengikuti Exp(5). Rata-rata waktu tunggu antar request adalah $1/5=0.2$ detik. Probabilitas menunggu lebih dari 1 detik sangat kecil: $e^{-5(1)} = 0.0067$.
+
+### C. Pertanyaan Komputasional
+
+11. **Soal:** Gunakan `scipy.stats.norm.cdf` untuk menghitung probabilitas di antara dua nilai pada distribusi Normal.
+    - **Solusi:**
+```python
+from scipy.stats import norm  
+mu, sigma = 100, 15  
+# P(85 < X < 115)  
+prob = norm.cdf(115, mu, sigma) - norm.cdf(85, mu, sigma)  
+print(f"Probabilitas: {prob:.4f}")  
+```
+
+12. **Soal:** Tulis skrip Python untuk menghasilkan plot distribusi Normal Standar dan arsirlah area di bawah kurva untuk $P(-1 < Z < 1)$.
+    - **Solusi:**
+```python
+import numpy as np; import matplotlib.pyplot as plt  
+from scipy.stats import norm  
+x = np.linspace(-3, 3, 100)  
+plt.plot(x, norm.pdf(x))  
+x_fill = np.linspace(-1, 1, 100)  
+plt.fill_between(x_fill, norm.pdf(x_fill), alpha=0.5)  
+plt.show()  
+```
+
+13. **Soal:** Implementasikan fungsi untuk menghitung skor-Z dari sekumpulan data numerik menggunakan numpy.
+    - **Solusi:**
+```python
+import numpy as np  
+def calculate_z_scores(data):  
+    return (data - np.mean(data)) / np.std(data)  
+data = [1, 2, 3, 4, 5]  
+print(calculate_z_scores(data))  
+```
+
+14. **Soal:** Buat simulasi untuk membuktikan sifat memoryless dari distribusi Eksponensial dengan membangkitkan data acak.
+    - **Solusi:**
+```python
+from scipy.stats import expon  
+data = expon.rvs(scale=10, size=10000) # Mean=10  
+# Peluang X > 15  
+p_tot = len(data[data > 15]) / len(data)  
+# Peluang X > 15 GIVEN X > 5 (sisa 10)  
+subset = data[data > 5]  
+p_cond = len(subset[subset > 15]) / len(subset)  
+# Bandingkan dengan P(X > 10)  
+p_ref = len(data[data > 10]) / len(data)  
+print(f"P(X>10): {p_ref:.3f}, P(X>15|X>5): {p_cond:.3f}")  
+```
+
+15. **Soal:** Visualisasikan bagaimana perubahan $\sigma$ mempengaruhi "keruncingan" kurva Normal menggunakan matplotlib.
+    - **Solusi:**
+```python
+x = np.linspace(-10, 10, 200)  
+plt.plot(x, norm.pdf(x, 0, 1), label='Sigma=1')  
+plt.plot(x, norm.pdf(x, 0, 0.5), label='Sigma=0.5 (Lancip)')  
+plt.plot(x, norm.pdf(x, 0, 2), label='Sigma=2 (Landai)')  
+plt.legend(); plt.show()  
+```
+
+
+

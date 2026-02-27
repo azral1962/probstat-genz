@@ -1,0 +1,183 @@
+Week 06: Distribusi Probabilitas Diskrit (Binomial & Poisson)
+
+ **"Simulation First, Math Later"** menghubungkan teori "kering" dengan aplikasi nyata seperti *Gacha Games*, *Server Traffic*, dan *Cybersecurity*.
+
+---
+
+## **Agenda Perkuliahan Minggu 6**
+**Topik:** Distribusi Binomial & Poisson
+**Tema Misi:** *"The Digital Pulse: Counting Clicks, Bugs, and Attacks"*
+
+### **Pertemuan 1: Senin (1 Jam) – *The Intuition & The Rare Event***
+*Fokus: Memahami pola "sukses/gagal" berulang dan fenomena "kejadian langka" melalui simulasi visual.*
+
+*   **00:00 – 00:10 | The Hook: "Gacha Rates & Server Bursts"**
+    *   **Aktivitas:** Tampilkan simulator "Gacha" (atau Loot Box).
+    *   **Pertanyaan:** "Jika *drop rate* item langka adalah 1% ($p=0.01$) dan kamu melakukan 100 kali *pull* ($n=100$), apakah kamu **dijamin** dapat 1 item? Atau bisa 0? Atau 5?"
+    *   **Poin:** Probabilitas bukan jaminan pasti, tapi distribusi kemungkinan. Ini adalah **Binomial**.
+*   **00:10 – 00:30 | Live Coding: "Visualizing Luck"**
+    *   **Dosen (Python Demo):**
+        *   Gunakan `numpy.random.binomial(n=100, p=0.01, size=1000)`.
+        *   Plot histogram hasilnya.
+        *   **Visualisasi:** Tunjukkan bahwa meskipun rata-rata dapat 1, banyak yang dapat 0 (sial) atau dapat 3 (hoki).
+    *   **Transisi:** Apa yang terjadi jika $n$ (jumlah percobaan) menjadi tak hingga (waktu terus berjalan) dan $p$ sangat kecil? Kita masuk ke **Poisson** (distribusi kejadian langka/trafik).
+*   **00:30 – 00:50 | Konsep: Binomial vs Poisson**
+    *   **Binomial:** Diskrit, jumlah percobaan ($n$) tetap (misal: 10 paket data dikirim, berapa yang rusak?).
+    *   **Poisson:** Diskrit, interval waktu/ruang, $n$ tidak diketahui tapi rata-rata ($\lambda$) diketahui (misal: berapa serangan DDoS per jam?).
+*   **00:50 – 01:00 | Pod Formation & Mission Brief**
+    *   **Misi GitHub:** *"The Traffic Controller"*. Mahasiswa akan mensimulasikan trafik jaringan untuk mendeteksi anomali.
+
+### **Pertemuan 2: Rabu (2 Jam) – *Simulation Lab***
+*Fokus: Menggunakan Python untuk menghitung risiko kegagalan sistem dan kapasitas server.*
+
+*   **00:00 – 00:20 | Micro-Lecture: Kapan Binomial $\approx$ Poisson?**
+    *   **Hukum Kejadian Jarang:** Tunjukkan lewat kode bahwa jika $n$ besar (1000) dan $p$ kecil (0.001), grafik Binomial dan Poisson ($\lambda = n \cdot p$) akan berimpit. Ini memudahkan perhitungan di sistem *real-time*.
+*   **00:20 – 01:10 | Pod Challenge: "Capacity & Anomaly"**
+    *   **Skenario:** Anda admin server. Rata-rata *request* per detik adalah $\lambda = 50$. Kapasitas server 70 req/detik.
+    *   **Tugas (Python):**
+        1.  Hitung peluang server *crash* (request > 70) menggunakan `scipy.stats.poisson`.
+        2.  **Simulasi:** Generate trafik selama 24 jam (86400 detik). Berapa detik server akan *down*?
+        3.  **Deteksi Serangan:** Jika tiba-tiba masuk 100 request, hitung probabilitasnya. Jika $P(X \ge 100)$ sangat kecil (misal < 0.0001), sistem harus otomatis memblokir IP (anggap serangan).
+*   **01:10 – 01:40 | Studi Kasus: Bug Hunter**
+    *   **Masalah:** Probabilitas 1 baris kode punya bug = 0.001. Ada 1000 baris kode.
+    *   **Hitungan:** Berapa peluang software "Clean" (0 bug)? Bandingkan hitungan `binom` vs `poisson`.
+*   **01:40 – 01:50 | Showcase & Keputusan**
+    *   Pods mempresentasikan: "Berapa kapasitas server cadangan yang harus dibeli agar peluang crash < 1%?"
+*   **01:50 – 02:00 | Exit Ticket**
+    *   Pertanyaan: "Berikan satu contoh kejadian di sekitarmu yang mengikuti distribusi Poisson." (Jawab: Chat masuk per jam, motor lewat per menit).
+
+---
+
+## **Materi Kuliah: Konsep, Aplikasi, & Komputasi**
+
+### **1. Konsep Dasar**
+*   **Distribusi Bernoulli:** Unit dasar. 1 percobaan, Sukses ($p$) atau Gagal ($1-p$).
+*   **Distribusi Binomial ($n, p$):** Jumlah sukses $k$ dalam $n$ percobaan Bernoulli yang saling independen.
+    *   Rumus: $P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$.
+*   **Distribusi Poisson ($\lambda$):** Jumlah kejadian dalam interval waktu/ruang tertentu.
+    *   Rumus: $P(X=k) = \frac{e^{-\lambda} \lambda^k}{k!}$.
+    *   **Hukum Kejadian Jarang:** Poisson adalah limit dari Binomial saat $n \to \infty$ dan $p \to 0$.
+
+### **2. Aplikasi Sistem Informasi**
+*   **Reliabilitas Komunikasi:** Menghitung peluang paket data rusak (Bit Error Rate). Jika dikirim 1000 bit dan $p_{error}=10^{-3}$, peluang paket diterima sempurna bisa dihitung dengan Binomial/Poisson.
+*   **Antrian Server:** Memodelkan kedatangan *user* ke website. Jika rata-rata 10 user/menit ($\lambda=10$), kita bisa menghitung peluang tiba-tiba datang 20 user (lonjakan beban).
+*   **Cybersecurity:** Deteksi anomali. Jika jumlah login gagal per menit biasanya $\lambda=0.5$, dan tiba-tiba ada 10 login gagal, probabilitas kejadian ini sangat rendah menurut Poisson, sehingga diklasifikasikan sebagai *Brute Force Attack*.
+
+### **3. Komputasi (Python)**
+*   **Library:** `scipy.stats` (modul `binom` dan `poisson`).
+*   **Fungsi Kunci:**
+    *   `binom.pmf(k, n, p)`: Peluang tepat $k$ sukses.
+    *   `poisson.cdf(k, mu)`: Peluang kumulatif ( $\le k$ kejadian). Berguna untuk menghitung "Peluang server *tidak* overload".
+    *   `numpy.random.poisson(lam, size)`: Simulasi data dummy trafik.
+
+---
+
+## **Tugas Kelompok (GitHub Classroom)**
+**Judul:** *Week 6: The Network Guardian*
+
+**Deskripsi:**
+Mahasiswa diberikan log data simulasi jaringan. Mereka harus memodelkan pola trafik normal dan membuat skrip otomatis untuk mendeteksi anomali.
+
+**Set Soal (Notebook):**
+1.  **Modeling (30 poin):**
+    *   Analisis data historis: Hitung rata-rata request/detik ($\lambda$).
+    *   Visualisasikan histogram data vs kurva teoritis Poisson($\lambda$). Apakah cocok?
+2.  **Capacity Planning (30 poin):**
+    *   Perusahaan ingin menjamin 99.9% waktu server aman.
+    *   Cari nilai $C$ (kapasitas) sedemikian rupa sehingga $P(X \le C) \ge 0.999$.
+3.  **Anomaly Detection (40 poin):**
+    *   Buat fungsi `is_anomaly(current_requests)`.
+    *   Jika probabilitas kejadian tersebut $< 0.05\%$ berdasarkan distribusi Poisson, kembalikan `True`.
+    *   Uji fungsi tersebut pada dataset serangan (dataset kedua).
+
+---
+
+## **15 Soal & Solusi (Sumber: "Desain Kurikulum...")**
+
+Berikut adalah 15 soal yang diambil dari referensi *Desain Kurikulum Statistika Generasi Z* (Bagian Minggu 06)–.
+
+### **A. Pertanyaan Konseptual**
+
+**1. Soal:** Apa syarat-syarat utama agar sebuah eksperimen dapat dimodelkan dengan distribusi Binomial?
+*   **Solusi:** Eksperimen terdiri dari $n$ percobaan identik, setiap percobaan hanya memiliki dua hasil (sukses/gagal), probabilitas sukses $p$ konstan untuk setiap percobaan, dan setiap percobaan saling independen.
+
+**2. Soal:** Mengapa distribusi Poisson sering disebut sebagai distribusi untuk kejadian langka?
+*   **Solusi:** Karena Poisson sering diturunkan dari distribusi Binomial di mana jumlah percobaan $n$ sangat besar (menuju tak hingga) namun probabilitas sukses $p$ sangat kecil (menuju nol), sehingga kejadian "sukses" relatif jarang terjadi dibanding total kemungkinan.
+
+**3. Soal:** Jelaskan hubungan antara distribusi Binomial dan distribusi Bernoulli.
+*   **Solusi:** Distribusi Bernoulli adalah kasus khusus dari distribusi Binomial dengan jumlah percobaan $n=1$. Distribusi Binomial adalah penjumlahan dari $n$ variabel acak Bernoulli yang independen dan identik.
+
+**4. Soal:** Dalam kondisi apa distribusi Poisson dapat digunakan sebagai pendekatan untuk distribusi Binomial?
+*   **Solusi:** Ketika jumlah percobaan $n$ sangat besar ($n \ge 30$ atau $n \to \infty$) dan probabilitas sukses $p$ sangat kecil ($p \le 0.05$ atau $p \to 0$), serta rata-rata $np$ tetap konstan sebagai $\lambda$.
+
+**5. Soal:** Apa makna parameter $\lambda$ dalam distribusi Poisson dalam konteks lalu lintas paket data?
+*   **Solusi:** Parameter $\lambda$ merepresentasikan rata-rata jumlah paket data yang tiba atau diproses per satuan waktu (misalnya: paket per detik) atau per satuan ruang.
+
+### **B. Pertanyaan Aplikatif**
+
+**6. Soal:** Sebuah sistem mengirimkan 10 paket data. Jika probabilitas satu paket rusak adalah 0,1, berapa probabilitas tepat 2 paket rusak?
+*   **Solusi:** Gunakan Binomial($n=10, p=0.1$).
+    $P(X=2) = \binom{10}{2} (0.1)^2 (0.9)^8 = 45 \cdot 0.01 \cdot 0.430 = 0.1937$.
+
+**7. Soal:** Rata-rata serangan siber yang terdeteksi pada firewall adalah 2 per jam. Berapa probabilitas tidak ada serangan dalam satu jam ke depan?
+*   **Solusi:** Gunakan Poisson($\lambda=2$).
+    $P(X=0) = \frac{e^{-2} 2^0}{0!} = e^{-2} \approx 0.1353$.
+
+**8. Soal:** Dalam pengujian software, probabilitas menemukan bug pada satu baris kode adalah 0,001. Jika ada 1.000 baris kode, gunakan pendekatan Poisson untuk menghitung probabilitas ada tepat 1 bug.
+*   **Solusi:** $\lambda = n \cdot p = 1000 \cdot 0.001 = 1$.
+    $P(X=1) = \frac{e^{-1} 1^1}{1!} = e^{-1} \approx 0.3679$.
+
+**9. Soal:** Sebuah database melayani rata-rata 50 query per detik. Hitung probabilitas server menerima lebih dari 60 query dalam satu detik tertentu.
+*   **Solusi:** Gunakan Poisson($\lambda=50$). Kita cari $P(X > 60) = 1 - P(X \le 60)$. Ini biasanya dihitung menggunakan tabel atau komputer (`1 - poisson.cdf(60, 50)`), hasilnya sekitar 0.072 (7.2%).
+
+**10. Soal:** Analisis probabilitas jumlah user yang mengklik iklan dalam 100 impresi jika *click-through rate* (CTR) adalah 2%.
+*   **Solusi:** Ini model Binomial($n=100, p=0.02$). Kita bisa menghitung peluang untuk berbagai jumlah klik (0, 1, 2, dst) untuk memprediksi performa iklan. Rata-rata klik yang diharapkan adalah $E[X] = 100 \cdot 0.02 = 2$ klik.
+
+### **C. Pertanyaan Komputasional**
+
+**11. Soal:** Gunakan `scipy.stats.binom.pmf` untuk memplot probabilitas jumlah sukses dari 0 hingga 20 dalam eksperimen dengan $n=20$ dan $p=0.5$.
+*   **Solusi:**
+    ```python
+    from scipy.stats import binom
+    import matplotlib.pyplot as plt
+    x = range(21)
+    plt.bar(x, binom.pmf(x, 20, 0.5))
+    plt.show()
+    ```
+
+**12. Soal:** Tulis program Python yang membandingkan hasil perhitungan distribusi Binomial dan pendekatan Poisson untuk $n=100$ dan $p=0.01$.
+*   **Solusi:**
+    ```python
+    from scipy.stats import binom, poisson
+    n, p = 100, 0.01
+    mu = n * p
+    print(f"Binom P(X=2): {binom.pmf(2, n, p)}")
+    print(f"Poisson P(X=2): {poisson.pmf(2, mu)}")
+    ```
+
+**13. Soal:** Simulasikan proses kedatangan Poisson dengan membangkitkan bilangan acak dan hitung jumlah kejadian dalam interval waktu tertentu.
+*   **Solusi:**
+    ```python
+    import numpy as np
+    # Simulasi 1000 jam, rata-rata 5 event/jam
+    simulasi = np.random.poisson(lam=5, size=1000)
+    print(f"Rata-rata simulasi: {np.mean(simulasi)}")
+    ```
+
+**14. Soal:** Visualisasikan perubahan bentuk distribusi Binomial saat parameter $p$ bervariasi dari 0,1 hingga 0,9.
+*   **Solusi:**
+    ```python
+    n = 20
+    for p in [0.1, 0.5, 0.9]:
+        plt.plot(binom.pmf(range(n+1), n, p), label=f'p={p}')
+    plt.legend(); plt.show()
+    ```
+
+**15. Soal:** Implementasikan fungsi untuk menghitung probabilitas kumulatif Binomial tanpa menggunakan pustaka eksternal.
+*   **Solusi:**
+    ```python
+    def fact(n): return 1 if n<=1 else n*fact(n-1)
+    def comb(n, k): return fact(n) // (fact(k) * fact(n-k))
+    def binom_cdf(k, n, p):
+        return sum(comb(n, i) * (p**i) * ((1-p)**(n-i)) for i in range(k+1))
+    ```

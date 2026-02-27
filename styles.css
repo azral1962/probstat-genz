@@ -1,0 +1,22 @@
+/* Readability */
+.content {
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(127,127,127,.35);
+  font-size: .85rem;
+  margin-right: .35rem;
+}
+
+pre code {
+  font-size: 0.95rem;
+}

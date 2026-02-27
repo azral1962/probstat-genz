@@ -1,0 +1,31 @@
+---
+title: "Minggu 08: Ujian Tengah Semester"
+subtitle: "Midterm Exam"
+
+---
+
+![“Hari ini bukan ujian hafalan. Ini ujian keputusan. Kamu akan diberi kasus seperti episode-episode sebelumnya: stok, reliability, alarm, risiko, cacat, garansi. Tugasmu: pilih model yang tepat, hitung, lalu jelaskan keputusan dengan kalimat yang tegas. Nilai tertinggi bukan dari rumus paling panjang, tapi dari reasoning paling bersih.”](../The_Decision_Engineer.png/image8.png)
+
+{{< include ../agenda/w08.qmd >}}
+
+## 1. Konsep Pengetahuan
+Evaluasi materi minggu 1-7.
+
+## 2. Tipikal Problem
+Ujian tertulis dan komputasi.
+
+## 3. Solusi & Pengambilan Keputusan
+Mengerjakan soal evaluasi dengan pendekatan probabilitas dan statistik.
+
+## 4. Eksplorasi Komputasi (Python)
+*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
+
+```{python}
+# Tulis kode Python Anda di sini
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+print("Siap untuk komputasi Minggu 08!")
+```

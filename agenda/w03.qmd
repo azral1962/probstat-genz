@@ -1,0 +1,190 @@
+Week 03: Reliabilitas Infrastruktur IT (Teori & Simulasi SRE)
+
+## Agenda Perkuliahan Minggu 3
+**Topik:** Studi Kasus Infrastruktur - Reliabilitas dan Resiliensi
+**Tema Misi:** "Architecting for Failure: How to Build Systems That (Almost) Never Die"
+
+### Pertemuan 1: Senin (1 Jam) – The Intuition & The Trap
+**Fokus:** Memahami kerapuhan sistem seri dan kekuatan redundansi (paralel) melalui simulasi visual.
+
+- **00:00 – 00:10 | The Hook: "The 500-Error Nightmare"**
+    - Aktivitas: Tampilkan diagram arsitektur microservices sederhana (Login $\to$ Database $\to$ Payment).
+    - Pertanyaan: "Jika setiap layanan punya peluang sukses 99% (sangat tinggi), berapa peluang user berhasil bayar? Apakah 99%?"
+    - Intuisi: Tidak. $0.99 \times 0.99 \times 0.99 \approx 97%$. Semakin kompleks sistem seri, semakin rapuh ia.
+
+- **00:10 – 00:30 | Live Coding: "Chain of Doom vs. The Hydra"**
+    - Dosen (Python Demo):
+        1. Skenario 1 (Seri): Simulasikan 10 komponen berurutan. Jika satu False, semua mati. Tunjukkan betapa seringnya sistem ini down.
+        2. Skenario 2 (Paralel/Hydra): Simulasikan 3 server redundan. Sistem mati hanya jika ketiganya False.
+    - Visualisasi: Plot grafik batang sederhana: Peluang gagal Seri vs Paralel.
+
+- **00:30 – 00:50 | Konsep: Matematika Reliabilitas**
+    - Formalkan intuisi tadi ke rumus:
+        - Seri (AND logic): $R_{sys} = \prod R_i$ (Reliabilitas turun drastis).
+        - Paralel (OR logic): $R_{sys} = 1 - \prod(1-R_i)$ (Reliabilitas naik drastis).
+    - Perkenalkan konsep "Five Nines" (99.999%) sebagai "Holy Grail" anak IT.
+
+- **00:50 – 01:00 | Pod Formation & Mission Brief**
+    - Misi GitHub: "Design the Unbreakable Cloud". Mahasiswa harus merancang arsitektur server dengan budget terbatas untuk mencapai uptime tertinggi.
+
+### Pertemuan 2: Rabu (2 Jam) – Engineering Lab
+**Fokus:** Menggunakan Python untuk optimasi desain sistem dan memahami risiko tersembunyi.
+
+- **00:00 – 00:15 | Intro: The Hidden Killer (Common Cause Failure)**
+    - Diskusi: "Kalian punya 3 server paralel. Aman? Bagaimana jika ketiga server itu ada di satu gedung yang sama dan listrik gedung mati?"
+    - Konsep: Independence Assumption itu berbahaya. Perkenalkan variabel pengganggu (Common Cause).
+
+- **00:15 – 01:00 | Pod Challenge: "Budget vs. Reliability"**
+    - Skenario: Anda punya budget $1000.
+        - Server Murah: $200, Reliabilitas 90%.
+        - Server Mahal: $500, Reliabilitas 99%.
+    - Tugas (Python):
+        1. Bandingkan opsi: Beli 2 Server Mahal (Paralel) vs 5 Server Murah (Paralel).
+        2. Mana yang memberikan $R_{total}$ lebih tinggi?
+        3. Simulasikan kejadian "Power Outage" yang membunuh semua server sekaligus dengan peluang 1%. Hitung reliabilitas real-world baru.
+
+- **01:00 – 01:30 | Deep Dive: m-out-of-n Systems**
+    - Kasus: RAID 5 atau Voting System (Consensus). Sistem butuh minimal 2 dari 3 server menyala agar valid.
+    - Gunakan `scipy.stats.binom` untuk menghitung peluangnya.
+
+- **01:30 – 01:50 | Design Review**
+    - Pods mempresentasikan pilihan arsitektur mereka. Debat: "Apakah worth it bayar mahal untuk naik dari 99.9% ke 99.99%?"
+
+- **01:50 – 02:00 | Exit Ticket**
+    - Pertanyaan: "Sebutkan satu contoh sistem Single Point of Failure di kehidupan kampusmu."
+
+---
+
+## Materi Kuliah: Konsep, Aplikasi, & Komputasi
+
+### 1. Konsep Dasar
+- **Reliabilitas (R):** Probabilitas sebuah komponen/sistem berfungsi dalam periode waktu tertentu. $R = 1 - P(\text{fail})$.
+- **Sistem Seri (Rantai Rapuh):** Komponen tersusun berurutan. Kegagalan satu komponen = Kegagalan sistem.
+    - Rumus: $R_{seri} = R_1 \times R_2 \times \dots \times R_n$.
+- **Sistem Paralel (Redundansi):** Komponen tersusun berdampingan. Sistem gagal hanya jika semua komponen gagal.
+    - Rumus: $R_{paralel} = 1 - [(1-R_1) \times (1-R_2) \dots]$.
+- **Sistem k-out-of-n:** Sistem berfungsi jika minimal k dari n komponen berfungsi (Contoh: Mayoritas voting pada blockchain).
+
+### 2. Aplikasi Sistem Informasi
+- **High Availability (HA):** Load Balancer membagi trafik ke beberapa server aplikasi (Paralel). Jika satu server crash, yang lain mengambil alih.
+- **ML Pipeline (Seri):** Ingestion $\to$ Cleaning $\to$ Training $\to$ Deployment. Jika Ingestion gagal, model tidak bisa dilatih. Ini adalah sistem seri yang kritis.
+- **Disaster Recovery (DR):** Memiliki Secondary Data Center. Ini adalah paralel tingkat tinggi. Namun hati-hati dengan Common Cause Failure (misal: AWS Region US-East-1 down total).
+
+### 3. Komputasi (Python)
+- **Fungsi Kustom:** Membuat fungsi `reliability_series(probs)` dan `reliability_parallel(probs)` menggunakan `numpy.prod`.
+- **Simulasi Monte Carlo:** Menggunakan `random.random()` untuk mensimulasikan status hidup/mati ribuan server dan menghitung persentase uptime sistem gabungan.
+
+---
+
+## Tugas Kelompok (GitHub Classroom)
+**Judul:** Week 3: The SRE Challenge - Designing High Availability Systems
+
+**Deskripsi:**
+Mahasiswa berperan sebagai Site Reliability Engineer (SRE). Diberikan topologi sistem yang kompleks (gabungan seri dan paralel), mahasiswa harus menghitung reliabilitas teoretis dan memvalidasinya dengan simulasi Python.
+
+**Soal Python (Notebook):**
+1. **Modeling (30 poin):** Representasikan sistem berikut dalam fungsi Python:
+    - Sub-sistem A: 3 Web Server (Paralel, @R=0.9).
+    - Sub-sistem B: 1 Database Utama (R=0.99).
+    - Sistem Total: Sub-sistem A terhubung Seri dengan Sub-sistem B.
+2. **Calculation (30 poin):** Hitung reliabilitas teoretis sistem total.
+3. **Simulation (20 poin):** Jalankan simulasi 10.000 kali.
+    - Generate status acak untuk tiap komponen.
+    - Cek logika: `(Web1 OR Web2 OR Web3) AND Database`.
+    - Hitung frekuensi sukses empiris.
+4. **Analysis (20 poin):** Jika budget memungkinkan penambahan 1 komponen (Web Server lagi ATAU Database Backup), mana yang paling signifikan menaikkan reliabilitas total? Buktikan dengan angka.
+
+---
+
+## 15 Soal & Solusi
+
+### A. Pertanyaan Konseptual
+
+1. **Soal:** Mengapa sistem seri dianggap memiliki resiliensi yang lebih rendah dibandingkan sistem tunggal dengan komponen yang sama?
+   - **Solusi:** Karena dalam sistem seri, reliabilitas total adalah hasil perkalian reliabilitas komponen ($R_{total} = \prod R_i$). Karena $R_i \le 1$, hasil perkalian akan selalu lebih kecil dari nilai komponen terendah. Menambah komponen seri justru menambah titik kegagalan (Point of Failure).
+
+2. **Soal:** Jelaskan bagaimana redundansi paralel meningkatkan reliabilitas total sebuah sistem informasi.
+   - **Solusi:** Redundansi paralel menciptakan jalur alternatif. Sistem hanya gagal jika semua jalur gagal bersamaan. Secara matematis, peluang kegagalan total ($F_{total}$) adalah hasil kali peluang kegagalan komponen ($F_i$). Karena $F_i$ kecil (misal 0.1), mengalikannya akan menghasilkan angka yang sangat kecil (0.01), sehingga Reliabilitas ($1-F_{total}$) meningkat drastis.
+
+3. **Soal:** Apa yang dimaksud dengan ketersediaan (availability) "lima sembilan" (99,999%) dan mengapa sulit dicapai?
+   - **Solusi:** "Lima sembilan" berarti sistem harus beroperasi 99,999% dari waktu, yang setara dengan downtime hanya sekitar 5,26 menit per tahun. Ini sulit dicapai karena memerlukan redundansi berlapis (hardware, power, network, geographic) dan eliminasi single point of failure sepenuhnya, serta mitigasi terhadap common cause failures.
+
+4. **Soal:** Bagaimana ketergantungan antar komponen (asumsi ketidakindependenan) mempengaruhi perhitungan reliabilitas?
+   - **Solusi:** Rumus standar paralel ($1-\prod F_i$) mengasumsikan kegagalan komponen bersifat independen. Jika ada ketergantungan (korelasi positif, misal satu rak server panas menyebabkan server lain ikut panas), probabilitas kegagalan bersama akan jauh lebih tinggi daripada hasil perkalian independen. Ini menyebabkan reliabilitas aktual lebih rendah dari perhitungan teoretis.
+
+5. **Soal:** Deskripsikan perbedaan antara kegagalan aktif dan kegagalan laten dalam sistem infrastruktur.
+   - **Solusi:**
+     - **Kegagalan Aktif:** Kerusakan yang langsung terlihat dan berdampak (misal: server meledak, kabel putus).
+     - **Kegagalan Laten:** Kerusakan yang sudah ada tapi belum memicu error sampai kondisi tertentu terpenuhi (misal: bug pada kode backup yang baru ketahuan saat backup benar-benar dibutuhkan/dijalankan).
+
+### B. Pertanyaan Aplikatif
+
+6. **Soal:** Sebuah jalur internet backbone terdiri dari 3 router yang disusun seri. Jika masing-masing memiliki reliabilitas 0,95, hitung reliabilitas total jalur tersebut.
+   - **Solusi:** $R_{total} = 0,95 \times 0,95 \times 0,95 = 0,857$ (atau 85,7%).
+
+7. **Soal:** Analisis ketersediaan sistem cloud yang memiliki 4 server paralel di mana sistem tetap berjalan jika minimal 1 server aktif. (Asumsi R tiap server tidak disebut, kita asumsikan R=0.9 untuk contoh, atau F=0.1).
+   - **Solusi:** Sistem gagal hanya jika ke-4 server mati. $P(\text{SystemDown}) = F^4$. $R_{system} = 1 - F^4$.
+
+8. **Soal:** Dalam desain Disaster Recovery Center (DRC), jika link utama memiliki uptime 99% dan link cadangan 98%, hitung probabilitas total sistem terhubung.
+   - **Solusi:** (Asumsi paralel/redundant). $P(\text{MainFail}) = 1 - 0.99 = 0.01$. $P(\text{BackupFail}) = 1 - 0.98 = 0.02$. $P(\text{TotalFail}) = 0.01 \times 0.02 = 0.0002$. $R_{total} = 1 - 0.0002 = 0.9998$ (99,98%).
+
+9. **Soal:** Sebuah gedung data center menggunakan 3 generator cadangan. Jika probabilitas satu generator gagal menyala adalah 0,02, berapa probabilitas setidaknya satu menyala saat listrik padam?
+   - **Solusi:** Peluang semua gagal = $0.02^3 = 0.000008$. Peluang setidaknya satu menyala = $1 - 0.000008 = 0.999992$.
+
+10. **Soal:** Evaluasi reliabilitas sistem transmisi data di mana satu file dibagi menjadi 5 paket dan sistem gagal jika salah satu paket hilang.
+    - **Solusi:** Ini adalah analogi sistem Seri. Jika $R_{paket}$ adalah reliabilitas pengiriman satu paket, maka reliabilitas pengiriman file adalah $(R_{paket})^5$. Risiko kegagalan meningkat seiring bertambahnya jumlah pecahan paket.
+
+### C. Pertanyaan Komputasional
+
+11. **Soal:** Buat fungsi Python untuk menghitung reliabilitas sistem seri dengan input berupa list reliabilitas komponen.
+    - **Solusi:**
+```python
+import numpy as np  
+def reliability_series(probs):  
+    return np.prod(probs)  
+# Contoh: reliability_series([0.9, 0.9, 0.9]) -> 0.729  
+```
+
+12. **Soal:** Implementasikan simulasi untuk membandingkan reliabilitas sistem seri vs paralel dengan jumlah komponen n dari 1 sampai 10.
+    - **Solusi:**
+```python
+import matplotlib.pyplot as plt  
+n_range = range(1, 11)  
+p = 0.9  
+r_series = [p**n for n in n_range]  
+r_parallel = [1 - (1-p)**n for n in n_range]  
+plt.plot(n_range, r_series, label='Seri')  
+plt.plot(n_range, r_parallel, label='Paralel')  
+plt.legend(); plt.show()  
+```
+
+13. **Soal:** Tulis skrip untuk menghitung jumlah minimum komponen paralel yang dibutuhkan agar reliabilitas total mencapai 0,999.
+    - **Solusi:**
+```python
+p_component = 0.9  
+target = 0.999  
+n = 1  
+while (1 - (1 - p_component)**n) < target:  
+    n += 1  
+print(f"Butuh {n} komponen.")  
+```
+
+14. **Soal:** Gunakan matplotlib untuk memplot grafik hubungan antara jumlah komponen paralel dan reliabilitas sistem.
+    - **Solusi:** (Lihat solusi no 12, fokus pada garis Paralel yang melengkung asimtotik mendekati 1).
+
+15. **Soal:** Simulasikan kegagalan komponen secara acak dalam 10.000 iterasi untuk mengestimasi Mean Time To Failure (MTTF) sistem sederhana.
+    - **Solusi:**
+```python
+import numpy as np  
+# Asumsi: Probabilitas gagal per jam = 0.01  
+trials = 10000  
+failure_times = []  
+for _ in range(trials):  
+    time = 0  
+    while np.random.rand() > 0.01: # Selama belum gagal  
+        time += 1  
+    failure_times.append(time)  
+print(f"Estimasi MTTF: {np.mean(failure_times)} jam")  
+```
+
+

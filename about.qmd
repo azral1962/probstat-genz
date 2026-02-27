@@ -1,0 +1,5 @@
+---
+title: "Tentang Buku Ini"
+---
+
+Buku ini dirancang untuk mahasiswa Gen-Z: ringkas, visual, dan berbasis eksperimen Python.

@@ -1,0 +1,184 @@
+Minggu 1: Fondasi Berpikir Probabilistik dalam Sistem Informasi
+
+
+
+## **Agenda Perkuliahan Minggu 1**
+**Tema:** *"Breaking the Deterministic Mindset: Why Average is a Lie"*
+
+### **Pertemuan 1: Senin (1 Jam) – Konsep & Intuisi**
+*Fokus: Mengubah pola pikir dari "pasti" (deterministik) menjadi "mungkin" (probabilistik) melalui studi kasus nyata.*
+
+*   **00:00 – 00:10 | The Hook: "Kenapa Server Crash?"**
+    *   **Aktivitas:** Tampilkan grafik *server load* yang fluktuatif. Tanyakan: "Jika kapasitas server 100 request/detik dan rata-rata traffic hanya 80 request/detik, kenapa server tetap *down*?"
+    *   **Poin Kunci:** Rata-rata menipu. Variabilitas (lonjakan acak) adalah penyebab kegagalan sistem,.
+*   **00:10 – 00:30 | Konsep: Deterministik vs. Probabilistik**
+    *   **Diskusi:** Perbedaan *logic code* (IF-ELSE = deterministik) vs *user behavior* (Probabilistik).
+    *   **Filosofi:** Perkenalkan dua kubu: *Frequentist* (data historis/limit) vs *Bayesian* (keyakinan/updating belief). Gunakan visual dari "Peta Pengetahuan".
+*   **00:30 – 00:50 | Demo: Simulasi Hukum Bilangan Besar (LLN)**
+    *   **Live Python (Dosen):** Simulasikan pelemparan koin 10 vs 10.000 kali. Tunjukkan bahwa "kestabilan" (probabilitas 0.5) baru muncul saat $n$ besar. Ketidakpastian tinggi terjadi di sampel kecil (Hukum Bilangan Besar).
+*   **00:50 – 01:00 | Pembentukan "Pods" & Misi Mingguan**
+    *   Bagi kelas menjadi kelompok (Pods) @5 orang.
+    *   Jelaskan misi GitHub Classroom: "Membangun Simulator Risiko Stok/Server".
+
+### **Pertemuan 2: Rabu (2 Jam) – Lab Komputasi & Aplikasi**
+*Fokus: Hands-on Python untuk membuktikan intuisi Senin.*
+
+*   **00:00 – 00:15 | Setup Lingkungan**
+    *   Review singkat: Jupyter Notebook, Library `random` vs `numpy`. Pentingnya `random.seed()` untuk reproduktifitas.
+*   **00:15 – 00:45 | Guided Lab: Simulasi Monte Carlo Sederhana**
+    *   Mahasiswa menulis kode untuk mensimulasikan "Waktu Tunggu Login".
+    *   **Tugas:** Generate 1.000 data acak, hitung rata-rata, bandingkan dengan rata-rata teoretis.
+*   **00:45 – 01:30 | Pod Challenge: "The CTO Dilemma"**
+    *   **Skenario:** Anda adalah CTO. Traffic rata-rata 100 user. Biaya server mahal, biaya *user lost* (server penuh) juga mahal.
+    *   **Misi:**
+        1.  Simulasikan traffic harian (gunakan distribusi acak).
+        2.  Bandingkan strategi: "Kapasitas pas-pasan (100)" vs "Kapasitas berlebih (120)".
+        3.  Hitung total kerugian masing-masing strategi.
+*   **01:30 – 01:50 | Share & Interpretasi**
+    *   Perwakilan Pods menunjukkan grafik mereka.
+    *   **Format Jawaban:** Klaim $\rightarrow$ Bukti (Plot) $\rightarrow$ Keputusan.
+*   **01:50 – 02:00 | Exit Ticket**
+    *   Satu pertanyaan di form: "Sebutkan satu contoh kejadian deterministik dan satu kejadian probabilistik di aplikasi Gojek/Tokopedia.".
+
+---
+
+## **Materi Kuliah: Konsep, Aplikasi, & Komputasi**
+
+**1. Konsep Dasar**
+*   **Deterministik vs Stokastik:** Deterministik adalah sebab-akibat pasti (Input A $\to$ Output B), contoh: `1 + 1 = 2`. Stokastik mengandung elemen acak, contoh: Waktu kedatangan paket data di router.
+*   **Ruang Sampel ($\Omega$):** Himpunan seluruh kemungkinan hasil. Dalam *load testing*, $\Omega$ bisa berupa {Sukses, Timeout, Error 500}.
+*   **Hukum Bilangan Besar (LLN):** Jaminan matematis bahwa rata-rata sampel empiris akan mendekati rata-rata teoretis seiring bertambahnya jumlah percobaan.
+
+**2. Aplikasi Sistem Informasi**
+*   **Reliabilitas Infrastruktur:** Menghitung risiko kegagalan. Kegagalan dua server cadangan tidak selalu independen (misal: mati listrik satu gedung mematikan keduanya).
+*   **Kualitas Layanan (QoS):** Probabilitas digunakan untuk menentukan bandwidth minimum agar *video streaming* tidak *buffering* bagi 99% user.
+
+**3. Komputasi (Python)**
+*   **Generasi Angka Acak:** Menggunakan `numpy.random` untuk memodelkan ketidakpastian.
+*   **Simulasi Monte Carlo:** Metode komputasi untuk menaksir probabilitas dengan melakukan ribuan percobaan acak.
+
+---
+
+## **Tugas Kelompok (GitHub Classroom)**
+**Judul:** *Week 1 Mission: Simulating Reliability & Risk*
+
+**Deskripsi:**
+Mahasiswa diberikan *starter notebook* yang berisi skenario sistem *Disaster Recovery*. Mereka harus melengkapi kode untuk mensimulasikan kegagalan server dan menjawab pertanyaan bisnis.
+
+**Soal Python:**
+1.  Buat fungsi `simulate_server_uptime(days, prob_failure)` yang mengembalikan status server (Up/Down) selama n-hari.
+2.  Simulasikan dua server (Server A dan B) yang bekerja paralel. Sistem Down hanya jika **keduanya** Down.
+3.  Bandingkan: Berapa hari sistem Down jika menggunakan 1 server vs 2 server?
+4.  **Analisis:** Jika biaya server ke-2 adalah \$100/hari dan biaya sistem Down adalah \$5000/hari, apakah *worth it* menyewa server ke-2? (Jawab dengan grafik profit/loss).
+
+**Submission:** Push `.ipynb` ke repo GitHub Classroom. Penilaian otomatis via GitHub Actions untuk kelengkapan kode, penilaian manual untuk analisis keputusan.
+
+---
+
+## **15 Soal & Solusi (Dari Sumber "Desain Kurikulum...")**
+
+Berikut adalah 15 soal yang diambil dari Bank Soal Mingguan (Minggu 01) dalam dokumen "Desain Kurikulum Statistika Generasi Z"-, beserta solusinya.
+
+### **A. Pertanyaan Konseptual**
+
+**1. Soal:** Jelaskan perbedaan mendasar antara fenomena deterministik (seperti operasi penjumlahan di CPU) dan fenomena probabilistik (seperti waktu kedatangan paket di router).
+*   **Solusi:** Fenomena deterministik selalu menghasilkan output yang sama untuk input dan kondisi awal yang sama (kepastian mutlak). Fenomena probabilistik memiliki variasi inheren di mana input yang sama bisa menghasilkan output berbeda, sehingga hanya bisa diprediksi pola atau peluangnya, bukan hasil pastinya.
+
+**2. Soal:** Mengapa pendekatan *Frequentist* memerlukan asumsi pengulangan eksperimen dalam kondisi yang identik?
+*   **Solusi:** Karena pendekatan Frequentist mendefinisikan probabilitas sebagai limit dari frekuensi relatif ($n/N$) saat jumlah percobaan ($N$) mendekati tak hingga. Tanpa pengulangan kondisi identik, frekuensi relatif tidak akan konvergen ke nilai yang bermakna.
+
+**3. Soal:** Definisikan ruang sampel dalam konteks pengujian beban (*load testing*) sebuah situs web e-commerce.
+*   **Solusi:** Ruang sampel adalah himpunan semua kemungkinan status respons server terhadap satu *request*. Contoh: $\Omega = \{ \text{HTTP 200 OK}, \text{HTTP 404 Not Found}, \text{HTTP 500 Server Error}, \text{Timeout} \}$.
+
+**4. Soal:** Apa yang dimaksud dengan interpretasi probabilitas subjektif (Bayesian) dan bagaimana relevansinya dalam pengambilan keputusan manajerial?
+*   **Solusi:** Probabilitas subjektif adalah ukuran "derajat keyakinan" seseorang berdasarkan informasi yang tersedia saat ini (bukan frekuensi fisik). Ini relevan bagi manajer untuk mengambil keputusan pada kejadian yang tidak berulang (misal: "Peluang sukses peluncuran produk baru") di mana data historis mungkin tidak ada.
+
+**5. Soal:** Jelaskan peran hukum bilangan besar (Law of Large Numbers) dalam validasi simulasi sistem.
+*   **Solusi:** LLN menjamin bahwa hasil simulasi rata-rata (empiris) akan mendekati nilai ekspektasi teoretis sistem jika simulasi dijalankan cukup lama/banyak. Ini memvalidasi bahwa hasil simulasi komputer merepresentasikan perilaku sistem yang sebenarnya.
+
+### **B. Pertanyaan Aplikatif**
+
+**6. Soal:** Sebuah sistem Disaster Recovery Center (DRC) memiliki dua server cadangan. Jika probabilitas satu server gagal adalah 0,05, jelaskan mengapa kegagalan keduanya tidak selalu 0,0025 dalam kondisi nyata.
+*   **Solusi:** Angka 0,0025 ($0,05 \times 0,05$) hanya berlaku jika kegagalan kedua server **independen**. Dalam dunia nyata, sering terjadi *Common Cause Failure* (misal: pemadaman listrik satu gedung, banjir, atau *bug* software yang sama) yang membuat keduanya gagal bersamaan, sehingga probabilitasnya > 0,0025.
+
+**7. Soal:** Analisis bagaimana fluktuasi jumlah pengguna aktif di platform media sosial dapat dimodelkan sebagai proses stokastik.
+*   **Solusi:** Jumlah pengguna tidak konstan tetapi berubah terhadap waktu secara acak. Ini dapat dimodelkan sebagai proses stokastik (misalnya Proses Poisson untuk kedatangan pengguna baru) di mana variabel acak $X(t)$ mewakili jumlah pengguna pada waktu $t$.
+
+**8. Soal:** Gunakan konsep probabilitas untuk mengevaluasi risiko kehilangan data pada media penyimpanan RAID 0 dibandingkan RAID 1.
+*   **Solusi:** RAID 0 (Striping) gagal jika **salah satu** disk gagal (Sistem Seri, risiko tinggi). RAID 1 (Mirroring) gagal hanya jika **semua** disk gagal (Sistem Paralel, risiko rendah/redundansi). Probabilitas kehilangan data RAID 0 > RAID 1.
+
+**9. Soal:** Jika sebuah algoritma enkripsi memiliki probabilitas tabrakan (*collision*) $10^{-15}$, sejauh mana tingkat kepercayaan pengembang pada integritas data?
+*   **Solusi:** Tingkat kepercayaan sangat tinggi (hampir absolut). Dalam skala probabilistik, $10^{-15}$ dianggap sebagai kejadian yang secara praktis mustahil terjadi dalam operasional normal, memberikan jaminan integritas data yang kuat ("Probabilistic Guarantee").
+
+**10. Soal:** Bagaimana probabilitas digunakan dalam menentukan kapasitas bandwidth minimum untuk menjamin kualitas layanan (QoS) video streaming?
+*   **Solusi:** Provider tidak menyediakan bandwidth untuk *peak* teoritis semua user (mahal), melainkan menggunakan probabilitas untuk menjamin (misalnya) 99.9% waktu, bandwidth cukup. Ini dihitung menggunakan distribusi beban user agar probabilitas *congestion* < 0.1%.
+
+### **C. Pertanyaan Komputasional**
+
+**11. Soal:** Tulis skrip Python untuk mensimulasikan 10.000 percobaan pelemparan koin tidak adil ($p=0,6$) dan plot konvergensi frekuensi relatifnya.
+*   **Solusi:**
+    ```python
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    n_trials = 10000
+    p_head = 0.6
+    # Simulasi: 1 = Head, 0 = Tail
+    flips = np.random.choice(, size=n_trials, p=[1-p_head, p_head])
+    # Hitung rata-rata kumulatif
+    cumulative_avg = np.cumsum(flips) / np.arange(1, n_trials + 1)
+
+    plt.plot(cumulative_avg)
+    plt.axhline(p_head, color='r', linestyle='--') # Garis teoretis
+    plt.xlabel("Jumlah Lemparan"); plt.ylabel("Frekuensi Relatif Head")
+    plt.show()
+    ```
+
+**12. Soal:** Gunakan pustaka `random` untuk menghasilkan 1.000 sampel waktu tunggu login dan hitung nilai rata-ratanya.
+*   **Solusi:**
+    ```python
+    import random
+    # Asumsi: Waktu tunggu 0-5 detik
+    wait_times = [random.uniform(0, 5) for _ in range(1000)]
+    average_time = sum(wait_times) / len(wait_times)
+    print(f"Rata-rata waktu tunggu: {average_time:.4f} detik")
+    ```
+
+**13. Soal:** Buatlah simulasi Monte Carlo untuk menghitung luas area di bawah kurva fungsi acak sederhana yang merepresentasikan beban kerja server.
+*   **Solusi:**
+    ```python
+    import numpy as np
+    # Contoh fungsi beban: y = x^2 di interval
+    n_points = 10000
+    x = np.random.uniform(0, 1, n_points)
+    y = np.random.uniform(0, 1, n_points)
+    # Titik di bawah kurva y = x^2
+    under_curve = y < x**2
+    area = np.mean(under_curve) * 1 # Luas kotak total 1x1
+    print(f"Estimasi Luas Area: {area}")
+    ```
+
+**14. Soal:** Implementasikan fungsi Python yang menghasilkan seluruh kemungkinan kombinasi dari 4-bit biner dan hitung probabilitas munculnya tepat dua angka '1'.
+*   **Solusi:**
+    ```python
+    import itertools
+    # Ruang Sampel
+    outcomes = list(itertools.product(, repeat=4))
+    # Kejadian A: Tepat dua angka '1'
+    event_A = [bits for bits in outcomes if sum(bits) == 2]
+    prob_A = len(event_A) / len(outcomes)
+    print(f"Probabilitas: {prob_A} (Seharusnya 6/16 = 0.375)")
+    ```
+
+**15. Soal:** Gunakan numpy untuk mensimulasikan distribusi umur pakai 500 hard disk berdasarkan data kegagalan historis.
+*   **Solusi:**
+    ```python
+    import numpy as np
+    import matplotlib.pyplot as plt
+    # Asumsi: Umur pakai berdistribusi Eksponensial (MTTF = 5 tahun)
+    mttf = 5
+    lifetimes = np.random.exponential(scale=mttf, size=500)
+    plt.hist(lifetimes, bins=20)
+    plt.title("Simulasi Umur Pakai Hard Disk")
+    plt.show()
+    ```

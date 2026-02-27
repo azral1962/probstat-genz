@@ -1,0 +1,32 @@
+---
+title: "Minggu 01: Pola Pikir Probabilistik vs Deterministik"
+subtitle: "Understanding Probabilistic Way of Thinking versus Deterministic Way of Thinking"
+---
+
+![“Bayangin kamu pegang stok toko. Kalau kamu bilang ‘permintaan pasti 100’, kamu terlihat rapi… sampai kenyataan menampar. Permintaan itu goyang—kadang 70, kadang 160. Nah, pertanyaan pentingnya: kamu mau terlihat yakin, atau mau benar? Probabilitas itu bukan bikin kita ragu—justru bikin kita *berani mengambil keputusan* dengan risiko yang dihitung. Hari ini kita latihan satu skill: membedakan dunia deterministik vs dunia nyata yang random. Dan keputusan kamu akan kita ukur: berapa peluang kehabisan stok kalau kamu nekat ‘pasti 100’?”](../The_Decision_Engineer.png/image1.png)
+
+{{< include ../agenda/w01.qmd >}}
+
+{{< include ../hands_on_py/01-randomness.qmd >}}
+
+## 1. Konsep Pengetahuan
+Memahami bahwa dalam dunia nyata, fenomena seringkali mengandung ketidakpastian (randomness) dan tidak dapat diprediksi dengan kepastian mutlak (deterministik), sehingga memerlukan kerangka kerja matematika untuk mengukur ketidakpastian tersebut.
+
+## 2. Tipikal Problem
+Sebuah toko ingin menentukan stok barang. Pendekatan deterministik mengasumsikan permintaan konstan (misal: pasti 100 unit), sedangkan realitanya permintaan berfluktuasi secara acak.
+
+## 3. Solusi & Pengambilan Keputusan
+Menggunakan model probabilistik untuk menghitung peluang terjadinya berbagai tingkat permintaan, sehingga manajer dapat menentukan level safety stock yang optimal untuk meminimalkan risiko kekurangan stok tanpa menimbun barang berlebihan.
+
+## 4. Eksplorasi Komputasi (Python)
+*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
+
+```{python}
+# Tulis kode Python Anda di sini
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+print("Siap untuk komputasi Minggu 01!")
+```

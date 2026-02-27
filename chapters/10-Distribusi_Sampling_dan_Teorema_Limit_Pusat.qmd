@@ -1,0 +1,30 @@
+---
+title: "Minggu 10: Distribusi Sampling dan Teorema Limit Pusat"
+subtitle: "Sampling Distribution, Central Limit Theorem (CLT)"
+---
+
+![“Tulisan ‘maks 15 orang’ itu ngarang atau sains? Kalau berat orang random, total berat 20 orang juga random. CLT bilang: total/rata-rata sampel cenderung normal kalau n cukup besar. Jadi kita bisa hitung peluang overload. Hari ini kamu belajar ‘sains di balik aturan’: bukan sekadar angka, tapi probabilitas risiko. Output akhirnya: rekomendasi batas penumpang yang membuat risiko overload mendekati nol.”](../The_Decision_Engineer.png/image10.png)
+
+{{< include ../agenda/w10.qmd >}}
+
+## 1. Konsep Pengetahuan
+Distribusi dari rata-rata sampel akan mendekati Normal jika ukuran sampel besar (n >= 30), terlepas dari distribusi populasinya.
+
+## 2. Tipikal Problem
+Sebuah lift memiliki kapasitas beban maksimum. Jika berat badan rata-rata penumpang adalah variabel acak, berapa peluang 20 orang penumpang melebihi kapasitas lift?
+
+## 3. Solusi & Pengambilan Keputusan
+Menggunakan CLT untuk memodelkan total berat penumpang sebagai distribusi Normal. Insinyur menggunakan ini untuk menetapkan batas aman jumlah penumpang agar peluang kelebihan beban mendekati nol.
+
+## 4. Eksplorasi Komputasi (Python)
+*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
+
+```{python}
+# Tulis kode Python Anda di sini
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+print("Siap untuk komputasi Minggu 10!")
+```

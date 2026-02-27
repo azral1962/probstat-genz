@@ -1,0 +1,127 @@
+---
+title: "Randomness: Acak itu bukan asal"
+---
+
+## Try First — Lempar koin (Python)
+
+```{python}
+import random
+[random.choice(["H","T"]) for _ in range(20)]
+```
+
+Menggunakan numpy
+Lempar satu Koin 10 kali
+```{python}
+import numpy as np
+lempar_koin = np.random.choice(["Depan","Belakang"], size=10,p= [0.1,0.9])
+print(lempar_koin)
+```
+
+Hitung Jumlah Depan dan Belakang
+```{python}
+hasil=list(lempar_koin)
+hitung_Depan = hasil.count("Depan")
+hitung_Belakang = hasil.count("Belakang")
+print("Deoan dan Belakang:",hitung_Depan, hitung_Belakang)
+```
+
+Lempar dua koin sepuluh kali
+
+```{python}
+import numpy as np
+lempar_koin = np.random.choice(["Depan","Belakang"], size=(2,10),p= [0.9,0.1])
+print(lempar_koin)
+hasil=list(lempar_koin[0])
+hitung_Depan = hasil.count("Depan")
+hitung_Belakang = hasil.count("Belakang")
+print("Depan dan Belakang:",hitung_Depan, hitung_Belakang)
+
+hasil=list(lempar_koin[1])
+hitung_Depan = hasil.count("Depan")
+hitung_Belakang = hasil.count("Belakang")
+print("Depan dan Belakang:",hitung_Depan, hitung_Belakang)
+```
+
+
+Lempar dadu
+```{python}
+dadu=[1,2,3,4,5,6]
+N = 100
+distribusi=[1/6,1/6,1/6,1/6,1/6,1/6]
+lempar_dadu=np.random.choice(dadu,size=N, p=distribusi)
+print(lempar_dadu)
+```
+
+memplot random sequen
+
+```{python}
+import matplotlib.pyplot as plt
+
+# Generate data using NumPy
+
+# Create a line plot using Matplotlib
+plt.bar(np.arange(N), lempar_dadu, label='count')
+plt.title('Line Plot')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
+```
+
+
+menghitung frekuensi kemunculan
+
+```{python}
+
+
+# Menghitung nilai unik dan frekuensinya
+values, counts = np.unique(lempar_dadu, return_counts=True)
+
+# Menampilkan hasil
+print("Nilai Unik:", values)
+print("Frekuensi:", counts)
+
+
+
+```
+
+menghitung jumlah dari lemparan 10 dadu
+
+```{python}
+
+N=(10,10000)
+lempar_dadu=np.random.choice(dadu,N, distribusi)
+jumlah = np.sum(lempar_dadu,axis=0)
+# print(jumlah)
+
+# Menghitung nilai unik dan frekuensinya
+values, counts = np.unique(np.array(jumlah), return_counts=True)
+
+# Menampilkan hasil
+print("Nilai Unik:", values)
+print("Frekuensi:", counts)
+
+```
+
+matplotlib
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate data using NumPy
+x = np.linspace(0, 10, 100) # 100 evenly spaced points between 0 and 10
+y = np.sin(0)              # Compute sine values for x
+
+# Create a line plot using Matplotlib
+plt.bar(values, counts, label='count')
+plt.title('Line Plot of sin(x)')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.legend()
+plt.grid(True)
+plt.show()
+```

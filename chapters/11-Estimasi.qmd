@@ -1,0 +1,31 @@
+---
+title: "Minggu 11: Estimasi"
+subtitle: "Estimation, Confidence Interval"
+
+---
+
+![“Kamu tes 100 chip. Rata-rata kecepatannya sekian. Tapi dunia nyata bertanya: ‘rata-rata produksi sebenarnya berapa?’ Kalau kamu hanya kasih satu angka, kamu seperti menebak. Confidence Interval itu cara berkata jujur: ‘kami yakin di rentang ini’. Hari ini kamu belajar bedanya point estimate dan interval estimate, lalu membuat kalimat klaim spesifikasi yang bisa dipertanggungjawabkan. Statistik = etika + sains.”](../The_Decision_Engineer.png/image11.png)
+
+{{< include ../agenda/w11.qmd >}}
+
+## 1. Konsep Pengetahuan
+Estimasi titik (point estimate) dan Estimasi Interval (Confidence Interval) untuk memperkirakan parameter populasi (rata-rata atau proporsi).
+
+## 2. Tipikal Problem
+Berdasarkan survei sampel terhadap 100 chip komputer, ditemukan rata-rata kecepatan pemrosesan tertentu. Berapa rata-rata kecepatan sebenarnya dari seluruh produksi pabrik?
+
+## 3. Solusi & Pengambilan Keputusan
+Membangun Confidence Interval (misal 95% CI). Pabrik dapat mengklaim spesifikasi produk dengan keyakinan statistik yang dapat dipertanggungjawabkan kepada konsumen.
+
+## 4. Eksplorasi Komputasi (Python)
+*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
+
+```{python}
+# Tulis kode Python Anda di sini
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+print("Siap untuk komputasi Minggu 11!")
+```

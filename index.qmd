@@ -1,0 +1,18 @@
+---
+title: "Selamat Datang"
+---
+
+## Cara pakai buku ini
+
+Buku ini adalah laboratorium mini:
+
+1. Hook (Real life)
+2. Try first (Python)
+3. Insight
+4. Visual
+5. Mini challenge
+6. Dunia nyata
+
+::: {.callout-tip}
+Aturan emas: kalau kamu belum mencoba kodenya, kamu belum belajar konsepnya.
+:::

@@ -1,0 +1,186 @@
+Week 05: Variabel Acak, Ekspektasi, dan Variansi
+
+## Agenda Perkuliahan Minggu 5
+**Tema Misi:** "The Gambler's Fallacy: Mastering Risk and Reward"
+
+### Pertemuan 1: Senin (1 Jam) - The Concept & The Trap
+**Fokus:** Mengubah "Kejadian" menjadi "Angka" (Variabel Acak) dan memahami arti "Nilai Harapan" sebagai pusat massa data.
+
+- **00:00 - 00:10 | The Hook: "Gacha & Loot Boxes"**
+    - Aktivitas: Tampilkan peluang drop rate item langka di game populer (misal: Genshin Impact atau Mobile Legends).
+    - Pertanyaan: "Item A harganya 1000 Diamond, tapi bisa didapat lewat Gacha seharga 100 Diamond dengan peluang 5%. Mana yang lebih 'cuan' secara matematis?"
+    - Konsep: Perkenalkan Variabel Acak ($X$) sebagai pemetaan dari Item (Event) ke Nilai Uang (Number).
+
+- **00:10 - 00:30 | Live Coding: "The Law of Averages"**
+    - Dosen (Python Demo): Simulasikan taruhan Gacha tersebut 10.000 kali.
+    - Visualisasi: Plot rata-rata kumulatif kemenangan. Tunjukkan garis konvergensi menuju Ekspektasi ($E[X]$).
+    - Poin Kunci: $E[X]$ bukan nilai yang akan Anda dapatkan sekali main, tapi rata-rata jika Anda main selamanya.
+
+- **00:30 - 00:50 | Deep Dive: Variansi = Risiko**
+    - Skenario: Dua server. Server A ping-nya stabil 50ms. Server B ping-nya rata-rata 50ms tapi sering spike ke 200ms. Rata-rata sama, tapi pengalaman beda.
+    - Definisikan Variansi ($Var(X)$): Ukuran "keganasan" fluktuasi data. Bagi insinyur IT, variansi adalah musuh (risiko/ketidakstabilan).
+
+- **00:50 - 01:00 | Pod Formation & Mission Brief**
+    - Misi GitHub: "The Casino House Edge". Mahasiswa harus merancang permainan judi digital yang menjamin bandar (mereka) untung dalam jangka panjang, tapi tetap menarik bagi pemain.
+
+### Pertemuan 2: Rabu (2 Jam) - Simulation Lab
+**Fokus:** Menggunakan Python untuk menghitung risiko investasi/bisnis dan membuktikan sifat momen.
+
+- **00:00 - 00:20 | Setup & Micro-Lecture: PDF vs CDF**
+    - Visual: Gunakan matplotlib step-plot untuk menggambar PMF (Probabilitas per titik) dan CDF (Probabilitas kumulatif).
+    - Konsep: CDF tidak pernah turun. Ini seperti "loading bar" probabilitas.
+
+- **00:20 - 01:00 | Pod Challenge: "Risk-Return Tradeoff"**
+    - Skenario: Anda manajer investasi IT. Ada 2 proyek:
+        - Proyek A (Stabil): Untung $10k (90%), Rugi $1k (10%).
+        - Proyek B (Volatil): Untung $50k (30%), Rugi $10k (70%).
+    - Tugas (Python):
+        1. Hitung $E[X]$ dan $Var(X)$ kedua proyek.
+        2. Simulasikan 100 kali jalan. Berapa kali Proyek B bangkrut?
+        3. Visualisasikan histogram hasil akhir.
+
+- **01:00 - 01:40 | Studi Kasus: "Expected Latency"**
+    - Menghitung expected cost dari retry logic. Jika login gagal ($p=0.2$), user mencoba lagi. Berapa rata-rata jumlah percobaan? (Pengantar distribusi Geometrik).
+
+- **01:40 - 01:50 | Code Review & Debat**
+    - "Apakah $E[X]$ tinggi selalu lebih baik?" (Jawab: Tidak jika Variansinya membahayakan kelangsungan hidup perusahaan).
+
+- **01:50 - 02:00 | Exit Ticket**
+    - Pertanyaan: "Jelaskan dengan bahasa manusia, apa bedanya $E[X]$ dan rata-rata sampel ($\bar{x}$)?"
+
+---
+
+## Materi Kuliah: Konsep, Aplikasi, & Komputasi
+
+### 1. Konsep Dasar
+- **Variabel Acak ($X$):** Fungsi yang memetakan hasil ruang sampel ($\Omega$) ke bilangan riil ($\mathbb{R}$). Contoh: $X$ = jumlah paket error.
+- **Ekspektasi ($E[X]$):** Pusat massa distribusi.
+    - Rumus Diskrit: $E[X] = \sum x \cdot P(X=x)$.
+    - Sifat Linear: $E[aX + b] = aE[X] + b$. (Berguna untuk konversi unit, misal dari Detik ke Milidetik).
+- **Variansi ($Var(X)$):** Ukuran penyebaran data dari rata-ratanya (Momen ke-2).
+    - Rumus: $Var(X) = E[(X - \mu)^2] = E[X^2] - (E[X])^2$.
+    - Sifat: $Var(aX+b) = a^2 Var(X)$. Konstanta $b$ tidak mempengaruhi sebaran.
+
+### 2. Aplikasi Sistem Informasi
+- **Capacity Planning:** Menggunakan $E[X]$ traffic untuk beli server dasar, dan $Var(X)$ untuk menentukan buffer kapasitas (Auto-scaling margin).
+- **Analisis Risiko:** Dalam keamanan siber, Risiko = Dampak $\times$ Probabilitas ($E[\text{Loss}]$).
+- **Algoritma Game:** Menyeimbangkan loot box agar tidak terlalu pelit (pemain kabur) atau terlalu murah (dev bangkrut).
+
+### 3. Komputasi (Python)
+- **Numpy:** Menggunakan `np.mean()` dan `np.var()` untuk data sampel.
+- **Custom Functions:** Implementasi rumus ekspektasi dengan `sum(x * p for x, p in zip(values, probs))`.
+- **Scipy Stats:** Menggunakan `rv_discrete` untuk membuat objek variabel acak kustom dan menghitung momennya secara otomatis.
+
+---
+
+## Tugas Kelompok (GitHub Classroom)
+**Judul:** Week 5: The Digital Casino - Designing Probability for Profit
+
+**Deskripsi:**
+Mahasiswa bertindak sebagai Game Designer. Mereka harus merancang sistem reward (Variabel Acak) untuk event game baru.
+
+**Set Soal (Notebook):**
+1. **Design Distribution:**
+    - Tentukan 3 jenis hadiah (Common, Rare, Epic) dengan nilai poin tertentu.
+    - Tentukan probabilitas masing-masing ($P_{common}, P_{rare}, P_{epic}$) sehingga totalnya 1.
+2. **Theoretical Calculation:**
+    - Hitung Ekspektasi poin per tarikan ($E[X]$).
+    - Hitung Variansi poin ($Var(X)$).
+    - Jika biaya main = 100 poin, apakah pemain untung atau rugi secara rata-rata?
+3. **Simulation Verification:**
+    - Simulasikan 10.000 kali tarikan menggunakan `numpy.random.choice`.
+    - Bandingkan rata-rata simulasi dengan $E[X]$ teoretis. Plot grafik konvergensinya (Hukum Bilangan Besar).
+4. **Business Logic:**
+    - Manajemen minta agar kasino untung minimal 10% dari setiap tiket. Ubah probabilitas atau nilai hadiah untuk mencapai target ini tanpa membuat game jadi membosankan (Variansi jangan 0).
+
+---
+
+## 15 Soal & Solusi
+
+### A. Pertanyaan Konseptual
+
+1. **Soal:** Apa perbedaan mendasar antara variabel acak diskrit dan kontinu dalam hal cara menghitung probabilitas di satu titik?
+   - **Solusi:** Untuk variabel acak diskrit, probabilitas di satu titik $P(X=x)$ adalah nilai dari Probability Mass Function (PMF) dan bisa bernilai positif. Untuk variabel acak kontinu, probabilitas di satu titik tunggal $P(X=x)$ selalu sama dengan 0; probabilitas hanya didefinisikan dalam interval (luas area di bawah kurva PDF).
+
+2. **Soal:** Mengapa nilai harapan ($E[X]$) sering disebut sebagai pusat massa dari distribusi probabilitas?
+   - **Solusi:** Secara matematis, rumus ekspektasi $E[X] = \sum x p(x)$ identik dengan rumus titik berat dalam fisika, di mana $x$ adalah posisi dan $p(x)$ adalah massa di titik tersebut. Jika kita menyeimbangkan histogram distribusi pada sebuah titik tumpu, titik tersebut adalah $E[X]$.
+
+3. **Soal:** Jelaskan hubungan antara variansi dan risiko dalam konteks investasi infrastruktur IT.
+   - **Solusi:** Variansi mengukur seberapa jauh hasil aktual bisa menyimpang dari rata-rata (ekspektasi). Dalam IT, variansi tinggi berarti ketidakpastian tinggi (misal: latensi yang kadang cepat sekali, kadang lambat sekali). Investasi dengan variansi tinggi dianggap "berisiko" karena sulit diprediksi dan membutuhkan mitigasi (buffer) yang lebih besar.
+
+4. **Soal:** Apa yang dimaksud dengan fungsi distribusi kumulatif (CDF) dan mengapa nilainya tidak pernah turun?
+   - **Solusi:** CDF, $F(x) = P(X \le x)$, menyatakan peluang variabel acak bernilai kurang dari atau sama dengan $x$. Nilainya tidak pernah turun (monoton naik) karena probabilitas adalah non-negatif; saat kita menggeser $x$ ke kanan, kita hanya bisa menambah (atau tetap), tidak mungkin mengurangi akumulasi peluang yang sudah didapat.
+
+5. **Soal:** Deskripsikan makna fisik dari momen kedua (variansi) terhadap penyebaran data dari nilai rata-ratanya.
+   - **Solusi:** Momen kedua di sekitar mean, $E[(X-\mu)^2]$, mengukur rata-rata kuadrat jarak data ke pusatnya. Fisiknya mirip dengan "momen inersia": semakin besar variansi, semakin "berat" ekor distribusi atau semakin tersebar datanya dari pusat, menunjukkan fluktuasi yang besar.
+
+### B. Pertanyaan Aplikatif
+
+6. **Soal:** Sebuah game online memberikan hadiah Rp 10.000 dengan probabilitas 0,1 dan Rp 0 dengan probabilitas 0,9. Berapakah biaya pendaftaran maksimum yang adil secara statistik?
+   - **Solusi:** Biaya adil (fair price) sama dengan nilai harapan kemenangan. $E[X] = (10.000 \times 0,1) + (0 \times 0,9) = 1.000$. Jadi, biaya pendaftaran maksimum agar permainan adil adalah Rp 1.000.
+
+7. **Soal:** Analisis variansi waktu respons database untuk menentukan kestabilan layanan bagi pengguna.
+   - **Solusi:** Rata-rata waktu respons (mean) yang rendah itu baik, tapi tidak cukup. Jika variansi tinggi, pengguna akan merasakan pengalaman yang tidak konsisten ("kadang cepat, kadang lag"). Layanan yang stabil harus memiliki variansi (atau standar deviasi) yang kecil agar performa dapat diprediksi (sesuai SLA).
+
+8. **Soal:** Jika sebuah server memiliki kapasitas 100 unit, dan beban kerja harian adalah variabel acak X dengan $\mu=80$ dan $\sigma=10$, seberapa sering server akan mengalami overload?
+   - **Solusi:** Overload terjadi jika $X > 100$. Menggunakan pendekatan Skor-Z: $Z=(100-80)/10=2$. Dari tabel normal standar, $P(Z > 2) \approx 0.0228$ atau sekitar 2.28%. Server akan overload sekitar 2-3 kali per 100 hari.
+
+9. **Soal:** Gunakan konsep ekspektasi untuk menghitung rata-rata jumlah percobaan login yang dilakukan user sebelum berhasil, jika probabilitas berhasil tiap kali adalah $p$.
+   - **Solusi:** Ini adalah Variabel Acak Geometrik. Nilai harapannya adalah $E[X] = 1/p$. Jika peluang berhasil login $p=0.5$, maka rata-rata butuh $1/0.5=2$ kali percobaan.
+
+10. **Soal:** Analisis profitabilitas proyek software menggunakan variabel acak untuk estimasi pendapatan dan biaya.
+    - **Solusi:** Profit $P = \text{Pendapatan}(R) - \text{Biaya}(C)$. Karena $R$ dan $C$ acak, $P$ juga variabel acak. $E[P] = E[R] - E[C]$. Proyek layak jika $E[P] > 0$ dan $Var(P)=Var(R)+Var(C)$ (asumsi independen) berada dalam batas toleransi risiko perusahaan.
+
+### C. Pertanyaan Komputasional
+
+11. **Soal:** Tulis skrip Python untuk menghitung mean dan variansi dari distribusi probabilitas diskrit yang diberikan dalam bentuk dictionary.
+    - **Solusi:**
+```python
+dist = {1: 0.2, 2: 0.5, 3: 0.3} # Value: Prob  
+mean = sum(x * p for x, p in dist.items())  
+variance = sum((x - mean)**2 * p for x, p in dist.items())  
+print(f"Mean: {mean}, Variance: {variance}")  
+```
+
+12. **Soal:** Gunakan `scipy.stats` untuk menghasilkan 1.000 sampel dari variabel acak kustom dan bandingkan rata-rata sampelnya dengan nilai harapan teoretis.
+    - **Solusi:**
+```python
+from scipy.stats import rv_discrete  
+xk = [10, 11, 12]; pk = [0.2, 0.5, 0.3]  
+cust_dist = rv_discrete(name='cust', values=(xk, pk))  
+samples = cust_dist.rvs(size=1000)  
+print(f"Sample Mean: {samples.mean()}, Theory Mean: {cust_dist.mean()}")  
+```
+
+13. **Soal:** Plot fungsi massa probabilitas (PMF) dan CDF dari sebuah variabel acak diskrit menggunakan step plot di matplotlib.
+    - **Solusi:**
+```python
+import matplotlib.pyplot as plt  
+import numpy as np  
+x = [10, 11, 12]; p = [0.2, 0.5, 0.3]  
+cdf = np.cumsum(p)  
+plt.step(x, cdf, where='post', label='CDF')  
+plt.bar(x, p, label='PMF', alpha=0.5)  
+plt.legend(); plt.show()  
+```
+
+14. **Soal:** Implementasikan fungsi untuk menghitung variansi menggunakan rumus $E[X^2] - (E[X])^2$.
+    - **Solusi:**
+```python
+def calc_variance(values, probs):  
+    ex = sum(v * p for v, p in zip(values, probs))  
+    ex2 = sum((v**2) * p for v, p in zip(values, probs))  
+    return ex2 - ex**2  
+```
+
+15. **Soal:** Buat simulasi pelemparan dadu 10.000 kali dan tunjukkan secara visual bagaimana rata-rata kumulatifnya konvergen ke 3,5.
+    - **Solusi:**
+```python
+import numpy as np; import matplotlib.pyplot as plt  
+rolls = np.random.randint(1, 7, 10000)  
+avgs = np.cumsum(rolls) / np.arange(1, 10001)  
+plt.plot(avgs); plt.axhline(3.5, color='r'); plt.show()  
+```
+
+
+

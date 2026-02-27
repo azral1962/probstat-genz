@@ -1,0 +1,12 @@
+{
+  "hash": "fc013b4763840f3eb318552ffa9b60da",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Aturan Probabilitas\"\n---\n\n::: {#f5d2c193 .cell execution_count=1}\n``` {.python .cell-code}\nimport random\nrandom.randint(1,6)\n```\n\n::: {.cell-output .cell-output-display execution_count=1}\n```\n5\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "03-probability-rules_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

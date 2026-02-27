@@ -1,0 +1,29 @@
+---
+title: "Minggu 16: Ujian Akhir Semester"
+subtitle: "Final Exam"
+
+---
+
+![“Final ini menilai satu hal: apakah kamu bisa memodelkan dunia yang tidak pasti lalu mengambil keputusan yang bisa dipertanggungjawabkan. Kamu akan dapat kasus besar. Tugasmu: pilih model, jalankan analisis, tulis keputusan, dan jelaskan konsekuensinya. Ini bukan akhir materi—ini awal cara berpikir.”](../The_Decision_Engineer.png/image15.png)
+
+## 1. Konsep Pengetahuan
+Evaluasi menyeluruh materi satu semester.
+
+## 2. Tipikal Problem
+Ujian komprehensif studi kasus.
+
+## 3. Solusi & Pengambilan Keputusan
+Menerapkan seluruh konsep probabilitas dan statistik untuk menyelesaikan masalah rekayasa.
+
+## 4. Eksplorasi Komputasi (Python)
+*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
+
+```{python}
+# Tulis kode Python Anda di sini
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+print("Siap untuk komputasi Minggu 16!")
+```

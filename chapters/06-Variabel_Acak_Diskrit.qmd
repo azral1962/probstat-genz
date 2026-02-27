@@ -1,0 +1,31 @@
+---
+title: "Minggu 06: Variabel Acak Diskrit"
+subtitle: "Binomial Distribution, Poisson Distribution"
+---
+
+![“Pabrik bilang cacat 1%. Kamu ambil 100 unit. Pertanyaan kecil tapi tajam: peluang tepat 2 cacat berapa? Ini momen kamu belajar memilih model yang tepat: Binomial untuk ‘n percobaan’, Poisson untuk ‘kejadian jarang’. Engineer yang bagus bukan yang hafal rumus banyak—tapi yang *tahu kapan pakai yang mana*. Hari ini kamu latihan dua model, lalu bikin keputusan QC: lanjut produksi atau stop inspeksi?”](../The_Decision_Engineer.png/image6.png)
+
+
+{{< include ../agenda/w06.qmd >}}
+
+## 1. Konsep Pengetahuan
+Distribusi Binomial untuk jumlah sukses dalam n percobaan, Distribusi Poisson untuk jumlah kejadian dalam interval waktu/ruang tertentu.
+
+## 2. Tipikal Problem
+Sebuah pabrik ingin menjamin kualitas produk. Diketahui rata-rata cacat adalah 1%. Berapa peluang menemukan tepat 2 barang cacat dalam sampel 100 unit?
+
+## 3. Solusi & Pengambilan Keputusan
+Menggunakan rumus distribusi Binomial (atau aproksimasi Poisson jika n besar dan p kecil). Jika peluang cacat melebihi ambang batas toleransi, manajer memutuskan untuk menghentikan lini produksi untuk inspeksi.
+
+## 4. Eksplorasi Komputasi (Python)
+*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
+
+```{python}
+# Tulis kode Python Anda di sini
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+print("Siap untuk komputasi Minggu 06!")
+```

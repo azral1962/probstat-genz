@@ -1,0 +1,68 @@
+{
+  "index.qmd": {
+    "index.html": "d623b404"
+  },
+  "chapters/01-randomness.qmd": {
+    "01-randomness.html": "64747875"
+  },
+  "chapters/02-sample-space.qmd": {
+    "02-sample-space.html": "1c0be035"
+  },
+  "chapters/03-probability-rules.qmd": {
+    "03-probability-rules.html": "6c65e8c4"
+  },
+  "about.qmd": {
+    "about.html": "c73d9ec8"
+  },
+  "chapters/04-bayes-conditional.qmd": {
+    "04-bayes-conditional.html": "8b24e61b"
+  },
+  "chapters/01-Pola_Pikir_Probabilistik_vs_Deterministik.qmd": {
+    "01-Pola_Pikir_Probabilistik_vs_Deterministik.html": "c552b35b"
+  },
+  "chapters/02-Kerangka_Probabilitas_dan_Statistik.qmd": {
+    "02-Kerangka_Probabilitas_dan_Statistik.html": "aa8981f4"
+  },
+  "chapters/03-Studi_Kasus_Aplikasi_Teknik.qmd": {
+    "03-Studi_Kasus_Aplikasi_Teknik.html": "9ab06bc9"
+  },
+  "chapters/04-Teorema_Probabilitas_dan_Bayes.qmd": {
+    "04-Teorema_Probabilitas_dan_Bayes.html": "312ae941"
+  },
+  "chapters/05-Variabel_Acak.qmd": {
+    "05-Variabel_Acak.html": "d87f87cb"
+  },
+  "chapters/06-Variabel_Acak_Diskrit.qmd": {
+    "06-Variabel_Acak_Diskrit.html": "ceceff8b"
+  },
+  "chapters/07-Variabel_Acak_Kontinu.qmd": {
+    "07-Variabel_Acak_Kontinu.html": "17481a7d"
+  },
+  "chapters/08-Ujian_Tengah_Semester.qmd": {
+    "08-Ujian_Tengah_Semester.html": "8689a0ad"
+  },
+  "chapters/09-Fungsi_Variabel_Acak.qmd": {
+    "09-Fungsi_Variabel_Acak.html": "8be702aa"
+  },
+  "chapters/10-Distribusi_Sampling_dan_Teorema_Limit_Pusat.qmd": {
+    "10-Distribusi_Sampling_dan_Teorema_Limit_Pusat.html": "1a9eb8db"
+  },
+  "chapters/11-Estimasi.qmd": {
+    "11-Estimasi.html": "b8b6c963"
+  },
+  "chapters/12-Pengujian_Hipotesis.qmd": {
+    "12-Pengujian_Hipotesis.html": "195d8fc1"
+  },
+  "chapters/13-Regresi.qmd": {
+    "13-Regresi.html": "a200564f"
+  },
+  "chapters/14-Studi_Kasus_Lanjutan.qmd": {
+    "14-Studi_Kasus_Lanjutan.html": "2debbbc5"
+  },
+  "chapters/15-Studi_Kasus_Lanjutan.qmd": {
+    "15-Studi_Kasus_Lanjutan.html": "d0699258"
+  },
+  "chapters/16-Ujian_Akhir_Semester.qmd": {
+    "16-Ujian_Akhir_Semester.html": "669c94b6"
+  }
+}

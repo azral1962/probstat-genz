@@ -1,0 +1,32 @@
+---
+title: "Minggu 02: Kerangka Probabilitas dan Statistik"
+subtitle: "Probabilistic Experiment, Sample Space, Event, Probability Definition and Axioms"
+---
+
+![“Kamu kirim 3 bit data. Kedengarannya kecil… tapi ada ‘semesta’ di belakangnya: semua kombinasi yang mungkin. Kalau kamu nggak mendefinisikan ruang sampel dan event dengan benar, kamu bakal salah hitung kualitas sistem komunikasi. Hari ini kita bikin cara pikir yang rapi: apa itu eksperimen, apa itu sample space, apa itu event, dan kenapa aksioma probabilitas itu ‘aturan main semesta’. Setelah ini, kamu bukan cuma bisa hitung peluang—kamu bisa *merancang* perhitungan peluang.”](../The_Decision_Engineer.png/image2.png)
+
+{{< include ../agenda/w02.qmd >}}
+
+{{< include ../hands_on_py/02-sample-space.qmd >}}
+
+## 1. Konsep Pengetahuan
+Ruang sampel (S) sebagai himpunan semua hasil yang mungkin, kejadian (E) sebagai himpunan bagian dari ruang sampel, dan aksioma probabilitas (nilai peluang antara 0 dan 1, total peluang semesta = 1).
+
+## 2. Tipikal Problem
+Dalam pengiriman data digital, kita ingin mengetahui peluang terjadinya kesalahan bit. Jika dikirim 3 bit, apa ruang sampelnya dan berapa peluang setidaknya satu bit salah?
+
+## 3. Solusi & Pengambilan Keputusan
+Mendaftar ruang sampel S = {000, 001, ..., 111}. Jika kejadian E adalah 'setidaknya satu error', kita hitung jumlah elemen di E dibagi total elemen di S untuk mendapatkan probabilitasnya, yang digunakan untuk menentukan kualitas saluran komunikasi.
+
+## 4. Eksplorasi Komputasi (Python)
+*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
+
+```{python}
+# Tulis kode Python Anda di sini
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+print("Siap untuk komputasi Minggu 02!")
+```

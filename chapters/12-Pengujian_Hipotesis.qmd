@@ -1,0 +1,31 @@
+---
+title: "Minggu 12: Pengujian Hipotesis"
+subtitle: "Hypothesis Testing Procedure, Error Types"
+
+---
+
+![“Ada obat baru. Klaimnya lebih efektif. Pertanyaannya: ini nyata atau kebetulan? Uji hipotesis itu ‘pengadilan statistik’: ada H0, ada H1, ada aturan keputusan, dan ada risiko salah vonis (Type I/II). Hari ini kamu belajar prosedur uji, membaca p-value, dan yang paling penting: menghubungkan angka dengan konsekuensi. Karena salah keputusan di sini bukan cuma salah nilai—bisa salah arah kebijakan.”](../The_Decision_Engineer.png/image12.png)
+
+{{< include ../agenda/w12.qmd >}}
+
+## 1. Konsep Pengetahuan
+Menentukan H0 dan H1, menghitung statistik uji, P-value, serta memahami Galat Tipe I (False Positive) dan Tipe II (False Negative).
+
+## 2. Tipikal Problem
+Sebuah obat baru diklaim lebih efektif menyembuhkan penyakit dibandingkan obat lama. Apakah klaim ini valid atau hanya kebetulan?
+
+## 3. Solusi & Pengambilan Keputusan
+Melakukan uji hipotesis (misal t-test). Jika P-value < alpha (0.05), tolak H0. Keputusannya adalah memproduksi obat baru tersebut karena terbukti secara signifikan lebih baik secara statistik.
+
+## 4. Eksplorasi Komputasi (Python)
+*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
+
+```{python}
+# Tulis kode Python Anda di sini
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+print("Siap untuk komputasi Minggu 12!")
+```

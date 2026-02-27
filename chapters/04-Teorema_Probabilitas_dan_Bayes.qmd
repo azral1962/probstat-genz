@@ -1,0 +1,34 @@
+---
+title: "Minggu 04: Teorema Probabilitas dan Bayes"
+subtitle: "Probability Theorems, Conditional Probability, Bayes Theorem"
+---
+
+![“Alarm akurat 90%. Alarm bunyi. Semua panik: ‘mesin rusak!’ Tapi… kalau kerusakan itu sangat jarang, alarm 90% bisa tetap sering bohong. Ini plot twist klasik: base rate. Bayes itu alat untuk ‘update keyakinan’ berdasarkan bukti, bukan berdasarkan panik. Hari ini kamu belajar beda ‘P(alarm | rusak)’ dan ‘P(rusak | alarm)’. Satu membuatmu terlihat pintar, satu menyelamatkan biaya shutdown."](../The_Decision_Engineer.png/image4.png)
+
+
+
+{{< include ../agenda/w04.qmd >}}
+
+{{< include ../hands_on_py/04-bayes-conditional.qmd >}}
+
+## 1. Konsep Pengetahuan
+Probabilitas bersyarat P(A|B), aturan perkalian, independensi, dan Teorema Bayes untuk memperbarui keyakinan berdasarkan bukti baru.
+
+## 2. Tipikal Problem
+Sebuah sistem pemantauan mendeteksi kerusakan mesin (alarm berbunyi). Diketahui akurasi alarm 90%, tetapi peluang mesin rusak sebenarnya sangat kecil (jarang terjadi). Apakah mesin benar-benar rusak jika alarm berbunyi?
+
+## 3. Solusi & Pengambilan Keputusan
+Menggunakan Teorema Bayes untuk menghitung Posterior Probability P(Rusak|Alarm). Seringkali hasilnya menunjukkan peluang kerusakan masih rendah (false alarm). Solusinya adalah melakukan verifikasi manual sebelum menghentikan produksi yang mahal.
+
+## 4. Eksplorasi Komputasi (Python)
+*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
+
+```{python}
+# Tulis kode Python Anda di sini
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+print("Siap untuk komputasi Minggu 04!")
+```
