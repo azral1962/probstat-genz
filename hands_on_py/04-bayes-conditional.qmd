@@ -1,11 +1,28 @@
----
-title: "Teorema Bayes dan Porbabilitas Kondisional"
----
 
-The Hook: “Jebakan Tes DNA/Wajah”
+## Python First
+
+**Teorema Bayes dan Porbabilitas Kondisional ** 
+
+
+### The Hook: “Jebakan Tes DNA/Wajah”
+
 Aktivitas: Tampilkan skenario FaceID/Biometrik. “Jika sistem keamanan punya akurasi 99%, dan alarm berbunyi mendeteksi teroris, berapa persen kemungkinan orang itu benar-benar teroris?”
 Tebakan Mahasiswa: Kebanyakan akan menjawab 99%.
 Realita: Tunjukkan bahwa jika teroris sangat langka (misal 1 dari 10.000), peluangnya mungkin di bawah 1%. Ini adalah Base-Rate Fallacy.
+
+Anda memiliki detektor teroris melalui foto dengan akurasi 99%. Kalau anda mendeteksi seseorang  positif teroris berapa yakin anda boahwa ia seorang teroris?
+
+Ini soal mengkuantisasi keyakinan. Kita modelkan dengan konsep peerobabilitas.
+
+Ruang Sample dibangkikan dua random sources: 
+ * Subset A para teroris: Dari setiap 100 orang yang ada dalam populasi, terdapat 1 orang teroris, yang kita tidak tahu siapa.
+ * Subset B positif teroris: Dari deteksi foto dari orang yang lewat, terdapt orang yang di nyatakan positif teroris atau negatif teroris dengan tingkat akurasi 99%
+
+ Logika: kalau total populasi ada 10000 orang, jumlah teroris 10 orang. kalau 10000 orang ini di foto, maaka dari 10 teroris ini yang terdeteksi 99% x 10 teroris alias 10 teroris terdeteksi semua. tapi 9990 bukan teroris dan akurasinya 99%, bearti 1% dari 9990 non teroris yaitu 100 orang akan dinyatakan positif.
+
+ Total yang terdeteksi teroris jadi 10 teroris true positive ditambah 100 nonteroris yangterciduk false-positive dengan total 110 orang. seberapa yakin anda  sekarang bila anda tahu dari 110 yang anda tangkap padahal jumlah teroris hanya 10.
+
+ Apalagi bila anda tahu dari 10000 penduduk, hanya 1 orang teroris, sebagaimana dalam simulasi berikut ini. Artnya bila populasi ada 100000, cuma ada 10 teroris
 
 
 ```{python}
@@ -36,6 +53,8 @@ for i in nik:
 
 ```
 
+
+# Proses melalui externam unctions
 
 ```{python}
 import matplotlib.pyplot as plt
@@ -94,6 +113,79 @@ if __name__ == "__main__":
 
 ```
 
+Secara umum: Kita berbicara tentang dua subset A, B, komplemennya dan dan irisanya 
+
+### Spam filter
+Sebuah filter spam mengetahui bahwa 20% email adalah spam. 90% spam mengandung kata "Promo", sementara hanya 5% email normal mengandung kata tersebut. Jika sebuah email mengandung kata "Promo", hitung probabilitas itu adalah spam.
+
+Solusi: 
+ A : Spam
+ B : Promo
+
+ Filter: B
+
+Untuk menghitung probabilitas ini, kita menggunakan **Teorema Bayes**. Masalah ini adalah contoh klasik dari bagaimana informasi baru (munculnya kata "Promo") memperbarui keyakinan awal kita (*prior*) tentang sebuah email.
+
+### 1. Identifikasi Data
+
+Pertama, kita definisikan variabel-variabelnya:
+
+* $P(S)$: Probabilitas awal email adalah **Spam** = $0,20$
+* $P(N)$: Probabilitas awal email adalah **Normal** = $0,80$
+* $P(P|S)$: Probabilitas ada kata **"Promo"** jika email itu Spam (**Sensitivity**) = $0,90$
+* $P(P|N)$: Probabilitas ada kata **"Promo"** jika email itu Normal (**False Positive Rate**) = $0,05$
+
+---
+
+### 2. Rumus & Perhitungan
+
+Kita ingin mencari $P(S|P)$, yaitu probabilitas email adalah Spam **dengan syarat** di dalamnya terdapat kata "Promo".
+
+$$P(S|P) = \frac{P(P|S) \times P(S)}{P(P)}$$
+
+Di mana $P(P)$ adalah probabilitas total munculnya kata "Promo" baik di email spam maupun normal:
+
+
+$$P(P) = (P(P|S) \times P(S)) + (P(P|N) \times P(N))$$
+
+**Langkah-langkah hitung:**
+
+1. **Hitung pembilang:** $0,90 \times 0,20 = 0,18$
+2. **Hitung penyebut:** $(0,90 \times 0,20) + (0,05 \times 0,80) = 0,18 + 0,04 = 0,22$
+3. **Hasil akhir:** 
+$$\frac{0,18}{0,22} = \frac{9}{11} \approx 0,8182$$
+
+
+
+---
+
+### 3. Kesimpulan
+
+Probabilitas email tersebut adalah spam jika mengandung kata "Promo" adalah **81,82%**.
+
+| Kondisi | Probabilitas |
+| --- | --- |
+| Sebelum cek kata "Promo" (*Prior*) | 20,00% |
+| Setelah cek kata "Promo" (*Posterior*) | **81,82%** |
+
+### 4. Implementasi Cepat dengan Python
+
+Jika kita ingin memverifikasi dengan kode yang telah kita bahas sebelumnya:
+
+```{python}
+def bayes_theorem(prior, likelihood, neg_likelihood):
+    numerator = likelihood * prior
+    denominator = (likelihood * prior) + (neg_likelihood * (1 - prior))
+    return (numerator / denominator) * 100
+
+hasil = bayes_theorem(0.20, 0.90, 0.05)
+print(f"Probabilitas Spam: {hasil:.2f}%")
+
+```
+
+
+### Naive Bayes Classifier
+
 **Naive Bayes Classifier** adalah algoritma pembelajaran mesin (machine learning) yang digunakan untuk klasifikasi, berdasarkan **Teorema Bayes**.
 
 Disebut "Naive" (lugu/polos) karena algoritma ini membuat asumsi yang sangat kuat bahwa setiap fitur (variabel) dalam data bersifat **independen** satu sama lain. Artinya, keberadaan satu fitur dianggap tidak ada hubungannya dengan keberadaan fitur lainnya.
@@ -111,7 +203,7 @@ $$P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}$$
 * **$P(A)$**: Peluang awal kejadian A (Prior).
 * **$P(B)$**: Peluang awal kejadian B (Evidence).
 
-
+### Naive Bayes Classfier in Peer-to-Peer Lending
 
 Dalam konteks *Peer-to-Peer (P2P) Lending*, **Naive Bayes Classifier** sering digunakan sebagai model awal (baseline) untuk menentukan apakah seorang calon peminjam (borrower) berisiko gagal bayar (*Default*) atau tidak (*Success*).
 
@@ -119,7 +211,7 @@ Berikut adalah simulasi kasus sederhana menggunakan data profil peminjam.
 
 
 
-### 1. Skenario Data Peminjam
+#### 1. Skenario Data Peminjam
 
 Misalkan kita memiliki data historis dengan fitur-fitur berikut:
 
@@ -128,18 +220,15 @@ Misalkan kita memiliki data historis dengan fitur-fitur berikut:
 * **Riwayat Kredit:** Lancar, Macet.
 
 
-Tentu saja! Membuat Naive Bayes dari nol (*from scratch*) sebenarnya adalah cara terbaik untuk memahami cara kerja probabilitas di balik layar. Kita hanya perlu menggunakan prinsip dasar **Teorema Bayes**.
-
 Dalam kasus *Credit Scoring*, kita akan menghitung:
 
 1. **Prior Probability**: Peluang awal seseorang "Lancar" atau "Gagal" bayar.
 2. **Likelihood**: Peluang munculnya fitur tertentu (misal: Penghasilan Rendah) jika diketahui orang tersebut "Gagal".
 
 
+#### Kode Python: Naive Bayes Manual (Tanpa Sklearn)
 
-### Kode Python: Naive Bayes Manual (Tanpa Sklearn)
-
-```python
+```{python}
 import pandas as pd
 
 # 1. Data Historis P2P Lending
@@ -214,14 +303,13 @@ Ketika Anda menjalankan kode di atas, inilah yang dilakukan sistem secara manual
 * **Tanpa Dependency:** Kode ini sangat ringan karena tidak membutuhkan library besar, cukup Python dasar (atau Pandas untuk mempermudah tabel).
 * **Laplace Smoothing:** Jika ada fitur yang belum pernah muncul di data latih (peluang = 0), Anda bisa dengan mudah menambahkan "+1" pada perhitungan (teknik *Laplace Smoothing*) agar hasil perkalian tidak menjadi nol semua.
 
-**Apakah Anda ingin saya tunjukkan cara menambahkan "Laplace Smoothing" agar kode ini lebih stabil saat menghadapi data yang tidak dikenal?**
 
 Komponen,Tanpa Smoothing,Dengan Laplace Smoothing
 Pembilang,count,count + 1
 Penyebut,total_kategori,total_kategori + jumlah_variasi_fitur
 Hasil jika data baru,0 (Error/Buntu),Tetap menghasilkan angka kecil (Stabil)
 
-### 2. Kode Python: Credit Scoring Model
+### 2. Kode Python sklearn: Credit Scoring Model
 
 ```python
 import pandas as pd
@@ -291,11 +379,10 @@ Dalam praktiknya, perusahaan P2P Lending tidak hanya melihat hasil "Lancar" atau
 
 Model ini sangat berguna jika Anda ingin membangun sistem *early warning* yang ringan di sisi server. Karena perhitungannya hanya berbasis probabilitas kondisional, ia tidak membebani memori server meskipun volume data peminjam sangat besar.
 
-**Apakah Anda ingin saya menambahkan fitur "Cross-Validation" untuk menguji seberapa akurat model ini jika diterapkan pada data yang lebih besar?**
 
 **Simulasi kode Python sederhana untuk menghitung Naive Bayes ini menggunakan library Scikit-Learn**
 
-Tentu! Kita akan menggunakan library `scikit-learn`, yang merupakan standar industri untuk *machine learning* di Python.
+Kita akan menggunakan library `scikit-learn`, yang merupakan standar industri untuk *machine learning* di Python.
 
 Berikut adalah simulasi sederhana untuk mengklasifikasikan apakah sebuah pesan adalah **"Promo"** atau **"Pesan Biasa"** berdasarkan kata-kata di dalamnya.
 
@@ -343,7 +430,7 @@ Meskipun kata "Hadiah" muncul di kedua jenis email, karena frekuensinya jauh leb
 
 ### Kode Python: Naive Bayes Sederhana
 
-```python
+```{python}
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 
@@ -361,7 +448,10 @@ label = [0, 0, 1, 1, 0]
 # 2. Mengubah teks menjadi angka (Vektorisasi)
 # Naive Bayes butuh angka, bukan kata-kata mentah
 vectorizer = CountVectorizer()
+
 X_train = vectorizer.fit_transform(pesan)
+
+
 
 # 3. Membuat dan Melatih Model (Multinomial Naive Bayes)
 model = MultinomialNB()
@@ -370,6 +460,7 @@ model.fit(X_train, label)
 # 4. Uji Coba dengan Pesan Baru
 pesan_baru = ["Ada hadiah diskon khusus untuk Anda"]
 X_test = vectorizer.transform(pesan_baru)
+print(X_test)
 prediksi = model.predict(X_test)
 
 # Output Hasil

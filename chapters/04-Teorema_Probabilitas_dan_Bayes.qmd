@@ -7,9 +7,10 @@ subtitle: "Probability Theorems, Conditional Probability, Bayes Theorem"
 
 
 
-{{< include ../agenda/w04.qmd >}}
-
 {{< include ../hands_on_py/04-bayes-conditional.qmd >}}
+
+
+{{< include ../agenda/w04.qmd >}}
 
 ## 1. Konsep Pengetahuan
 Probabilitas bersyarat P(A|B), aturan perkalian, independensi, dan Teorema Bayes untuk memperbarui keyakinan berdasarkan bukti baru.
