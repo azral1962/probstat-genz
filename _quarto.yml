@@ -1,6 +1,6 @@
 project:
   type: book
-  output-dir: _book
+  output-dir: docs
 
 book:
   title: "Probabilitas & Statistika (Python)"
@@ -25,11 +25,6 @@ book:
     - chapters/14-Studi_Kasus_Lanjutan.qmd
     - chapters/15-Studi_Kasus_Lanjutan.qmd
     - chapters/16-Ujian_Akhir_Semester.qmd
-
-
-
-
-
     - about.qmd
 
 bibliography: references.bib

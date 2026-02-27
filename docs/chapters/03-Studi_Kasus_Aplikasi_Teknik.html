@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Aturan Probabilitas – Probabilitas &amp; Statistika (Python)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/04-Teorema_Probabilitas_dan_Bayes.html" rel="next">
+<link href="../chapters/02-Kerangka_Probabilitas_dan_Statistik.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-b9e11ad5a37ead2aabff839d95ae3857.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/03-Studi_Kasus_Aplikasi_Teknik.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Minggu 03: Studi Kasus Aplikasi Teknik</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Probabilitas &amp; Statistika (Python)</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Selamat Datang</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-Pola_Pikir_Probabilistik_vs_Deterministik.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Minggu 01: Pola Pikir Probabilistik vs Deterministik</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-Kerangka_Probabilitas_dan_Statistik.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Minggu 02: Kerangka Probabilitas dan Statistik</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-Studi_Kasus_Aplikasi_Teknik.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Minggu 03: Studi Kasus Aplikasi Teknik</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-Teorema_Probabilitas_dan_Bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Minggu 04: Teorema Probabilitas dan Bayes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-Variabel_Acak.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Minggu 05: Variabel Acak</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-Variabel_Acak_Diskrit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Minggu 06: Variabel Acak Diskrit</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-Variabel_Acak_Kontinu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Minggu 07: Variabel Acak Kontinu</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-Ujian_Tengah_Semester.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Minggu 08: Ujian Tengah Semester</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-Fungsi_Variabel_Acak.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Minggu 09: Fungsi Variabel Acak</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-Distribusi_Sampling_dan_Teorema_Limit_Pusat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Minggu 10: Distribusi Sampling dan Teorema Limit Pusat</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-Estimasi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Minggu 11: Estimasi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-Pengujian_Hipotesis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Minggu 12: Pengujian Hipotesis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-Regresi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Minggu 13: Regresi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-Studi_Kasus_Lanjutan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Minggu 14-15: Studi Kasus Lanjutan</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-Studi_Kasus_Lanjutan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Minggu 14-15: Studi Kasus Lanjutan</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-Ujian_Akhir_Semester.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Minggu 16: Ujian Akhir Semester</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tentang Buku Ini</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#agenda-perkuliahan-minggu-3" id="toc-agenda-perkuliahan-minggu-3" class="nav-link active" data-scroll-target="#agenda-perkuliahan-minggu-3"><span class="header-section-number">4.1</span> Agenda Perkuliahan Minggu 3</a>
+  <ul class="collapse">
+  <li><a href="#pertemuan-1-senin-1-jam-the-intuition-the-trap" id="toc-pertemuan-1-senin-1-jam-the-intuition-the-trap" class="nav-link" data-scroll-target="#pertemuan-1-senin-1-jam-the-intuition-the-trap"><span class="header-section-number">4.1.1</span> Pertemuan 1: Senin (1 Jam) – The Intuition &amp; The Trap</a></li>
+  <li><a href="#pertemuan-2-rabu-2-jam-engineering-lab" id="toc-pertemuan-2-rabu-2-jam-engineering-lab" class="nav-link" data-scroll-target="#pertemuan-2-rabu-2-jam-engineering-lab"><span class="header-section-number">4.1.2</span> Pertemuan 2: Rabu (2 Jam) – Engineering Lab</a></li>
+  </ul></li>
+  <li><a href="#materi-kuliah-konsep-aplikasi-komputasi" id="toc-materi-kuliah-konsep-aplikasi-komputasi" class="nav-link" data-scroll-target="#materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">4.2</span> Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</a>
+  <ul class="collapse">
+  <li><a href="#konsep-dasar" id="toc-konsep-dasar" class="nav-link" data-scroll-target="#konsep-dasar"><span class="header-section-number">4.2.1</span> 1. Konsep Dasar</a></li>
+  <li><a href="#aplikasi-sistem-informasi" id="toc-aplikasi-sistem-informasi" class="nav-link" data-scroll-target="#aplikasi-sistem-informasi"><span class="header-section-number">4.2.2</span> 2. Aplikasi Sistem Informasi</a></li>
+  <li><a href="#komputasi-python" id="toc-komputasi-python" class="nav-link" data-scroll-target="#komputasi-python"><span class="header-section-number">4.2.3</span> 3. Komputasi (Python)</a></li>
+  </ul></li>
+  <li><a href="#tugas-kelompok-github-classroom" id="toc-tugas-kelompok-github-classroom" class="nav-link" data-scroll-target="#tugas-kelompok-github-classroom"><span class="header-section-number">4.3</span> Tugas Kelompok (GitHub Classroom)</a></li>
+  <li><a href="#soal-solusi" id="toc-soal-solusi" class="nav-link" data-scroll-target="#soal-solusi"><span class="header-section-number">4.4</span> 15 Soal &amp; Solusi</a>
+  <ul class="collapse">
+  <li><a href="#a.-pertanyaan-konseptual" id="toc-a.-pertanyaan-konseptual" class="nav-link" data-scroll-target="#a.-pertanyaan-konseptual"><span class="header-section-number">4.4.1</span> A. Pertanyaan Konseptual</a></li>
+  <li><a href="#b.-pertanyaan-aplikatif" id="toc-b.-pertanyaan-aplikatif" class="nav-link" data-scroll-target="#b.-pertanyaan-aplikatif"><span class="header-section-number">4.4.2</span> B. Pertanyaan Aplikatif</a></li>
+  <li><a href="#c.-pertanyaan-komputasional" id="toc-c.-pertanyaan-komputasional" class="nav-link" data-scroll-target="#c.-pertanyaan-komputasional"><span class="header-section-number">4.4.3</span> C. Pertanyaan Komputasional</a></li>
+  </ul></li>
+  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">4.5</span> 1. Konsep Pengetahuan</a></li>
+  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">4.6</span> 2. Tipikal Problem</a></li>
+  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">4.7</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
+  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">4.8</span> 4. Eksplorasi Komputasi (Python)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Aturan Probabilitas</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<p class="subtitle lead">Probabilistic Framework in Engineering Application (Data Center, Generator Backup, Reliability)</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../The_Decision_Engineer.png/image3.png" class="img-fluid figure-img"></p>
+<figcaption>“Data center mati 3 menit bisa rugi besar. Kamu punya 2 generator—pasang seri atau paralel? Ini bukan selera desain; ini soal peluang gagal total. Kalau seri, satu komponen drop—habis. Kalau paralel, sistem masih hidup selama ada satu yang bertahan. Hari ini probabilitas berubah jadi ‘bahasa keputusan engineering’: kita hitung peluang kegagalan sistem dan memilih arsitektur yang paling masuk akal. Ending-nya bukan rumus—ending-nya rekomendasi desain.”</figcaption>
+</figure>
+</div>
+<p>Week 03: Reliabilitas Infrastruktur IT (Teori &amp; Simulasi SRE)</p>
+<section id="agenda-perkuliahan-minggu-3" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="agenda-perkuliahan-minggu-3"><span class="header-section-number">4.1</span> Agenda Perkuliahan Minggu 3</h2>
+<p><strong>Topik:</strong> Studi Kasus Infrastruktur - Reliabilitas dan Resiliensi <strong>Tema Misi:</strong> “Architecting for Failure: How to Build Systems That (Almost) Never Die”</p>
+<section id="pertemuan-1-senin-1-jam-the-intuition-the-trap" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="pertemuan-1-senin-1-jam-the-intuition-the-trap"><span class="header-section-number">4.1.1</span> Pertemuan 1: Senin (1 Jam) – The Intuition &amp; The Trap</h3>
+<p><strong>Fokus:</strong> Memahami kerapuhan sistem seri dan kekuatan redundansi (paralel) melalui simulasi visual.</p>
+<ul>
+<li><strong>00:00 – 00:10 | The Hook: “The 500-Error Nightmare”</strong>
+<ul>
+<li>Aktivitas: Tampilkan diagram arsitektur microservices sederhana (Login <span class="math inline">\(\to\)</span> Database <span class="math inline">\(\to\)</span> Payment).</li>
+<li>Pertanyaan: “Jika setiap layanan punya peluang sukses 99% (sangat tinggi), berapa peluang user berhasil bayar? Apakah 99%?”</li>
+<li>Intuisi: Tidak. <span class="math inline">\(0.99 \times 0.99 \times 0.99 \approx 97%\)</span>. Semakin kompleks sistem seri, semakin rapuh ia.</li>
+</ul></li>
+<li><strong>00:10 – 00:30 | Live Coding: “Chain of Doom vs.&nbsp;The Hydra”</strong>
+<ul>
+<li>Dosen (Python Demo):
+<ol type="1">
+<li>Skenario 1 (Seri): Simulasikan 10 komponen berurutan. Jika satu False, semua mati. Tunjukkan betapa seringnya sistem ini down.</li>
+<li>Skenario 2 (Paralel/Hydra): Simulasikan 3 server redundan. Sistem mati hanya jika ketiganya False.</li>
+</ol></li>
+<li>Visualisasi: Plot grafik batang sederhana: Peluang gagal Seri vs Paralel.</li>
+</ul></li>
+<li><strong>00:30 – 00:50 | Konsep: Matematika Reliabilitas</strong>
+<ul>
+<li>Formalkan intuisi tadi ke rumus:
+<ul>
+<li>Seri (AND logic): <span class="math inline">\(R_{sys} = \prod R_i\)</span> (Reliabilitas turun drastis).</li>
+<li>Paralel (OR logic): <span class="math inline">\(R_{sys} = 1 - \prod(1-R_i)\)</span> (Reliabilitas naik drastis).</li>
+</ul></li>
+<li>Perkenalkan konsep “Five Nines” (99.999%) sebagai “Holy Grail” anak IT.</li>
+</ul></li>
+<li><strong>00:50 – 01:00 | Pod Formation &amp; Mission Brief</strong>
+<ul>
+<li>Misi GitHub: “Design the Unbreakable Cloud”. Mahasiswa harus merancang arsitektur server dengan budget terbatas untuk mencapai uptime tertinggi.</li>
+</ul></li>
+</ul>
+</section>
+<section id="pertemuan-2-rabu-2-jam-engineering-lab" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="pertemuan-2-rabu-2-jam-engineering-lab"><span class="header-section-number">4.1.2</span> Pertemuan 2: Rabu (2 Jam) – Engineering Lab</h3>
+<p><strong>Fokus:</strong> Menggunakan Python untuk optimasi desain sistem dan memahami risiko tersembunyi.</p>
+<ul>
+<li><strong>00:00 – 00:15 | Intro: The Hidden Killer (Common Cause Failure)</strong>
+<ul>
+<li>Diskusi: “Kalian punya 3 server paralel. Aman? Bagaimana jika ketiga server itu ada di satu gedung yang sama dan listrik gedung mati?”</li>
+<li>Konsep: Independence Assumption itu berbahaya. Perkenalkan variabel pengganggu (Common Cause).</li>
+</ul></li>
+<li><strong>00:15 – 01:00 | Pod Challenge: “Budget vs.&nbsp;Reliability”</strong>
+<ul>
+<li>Skenario: Anda punya budget $1000.
+<ul>
+<li>Server Murah: $200, Reliabilitas 90%.</li>
+<li>Server Mahal: $500, Reliabilitas 99%.</li>
+</ul></li>
+<li>Tugas (Python):
+<ol type="1">
+<li>Bandingkan opsi: Beli 2 Server Mahal (Paralel) vs 5 Server Murah (Paralel).</li>
+<li>Mana yang memberikan <span class="math inline">\(R_{total}\)</span> lebih tinggi?</li>
+<li>Simulasikan kejadian “Power Outage” yang membunuh semua server sekaligus dengan peluang 1%. Hitung reliabilitas real-world baru.</li>
+</ol></li>
+</ul></li>
+<li><strong>01:00 – 01:30 | Deep Dive: m-out-of-n Systems</strong>
+<ul>
+<li>Kasus: RAID 5 atau Voting System (Consensus). Sistem butuh minimal 2 dari 3 server menyala agar valid.</li>
+<li>Gunakan <code>scipy.stats.binom</code> untuk menghitung peluangnya.</li>
+</ul></li>
+<li><strong>01:30 – 01:50 | Design Review</strong>
+<ul>
+<li>Pods mempresentasikan pilihan arsitektur mereka. Debat: “Apakah worth it bayar mahal untuk naik dari 99.9% ke 99.99%?”</li>
+</ul></li>
+<li><strong>01:50 – 02:00 | Exit Ticket</strong>
+<ul>
+<li>Pertanyaan: “Sebutkan satu contoh sistem Single Point of Failure di kehidupan kampusmu.”</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="materi-kuliah-konsep-aplikasi-komputasi" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">4.2</span> Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</h2>
+<section id="konsep-dasar" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="konsep-dasar"><span class="header-section-number">4.2.1</span> 1. Konsep Dasar</h3>
+<ul>
+<li><strong>Reliabilitas (R):</strong> Probabilitas sebuah komponen/sistem berfungsi dalam periode waktu tertentu. <span class="math inline">\(R = 1 - P(\text{fail})\)</span>.</li>
+<li><strong>Sistem Seri (Rantai Rapuh):</strong> Komponen tersusun berurutan. Kegagalan satu komponen = Kegagalan sistem.
+<ul>
+<li>Rumus: <span class="math inline">\(R_{seri} = R_1 \times R_2 \times \dots \times R_n\)</span>.</li>
+</ul></li>
+<li><strong>Sistem Paralel (Redundansi):</strong> Komponen tersusun berdampingan. Sistem gagal hanya jika semua komponen gagal.
+<ul>
+<li>Rumus: <span class="math inline">\(R_{paralel} = 1 - [(1-R_1) \times (1-R_2) \dots]\)</span>.</li>
+</ul></li>
+<li><strong>Sistem k-out-of-n:</strong> Sistem berfungsi jika minimal k dari n komponen berfungsi (Contoh: Mayoritas voting pada blockchain).</li>
+</ul>
+</section>
+<section id="aplikasi-sistem-informasi" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="aplikasi-sistem-informasi"><span class="header-section-number">4.2.2</span> 2. Aplikasi Sistem Informasi</h3>
+<ul>
+<li><strong>High Availability (HA):</strong> Load Balancer membagi trafik ke beberapa server aplikasi (Paralel). Jika satu server crash, yang lain mengambil alih.</li>
+<li><strong>ML Pipeline (Seri):</strong> Ingestion <span class="math inline">\(\to\)</span> Cleaning <span class="math inline">\(\to\)</span> Training <span class="math inline">\(\to\)</span> Deployment. Jika Ingestion gagal, model tidak bisa dilatih. Ini adalah sistem seri yang kritis.</li>
+<li><strong>Disaster Recovery (DR):</strong> Memiliki Secondary Data Center. Ini adalah paralel tingkat tinggi. Namun hati-hati dengan Common Cause Failure (misal: AWS Region US-East-1 down total).</li>
+</ul>
+</section>
+<section id="komputasi-python" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="komputasi-python"><span class="header-section-number">4.2.3</span> 3. Komputasi (Python)</h3>
+<ul>
+<li><strong>Fungsi Kustom:</strong> Membuat fungsi <code>reliability_series(probs)</code> dan <code>reliability_parallel(probs)</code> menggunakan <code>numpy.prod</code>.</li>
+<li><strong>Simulasi Monte Carlo:</strong> Menggunakan <code>random.random()</code> untuk mensimulasikan status hidup/mati ribuan server dan menghitung persentase uptime sistem gabungan.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="tugas-kelompok-github-classroom" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="tugas-kelompok-github-classroom"><span class="header-section-number">4.3</span> Tugas Kelompok (GitHub Classroom)</h2>
+<p><strong>Judul:</strong> Week 3: The SRE Challenge - Designing High Availability Systems</p>
+<p><strong>Deskripsi:</strong> Mahasiswa berperan sebagai Site Reliability Engineer (SRE). Diberikan topologi sistem yang kompleks (gabungan seri dan paralel), mahasiswa harus menghitung reliabilitas teoretis dan memvalidasinya dengan simulasi Python.</p>
+<p><strong>Soal Python (Notebook):</strong> 1. <strong>Modeling (30 poin):</strong> Representasikan sistem berikut dalam fungsi Python: - Sub-sistem A: 3 Web Server (Paralel, <span class="citation" data-cites="R">(<a href="#ref-R" role="doc-biblioref"><strong>R?</strong></a>)</span>=0.9). - Sub-sistem B: 1 Database Utama (R=0.99). - Sistem Total: Sub-sistem A terhubung Seri dengan Sub-sistem B. 2. <strong>Calculation (30 poin):</strong> Hitung reliabilitas teoretis sistem total. 3. <strong>Simulation (20 poin):</strong> Jalankan simulasi 10.000 kali. - Generate status acak untuk tiap komponen. - Cek logika: <code>(Web1 OR Web2 OR Web3) AND Database</code>. - Hitung frekuensi sukses empiris. 4. <strong>Analysis (20 poin):</strong> Jika budget memungkinkan penambahan 1 komponen (Web Server lagi ATAU Database Backup), mana yang paling signifikan menaikkan reliabilitas total? Buktikan dengan angka.</p>
+<hr>
+</section>
+<section id="soal-solusi" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="soal-solusi"><span class="header-section-number">4.4</span> 15 Soal &amp; Solusi</h2>
+<section id="a.-pertanyaan-konseptual" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="a.-pertanyaan-konseptual"><span class="header-section-number">4.4.1</span> A. Pertanyaan Konseptual</h3>
+<ol type="1">
+<li><strong>Soal:</strong> Mengapa sistem seri dianggap memiliki resiliensi yang lebih rendah dibandingkan sistem tunggal dengan komponen yang sama?
+<ul>
+<li><strong>Solusi:</strong> Karena dalam sistem seri, reliabilitas total adalah hasil perkalian reliabilitas komponen (<span class="math inline">\(R_{total} = \prod R_i\)</span>). Karena <span class="math inline">\(R_i \le 1\)</span>, hasil perkalian akan selalu lebih kecil dari nilai komponen terendah. Menambah komponen seri justru menambah titik kegagalan (Point of Failure).</li>
+</ul></li>
+<li><strong>Soal:</strong> Jelaskan bagaimana redundansi paralel meningkatkan reliabilitas total sebuah sistem informasi.
+<ul>
+<li><strong>Solusi:</strong> Redundansi paralel menciptakan jalur alternatif. Sistem hanya gagal jika semua jalur gagal bersamaan. Secara matematis, peluang kegagalan total (<span class="math inline">\(F_{total}\)</span>) adalah hasil kali peluang kegagalan komponen (<span class="math inline">\(F_i\)</span>). Karena <span class="math inline">\(F_i\)</span> kecil (misal 0.1), mengalikannya akan menghasilkan angka yang sangat kecil (0.01), sehingga Reliabilitas (<span class="math inline">\(1-F_{total}\)</span>) meningkat drastis.</li>
+</ul></li>
+<li><strong>Soal:</strong> Apa yang dimaksud dengan ketersediaan (availability) “lima sembilan” (99,999%) dan mengapa sulit dicapai?
+<ul>
+<li><strong>Solusi:</strong> “Lima sembilan” berarti sistem harus beroperasi 99,999% dari waktu, yang setara dengan downtime hanya sekitar 5,26 menit per tahun. Ini sulit dicapai karena memerlukan redundansi berlapis (hardware, power, network, geographic) dan eliminasi single point of failure sepenuhnya, serta mitigasi terhadap common cause failures.</li>
+</ul></li>
+<li><strong>Soal:</strong> Bagaimana ketergantungan antar komponen (asumsi ketidakindependenan) mempengaruhi perhitungan reliabilitas?
+<ul>
+<li><strong>Solusi:</strong> Rumus standar paralel (<span class="math inline">\(1-\prod F_i\)</span>) mengasumsikan kegagalan komponen bersifat independen. Jika ada ketergantungan (korelasi positif, misal satu rak server panas menyebabkan server lain ikut panas), probabilitas kegagalan bersama akan jauh lebih tinggi daripada hasil perkalian independen. Ini menyebabkan reliabilitas aktual lebih rendah dari perhitungan teoretis.</li>
+</ul></li>
+<li><strong>Soal:</strong> Deskripsikan perbedaan antara kegagalan aktif dan kegagalan laten dalam sistem infrastruktur.
+<ul>
+<li><strong>Solusi:</strong>
+<ul>
+<li><strong>Kegagalan Aktif:</strong> Kerusakan yang langsung terlihat dan berdampak (misal: server meledak, kabel putus).</li>
+<li><strong>Kegagalan Laten:</strong> Kerusakan yang sudah ada tapi belum memicu error sampai kondisi tertentu terpenuhi (misal: bug pada kode backup yang baru ketahuan saat backup benar-benar dibutuhkan/dijalankan).</li>
+</ul></li>
+</ul></li>
+</ol>
+</section>
+<section id="b.-pertanyaan-aplikatif" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="b.-pertanyaan-aplikatif"><span class="header-section-number">4.4.2</span> B. Pertanyaan Aplikatif</h3>
+<ol start="6" type="1">
+<li><strong>Soal:</strong> Sebuah jalur internet backbone terdiri dari 3 router yang disusun seri. Jika masing-masing memiliki reliabilitas 0,95, hitung reliabilitas total jalur tersebut.
+<ul>
+<li><strong>Solusi:</strong> <span class="math inline">\(R_{total} = 0,95 \times 0,95 \times 0,95 = 0,857\)</span> (atau 85,7%).</li>
+</ul></li>
+<li><strong>Soal:</strong> Analisis ketersediaan sistem cloud yang memiliki 4 server paralel di mana sistem tetap berjalan jika minimal 1 server aktif. (Asumsi R tiap server tidak disebut, kita asumsikan R=0.9 untuk contoh, atau F=0.1).
+<ul>
+<li><strong>Solusi:</strong> Sistem gagal hanya jika ke-4 server mati. <span class="math inline">\(P(\text{SystemDown}) = F^4\)</span>. <span class="math inline">\(R_{system} = 1 - F^4\)</span>.</li>
+</ul></li>
+<li><strong>Soal:</strong> Dalam desain Disaster Recovery Center (DRC), jika link utama memiliki uptime 99% dan link cadangan 98%, hitung probabilitas total sistem terhubung.
+<ul>
+<li><strong>Solusi:</strong> (Asumsi paralel/redundant). <span class="math inline">\(P(\text{MainFail}) = 1 - 0.99 = 0.01\)</span>. <span class="math inline">\(P(\text{BackupFail}) = 1 - 0.98 = 0.02\)</span>. <span class="math inline">\(P(\text{TotalFail}) = 0.01 \times 0.02 = 0.0002\)</span>. <span class="math inline">\(R_{total} = 1 - 0.0002 = 0.9998\)</span> (99,98%).</li>
+</ul></li>
+<li><strong>Soal:</strong> Sebuah gedung data center menggunakan 3 generator cadangan. Jika probabilitas satu generator gagal menyala adalah 0,02, berapa probabilitas setidaknya satu menyala saat listrik padam?
+<ul>
+<li><strong>Solusi:</strong> Peluang semua gagal = <span class="math inline">\(0.02^3 = 0.000008\)</span>. Peluang setidaknya satu menyala = <span class="math inline">\(1 - 0.000008 = 0.999992\)</span>.</li>
+</ul></li>
+<li><strong>Soal:</strong> Evaluasi reliabilitas sistem transmisi data di mana satu file dibagi menjadi 5 paket dan sistem gagal jika salah satu paket hilang.
+<ul>
+<li><strong>Solusi:</strong> Ini adalah analogi sistem Seri. Jika <span class="math inline">\(R_{paket}\)</span> adalah reliabilitas pengiriman satu paket, maka reliabilitas pengiriman file adalah <span class="math inline">\((R_{paket})^5\)</span>. Risiko kegagalan meningkat seiring bertambahnya jumlah pecahan paket.</li>
+</ul></li>
+</ol>
+</section>
+<section id="c.-pertanyaan-komputasional" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="c.-pertanyaan-komputasional"><span class="header-section-number">4.4.3</span> C. Pertanyaan Komputasional</h3>
+<ol start="11" type="1">
+<li><strong>Soal:</strong> Buat fungsi Python untuk menghitung reliabilitas sistem seri dengan input berupa list reliabilitas komponen.
+<ul>
+<li><strong>Solusi:</strong></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np  </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reliability_series(probs):  </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> np.prod(probs)  </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Contoh: reliability_series([0.9, 0.9, 0.9]) -&gt; 0.729  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><strong>Soal:</strong> Implementasikan simulasi untuk membandingkan reliabilitas sistem seri vs paralel dengan jumlah komponen n dari 1 sampai 10.
+<ul>
+<li><strong>Solusi:</strong></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt  </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n_range <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>)  </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">0.9</span>  </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>r_series <span class="op">=</span> [p<span class="op">**</span>n <span class="cf">for</span> n <span class="kw">in</span> n_range]  </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>r_parallel <span class="op">=</span> [<span class="dv">1</span> <span class="op">-</span> (<span class="dv">1</span><span class="op">-</span>p)<span class="op">**</span>n <span class="cf">for</span> n <span class="kw">in</span> n_range]  </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.plot(n_range, r_series, label<span class="op">=</span><span class="st">'Seri'</span>)  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>plt.plot(n_range, r_parallel, label<span class="op">=</span><span class="st">'Paralel'</span>)  </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.legend()<span class="op">;</span> plt.show()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><strong>Soal:</strong> Tulis skrip untuk menghitung jumlah minimum komponen paralel yang dibutuhkan agar reliabilitas total mencapai 0,999.
+<ul>
+<li><strong>Solusi:</strong></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p_component <span class="op">=</span> <span class="fl">0.9</span>  </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> <span class="fl">0.999</span>  </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">1</span>  </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (<span class="dv">1</span> <span class="op">-</span> (<span class="dv">1</span> <span class="op">-</span> p_component)<span class="op">**</span>n) <span class="op">&lt;</span> target:  </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>n <span class="op">+=</span> <span class="dv">1</span>  </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Butuh </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> komponen."</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><strong>Soal:</strong> Gunakan matplotlib untuk memplot grafik hubungan antara jumlah komponen paralel dan reliabilitas sistem.
+<ul>
+<li><strong>Solusi:</strong> (Lihat solusi no 12, fokus pada garis Paralel yang melengkung asimtotik mendekati 1).</li>
+</ul></li>
+<li><strong>Soal:</strong> Simulasikan kegagalan komponen secara acak dalam 10.000 iterasi untuk mengestimasi Mean Time To Failure (MTTF) sistem sederhana.
+<ul>
+<li><strong>Solusi:</strong></li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np  </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Asumsi: Probabilitas gagal per jam = 0.01  </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>trials <span class="op">=</span> <span class="dv">10000</span>  </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>failure_times <span class="op">=</span> []  </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(trials):  </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>time <span class="op">=</span> <span class="dv">0</span>  </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> np.random.rand() <span class="op">&gt;</span> <span class="fl">0.01</span>: <span class="co"># Selama belum gagal  </span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    time <span class="op">+=</span> <span class="dv">1</span>  </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>failure_times.append(time)  </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Estimasi MTTF: </span><span class="sc">{</span>np<span class="sc">.</span>mean(failure_times)<span class="sc">}</span><span class="ss"> jam"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
+<div id="61b64771" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Lihat kode</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>random.randint(<span class="dv">1</span>,<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>3</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="konsep-pengetahuan" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">4.5</span> 1. Konsep Pengetahuan</h2>
+<p>Keandalan sistem (reliability), sistem seri vs paralel. Dalam sistem paralel, sistem bekerja jika setidaknya satu komponen bekerja, sedangkan seri membutuhkan semua komponen bekerja.</p>
+</section>
+<section id="tipikal-problem" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">4.6</span> 2. Tipikal Problem</h2>
+<p>Sebuah pusat data memiliki dua generator listrik. Apakah lebih baik menyusunnya secara seri atau paralel untuk menjamin ketersediaan daya?</p>
+</section>
+<section id="solusi-pengambilan-keputusan" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">4.7</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
+<p>Menghitung probabilitas kegagalan sistem. Pada desain paralel, peluang kegagalan total adalah hasil kali peluang kegagalan masing-masing unit (yang jauh lebih kecil). Keputusan optimalnya adalah menggunakan konfigurasi paralel untuk meningkatkan reliabilitas sistem secara drastis.</p>
+</section>
+<section id="eksplorasi-komputasi-python" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">4.8</span> 4. Eksplorasi Komputasi (Python)</h2>
+<p><em>Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.</em></p>
+<div id="761a92cb" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Lihat kode</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 03!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Siap untuk komputasi Minggu 03!</code></pre>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/02-Kerangka_Probabilitas_dan_Statistik.html" class="pagination-link" aria-label="Minggu 02: Kerangka Probabilitas dan Statistik">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Minggu 02: Kerangka Probabilitas dan Statistik</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/04-Teorema_Probabilitas_dan_Bayes.html" class="pagination-link" aria-label="Minggu 04: Teorema Probabilitas dan Bayes">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Minggu 04: Teorema Probabilitas dan Bayes</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minggu 03: Studi Kasus Aplikasi Teknik"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Probabilistic Framework in Engineering Application (Data Center, Generator Backup, Reliability)"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="al">![“Data center mati 3 menit bisa rugi besar. Kamu punya 2 generator—pasang seri atau paralel? Ini bukan selera desain; ini soal peluang gagal total. Kalau seri, satu komponen drop—habis. Kalau paralel, sistem masih hidup selama ada satu yang bertahan. Hari ini probabilitas berubah jadi ‘bahasa keputusan engineering’: kita hitung peluang kegagalan sistem dan memilih arsitektur yang paling masuk akal. Ending-nya bukan rumus—ending-nya rekomendasi desain.”](../The_Decision_Engineer.png/image3.png)</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../agenda/w03.qmd &gt;}}</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../hands_on_py/03-probability-rules.qmd &gt;}}</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>Keandalan sistem (reliability), sistem seri vs paralel. Dalam sistem paralel, sistem bekerja jika setidaknya satu komponen bekerja, sedangkan seri membutuhkan semua komponen bekerja.</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>Sebuah pusat data memiliki dua generator listrik. Apakah lebih baik menyusunnya secara seri atau paralel untuk menjamin ketersediaan daya?</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>Menghitung probabilitas kegagalan sistem. Pada desain paralel, peluang kegagalan total adalah hasil kali peluang kegagalan masing-masing unit (yang jauh lebih kecil). Keputusan optimalnya adalah menggunakan konfigurasi paralel untuk meningkatkan reliabilitas sistem secara drastis.</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 03!"</span>)</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
