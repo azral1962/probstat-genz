@@ -3,6 +3,517 @@
 
 **Teorema Bayes dan Porbabilitas Kondisional ** 
 
+Berikut **kode Python (siap pakai)** untuk **setiap item** dalam agenda Minggu 4. Saya buat per bagian supaya Bapak bisa copy–paste ke notebook / .py terpisah.
+
+---
+
+## 6.1.1 Pertemuan 1 (Senin, 1 Jam) — The Intuition & The Paradox
+
+### 00:00–00:10 | The Hook: “Jebakan Tes DNA/Wajah” (Base-Rate Fallacy)
+
+```{python}
+def bayes_posterior(p_terrorist=1/10_000, sensitivity=0.99, false_positive_rate=0.01):
+    """
+    P(T|+) = P(+|T)P(T) / (P(+|T)P(T) + P(+|~T)P(~T))
+    sensitivity = P(+|T)
+    false_positive_rate = P(+|~T)
+    """
+    p_t = p_terrorist
+    p_not = 1 - p_t
+    p_pos_given_t = sensitivity
+    p_pos_given_not = false_positive_rate
+
+    numerator = p_pos_given_t * p_t
+    denominator = numerator + p_pos_given_not * p_not
+    return numerator / denominator
+
+posterior = bayes_posterior(p_terrorist=1/10_000, sensitivity=0.99, false_positive_rate=0.01)
+print(f"P(teroris | alarm berbunyi) = {posterior:.6f} = {posterior*100:.4f}%")
+```
+
+> Kalau ingin “shock effect”: ubah prevalensi jadi 1/1.000.000 dan bandingkan.
+
+---
+
+### 00:10–00:30 | Live Coding: “Simulation over Formula”
+
+**Simulasi populasi + detector + hitung alarm vs hacker tertangkap + visual “population matrix”**
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def simulate_detection_population(
+    N=10_000,
+    n_hacker=1,
+    sensitivity=0.99,          # P(alarm|hacker)
+    false_positive_rate=0.01,  # P(alarm|normal)
+    seed=42
+):
+    rng = np.random.default_rng(seed)
+
+    # Label populasi: 1 = hacker, 0 = normal
+    labels = np.zeros(N, dtype=int)
+    hacker_idx = rng.choice(N, size=n_hacker, replace=False)
+    labels[hacker_idx] = 1
+
+    # Alarm
+    alarm = np.zeros(N, dtype=int)
+
+    # Untuk hacker
+    hacker_mask = labels == 1
+    alarm[hacker_mask] = (rng.random(np.sum(hacker_mask)) < sensitivity).astype(int)
+
+    # Untuk normal
+    normal_mask = labels == 0
+    alarm[normal_mask] = (rng.random(np.sum(normal_mask)) < false_positive_rate).astype(int)
+
+    # Ringkasan
+    total_alarm = int(alarm.sum())
+    true_positive = int(((labels == 1) & (alarm == 1)).sum())
+    false_positive = int(((labels == 0) & (alarm == 1)).sum())
+
+    # Posterior empiris: P(hacker | alarm)
+    posterior_emp = true_positive / total_alarm if total_alarm > 0 else 0.0
+
+    return {
+        "N": N,
+        "n_hacker": n_hacker,
+        "labels": labels,
+        "alarm": alarm,
+        "total_alarm": total_alarm,
+        "true_positive": true_positive,
+        "false_positive": false_positive,
+        "posterior_emp": posterior_emp,
+        "hacker_idx": hacker_idx
+    }
+
+def plot_population_matrix(labels, alarm, cols=100, title="Population Matrix (Alarm vs Label)"):
+    """
+    Visual grid: 
+    - 0: normal & no alarm
+    - 1: normal & alarm (false positive)
+    - 2: hacker & no alarm (false negative)
+    - 3: hacker & alarm (true positive)
+    """
+    N = len(labels)
+    rows = int(np.ceil(N / cols))
+    grid = np.zeros(rows * cols, dtype=int)
+    grid[:N] = 0
+
+    normal = labels == 0
+    hacker = labels == 1
+    pos = alarm == 1
+    neg = alarm == 0
+
+    grid_idx = np.arange(rows * cols)[:N]
+    grid_vals = np.zeros(N, dtype=int)
+
+    grid_vals[normal & neg] = 0
+    grid_vals[normal & pos] = 1
+    grid_vals[hacker & neg] = 2
+    grid_vals[hacker & pos] = 3
+
+    grid[grid_idx] = grid_vals
+    grid2d = grid.reshape(rows, cols)
+
+    plt.figure(figsize=(10, 6))
+    plt.imshow(grid2d, aspect="auto")
+    plt.title(title)
+    plt.xlabel("Kolom individu")
+    plt.ylabel("Baris")
+    plt.colorbar(label="0=TN, 1=FP, 2=FN, 3=TP")
+    plt.tight_layout()
+    plt.show()
+
+# Demo cepat
+res = simulate_detection_population(N=10_000, n_hacker=1, sensitivity=0.99, false_positive_rate=0.01, seed=7)
+print("Total alarm:", res["total_alarm"])
+print("True Positive (hacker ketangkap):", res["true_positive"])
+print("False Positive (orang normal kena alarm):", res["false_positive"])
+print(f"Posterior empiris P(hacker|alarm) ≈ {res['posterior_emp']*100:.4f}%")
+
+plot_population_matrix(res["labels"], res["alarm"], cols=100, title="FaceID/Detector: Base Rate Fallacy (Simulasi)")
+```
+
+---
+
+### 00:30–00:50 | Konsep: Teorema Bayes + Independen vs Saling Lepas
+
+#### A) Bayes sebagai “update engine”
+
+```python
+def bayes_update(prior, likelihood_pos_given_H, likelihood_pos_given_notH):
+    """
+    prior = P(H)
+    likelihood_pos_given_H = P(+|H)
+    likelihood_pos_given_notH = P(+|~H)
+    returns posterior P(H|+)
+    """
+    pH = prior
+    pNot = 1 - pH
+    num = likelihood_pos_given_H * pH
+    den = num + likelihood_pos_given_notH * pNot
+    return num / den
+
+prior = 1/10_000
+posterior = bayes_update(prior, likelihood_pos_given_H=0.99, likelihood_pos_given_notH=0.01)
+print("Posterior:", posterior, "=", posterior*100, "%")
+```
+
+#### B) Demo “Independen vs Mutually Exclusive” (pakai angka sederhana)
+
+```python
+def check_independent(pA, pB, pA_and_B, tol=1e-9):
+    return abs(pA_and_B - (pA * pB)) < tol
+
+def check_mutually_exclusive(pA_and_B, tol=1e-9):
+    return abs(pA_and_B - 0.0) < tol
+
+# Contoh 1: Independen (koin & dadu)
+pA = 1/2          # koin = head
+pB = 1/6          # dadu = 6
+pA_and_B = 1/12   # head AND 6
+print("Independen?", check_independent(pA, pB, pA_and_B))
+print("Saling Lepas?", check_mutually_exclusive(pA_and_B))
+
+# Contoh 2: Saling Lepas (dadu = 1 vs dadu = 2)
+pA = 1/6          # dadu = 1
+pB = 1/6          # dadu = 2
+pA_and_B = 0      # tidak mungkin terjadi bersamaan
+print("Independen?", check_independent(pA, pB, pA_and_B))   # biasanya False
+print("Saling Lepas?", check_mutually_exclusive(pA_and_B)) # True
+```
+
+---
+
+### 00:50–01:00 | Pod Formation & Mission Brief: “Building a Naive Spam Filter”
+
+Kode “starter” yang bisa jadi tugas GitHub: parsing email sederhana + skor kata kunci.
+
+```python
+import re
+from collections import Counter
+
+def tokenize(text):
+    # Lowercase + ambil kata
+    return re.findall(r"[a-zA-Z0-9]+", text.lower())
+
+def train_keyword_model(emails, labels):
+    """
+    emails: list[str]
+    labels: list[int]  # 1 spam, 0 ham
+    return counts kata per kelas + prior
+    """
+    spam_words = Counter()
+    ham_words = Counter()
+    n_spam = 0
+    n_ham = 0
+
+    for text, y in zip(emails, labels):
+        words = tokenize(text)
+        if y == 1:
+            n_spam += 1
+            spam_words.update(words)
+        else:
+            n_ham += 1
+            ham_words.update(words)
+
+    prior_spam = n_spam / (n_spam + n_ham) if (n_spam + n_ham) else 0.0
+    return {"spam_words": spam_words, "ham_words": ham_words, "prior_spam": prior_spam}
+
+def predict_naive_keyword(text, model, keywords=("gratis", "promo", "diskon"), threshold=1):
+    """
+    SANGAT naive: jika jumlah keyword muncul >= threshold => spam
+    """
+    words = tokenize(text)
+    c = Counter(words)
+    score = sum(c[k] for k in keywords)
+    return 1 if score >= threshold else 0, score
+
+# Demo mini
+emails = [
+    "Gratis diskon besar untuk kamu!",
+    "Rapat jam 10, jangan lupa agenda",
+    "Promo terbatas! gratis ongkir",
+    "Tolong kirim laporan minggu ini"
+]
+labels = [1, 0, 1, 0]
+
+model = train_keyword_model(emails, labels)
+print("Prior spam:", model["prior_spam"])
+
+for e in emails:
+    yhat, score = predict_naive_keyword(e, model)
+    print(yhat, score, "=>", e)
+```
+
+---
+
+## 6.1.2 Pertemuan 2 (Rabu, 2 Jam) — Logic & Code Lab
+
+### 00:00–00:20 | Deep Dive: Monty Hall Paradox (Simulasi)
+
+Versi yang bisa “interaktif ringan” + simulasi banyak trial.
+
+```python
+import numpy as np
+
+def monty_hall_trial(switch=True, rng=None):
+    if rng is None:
+        rng = np.random.default_rng()
+    doors = np.array([0, 1, 2])
+    prize = rng.integers(0, 3)       # lokasi mobil
+    choice = rng.integers(0, 3)      # pilihan awal
+
+    # Host buka pintu yang bukan pilihan & bukan prize
+    candidates = doors[(doors != choice) & (doors != prize)]
+    opened = rng.choice(candidates)
+
+    if switch:
+        # pindah ke pintu yang tersisa
+        remaining = doors[(doors != choice) & (doors != opened)]
+        choice = remaining[0]
+
+    win = (choice == prize)
+    return win
+
+def simulate_monty_hall(n=100_000, switch=True, seed=123):
+    rng = np.random.default_rng(seed)
+    wins = 0
+    for _ in range(n):
+        wins += monty_hall_trial(switch=switch, rng=rng)
+    return wins / n
+
+p_stay = simulate_monty_hall(n=200_000, switch=False)
+p_switch = simulate_monty_hall(n=200_000, switch=True)
+print("Win rate STAY  :", p_stay)
+print("Win rate SWITCH:", p_switch)
+```
+
+---
+
+### 00:20–01:10 | Pod Challenge: “The Spam Assassin”
+
+#### A) Hitung manual dengan Bayes (langsung di Python biar konsisten)
+
+Skenario:
+
+* Prior spam = 20%
+* P("gratis"|spam) = 90%
+* P("gratis"|normal) = 5%
+
+```python
+def posterior_spam_given_word(prior_spam, p_word_given_spam, p_word_given_ham):
+    num = p_word_given_spam * prior_spam
+    den = num + p_word_given_ham * (1 - prior_spam)
+    return num / den
+
+prior = 0.20
+p_w_spam = 0.90
+p_w_ham = 0.05
+
+post = posterior_spam_given_word(prior, p_w_spam, p_w_ham)
+print(f"P(Spam | 'Gratis') = {post:.6f} = {post*100:.2f}%")
+```
+
+#### B) Fungsi `is_spam(word, prior, sensitivity, specificity)`
+
+Saya buat versi yang “jelas”:
+
+* sensitivity = P(word muncul | spam)
+* specificity = P(word tidak muncul | ham)
+  Sehingga P(word muncul | ham) = 1 - specificity.
+
+```python
+def is_spam(word_present, prior_spam, sensitivity, specificity):
+    """
+    word_present: True jika kata muncul.
+    sensitivity: P(word present | spam)
+    specificity: P(word absent  | ham)
+    """
+    p_spam = prior_spam
+    p_ham = 1 - p_spam
+
+    p_word_given_spam = sensitivity
+    p_word_given_ham = 1 - specificity
+
+    if word_present:
+        num = p_word_given_spam * p_spam
+        den = num + p_word_given_ham * p_ham
+        return num / den
+    else:
+        # P(spam | word absent)
+        p_notword_given_spam = 1 - p_word_given_spam
+        p_notword_given_ham = specificity
+        num = p_notword_given_spam * p_spam
+        den = num + p_notword_given_ham * p_ham
+        return num / den
+
+# Demo sesuai skenario:
+prior = 0.20
+sensitivity = 0.90
+specificity = 0.95  # karena P(word|ham)=0.05 => P(not word|ham)=0.95
+
+print("Jika kata 'Gratis' muncul:", is_spam(True, prior, sensitivity, specificity))
+print("Jika kata 'Gratis' TIDAK muncul:", is_spam(False, prior, sensitivity, specificity))
+```
+
+#### C) Eksperimen: prior turun jadi 1% (imbalance)
+
+```python
+for prior in [0.20, 0.05, 0.01]:
+    post = is_spam(True, prior, sensitivity=0.90, specificity=0.95)
+    print(f"Prior spam={prior:.2%} => P(spam|'Gratis')={post:.2%}")
+```
+
+#### D) (Bonus) Simulasi confusion matrix untuk lihat False Positive “di dunia nyata”
+
+```python
+import numpy as np
+
+def simulate_spam_filter(
+    N=50_000,
+    prior_spam=0.20,
+    sensitivity=0.90,   # P(word|spam)
+    specificity=0.95,   # P(not word|ham)
+    seed=0
+):
+    rng = np.random.default_rng(seed)
+    # label email: 1 spam, 0 ham
+    y = (rng.random(N) < prior_spam).astype(int)
+
+    # word_present berdasarkan kelas
+    word = np.zeros(N, dtype=int)
+
+    spam_mask = y == 1
+    ham_mask = y == 0
+
+    word[spam_mask] = (rng.random(np.sum(spam_mask)) < sensitivity).astype(int)
+    word[ham_mask]  = (rng.random(np.sum(ham_mask))  < (1 - specificity)).astype(int)  # P(word|ham)
+
+    # Prediksi: jika word_present => spam
+    yhat = word.copy()
+
+    TP = int(((y==1) & (yhat==1)).sum())
+    FP = int(((y==0) & (yhat==1)).sum())
+    TN = int(((y==0) & (yhat==0)).sum())
+    FN = int(((y==1) & (yhat==0)).sum())
+
+    precision = TP/(TP+FP) if (TP+FP) else 0.0
+    recall = TP/(TP+FN) if (TP+FN) else 0.0
+
+    return {"TP":TP,"FP":FP,"TN":TN,"FN":FN,"precision":precision,"recall":recall}
+
+for prior in [0.20, 0.01]:
+    cm = simulate_spam_filter(N=100_000, prior_spam=prior, sensitivity=0.90, specificity=0.95, seed=1)
+    print(f"\nPrior={prior:.2%}")
+    print(cm)
+```
+
+---
+
+### 01:10–01:40 | Studi Kasus: Deteksi Intrusi & Anomali (Gabungkan sinyal independen)
+
+Inti teknik: pakai **likelihood ratio** dari beberapa sinyal (diasumsikan independen).
+
+```python
+def posterior_with_independent_signals(prior_H, signals):
+    """
+    prior_H: P(H) mis. intrusi
+    signals: list of tuples (p_e_given_H, p_e_given_notH) untuk setiap evidence E_i
+    Dengan asumsi evidence independen bersyarat pada H / ~H:
+      P(E1..Ek | H) = Π P(Ei|H)
+      P(E1..Ek | ~H) = Π P(Ei|~H)
+    """
+    pH = prior_H
+    pNot = 1 - pH
+
+    pE_given_H = 1.0
+    pE_given_Not = 1.0
+    for p1, p0 in signals:
+        pE_given_H *= p1
+        pE_given_Not *= p0
+
+    num = pE_given_H * pH
+    den = num + pE_given_Not * pNot
+    return num / den
+
+# Contoh: dua sinyal: IP mencurigakan + login jam 03:00
+prior_intrusion = 1/10_000
+
+# Misal:
+# P(IP suspicious | intrusi)=0.80, P(IP suspicious | normal)=0.02
+# P(login 03:00 | intrusi)=0.60, P(login 03:00 | normal)=0.05
+signals = [(0.80, 0.02), (0.60, 0.05)]
+
+post2 = posterior_with_independent_signals(prior_intrusion, signals)
+print(f"Posterior intrusi setelah 2 sinyal = {post2:.6f} = {post2*100:.4f}%")
+```
+
+Kalau mau “wow effect”: tambahkan sinyal ke-3 (device baru, geo anomaly, dll) dan lihat posterior naik.
+
+---
+
+### 01:40–01:50 | Code Review & Debat: “Kapan kita boleh mengabaikan Prior?”
+
+Buat script kecil untuk “membuktikan” prior sulit diabaikan: ubah prior, lihat posterior.
+
+```python
+def sweep_prior(priors, p_e_given_H, p_e_given_notH):
+    out = []
+    for pr in priors:
+        post = bayes_update(pr, p_e_given_H, p_e_given_notH)
+        out.append((pr, post))
+    return out
+
+priors = [0.5, 0.1, 0.01, 0.001, 0.0001]
+pairs = sweep_prior(priors, p_e_given_H=0.99, p_e_given_notH=0.01)
+
+for pr, post in pairs:
+    print(f"Prior={pr:.5f} => Posterior={post:.5f}")
+```
+
+---
+
+### 01:50–02:00 | Exit Ticket (Auto-check jawaban teks sederhana)
+
+Kalau Bapak ingin “exit ticket” yang dikumpulkan cepat (mis. via input), ini contoh auto-check **keyword-based** (naif tapi praktis).
+
+```python
+def grade_exit_ticket(answer: str):
+    """
+    Penilaian sederhana berbasis keyword.
+    Kunci konsep:
+      - false positive: alarm/sistem bilang ada bahaya padahal tidak ada
+      - bahaya: memicu tindakan salah, rugi, panik, memadamkan, mengganggu operasi, dll
+    """
+    a = answer.lower()
+    must_have = ["false positive", "alarm", "padahal", "tidak"]
+    danger_words = ["bahaya", "rugi", "panik", "salah", "memadamkan", "ganggu", "shutdown"]
+
+    score = 0
+    for k in must_have:
+        if k in a:
+            score += 1
+    if any(w in a for w in danger_words):
+        score += 2
+
+    # Skor maksimum 6
+    return score, 6
+
+# Contoh pemakaian:
+jawaban = """
+False positive itu ketika alarm kebakaran menyatakan ada api padahal tidak ada.
+Ini berbahaya karena bisa memadamkan sistem otomatis secara salah dan mengganggu operasi serta menimbulkan kerugian.
+"""
+score, max_score = grade_exit_ticket(jawaban)
+print(f"Score: {score}/{max_score}")
+```
+
+---
+
+Kalau Bapak mau, saya bisa rapikan semua ini jadi **satu file repo “week04/”** (mis. `w4_demo.ipynb`, `w4_spam_lab.py`, `w4_monty_hall.py`) lengkap dengan `README.md` dan instruksi tugas GitHub Classroom—tapi untuk saat ini, semua item agendanya sudah punya kode masing-masing.
 
 ### The Hook: “Jebakan Tes DNA/Wajah”
 
