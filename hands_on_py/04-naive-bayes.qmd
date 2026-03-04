@@ -1,0 +1,1429 @@
+---
+title: Naive Bayes Claassifier
+---
+
+Prinsip dasar **Naive Bayes classifier** adalah: *mengklasifikasikan objek dengan membandingkan seberapa “mungkin” data itu muncul pada tiap kelas*, lalu memilih kelas dengan probabilitas posterior terbesar.
+
+### 1) Bayes sebagai mesin “update keyakinan”
+
+Naive Bayes memakai Teorema Bayes:
+
+[
+P(C\mid x)\propto P(C),P(x\mid C)
+]
+
+* **Prior** (P(C)): seberapa sering kelas itu terjadi sebelum melihat data (mis. spam cuma 1%).
+* **Likelihood** (P(x\mid C)): seberapa cocok data (x) jika kelasnya (C).
+* **Posterior** (P(C\mid x)): keyakinan setelah melihat data.
+
+Kita tidak perlu menghitung penyebut (P(x)) karena sama untuk semua kelas, jadi cukup membandingkan skor:
+[
+\text{score}(C)=P(C),P(x\mid C)
+]
+
+---
+
+### 2) Asumsi “naive”: fitur dianggap independen bersyarat pada kelas
+
+Agar (P(x\mid C)) mudah dihitung, Naive Bayes membuat asumsi:
+
+[
+P(x_1,x_2,\dots,x_d\mid C)\approx \prod_{j=1}^d P(x_j\mid C)
+]
+
+Artinya: **setelah kelas diketahui**, tiap fitur dianggap tidak saling mempengaruhi.
+
+Contoh:
+
+* Spam detection: kata “gratis”, “promo”, “klik” dianggap independen *dengan syarat* email itu spam/ham.
+* Credit scoring: fitur seperti DTI, income bin, purpose dianggap independen *dengan syarat* borrower good/bad.
+
+Ini memang “naive” (di dunia nyata fitur sering berkorelasi), tapi sering tetap bekerja baik.
+
+---
+
+### 3) Keputusan klasifikasi: pilih kelas dengan posterior terbesar
+
+[
+\hat{C} = \arg\max_C \left[\log P(C) + \sum_j \log P(x_j\mid C)\right]
+]
+
+Biasanya dipakai **log** supaya:
+
+* tidak underflow (perkalian angka kecil jadi 0),
+* berubah jadi penjumlahan.
+
+---
+
+### 4) Intuisi versi “LLR” (Sherlock version)
+
+Untuk binary class (1 vs 0), yang dibandingkan adalah **log-likelihood ratio**:
+
+[
+\log\frac{P(1\mid x)}{P(0\mid x)}
+=================================
+
+\log\frac{P(1)}{P(0)}
++
+\sum_j \log\frac{P(x_j\mid 1)}{P(x_j\mid 0)}
+]
+
+* prior memberi “bias awal”
+* tiap fitur memberi “bukti” pro/kon kelas 1
+
+---
+
+### 5) Kenapa perlu smoothing (Laplace)
+
+Jika ada fitur yang **tidak pernah muncul** di kelas tertentu saat training, maka (P(x_j\mid C)=0) dan seluruh skor jadi 0 (log jadi (-\infty)).
+Solusinya: **Laplace smoothing** (tambah (\alpha)) agar tidak ada probabilitas nol.
+
+---
+
+### 6) Kapan Naive Bayes cocok
+
+* Data teks (spam, sentiment): sangat cepat dan baseline kuat.
+* Data tabular diskret: oke jika fitur tidak terlalu saling terikat.
+* Dataset besar/fitur banyak: bagus karena training sederhana.
+
+Kalau Bapak mau, saya bisa jelaskan juga **tiga varian utama** (GaussianNB, MultinomialNB, BernoulliNB) dan kapan dipakai.
+
+Baik Prof. Armein — kita masuk lebih dalam 👨‍🔬
+Berikut penjelasan **tiga varian utama Naive Bayes**, lengkap dengan:
+
+* intuisi matematis
+* kapan dipakai
+* contoh aplikatif (spam, sentiment, credit scoring)
+* kelebihan & keterbatasan
+
+---
+
+# 1️⃣ Gaussian Naive Bayes
+
+## 🔹 Asumsi
+
+Setiap fitur numerik mengikuti distribusi **Gaussian (Normal)** dalam setiap kelas:
+
+[
+x_j \mid C \sim \mathcal{N}(\mu_{Cj}, \sigma_{Cj}^2)
+]
+
+Likelihood:
+
+[
+P(x_j \mid C)
+=============
+
+\frac{1}{\sqrt{2\pi\sigma^2}}
+\exp\left(-\frac{(x_j-\mu)^2}{2\sigma^2}\right)
+]
+
+---
+
+## 🔹 Kapan Dipakai?
+
+✔ Fitur numerik kontinu
+✔ Credit scoring (income, DTI, umur, dll)
+✔ Sensor data
+✔ Fraud detection berbasis angka
+
+---
+
+## 🔹 Contoh P2P Lending
+
+Fitur:
+
+* income (numeric)
+* DTI ratio
+* loan history months
+
+Jika borrower GOOD punya income rata-rata 12 juta dan BAD rata-rata 4 juta, maka income tinggi otomatis meningkatkan likelihood kelas GOOD.
+
+---
+
+## 🔹 Kelebihan
+
+* Tidak perlu binning
+* Cepat
+* Parameter sedikit (mean & variance per fitur per kelas)
+
+## 🔹 Kekurangan
+
+* Jika distribusi tidak mendekati normal → performa turun
+* Sensitif terhadap outlier
+
+---
+
+# 2️⃣ Multinomial Naive Bayes
+
+## 🔹 Asumsi
+
+Fitur adalah **count/frequency** (biasanya teks)
+
+[
+P(x \mid C) = \prod_j P(w_j \mid C)^{count(w_j)}
+]
+
+---
+
+## 🔹 Kapan Dipakai?
+
+✔ Spam detection
+✔ Sentiment analysis
+✔ Document classification
+✔ Text mining
+
+---
+
+## 🔹 Contoh Spam
+
+Kata:
+
+* “gratis” sangat sering muncul di spam
+* “rapat” jarang muncul di spam
+
+LLR untuk kata "gratis":
+
+[
+\log \frac{P(gratis\mid spam)}{P(gratis\mid ham)}
+]
+
+Jika besar → kuat mendukung spam.
+
+---
+
+## 🔹 Kelebihan
+
+* Sangat efektif untuk teks
+* Training sangat cepat
+* Tahan terhadap dimensi tinggi
+
+## 🔹 Kekurangan
+
+* Asumsi independensi kata tidak realistis
+* Tidak mempertimbangkan urutan kata (kecuali n-gram)
+
+---
+
+# 3️⃣ Bernoulli Naive Bayes
+
+## 🔹 Asumsi
+
+Fitur adalah **binary (0/1)** → hanya memperhatikan apakah fitur muncul atau tidak.
+
+[
+P(x_j\mid C)=p^{x_j}(1-p)^{1-x_j}
+]
+
+---
+
+## 🔹 Kapan Dipakai?
+
+✔ Text classification (presence/absence)
+✔ Fitur boolean
+✔ Sistem rule-based sederhana
+
+---
+
+## 🔹 Perbedaan dengan Multinomial
+
+| Multinomial              | Bernoulli               |
+| ------------------------ | ----------------------- |
+| Menghitung frekuensi     | Hanya hadir/tidak       |
+| Bagus untuk teks panjang | Bagus untuk teks pendek |
+| Umum dipakai di NLP      | Lebih jarang            |
+
+---
+
+# 🎯 Perbandingan Singkat
+
+| Tipe Data        | Model         |
+| ---------------- | ------------- |
+| Numerik kontinu  | GaussianNB    |
+| Count teks       | MultinomialNB |
+| Binary/boolean   | BernoulliNB   |
+| Kategori diskret | CategoricalNB |
+
+---
+
+# 🔬 Intuisi Unified (Very Important)
+
+Semua varian adalah bentuk khusus dari:
+
+[
+\hat{C}
+=======
+
+\arg\max_C
+\left[
+\log P(C)
++
+\sum_j \log P(x_j\mid C)
+\right]
+]
+
+Perbedaannya hanya pada bentuk (P(x_j\mid C)).
+
+---
+
+# 💡 Insight yang Kuat untuk Mahasiswa
+
+Naive Bayes bukan “model statistik biasa”.
+Ia adalah:
+
+> **Mesin akumulasi bukti (evidence accumulation engine).**
+
+Setiap fitur memberikan kontribusi:
+
+[
+\text{Total Evidence} = \text{Prior Evidence} + \sum \text{Feature Evidence}
+]
+
+Inilah alasan versi LLR sangat powerful untuk mengajar.
+
+---
+
+# 🚀 Untuk Konteks Kuliah Prof (Sherlock Holmes 2.0)
+
+Saya sarankan struktur ini:
+
+1. Spam → MultinomialNB
+2. Sentiment → Bernoulli vs Multinomial comparison
+3. P2P → GaussianNB vs DiscreteNB comparison
+4. Diskusi imbalance & prior
+5. Geser threshold → precision/recall tradeoff
+
+---
+
+Kalau Prof mau, saya bisa lanjut dengan:
+
+* 🔎 Visualisasi kontribusi tiap fitur (feature importance berbasis LLR)
+* ⚖ Demo imbalance ekstrem (base-rate fallacy)
+* 📊 Plot decision boundary GaussianNB
+* 🧠 Perbandingan Naive Bayes vs Logistic Regression (karena LLR bentuknya mirip)
+
+Mau ke arah mana kita perdalam?
+
+```python
+import re
+from collections import Counter
+
+def tokenize(text):
+    # Lowercase + ambil kata
+    return re.findall(r"[a-zA-Z0-9]+", text.lower())
+
+def train_keyword_model(emails, labels):
+    """
+    emails: list[str]
+    labels: list[int]  # 1 spam, 0 ham
+    return counts kata per kelas + prior
+    """
+    spam_words = Counter()
+    ham_words = Counter()
+    n_spam = 0
+    n_ham = 0
+
+    for text, y in zip(emails, labels):
+        words = tokenize(text)
+        if y == 1:
+            n_spam += 1
+            spam_words.update(words)
+        else:
+            n_ham += 1
+            ham_words.update(words)
+
+    prior_spam = n_spam / (n_spam + n_ham) if (n_spam + n_ham) else 0.0
+    return {"spam_words": spam_words, "ham_words": ham_words, "prior_spam": prior_spam}
+
+def predict_naive_keyword(text, model, keywords=("gratis", "promo", "diskon"), threshold=1):
+    """
+    SANGAT naive: jika jumlah keyword muncul >= threshold => spam
+    """
+    words = tokenize(text)
+    c = Counter(words)
+    score = sum(c[k] for k in keywords)
+    return 1 if score >= threshold else 0, score
+
+# Demo mini
+emails = [
+    "Gratis diskon besar untuk kamu!",
+    "Rapat jam 10, jangan lupa agenda",
+    "Promo terbatas! gratis ongkir",
+    "Tolong kirim laporan minggu ini"
+]
+labels = [1, 0, 1, 0]
+
+model = train_keyword_model(emails, labels)
+print("Prior spam:", model["prior_spam"])
+
+for e in emails:
+    yhat, score = predict_naive_keyword(e, model)
+    print(yhat, score, "=>", e)
+```
+
+Di bawah ini saya berikan **dua versi Naive Bayes classifier** untuk **3 aplikasi**:
+
+1. **Spam detection (teks)**
+2. **Sentiment analysis (teks)**
+3. **Credit scoring P2P lending (tabular)**
+
+Versi:
+
+* **A. Tanpa sklearn** (pure Python + NumPy)
+* **B. Dengan sklearn**
+
+Semua contoh **self-contained** (langsung jalan), lengkap dengan **train → predict → confusion matrix**.
+
+---
+
+## Utilitas umum: confusion matrix + metrik (dipakai semua contoh)
+
+```python
+import numpy as np
+
+def confusion_2x2(y_true, y_pred, positive_label=1):
+    y_true = np.asarray(y_true)
+    y_pred = np.asarray(y_pred)
+
+    TP = int(np.sum((y_true == positive_label) & (y_pred == positive_label)))
+    TN = int(np.sum((y_true != positive_label) & (y_pred != positive_label)))
+    FP = int(np.sum((y_true != positive_label) & (y_pred == positive_label)))
+    FN = int(np.sum((y_true == positive_label) & (y_pred != positive_label)))
+
+    cm = np.array([[TN, FP],
+                   [FN, TP]])
+    return cm, TP, FP, TN, FN
+
+def metrics_from_cm(TP, FP, TN, FN):
+    precision = TP / (TP + FP) if (TP + FP) else 0.0
+    recall    = TP / (TP + FN) if (TP + FN) else 0.0
+    accuracy  = (TP + TN) / (TP + TN + FP + FN) if (TP+TN+FP+FN) else 0.0
+    f1 = (2*precision*recall)/(precision+recall) if (precision+recall) else 0.0
+    return {"precision": precision, "recall": recall, "accuracy": accuracy, "f1": f1}
+```
+
+---
+
+# A) TANPA sklearn
+
+## A1) Naive Bayes untuk teks (Multinomial NB) — core engine
+
+Dipakai untuk **spam detection** dan **sentiment analysis**.
+
+```python
+import re
+from collections import Counter, defaultdict
+
+def tokenize(text):
+    return re.findall(r"[a-zA-Z0-9]+", text.lower())
+
+class MultinomialNB_Text_NoSK:
+    """
+    Multinomial Naive Bayes untuk teks:
+    P(class|doc) ∝ P(class) * Π P(word|class)^{count(word,doc)}
+    dengan Laplace smoothing.
+    """
+    def __init__(self, alpha=1.0):
+        self.alpha = float(alpha)
+        self.class_priors_log = {}
+        self.word_logprob = {}   # dict[class] -> dict[word] -> log P(word|class)
+        self.vocab = set()
+        self.classes_ = None
+
+    def fit(self, texts, y):
+        y = list(y)
+        texts = list(texts)
+        classes = sorted(set(y))
+        self.classes_ = classes
+
+        # Count words per class
+        word_counts = {c: Counter() for c in classes}
+        class_counts = Counter(y)
+
+        for text, label in zip(texts, y):
+            words = tokenize(text)
+            word_counts[label].update(words)
+            self.vocab.update(words)
+
+        V = len(self.vocab)
+
+        # log priors
+        n = len(y)
+        self.class_priors_log = {c: np.log(class_counts[c] / n) for c in classes}
+
+        # log likelihoods with Laplace smoothing
+        self.word_logprob = {}
+        for c in classes:
+            total_words_in_class = sum(word_counts[c].values())
+            denom = total_words_in_class + self.alpha * V
+            self.word_logprob[c] = {}
+            for w in self.vocab:
+                num = word_counts[c][w] + self.alpha
+                self.word_logprob[c][w] = np.log(num / denom)
+
+            # store unseen word logprob (for words outside vocab during predict)
+            self.word_logprob[c]["<UNK>"] = np.log(self.alpha / denom)
+
+        return self
+
+    def predict_proba(self, texts):
+        probs = []
+        for text in texts:
+            words = tokenize(text)
+            counts = Counter(words)
+            log_scores = []
+            for c in self.classes_:
+                s = self.class_priors_log[c]
+                for w, k in counts.items():
+                    s += k * self.word_logprob[c].get(w, self.word_logprob[c]["<UNK>"])
+                log_scores.append(s)
+
+            # softmax
+            log_scores = np.array(log_scores)
+            log_scores = log_scores - np.max(log_scores)
+            p = np.exp(log_scores)
+            p = p / p.sum()
+            probs.append(p)
+        return np.array(probs)
+
+    def predict(self, texts):
+        proba = self.predict_proba(texts)
+        idx = np.argmax(proba, axis=1)
+        return np.array([self.classes_[i] for i in idx])
+```
+
+---
+
+## A2) (1) Spam Detection — tanpa sklearn
+
+```python
+# Dataset kecil (demo). Untuk kelas, 1=spam, 0=ham
+spam_texts = [
+    "Gratis hadiah besar klik link sekarang",
+    "Promo diskon 90 persen hanya hari ini",
+    "Selamat kamu menang voucher belanja",
+    "Pinjaman cepat cair tanpa syarat klik",
+    "Dapatkan uang gratis sekarang juga",
+    "Claim hadiah kamu melalui link ini",
+]
+ham_texts = [
+    "Rapat jam 10 besok di ruang meeting",
+    "Tolong kirim laporan mingguan hari ini",
+    "Jadwal kuliah diundur jadi jam 13",
+    "Terima kasih atas kerja samanya",
+    "Mari diskusi proposal penelitian minggu depan",
+    "Saya sudah upload materi ke LMS",
+]
+
+X = spam_texts + ham_texts
+y = [1]*len(spam_texts) + [0]*len(ham_texts)
+
+# Split sederhana
+idx = np.arange(len(X))
+np.random.seed(0)
+np.random.shuffle(idx)
+train_idx, test_idx = idx[:9], idx[9:]
+
+X_train = [X[i] for i in train_idx]
+y_train = [y[i] for i in train_idx]
+X_test  = [X[i] for i in test_idx]
+y_test  = [y[i] for i in test_idx]
+
+model_spam = MultinomialNB_Text_NoSK(alpha=1.0).fit(X_train, y_train)
+y_pred = model_spam.predict(X_test)
+
+cm, TP, FP, TN, FN = confusion_2x2(y_test, y_pred, positive_label=1)
+print("=== Spam Detection (No sklearn) ===")
+print("Confusion Matrix [[TN,FP],[FN,TP]]:\n", cm)
+print("Metrics:", metrics_from_cm(TP, FP, TN, FN))
+
+# Coba prediksi baru
+samples = [
+    "gratis voucher klik link",
+    "mohon kirim revisi draft proposal",
+]
+print("Pred:", model_spam.predict(samples))
+print("Proba:", model_spam.predict_proba(samples))
+```
+
+---
+
+## A3) (2) Sentiment Analysis — tanpa sklearn
+
+```python
+# 1=positive, 0=negative (demo kecil)
+pos = [
+    "film ini bagus sekali dan sangat menyentuh",
+    "saya suka layanan ini cepat dan ramah",
+    "produk berkualitas dan pengiriman tepat waktu",
+    "pengalaman luar biasa saya puas",
+    "rekomendasi terbaik mantap",
+]
+neg = [
+    "film ini buruk dan membosankan",
+    "layanan lambat dan tidak membantu",
+    "produk rusak dan mengecewakan",
+    "pengalaman jelek saya kesal",
+    "sangat tidak puas mengecewakan",
+]
+
+X = pos + neg
+y = [1]*len(pos) + [0]*len(neg)
+
+idx = np.arange(len(X))
+np.random.seed(1)
+np.random.shuffle(idx)
+train_idx, test_idx = idx[:7], idx[7:]
+
+X_train = [X[i] for i in train_idx]
+y_train = [y[i] for i in train_idx]
+X_test  = [X[i] for i in test_idx]
+y_test  = [y[i] for i in test_idx]
+
+model_sent = MultinomialNB_Text_NoSK(alpha=1.0).fit(X_train, y_train)
+y_pred = model_sent.predict(X_test)
+
+cm, TP, FP, TN, FN = confusion_2x2(y_test, y_pred, positive_label=1)
+print("\n=== Sentiment Analysis (No sklearn) ===")
+print("Confusion Matrix [[TN,FP],[FN,TP]]:\n", cm)
+print("Metrics:", metrics_from_cm(TP, FP, TN, FN))
+
+samples = [
+    "saya puas sekali layanan ramah",
+    "produk ini mengecewakan dan buruk",
+]
+print("Pred:", model_sent.predict(samples))
+print("Proba:", model_sent.predict_proba(samples))
+```
+
+---
+
+## A4) (3) Credit Scoring P2P Lending — tanpa sklearn (Discrete Naive Bayes)
+
+Untuk tabular, cara paling aman tanpa sklearn: **diskritisasi fitur numerik** → lalu **Naive Bayes diskret** (kategori).
+
+```python
+class DiscreteNB_NoSK:
+    """
+    Naive Bayes untuk fitur diskret/kategori.
+    P(y|x) ∝ P(y) * Π P(x_j = v | y)
+    Laplace smoothing per fitur.
+    """
+    def __init__(self, alpha=1.0):
+        self.alpha = float(alpha)
+        self.classes_ = None
+        self.prior_log = {}
+        self.cond_log = {}   # cond_log[y][j][value] = log prob
+        self.feature_values_ = []  # list of sets
+
+    def fit(self, X, y):
+        X = np.asarray(X, dtype=object)
+        y = np.asarray(y, dtype=object)
+        n, d = X.shape
+        classes = sorted(set(y))
+        self.classes_ = classes
+
+        # nilai unik per fitur
+        self.feature_values_ = [set(X[:, j]) for j in range(d)]
+
+        # prior
+        counts_y = Counter(y)
+        self.prior_log = {c: np.log(counts_y[c] / n) for c in classes}
+
+        # conditional counts
+        self.cond_log = {c: [defaultdict(float) for _ in range(d)] for c in classes}
+
+        for c in classes:
+            Xc = X[y == c]
+            for j in range(d):
+                vals = list(self.feature_values_[j])
+                counts = Counter(Xc[:, j])
+                V = len(vals)
+                denom = len(Xc) + self.alpha * V
+                for v in vals:
+                    num = counts.get(v, 0) + self.alpha
+                    self.cond_log[c][j][v] = np.log(num / denom)
+                # unseen:
+                self.cond_log[c][j]["<UNK>"] = np.log(self.alpha / denom)
+
+        return self
+
+    def predict_proba(self, X):
+        X = np.asarray(X, dtype=object)
+        n, d = X.shape
+        probs = np.zeros((n, len(self.classes_)), dtype=float)
+
+        for i in range(n):
+            log_scores = []
+            for c in self.classes_:
+                s = self.prior_log[c]
+                for j in range(d):
+                    v = X[i, j]
+                    s += self.cond_log[c][j].get(v, self.cond_log[c][j]["<UNK>"])
+                log_scores.append(s)
+
+            log_scores = np.array(log_scores)
+            log_scores = log_scores - np.max(log_scores)
+            p = np.exp(log_scores)
+            p = p / p.sum()
+            probs[i, :] = p
+        return probs
+
+    def predict(self, X):
+        proba = self.predict_proba(X)
+        idx = np.argmax(proba, axis=1)
+        return np.array([self.classes_[i] for i in idx])
+
+def bin_income(x):
+    # juta rupiah/bulan (contoh)
+    if x < 5: return "low"
+    if x < 12: return "mid"
+    return "high"
+
+def bin_dti(x):
+    # debt-to-income ratio (0..1)
+    if x < 0.2: return "low"
+    if x < 0.5: return "mid"
+    return "high"
+
+def bin_history_months(m):
+    if m < 6: return "short"
+    if m < 24: return "mid"
+    return "long"
+
+# Dataset demo P2P lending:
+# fitur: income_bin, dti_bin, history_bin, purpose
+# label: 1=good (lancar), 0=bad (default)
+raw = [
+    (10, 0.25, 18, "working_capital", 1),
+    (3,  0.60, 4,  "consumption",     0),
+    (7,  0.35, 8,  "education",       1),
+    (4,  0.55, 10, "consumption",     0),
+    (15, 0.15, 36, "investment",      1),
+    (6,  0.70, 5,  "working_capital", 0),
+    (9,  0.40, 30, "working_capital", 1),
+    (2,  0.80, 3,  "consumption",     0),
+    (13, 0.30, 20, "investment",      1),
+    (5,  0.45, 12, "education",       1),
+    (8,  0.65, 7,  "consumption",     0),
+    (12, 0.22, 28, "working_capital", 1),
+]
+
+X = []
+y = []
+for income, dti, hist, purpose, label in raw:
+    X.append([bin_income(income), bin_dti(dti), bin_history_months(hist), purpose])
+    y.append(label)
+
+X = np.array(X, dtype=object)
+y = np.array(y, dtype=int)
+
+# Split
+idx = np.arange(len(X))
+np.random.seed(2)
+np.random.shuffle(idx)
+train_idx, test_idx = idx[:8], idx[8:]
+
+X_train, y_train = X[train_idx], y[train_idx]
+X_test,  y_test  = X[test_idx],  y[test_idx]
+
+model_credit = DiscreteNB_NoSK(alpha=1.0).fit(X_train, y_train)
+y_pred = model_credit.predict(X_test)
+
+cm, TP, FP, TN, FN = confusion_2x2(y_test, y_pred, positive_label=1)  # positive_label=GOOD
+print("\n=== Credit Scoring P2P (No sklearn, Discrete NB) ===")
+print("Confusion Matrix [[TN,FP],[FN,TP]] (TN=bad correctly):\n", cm)
+print("Metrics (positive=GOOD):", metrics_from_cm(TP, FP, TN, FN))
+
+# Prediksi calon borrower baru
+new_applicants = np.array([
+    [bin_income(11), bin_dti(0.55), bin_history_months(10), "working_capital"],  # agak risk
+    [bin_income(14), bin_dti(0.18), bin_history_months(30), "investment"],      # bagus
+], dtype=object)
+
+print("Pred (1=GOOD,0=BAD):", model_credit.predict(new_applicants))
+print("Proba [P(BAD), P(GOOD)] per row:\n", model_credit.predict_proba(new_applicants))
+```
+
+---
+
+# B) DENGAN sklearn
+
+> Catatan: untuk teks kita pakai **CountVectorizer + MultinomialNB**.
+> Untuk credit scoring tabular, paling simpel: **OneHotEncoder + GaussianNB** (atau BernoulliNB). GaussianNB bekerja cukup baik setelah one-hot + numeric scaling sederhana.
+
+## B1) (1) Spam Detection — sklearn
+
+```python
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import confusion_matrix, classification_report
+
+spam_texts = [
+    "Gratis hadiah besar klik link sekarang",
+    "Promo diskon 90 persen hanya hari ini",
+    "Selamat kamu menang voucher belanja",
+    "Pinjaman cepat cair tanpa syarat klik",
+    "Dapatkan uang gratis sekarang juga",
+    "Claim hadiah kamu melalui link ini",
+]
+ham_texts = [
+    "Rapat jam 10 besok di ruang meeting",
+    "Tolong kirim laporan mingguan hari ini",
+    "Jadwal kuliah diundur jadi jam 13",
+    "Terima kasih atas kerja samanya",
+    "Mari diskusi proposal penelitian minggu depan",
+    "Saya sudah upload materi ke LMS",
+]
+
+X = spam_texts + ham_texts
+y = [1]*len(spam_texts) + [0]*len(ham_texts)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=0, stratify=y)
+
+pipe = Pipeline([
+    ("vec", CountVectorizer(lowercase=True)),
+    ("nb", MultinomialNB(alpha=1.0)),
+])
+
+pipe.fit(X_train, y_train)
+y_pred = pipe.predict(X_test)
+
+print("=== Spam Detection (sklearn) ===")
+print("Confusion matrix [[TN,FP],[FN,TP]]:\n", confusion_matrix(y_test, y_pred))
+print(classification_report(y_test, y_pred, digits=4))
+
+samples = ["gratis voucher klik link", "mohon kirim revisi draft proposal"]
+print("Pred:", pipe.predict(samples))
+print("Proba:", pipe.predict_proba(samples))
+```
+
+---
+
+## B2) (2) Sentiment Analysis — sklearn
+
+```python
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import confusion_matrix, classification_report
+
+pos = [
+    "film ini bagus sekali dan sangat menyentuh",
+    "saya suka layanan ini cepat dan ramah",
+    "produk berkualitas dan pengiriman tepat waktu",
+    "pengalaman luar biasa saya puas",
+    "rekomendasi terbaik mantap",
+]
+neg = [
+    "film ini buruk dan membosankan",
+    "layanan lambat dan tidak membantu",
+    "produk rusak dan mengecewakan",
+    "pengalaman jelek saya kesal",
+    "sangat tidak puas mengecewakan",
+]
+
+X = pos + neg
+y = [1]*len(pos) + [0]*len(neg)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=1, stratify=y)
+
+pipe = Pipeline([
+    ("vec", CountVectorizer(lowercase=True, ngram_range=(1,2))),  # bigram sering bantu sentiment
+    ("nb", MultinomialNB(alpha=1.0)),
+])
+
+pipe.fit(X_train, y_train)
+y_pred = pipe.predict(X_test)
+
+print("=== Sentiment Analysis (sklearn) ===")
+print("Confusion matrix [[TN,FP],[FN,TP]]:\n", confusion_matrix(y_test, y_pred))
+print(classification_report(y_test, y_pred, digits=4))
+
+samples = ["saya puas sekali layanan ramah", "produk ini mengecewakan dan buruk"]
+print("Pred:", pipe.predict(samples))
+print("Proba:", pipe.predict_proba(samples))
+```
+
+---
+
+## B3) (3) Credit Scoring P2P — sklearn (OneHot + GaussianNB)
+
+```python
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.impute import SimpleImputer
+
+# Data demo: [income_juta, dti, history_months, purpose]
+raw = [
+    [10, 0.25, 18, "working_capital", 1],
+    [3,  0.60, 4,  "consumption",     0],
+    [7,  0.35, 8,  "education",       1],
+    [4,  0.55, 10, "consumption",     0],
+    [15, 0.15, 36, "investment",      1],
+    [6,  0.70, 5,  "working_capital", 0],
+    [9,  0.40, 30, "working_capital", 1],
+    [2,  0.80, 3,  "consumption",     0],
+    [13, 0.30, 20, "investment",      1],
+    [5,  0.45, 12, "education",       1],
+    [8,  0.65, 7,  "consumption",     0],
+    [12, 0.22, 28, "working_capital", 1],
+]
+
+raw = np.array(raw, dtype=object)
+X = raw[:, :4]
+y = raw[:, 4].astype(int)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=2, stratify=y)
+
+# Kolom: 0 income (num), 1 dti (num), 2 history (num), 3 purpose (cat)
+num_cols = [0,1,2]
+cat_cols = [3]
+
+preprocess = ColumnTransformer(
+    transformers=[
+        ("num", Pipeline([("imp", SimpleImputer(strategy="median"))]), num_cols),
+        ("cat", Pipeline([("imp", SimpleImputer(strategy="most_frequent")),
+                          ("oh", OneHotEncoder(handle_unknown="ignore"))]), cat_cols),
+    ],
+    remainder="drop"
+)
+
+# GaussianNB butuh array dense (karena output OneHot sparse)
+class DenseGaussianNB(GaussianNB):
+    def fit(self, X, y):
+        return super().fit(X.toarray() if hasattr(X, "toarray") else X, y)
+    def predict(self, X):
+        Xd = X.toarray() if hasattr(X, "toarray") else X
+        return super().predict(Xd)
+    def predict_proba(self, X):
+        Xd = X.toarray() if hasattr(X, "toarray") else X
+        return super().predict_proba(Xd)
+
+pipe = Pipeline([
+    ("prep", preprocess),
+    ("nb", DenseGaussianNB())
+])
+
+pipe.fit(X_train, y_train)
+y_pred = pipe.predict(X_test)
+
+print("=== Credit Scoring P2P (sklearn) ===")
+print("Confusion matrix [[TN,FP],[FN,TP]]:\n", confusion_matrix(y_test, y_pred))
+print(classification_report(y_test, y_pred, digits=4))
+
+new_applicants = np.array([
+    [11, 0.55, 10, "working_capital"],
+    [14, 0.18, 30, "investment"],
+], dtype=object)
+
+print("Pred (1=GOOD,0=BAD):", pipe.predict(new_applicants))
+print("Proba [P(BAD),P(GOOD)]:\n", pipe.predict_proba(new_applicants))
+```
+
+---
+
+## Catatan singkat untuk penggunaan di kelas (biar “nyambung” dengan Bayesian update)
+
+* **Prior** = proporsi kelas (spam rate / positive sentiment rate / default rate).
+* **Likelihood** (teks) = frekuensi kata per kelas.
+* **Imbalance** (mis. default rate kecil) → **precision bisa jeblok** walau “akurasi tinggi”.
+
+Kalau Bapak mau, saya bisa:
+
+* menambah versi **log-likelihood ratio** yang eksplisit (lebih “Sherlock Holmes 2.0”), atau
+* menyiapkan **starter repo GitHub Classroom**: `src/nb.py`, `train.py`, `evaluate.py`, `tests/` untuk autograding.
+
+
+Berikut **versi Log-Likelihood Ratio (LLR)** yang “Sherlock Holmes banget”: kita tidak hitung (P(y|x)) langsung, tapi hitung **log-odds**:
+
+[
+\log \frac{P(y=1\mid x)}{P(y=0\mid x)}
+======================================
+
+\log \frac{P(y=1)}{P(y=0)}
++
+\log \frac{P(x\mid y=1)}{P(x\mid y=0)}
+]
+
+Keputusan:
+
+* jika **LLR > 0** ⇒ pilih kelas 1
+* jika **LLR < 0** ⇒ pilih kelas 0
+  Ambang bisa digeser (mis. untuk mengurangi false positive).
+
+Di bawah ini saya buat **3 aplikasi** dan **2 versi kode**:
+
+* **A) tanpa sklearn**
+* **B) dengan sklearn**
+
+---
+
+# A) TANPA sklearn
+
+## A0) Utility: prior-odds, sigmoid (opsional)
+
+```python
+import numpy as np
+
+def logit(p):
+    p = float(p)
+    p = min(max(p, 1e-15), 1-1e-15)
+    return np.log(p/(1-p))
+
+def sigmoid(z):
+    return 1/(1+np.exp(-z))
+```
+
+---
+
+## A1) LLR untuk TEKS (Multinomial NB dengan counts)
+
+LLR dokumen untuk kelas 1 vs 0:
+
+[
+\text{LLR}(d)=\log\frac{P(y=1)}{P(y=0)}+\sum_w c(w,d)\cdot \log\frac{P(w\mid 1)}{P(w\mid 0)}
+]
+
+### Engine: fit → score_llr → predict
+
+```python
+import re
+from collections import Counter
+
+def tokenize(text):
+    return re.findall(r"[a-zA-Z0-9]+", text.lower())
+
+class TextLLR_NoSK:
+    """
+    Multinomial NB versi LLR untuk binary classification.
+    label 1 = positive/spam, label 0 = negative/ham
+    """
+    def __init__(self, alpha=1.0):
+        self.alpha = float(alpha)
+        self.vocab = set()
+        self.log_prior_odds = 0.0
+        self.log_pw_given_1 = {}
+        self.log_pw_given_0 = {}
+        self.log_ratio_w = {}   # log P(w|1) - log P(w|0)
+        self.log_unk_ratio = 0.0
+
+    def fit(self, texts, y):
+        texts = list(texts)
+        y = np.asarray(y).astype(int)
+
+        # prior odds
+        p1 = y.mean()
+        self.log_prior_odds = logit(p1)
+
+        # count words per class
+        c1 = Counter()
+        c0 = Counter()
+        n1 = 0
+        n0 = 0
+        for t, label in zip(texts, y):
+            words = tokenize(t)
+            if label == 1:
+                c1.update(words); n1 += 1
+            else:
+                c0.update(words); n0 += 1
+            self.vocab.update(words)
+
+        V = len(self.vocab)
+
+        total1 = sum(c1.values())
+        total0 = sum(c0.values())
+
+        denom1 = total1 + self.alpha * V
+        denom0 = total0 + self.alpha * V
+
+        # precompute log probs and log ratios
+        self.log_pw_given_1 = {}
+        self.log_pw_given_0 = {}
+        self.log_ratio_w = {}
+
+        for w in self.vocab:
+            p_w_1 = (c1[w] + self.alpha) / denom1
+            p_w_0 = (c0[w] + self.alpha) / denom0
+            self.log_pw_given_1[w] = np.log(p_w_1)
+            self.log_pw_given_0[w] = np.log(p_w_0)
+            self.log_ratio_w[w] = self.log_pw_given_1[w] - self.log_pw_given_0[w]
+
+        # unseen word ratio
+        p_unk_1 = self.alpha / denom1
+        p_unk_0 = self.alpha / denom0
+        self.log_unk_ratio = np.log(p_unk_1) - np.log(p_unk_0)
+        return self
+
+    def score_llr(self, text):
+        counts = Counter(tokenize(text))
+        s = self.log_prior_odds
+        for w, k in counts.items():
+            s += k * self.log_ratio_w.get(w, self.log_unk_ratio)
+        return float(s)
+
+    def predict(self, texts, threshold=0.0):
+        scores = np.array([self.score_llr(t) for t in texts], dtype=float)
+        return (scores > threshold).astype(int), scores
+
+    def predict_proba(self, texts, threshold=0.0):
+        # P(y=1|x) = sigmoid(LLR - threshold_shift)
+        scores = np.array([self.score_llr(t) for t in texts], dtype=float)
+        z = scores - threshold
+        p1 = sigmoid(z)
+        return np.vstack([1-p1, p1]).T, scores
+```
+
+---
+
+## A1a) (1) Spam Detection (LLR)
+
+```python
+spam = [
+    "Gratis hadiah besar klik link sekarang",
+    "Promo diskon 90 persen hanya hari ini",
+    "Selamat kamu menang voucher belanja",
+    "Pinjaman cepat cair tanpa syarat klik",
+]
+ham = [
+    "Rapat jam 10 besok di ruang meeting",
+    "Tolong kirim laporan mingguan hari ini",
+    "Jadwal kuliah diundur jadi jam 13",
+    "Saya sudah upload materi ke LMS",
+]
+
+X = spam + ham
+y = [1]*len(spam) + [0]*len(ham)
+
+model = TextLLR_NoSK(alpha=1.0).fit(X, y)
+
+tests = [
+    "gratis voucher klik link",
+    "mohon kirim revisi draft proposal",
+    "promo diskon besar terbatas",
+]
+pred, llr = model.predict(tests, threshold=0.0)
+proba, _ = model.predict_proba(tests)
+
+for t, p, s, pr in zip(tests, pred, llr, proba):
+    print(f"\nTEXT: {t}\nLLR={s:.3f}  pred={p}  P(spam)={pr[1]:.3f}")
+```
+
+> **Geser threshold** untuk mengurangi false positive: mis. `threshold=1.5` (lebih ketat memanggil spam).
+
+---
+
+## A1b) (2) Sentiment Analysis (LLR)
+
+```python
+pos = [
+    "film ini bagus sekali dan sangat menyentuh",
+    "saya suka layanan ini cepat dan ramah",
+    "pengalaman luar biasa saya puas",
+]
+neg = [
+    "film ini buruk dan membosankan",
+    "layanan lambat dan tidak membantu",
+    "pengalaman jelek saya kesal",
+]
+
+X = pos + neg
+y = [1]*len(pos) + [0]*len(neg)
+
+model = TextLLR_NoSK(alpha=1.0).fit(X, y)
+
+tests = [
+    "saya puas sekali layanan ramah",
+    "produk ini mengecewakan dan buruk",
+]
+pred, llr = model.predict(tests)
+proba, _ = model.predict_proba(tests)
+for t, p, s, pr in zip(tests, pred, llr, proba):
+    print(f"\nTEXT: {t}\nLLR={s:.3f}  pred={p}  P(positive)={pr[1]:.3f}")
+```
+
+---
+
+## A2) (3) Credit Scoring P2P (LLR diskret per-fitur)
+
+Untuk fitur kategori/diskret:
+
+[
+\text{LLR}(x)=\log\frac{P(GOOD)}{P(BAD)}+\sum_j \log\frac{P(x_j=v_j\mid GOOD)}{P(x_j=v_j\mid BAD)}
+]
+
+### Engine: fit dari X kategori
+
+```python
+from collections import Counter, defaultdict
+
+class DiscreteLLR_NoSK:
+    """
+    Binary discrete NB, output skor LLR.
+    y=1: GOOD (lancar), y=0: BAD (default)
+    """
+    def __init__(self, alpha=1.0):
+        self.alpha = float(alpha)
+        self.log_prior_odds = 0.0
+        self.feature_vals = []
+        self.log_ratio = []      # list[dict[val] -> log P(val|1)-log P(val|0)]
+        self.log_unk_ratio = []  # per fitur
+
+    def fit(self, X, y):
+        X = np.asarray(X, dtype=object)
+        y = np.asarray(y).astype(int)
+        n, d = X.shape
+
+        self.log_prior_odds = logit(y.mean())
+        self.feature_vals = [sorted(set(X[:, j])) for j in range(d)]
+        self.log_ratio = [dict() for _ in range(d)]
+        self.log_unk_ratio = [0.0 for _ in range(d)]
+
+        X1 = X[y == 1]
+        X0 = X[y == 0]
+
+        for j in range(d):
+            vals = self.feature_vals[j]
+            V = len(vals)
+
+            c1 = Counter(X1[:, j]) if len(X1) else Counter()
+            c0 = Counter(X0[:, j]) if len(X0) else Counter()
+
+            denom1 = len(X1) + self.alpha * V
+            denom0 = len(X0) + self.alpha * V
+
+            for v in vals:
+                p1 = (c1.get(v, 0) + self.alpha) / denom1
+                p0 = (c0.get(v, 0) + self.alpha) / denom0
+                self.log_ratio[j][v] = np.log(p1) - np.log(p0)
+
+            # unseen ratio
+            self.log_unk_ratio[j] = np.log(self.alpha/denom1) - np.log(self.alpha/denom0)
+
+        return self
+
+    def score_llr_row(self, row):
+        s = self.log_prior_odds
+        for j, v in enumerate(row):
+            s += self.log_ratio[j].get(v, self.log_unk_ratio[j])
+        return float(s)
+
+    def predict(self, X, threshold=0.0):
+        X = np.asarray(X, dtype=object)
+        scores = np.array([self.score_llr_row(r) for r in X], dtype=float)
+        yhat = (scores > threshold).astype(int)
+        return yhat, scores
+
+    def predict_proba(self, X, threshold=0.0):
+        yhat, scores = self.predict(X, threshold=threshold)
+        p1 = sigmoid(scores - threshold)
+        return np.vstack([1-p1, p1]).T, scores
+```
+
+### Demo P2P (pakai binning seperti sebelumnya)
+
+```python
+def bin_income(x):
+    if x < 5: return "low"
+    if x < 12: return "mid"
+    return "high"
+
+def bin_dti(x):
+    if x < 0.2: return "low"
+    if x < 0.5: return "mid"
+    return "high"
+
+def bin_history(m):
+    if m < 6: return "short"
+    if m < 24: return "mid"
+    return "long"
+
+raw = [
+    (10, 0.25, 18, "working_capital", 1),
+    (3,  0.60, 4,  "consumption",     0),
+    (7,  0.35, 8,  "education",       1),
+    (4,  0.55, 10, "consumption",     0),
+    (15, 0.15, 36, "investment",      1),
+    (6,  0.70, 5,  "working_capital", 0),
+    (9,  0.40, 30, "working_capital", 1),
+    (2,  0.80, 3,  "consumption",     0),
+]
+
+X = []
+y = []
+for income, dti, hist, purpose, label in raw:
+    X.append([bin_income(income), bin_dti(dti), bin_history(hist), purpose])
+    y.append(label)
+
+X = np.array(X, dtype=object)
+y = np.array(y, dtype=int)
+
+model = DiscreteLLR_NoSK(alpha=1.0).fit(X, y)
+
+new_apps = np.array([
+    [bin_income(11), bin_dti(0.55), bin_history(10), "working_capital"],
+    [bin_income(14), bin_dti(0.18), bin_history(30), "investment"],
+], dtype=object)
+
+pred, llr = model.predict(new_apps, threshold=0.0)
+proba, _ = model.predict_proba(new_apps)
+
+for r, p, s, pr in zip(new_apps, pred, llr, proba):
+    print(f"\nX={r}\nLLR={s:.3f}  pred(GOOD=1)={p}  P(GOOD)={pr[1]:.3f}")
+```
+
+---
+
+# B) DENGAN sklearn (LLR dari parameter NB)
+
+Intinya: sklearn sudah menghitung **joint log-likelihood** per kelas.
+Untuk binary, LLR = (log joint kelas 1) − (log joint kelas 0).
+
+## B1) LLR untuk teks dengan sklearn (CountVectorizer + MultinomialNB)
+
+```python
+import numpy as np
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+def llr_text_sklearn(texts_train, y_train, texts_test, alpha=1.0):
+    vec = CountVectorizer(lowercase=True)
+    Xtr = vec.fit_transform(texts_train)
+
+    nb = MultinomialNB(alpha=alpha)
+    nb.fit(Xtr, y_train)
+
+    Xte = vec.transform(texts_test)
+
+    # joint log-likelihood per kelas: shape (n_samples, 2)
+    jll = nb._joint_log_likelihood(Xte)
+
+    # asumsikan kelas bernilai [0,1]
+    # LLR = log P(x,y=1) - log P(x,y=0)
+    llr = jll[:, 1] - jll[:, 0]
+    pred = (llr > 0).astype(int)
+
+    # opsional: probabilitas via sigmoid(llr) (untuk binary NB, ini konsisten)
+    p1 = sigmoid(llr)
+    proba = np.vstack([1-p1, p1]).T
+
+    return pred, llr, proba, vec, nb
+
+# Demo spam
+spam = [
+    "Gratis hadiah besar klik link sekarang",
+    "Promo diskon 90 persen hanya hari ini",
+    "Selamat kamu menang voucher belanja",
+    "Pinjaman cepat cair tanpa syarat klik",
+]
+ham = [
+    "Rapat jam 10 besok di ruang meeting",
+    "Tolong kirim laporan mingguan hari ini",
+    "Jadwal kuliah diundur jadi jam 13",
+    "Saya sudah upload materi ke LMS",
+]
+Xtr = spam + ham
+ytr = [1]*len(spam) + [0]*len(ham)
+
+tests = ["gratis voucher klik link", "mohon kirim revisi draft proposal"]
+
+pred, llr, proba, vec, nb = llr_text_sklearn(Xtr, ytr, tests, alpha=1.0)
+for t, p, s, pr in zip(tests, pred, llr, proba):
+    print(f"\nTEXT: {t}\nLLR={s:.3f}  pred={p}  P(class1)={pr[1]:.3f}")
+```
+
+> Untuk **sentiment**, tinggal ganti data latihnya; engine sama.
+
+---
+
+## B2) LLR untuk credit scoring tabular dengan sklearn
+
+Pilihan yang rapi untuk LLR adalah **CategoricalNB** (fitur kategori berupa integer).
+Alurnya: encode kategori → `CategoricalNB` → ambil `_joint_log_likelihood` → LLR.
+
+```python
+import numpy as np
+from sklearn.naive_bayes import CategoricalNB
+from sklearn.preprocessing import OrdinalEncoder
+
+def llr_credit_categorical_sklearn(X_train, y_train, X_test, alpha=1.0):
+    enc = OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1)
+    Xtr_enc = enc.fit_transform(X_train)
+    Xte_enc = enc.transform(X_test)
+
+    nb = CategoricalNB(alpha=alpha)
+    nb.fit(Xtr_enc, y_train)
+
+    jll = nb._joint_log_likelihood(Xte_enc)
+    llr = jll[:, 1] - jll[:, 0]
+    pred = (llr > 0).astype(int)
+
+    p1 = sigmoid(llr)
+    proba = np.vstack([1-p1, p1]).T
+    return pred, llr, proba, enc, nb
+
+# Demo P2P kategori (pakai binning)
+def bin_income(x):
+    if x < 5: return "low"
+    if x < 12: return "mid"
+    return "high"
+
+def bin_dti(x):
+    if x < 0.2: return "low"
+    if x < 0.5: return "mid"
+    return "high"
+
+def bin_history(m):
+    if m < 6: return "short"
+    if m < 24: return "mid"
+    return "long"
+
+raw = [
+    (10, 0.25, 18, "working_capital", 1),
+    (3,  0.60, 4,  "consumption",     0),
+    (7,  0.35, 8,  "education",       1),
+    (4,  0.55, 10, "consumption",     0),
+    (15, 0.15, 36, "investment",      1),
+    (6,  0.70, 5,  "working_capital", 0),
+    (9,  0.40, 30, "working_capital", 1),
+    (2,  0.80, 3,  "consumption",     0),
+]
+
+X = []
+y = []
+for income, dti, hist, purpose, label in raw:
+    X.append([bin_income(income), bin_dti(dti), bin_history(hist), purpose])
+    y.append(label)
+
+X = np.array(X, dtype=object)
+y = np.array(y, dtype=int)
+
+new_apps = np.array([
+    [bin_income(11), bin_dti(0.55), bin_history(10), "working_capital"],
+    [bin_income(14), bin_dti(0.18), bin_history(30), "investment"],
+], dtype=object)
+
+pred, llr, proba, enc, nb = llr_credit_categorical_sklearn(X, y, new_apps, alpha=1.0)
+
+for r, p, s, pr in zip(new_apps, pred, llr, proba):
+    print(f"\nX={r}\nLLR={s:.3f}  pred(GOOD=1)={p}  P(GOOD)={pr[1]:.3f}")
+```
+
+---
+
+## Inti pedagogis yang biasanya “nendang” di kelas
+
+* **LLR = bukti (evidence) dalam satu angka**.
+* **Prior** menggeser baseline log-odds.
+* Setiap fitur/kata memberi kontribusi:
+  (\log\frac{P(\text{fitur}|1)}{P(\text{fitur}|0)}) = “seberapa kuat fitur ini mendukung kelas 1”.
+
+Kalau Bapak mau, saya bisa tambahkan fungsi `explain(text)` yang mengurutkan **top-k kata** penyumbang LLR terbesar (fit untuk demo “Sherlock reasoning”).

@@ -1,0 +1,195 @@
+---
+title: "Materi Kuliah: Naive Bayes Classifier dan Aplikasinya"
+subtitle: "Pengajar Probabilitas dan Statistik"
+
+jupyter: python3
+---
+
+## Pengenalan Naive Bayes Classifier
+
+Dalam kasus deteksi Byes terdapat dua himpunan A dan B, dimana A adalah status klasifikasi keadaan sebenarnya (yang kita tidak tahu) tentang outcome suatu sample 9biasany biner), dan B adalah suatu detekis atau clasifikasi dari sample tersbut. Biasanya B dignakan untuk menyimpulkan A, meskipun tidak selalu benar.
+
+Misalnya $A/A^{C}$ adlah prediksi bakaal stastus sakit/sehat, spam/ham, suka/benci, lancar/ngemplang.
+
+Bisaknay sutau deteksi didasrkan pada n-buah fiture dari satusample. Ini adalah B
+
+$$
+X=(x_1, x_2, ..., x_n)
+$$
+
+misalsnya seorang mahasiwa memiliki fitur (berat, tinggi, usia, jenis kelamin,) maka seoarng mahasiswa spsifik memiliki fitur
+
+$$
+X=(70, 171, 20, L) 
+$$
+
+Bila mencari P(A) itu sukar, lama, atau mahal, sedangkan mencari P(B) lebh b=mudah, cepat, atau murah, bisakah kita meghitung berdaseran \$P(A\|B)\$ Kita tahu dari Bayes
+
+**Naive Bayes Classifier** adalah algoritma klasifikasi probabilistik yang didasarkan pada **Teorema Bayes**. Algoritma ini disebut "Naive" (naif) karena ia mengasumsikan bahwa setiap fitur (variabel penjelas) berkontribusi secara independen terhadap probabilitas kelas target, meskipun di dunia nyata variabel-variabel tersebut mungkin saling berkaitan.
+
+### Konsep Dasar
+
+Secara konseptual, sistem ini bekerja dengan prinsip dasar matematis yang sama, yaitu:
+
+**1. Pembaruan Keyakinan berdasarkan Probabilitas Bersyarat (*Conditional Probability*)** Keputusan diambil dengan mengukur probabilitas bersyarat, yaitu peluang suatu hipotesis atau kejadian A asalkan kejadian observasi B (fitur data) telah diketahui. Pendekatan ini memperlakukan parameter atau kelas yang tidak diketahui sebagai variabel acak yang peluangnya bisa diperbarui seiring masuknya bukti baru.
+
+**2. Penggunaan 3 Komponen Utama Teorema Bayes** Dalam memproses data, model menggabungkan tiga komponen utama:
+
+-   \* **Prior (**$P(A)$): Peluang awal atau tingkat keyakinan sebelum sistem melihat bukti (data/fitur) apa pun.
+
+-   \* **Likelihood (**$P(B|A)$): Seberapa masuk akal (peluang) bukti atau observasi data tersebut muncul jika kita mengasumsikan hipotesis kelasnya benar.
+
+-   \* **Posterior (**$P(A|B)$): Probabilitas akhir yang dihasilkan setelah sistem mengevaluasi bukti/data baru. Distribusi probabilitas *posterior* inilah yang menjadi keluaran sistem untuk menetapkan kelas data.
+
+**3. Asumsi Independensi "Naive"** Kenapa model ini bisa bekerja cepat memproses banyak fitur adalah karena berasumsi bahwa setiap elemen data atau fitur berkontribusi secara independen (*statistically independent*) terhadap probabilitas hasil.
+
+Secara singkat, konsep dasarnya adalah sistem menggunakan probabilitas kejadian di masa lalu (*Prior* dan *Likelihood*) untuk secara rasional memprediksi atau memperbarui status keyakinan akan data baru saat ini (*Posterior*).
+
+------------------------------------------------------------------------
+
+## Contoh Implementasi dengan Python
+
+Berikut adalah tiga contoh sederhana penerapan Naive Bayes untuk didemokan di kelas.
+
+### 1. Spam Detection (Deteksi Email Sampah)
+
+**Konsep:** Salah satu cara merancang penyaring *spam* adalah dengan melihat kemunculan kata-kata spesifik yang sering muncul di email spam. Teorema Bayes digunakan untuk memperbarui probabilitas apakah email tersebut spam setelah sistem melihat kata tertentu.
+
+Kode “starter” yang bisa jadi tugas GitHub: parsing email sederhana + skor kata kunci.
+
+``` python
+import re
+from collections import Counter
+
+def tokenize(text):
+    # Lowercase + ambil kata
+    return re.findall(r"[a-zA-Z0-9]+", text.lower())
+
+def train_keyword_model(emails, labels):
+    """
+    emails: list[str]
+    labels: list[int]  # 1 spam, 0 ham
+    return counts kata per kelas + prior
+    """
+    spam_words = Counter()
+    ham_words = Counter()
+    n_spam = 0
+    n_ham = 0
+
+    for text, y in zip(emails, labels):
+        words = tokenize(text)
+        if y == 1:
+            n_spam += 1
+            spam_words.update(words)
+        else:
+            n_ham += 1
+            ham_words.update(words)
+
+    prior_spam = n_spam / (n_spam + n_ham) if (n_spam + n_ham) else 0.0
+    return {"spam_words": spam_words, "ham_words": ham_words, "prior_spam": prior_spam}
+
+def predict_naive_keyword(text, model, keywords=("gratis", "promo", "diskon"), threshold=1):
+    """
+    SANGAT naive: jika jumlah keyword muncul >= threshold => spam
+    """
+    words = tokenize(text)
+    c = Counter(words)
+    score = sum(c[k] for k in keywords)
+    return 1 if score >= threshold else 0, score
+
+# Demo mini
+emails = [
+    "Gratis diskon besar untuk kamu!",
+    "Rapat jam 10, jangan lupa agenda",
+    "Promo terbatas! gratis ongkir",
+    "Tolong kirim laporan minggu ini"
+]
+labels = [1, 0, 1, 0]
+
+model = train_keyword_model(emails, labels)
+print("Prior spam:", model["prior_spam"])
+
+for e in emails:
+    yhat, score = predict_naive_keyword(e, model)
+    print(yhat, score, "=>", e)
+```
+
+```{python}
+# 1. Definisi Probabilitas Prior (Peluang awal)
+P_Spam = 0.50
+P_Bukan_Spam = 0.50
+
+# 2. Definisi Likelihood (Peluang munculnya kata "refinance")
+P_Refinance_given_Spam = 0.01       # 1%
+P_Refinance_given_Bukan_Spam = 0.00001 # 0.001%
+
+# 3. Hukum Probabilitas Total: Peluang total kata "refinance" muncul
+P_Refinance = (P_Refinance_given_Spam * P_Spam) + (P_Refinance_given_Bukan_Spam * P_Bukan_Spam)
+
+# 4. Teorema Bayes: Probabilitas email adalah Spam JIKA ada kata "refinance" (Posterior)
+P_Spam_given_Refinance = (P_Refinance_given_Spam * P_Spam) / P_Refinance
+
+print(f"Probabilitas email adalah Spam jika mengandung kata 'refinance': {P_Spam_given_Refinance:.4f} atau {P_Spam_given_Refinance*100:.2f}%")
+```
+
+### 2. Sentiment Analysis (Analisis Sentimen)
+
+**Konsep:** Mirip dengan spam filter, analisis sentimen mengklasifikasikan teks (misalnya ulasan pelanggan) menjadi sentimen "Positif" atau "Negatif" berdasarkan keberadaan kata-kata tertentu. Model yang sering digunakan untuk teks berupa hitungan diskrit (kata) adalah distribusi Multinomial.
+
+```{python}
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+# Data latih sederhana (Komentar dan label Sentimen: 1=Positif, 0=Negatif)
+komentar = [
+    "Produk ini sangat bagus dan memuaskan", 
+    "Layanan buruk, saya sangat kecewa",
+    "Bagus sekali, kualitas terbaik",
+    "Jelek dan cepat rusak, tidak direkomendasikan"
+]
+label = [1, 0, 1, 0]
+# Mengubah teks menjadi angka (vektor probabilitas kata)
+vectorizer = CountVectorizer()
+X_train = vectorizer.fit_transform(komentar)
+
+# Melatih model Naive Bayes
+nb_classifier = MultinomialNB()
+nb_classifier.fit(X_train, label)
+
+# Demo Prediksi data baru
+komentar_baru = ["Produknya jelek dan mengecewakan"]
+X_new = vectorizer.transform(komentar_baru)
+prediksi = nb_classifier.predict(X_new)
+
+print("Komentar:", komentar_baru)
+print("Hasil Sentimen:", "Positif" if prediksi == 1 else "Negatif")
+```
+
+### 3. Credit Scoring (Penilaian Risiko Kredit)
+
+**Konsep:** Memprediksi apakah seorang nasabah memiliki risiko kredit yang baik atau buruk (respons biner 0 atau 1) berdasarkan variabel kontinu seperti pendapatan dan usia. Karena datanya kontinu, kita menggunakan **Gaussian Naive Bayes** yang mengasumsikan variabel acak kontinu terdistribusi secara Normal (Gaussian) untuk masing-masing kelas target.
+
+```{python}
+import numpy as np
+from sklearn.naive_bayes import GaussianNB
+
+# Data Latih: [Usia, Pendapatan (dalam juta)]
+# Label: 1 = Kredit Disetujui (Risiko Rendah), 0 = Ditolak (Risiko Tinggi)
+X_nasabah = np.array([
+    [25, 5.0],  [45, 15.0], [35, 12.0], 
+    [22, 3.5],  [50, 20.0], [28, 4.0]
+])
+y_kredit = np.array([0, 1, 1, 0, 1, 0])
+
+# Membuat model Gaussian Naive Bayes (asumsi fitur berdistribusi Normal)
+gnb = GaussianNB()
+gnb.fit(X_nasabah, y_kredit)
+
+# Demo Prediksi Nasabah Baru
+nasabah_baru = np.array([[40, 14.0], [23, 4.5]])
+prediksi_kredit = gnb.predict(nasabah_baru)
+
+for i, nasabah in enumerate(nasabah_baru):
+    status = "Disetujui" if prediksi_kredit[i] == 1 else "Ditolak"
+    print(f"Nasabah {i+1} (Usia: {nasabah[0]}, Pendapatan: {nasabah[1]}jt) -> Prediksi Kredit: {status}")
+```
