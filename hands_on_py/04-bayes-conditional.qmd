@@ -755,22 +755,25 @@ def hitung_naive_bayes(data_baru):
     total_data = len(df)
     p_lancar = len(df[df['Target'] == 'Lancar']) / total_data
     p_gagal = len(df[df['Target'] == 'Gagal']) / total_data
-    
+    print(p_lancar,p_gagal)
     # --- STEP 2: Hitung Likelihood untuk setiap Fitur ---
     # Kita akan menghitung P(Fitur | Lancar) dan P(Fitur | Gagal)
     
     prob_lancar = p_lancar
     prob_gagal = p_gagal
     
-    for kolom, nilai in data_baru.items():
+                                                                            
+                                             for kolom, nilai in data_baru.items():
         # Likelihood untuk Lancar
         count_fitur_lancar = len(df[(df[kolom] == nilai) & (df['Target'] == 'Lancar')])
         likelihood_lancar = count_fitur_lancar / len(df[df['Target'] == 'Lancar'])
+        print(kolom, nilai,count_fitur_lancar, likelihood_lancar, len(df[df['Target'] == 'Lancar']))
         prob_lancar *= likelihood_lancar
         
         # Likelihood untuk Gagal
         count_fitur_gagal = len(df[(df[kolom] == nilai) & (df['Target'] == 'Gagal')])
         likelihood_gagal = count_fitur_gagal / len(df[df['Target'] == 'Gagal'])
+        print(kolom, nilai,count_fitur_gagal,likelihood_gagal, len(df[df['Target'] == 'Gagal']))
         prob_gagal *= likelihood_gagal
     
     # --- STEP 3: Normalisasi (Agar total probabilitas = 100%) ---
