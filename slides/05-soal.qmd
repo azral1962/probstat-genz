@@ -1,0 +1,159 @@
+Berikut adalah 10 soal dasar tentang Variabel Acak (Random Variable) yang dirancang khusus dengan konteks *relatable* untuk Mahasiswa (seperti *gaming, e-commerce, streaming*, dan *sosmed*).
+
+Semua perhitungan di bawah ini didasarkan pada definisi fungsi probabilitas diskrit (PMF), Nilai Harapan / Ekspektasi $E[X] = \sum x P(X=x)$, dan Variansi $Var(X) = E[X^2] - (E[X])^2$ sesuai dengan literatur probabilitas.
+
+------------------------------------------------------------------------
+
+## **Rumus Sakti (Cheat Sheet) yang Dipakai:**
+
+1.  **Ekspektasi (Rata-rata/Mean):** $E[X] = \sum x \cdot P(x)$
+2.  **Ekspektasi Kuadrat:** $E[X^2] = \sum x^2 \cdot P(x)$
+3.  **Variansi (Risiko/Sebaran):** $Var(X) = E[X^2] - (E[X])^2$
+
+------------------------------------------------------------------------
+
+# **10 Soal Random Variable** 
+
+## **Soal 1: Tarikan Gacha Game (SSR Character)**
+
+Kamu sedang *pull gacha* di Genshin Impact. Misalkan $X$ adalah jumlah karakter SSR yang kamu dapat dalam 1 kali tarikan spesial. Peluang dapat SSR ($X=1$) adalah 0,2 (20%) dan peluang dapat karakter ampas/biasa ($X=0$) adalah 0,8 (80%).
+
+**Tanya:** Hitung Ekspektasi $E[X]$ dan Variansinya $Var(X)$!
+
+**Solusi:** 
+
+- $E[X] = (0 \times 0,8) + (1 \times 0,2) = 0,2$ 
+
+- $E[X^2] = (0^2 \times 0,8) + (1^2 \times 0,2) = 0,2$ 
+
+- $Var(X) = 0,2 - (0,2)^2 = 0,2 - 0,04 = 0,16$
+
+## **Soal 2: Binge-Watching Netflix**
+
+Variabel acak $X$ adalah jumlah episode drakor/series Netflix yang kamu tonton tanpa jeda di akhir pekan. Distribusi peluangnya (PMF): $P(1) = 0,1$ \| $P(2) = 0,3$ \| $P(3) = 0,4$ \| $P(4) = 0,2$.
+
+**Tanya:** Berapa rata-rata ekspektasi episode yang kamu tonton dan variansinya?
+
+**Solusi:** 
+
+- $E[X] = (1)(0,1) + (2)(0,3) + (3)(0,4) + (4)(0,2) = 0,1 + 0,6 + 1,2 + 0,8 = 2,7$ episode. 
+
+- $E[X^2] = (1^2)(0,1) + (2^2)(0,3) + (3^2)(0,4) + (4^2)(0,2) = 0,1 + 1,2 + 3,6 + 3,2 = 8,1$ 
+
+- $Var(X) = 8,1 - (2,7)^2 = 8,1 - 7,29 = 0,81$
+
+## **Soal 3: Top-up E-Wallet Per Minggu**
+
+Variabel acak $X$ menyatakan nominal top-up Gopay/OVO kamu dalam satuan "Ratusan Ribu Rupiah" setiap minggu. Distribusinya: $P(0) = 0,2$ (lagi bokek) \| $P(1) = 0,5$ (standar) \| $P(2) = 0,3$ (lagi sultan).
+
+**Tanya:** Hitung Ekspektasi nominal top-up dan Variansinya!
+
+**Solusi:** 
+
+- $E[X] = (0)(0,2) + (1)(0,5) + (2)(0,3) = 0 + 0,5 + 0,6 = 1,1$ (Artinya Rp 110.000). 
+
+- $E[X^2] = (0)(0,2) + (1)(0,5) + (4)(0,3) = 0 + 0,5 + 1,2 = 1,7$ 
+
+- $Var(X) = 1,7 - (1,1)^2 = 1,7 - 1,21 = 0,49$
+
+## **Soal 4: FYP TikTok Engagement (Transformasi Linear)**
+
+Skor *engagement* video TikTok kamu dilambangkan dengan $X$ (Skala 1-3). $P(1)=0,3$ \| $P(2)=0,5$ \| $P(3)=0,2$. Ternyata, algoritma TikTok memberikan *Views* aktual dengan rumus $Y = 1000X$.
+
+**Tanya:** Hitung Ekspektasi Views $E[Y]$ dan Variansinya $Var(Y)$ menggunakan aturan linear!
+
+**Solusi:** Cari dulu nilai $X$: 
+
+- $E[X] = (1)(0,3) + (2)(0,5) + (3)(0,2) = 0,3 + 1,0 + 0,6 = 1,9$ 
+
+- $E[X^2] = (1)(0,3) + (4)(0,5) + (9)(0,2) = 0,3 + 2,0 + 1,8 = 4,1$ 
+
+- $Var(X) = 4,1 - (1,9)^2 = 4,1 - 3,61 = 0,49$ 
+
+- Transformasi ke $Y$: \* $E[Y] = 1000 \times E[X] = 1000 \times 1,9 = 1.900$ Views. 
+
+- $Var(Y) = (1000)^2 \times Var(X) = 1.000.000 \times 0,49 = 490.000$.
+
+## **Soal 5: Rating Bintang 5 Thrfting Shopee**
+
+Kamu jualan baju *thrift* di e-commerce. Variabel $X$ mewakili rating bintang dari pembeli. $P(1)=0,05$ \| $P(2)=0,05$ \| $P(3)=0,1$ \| $P(4)=0,3$ \| $P(5)=0,5$.
+
+**Tanya:** Tentukan rata-rata (Ekspektasi) rating tokomu dan Variansinya!
+
+**Solusi:** 
+
+- $E[X] = 1(0,05) + 2(0,05) + 3(0,1) + 4(0,3) + 5(0,5) = 0,05 + 0,1 + 0,3 + 1,2 + 2,5 = 4,15$ Bintang. 
+
+- $E[X^2] = 1(0,05) + 4(0,05) + 9(0,1) + 16(0,3) + 25(0,5) = 0,05 + 0,2 + 0,9 + 4,8 + 12,5 = 18,45$ 
+
+- $Var(X) = 18,45 - (4,15)^2 = 18,45 - 17,2225 = 1,2275$
+
+## **Soal 6: War Tiket Konser / Flash Sale**
+
+Waktu ikut *Flash Sale* barang murah, suksesnya kecil sekali. Jika berhasil beli ($X=10$, anggap untung 10 juta nilai *hype*-nya), peluangnya hanya $0,01$. Jika gagal *checkout* ($X=-1$, rugi waktu/kuota), peluangnya $0,99$.
+
+**Tanya:** Berapa Ekspektasi $E[X]$ dan Variansi $Var(X)$ dari ikut war ini?
+
+**Solusi:** 
+
+- $E[X] = (10 \times 0,01) + (-1 \times 0,99) = 0,1 - 0,99 = -0,89$ (Artinya, secara statistik ini bikin rugi!).
+
+- $E[X^2] = (100 \times 0,01) + (1 \times 0,99) = 1 + 0,99 = 1,99$ 
+
+- $Var(X) = 1,99 - (-0,89)^2 = 1,99 - 0,7921 = 1,1979$
+
+## **Soal 7: Winstreak Valorant / Mobile Legends**
+
+Variabel $X$ menunjukkan berapa jumlah kemenangan beruntun (*winstreak*) yang kamu dapat malam ini sebelum akhirnya ketemu *troll team* dan kalah. $P(0)=0,4$ (langsung kalah) \| $P(1)=0,3$ \| $P(2)=0,2$ \| $P(3)=0,1$.
+
+**Tanya:** Hitung ekspektasi winstreak dan variansinya!
+
+**Solusi:**
+
+- $E[X] = 0(0,4) + 1(0,3) + 2(0,2) + 3(0,1) = 0 + 0,3 + 0,4 + 0,3 = 1,0$ match. 
+
+- $E[X^2] = 0 + 1(0,3) + 4(0,2) + 9(0,1) = 0 + 0,3 + 0,8 + 0,9 = 2,0$ 
+
+- $Var(X) = 2,0 - (1,0)^2 = 1,0$
+
+## **Soal 8: Skip Lagu di Spotify**
+
+Berapa kali kamu nge-*skip* lagu di *playlist* sampai nemu *vibe* yang pas? $X$ adalah jumlah lagu yang diskip. $P(1) = 0,5$ \| $P(2) = 0,25$ \| $P(3) = 0,125$ \| $P(4) = 0,125$.
+
+**Tanya:** Hitung $E[X]$ dan $Var(X)$!
+
+**Solusi:** 
+
+- $E[X] = 1(0,5) + 2(0,25) + 3(0,125) + 4(0,125) = 0,5 + 0,5 + 0,375 + 0,5 = 1,875$ kali skip.
+
+- $E[X^2] = 1(0,5) + 4(0,25) + 9(0,125) + 16(0,125) = 0,5 + 1,0 + 1,125 + 2,0 = 4,625$ 
+
+- $Var(X) = 4,625 - (1,875)^2 = 4,625 - 3,515625 = 1,109375$
+
+## **Soal 9: Baterai HP (Screen-On Time) - Model Seragam**
+
+Jumlah jam $X$ yang kamu habiskan untuk *scrolling* IG/Twitter per hari diasumsikan berdistribusi seragam (*Uniform*) pada angka 4, 5, 6, 7, atau 8 jam. Karena ada 5 kemungkinan yang setara, masing-masing memiliki peluang $P(X=x) = 0,2$.
+
+**Tanya:** Hitung Ekspektasi SOT kamu dan Variansinya!
+
+**Solusi:**
+
+- $E[X] = (4+5+6+7+8) \times 0,2 = 30 \times 0,2 = 6$ jam. 
+
+- $E[X^2] = (16+25+36+49+64) \times 0,2 = 190 \times 0,2 = 38$ 
+
+- $Var(X) = 38 - (6)^2 = 38 - 36 = 2$
+
+## **Soal 10: Waktu Tunggu Balasan Chat (Di-Ghosting)**
+
+Variabel $X$ adalah waktu tunggu (dalam jam, dibulatkan) balasan chat dari gebetan. $P(0) = 0,4$ (fast respon) \| $P(1) = 0,3$ (standar) \| $P(2) = 0,2$ (sibuk) \| $P(24) = 0,1$ (*di-ghosting* seharian).
+
+**Tanya:** Hitung $E[X]$ dan $Var(X)$. Perhatikan bagaimana 1 pencilan ekstrim merusak rata-rata!
+
+**Solusi:**
+
+- $E[X] = (0)(0,4) + (1)(0,3) + (2)(0,2) + (24)(0,1) = 0 + 0,3 + 0,4 + 2,4 = 3,1$ jam.
+
+- $E[X^2] = (0^2)(0,4) + (1^2)(0,3) + (2^2)(0,2) + (24^2)(0,1) = 0 + 0,3 + 0,8 + (576 \times 0,1) = 58,7$
+
+- $Var(X) = 58,7 - (3,1)^2 = 58,7 - 9,61 = 49,09$ *(Variansinya sangat besar karena adanya probabilitas 10% di-ghosting 24 jam!)*
