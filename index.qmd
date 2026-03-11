@@ -3,7 +3,7 @@ title: "Selamat Datang"
 ---
 
 
-Buku ini menerapkan pendekatan Python untuk menjelaskan konsep Probabilitas dan Statistika
+Buku ini menerapkan pendekatan Python untuk menjelaskan konsep Probabilitas dan Statistika.
 
 ## Cara pakai buku ini
 
