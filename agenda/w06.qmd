@@ -99,8 +99,12 @@ Berikut adalah 15 soal yang diambil dari referensi *Desain Kurikulum Statistika 
 ### **A. Pertanyaan Konseptual**
 
 **1. Soal:** Apa syarat-syarat utama agar sebuah eksperimen dapat dimodelkan dengan distribusi Binomial?
+
+{{<pause>}}
+
 *   **Solusi:** Eksperimen terdiri dari $n$ percobaan identik, setiap percobaan hanya memiliki dua hasil (sukses/gagal), probabilitas sukses $p$ konstan untuk setiap percobaan, dan setiap percobaan saling independen.
 
+{{<pagebreak>}}
 **2. Soal:** Mengapa distribusi Poisson sering disebut sebagai distribusi untuk kejadian langka?
 *   **Solusi:** Karena Poisson sering diturunkan dari distribusi Binomial di mana jumlah percobaan $n$ sangat besar (menuju tak hingga) namun probabilitas sukses $p$ sangat kecil (menuju nol), sehingga kejadian "sukses" relatif jarang terjadi dibanding total kemungkinan.
 

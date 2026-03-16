@@ -135,7 +135,7 @@ Mahasiswa bertindak sebagai Game Designer. Mereka harus merancang sistem reward 
 
 11. **Soal:** Tulis skrip Python untuk menghitung mean dan variansi dari distribusi probabilitas diskrit yang diberikan dalam bentuk dictionary.
     - **Solusi:**
-```python
+```{python}
 dist = {1: 0.2, 2: 0.5, 3: 0.3} # Value: Prob  
 mean = sum(x * p for x, p in dist.items())  
 variance = sum((x - mean)**2 * p for x, p in dist.items())  
@@ -144,7 +144,7 @@ print(f"Mean: {mean}, Variance: {variance}")
 
 12. **Soal:** Gunakan `scipy.stats` untuk menghasilkan 1.000 sampel dari variabel acak kustom dan bandingkan rata-rata sampelnya dengan nilai harapan teoretis.
     - **Solusi:**
-```python
+```{python}
 from scipy.stats import rv_discrete  
 xk = [10, 11, 12]; pk = [0.2, 0.5, 0.3]  
 cust_dist = rv_discrete(name='cust', values=(xk, pk))  
@@ -154,7 +154,7 @@ print(f"Sample Mean: {samples.mean()}, Theory Mean: {cust_dist.mean()}")
 
 13. **Soal:** Plot fungsi massa probabilitas (PMF) dan CDF dari sebuah variabel acak diskrit menggunakan step plot di matplotlib.
     - **Solusi:**
-```python
+```{python}
 import matplotlib.pyplot as plt  
 import numpy as np  
 x = [10, 11, 12]; p = [0.2, 0.5, 0.3]  
@@ -166,7 +166,7 @@ plt.legend(); plt.show()
 
 14. **Soal:** Implementasikan fungsi untuk menghitung variansi menggunakan rumus $E[X^2] - (E[X])^2$.
     - **Solusi:**
-```python
+```{python}
 def calc_variance(values, probs):  
     ex = sum(v * p for v, p in zip(values, probs))  
     ex2 = sum((v**2) * p for v, p in zip(values, probs))  
@@ -175,11 +175,13 @@ def calc_variance(values, probs):
 
 15. **Soal:** Buat simulasi pelemparan dadu 10.000 kali dan tunjukkan secara visual bagaimana rata-rata kumulatifnya konvergen ke 3,5.
     - **Solusi:**
-```python
+```{python}
 import numpy as np; import matplotlib.pyplot as plt  
-rolls = np.random.randint(1, 7, 10000)  
-avgs = np.cumsum(rolls) / np.arange(1, 10001)  
-plt.plot(avgs); plt.axhline(3.5, color='r'); plt.show()  
+n = 100
+rolls = np.random.randint(1, 7, n)  
+print(rolls,"\n")
+avgs = np.cumsum(rolls) / np.arange(1, n+1)  
+# plt.plot(avgs); plt.axhline(3.5, color='r'); # plt.show()  
 ```
 
 

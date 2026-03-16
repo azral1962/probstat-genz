@@ -1,0 +1,5 @@
+---
+title: "Minggu 06: Variabel Acak Diskrit"
+subtitle: "Binomial Distribution, Poisson Distribution"
+---
+{{< include ../agenda/w06.qmd >}}
