@@ -1,0 +1,60 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Minggu 06: Distribusi Khusus Diskrit\"\n",
+        "subttle: \"Antrian M/M/1\"\n",
+        "---"
+      ],
+      "id": "33c63031"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import numpy as np\n",
+        "\n",
+        "arrival_rate = 2\n",
+        "service_rate = 3\n",
+        "\n",
+        "n = 1000\n",
+        "\n",
+        "interarrival = np.random.exponential(1/arrival_rate, n)\n",
+        "service_time = np.random.exponential(1/service_rate, n)\n",
+        "\n",
+        "arrival_time = np.cumsum(interarrival)\n",
+        "\n",
+        "start_service = np.zeros(n)\n",
+        "finish_service = np.zeros(n)\n",
+        "\n",
+        "for i in range(n):\n",
+        "    if i == 0:\n",
+        "        start_service[i] = arrival_time[i]\n",
+        "    else:\n",
+        "        start_service[i] = max(arrival_time[i], finish_service[i-1])\n",
+        "    \n",
+        "    finish_service[i] = start_service[i] + service_time[i]\n",
+        "\n",
+        "waiting_time = start_service - arrival_time\n",
+        "\n",
+        "print(\"Average waiting time:\", np.mean(waiting_time))"
+      ],
+      "id": "33421f9d",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\Armein Z. R. Langi\\AppData\\Local\\Python\\pythoncore-3.14-64\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

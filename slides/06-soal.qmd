@@ -1,0 +1,187 @@
+---
+title: "Problem Set 4: Probabilitas & Statistik"
+subtitle: "Distribusi Variabel Acak (Uniform, Poisson, Binomial, Geometrik)"
+author: "Solusi Pembahasan"
+
+---
+
+# Pendahuluan
+
+## Soal 1: Distribusi Seragam Diskrit
+
+**Soal:** Misalkan $X$ adalah *random variable* berdistribusi seragam dengan rentang bilangan bulat 0 sampai 9. Tentukan mean, variansi, dan standar deviasi dari $Y = 5X$ dan bandingkan dengan $X$!
+
+
+**Solusi:**
+Karena $X \sim U(0,9)$, maka:
+$$E(X) = \frac{9 + 0}{2} = 4,5$$
+$$\sigma_X^2 = \frac{(9 - 0 + 1)^2 - 1}{12} = \frac{100 - 1}{12} = 8,25$$
+$$\sigma_X = \sqrt{8,25} = 2,87$$
+
+
+Untuk $Y = 5X$, maka fungsi transformasinya adalah:
+$$E(Y) = 5 \cdot E(X) = 5 \cdot 4,5 = 22,5$$
+$$\sigma_Y^2 = 5^2 \cdot \sigma_X^2 = 25 \cdot 8,25 = 206,25$$
+$$\sigma_Y = 14,36$$
+
+---
+
+## Soal 2: Distribusi Poisson (Panggilan Telepon)
+
+**Soal:** Panggilan telepon datang dengan rata-rata 10 panggilan per jam ($\lambda = 10$).
+
+
+**Solusi:**
+**a. Tepat 5 panggilan dalam 1 jam ($t=1$):**
+
+
+$$P(X=5) = \frac{e^{-10} 10^5}{5!} = 0,037833$$
+
+**b. 3 atau kurang panggilan dalam 1 jam:**
+
+
+$$P(X \le 3) = \sum_{x=0}^{3} \frac{e^{-10} 10^x}{x!} = 0,010336$$
+
+**c. Tepat 15 panggilan dalam 2 jam ($\lambda t = 20$):**
+
+
+$$P(X=15) = \frac{e^{-20} 20^{15}}{15!} = 0,051649$$
+
+**d. Tepat 5 panggilan dalam 30 menit ($\lambda t = 5$):**
+
+
+$$P(X=5) = \frac{e^{-5} 5^5}{5!} = 0,175467$$
+
+---
+
+## Soal 3: Poisson & Bernoulli (Cacat Panel Mobil)
+
+**Soal:** Cacat panel plastik berdistribusi Poisson dengan mean 0,05 cacat/$ft^2$. Interior mobil mengandung 10 $ft^2$.
+
+
+**Solusi:** Rata-rata per mobil $\lambda = 0,05 \times 10 = 0,5$.
+**a. Probabilitas interior tanpa cacat ($X=0$):**
+
+$$P(X=0) = \frac{e^{-0,5} 0,5^0}{0!} = 0,60653$$
+
+**b. Jika 10 mobil dijual, probabilitas tidak ada yang cacat ($Y=0$, Binomial):**
+
+$$P(Y=0) = \binom{10}{0} (0,60653)^0 (1-0,60653)^{10} = 0,006738$$
+
+**c. Paling banyak 1 mobil bercacat dari 10 mobil ($Y \le 1$):**
+
+$$P(Y \le 1) = \sum_{y=0}^{1} b(y; 10, 1 - 0,60653) = 0,050448$$
+
+---
+
+## Soal 4: Distribusi Binomial (Data Center)
+
+**Soal:** Bank memiliki 5 infrastruktur *hardware* di 5 *Data Center*. Probabilitas bekerja baik adalah $p=0,8$. $X$ merepresentasikan jumlah *Data     Center* yang bekerja dengan baik.
+
+**Solusi PMF & Evaluasi:**
+$P(X=x) = \binom{5}{x} (0,8)^x (0,2)^{5-x}$
+
+| $x$ | $f(x)$ |
+|-----|--------|
+| 0   | 0,00032|
+| 1   | 0,0064 |
+| 2   | 0,0512 |
+| 3   | 0,2048 |
+| 4   | 0,4096 |
+| 5   | 0,32768|
+
+**Median ($M$):** $M=3$, karena $P(X \le 3) \approx 0,5$.
+**Probabilitas down total:** $P(X=0) = 0,00032$.
+**Minimal 1 bekerja baik:** $P(X \ge 1) = 1 - P(X=0) = 0,99968$.
+
+---
+
+## Soal 5: Distribusi Geometrik (Umur Komponen)
+
+**Soal:** Umur komponen $L$ dalam hari, kegagalan di hari ke-$n$ mengikuti distribusi geometrik $P[L=n] = (1-b)b^n$, dengan $b=0,6$.
+
+
+**Solusi:**
+**c. Median ($M$):**
+
+ $M=0$.
+**d. Ekspektasi (Mean) dari $L$:**
+
+$$E(L) = \sum_{n=0}^{\infty} (1-b)b^n = \frac{1-b}{1-b} = 1$$ *(Perbaikan perhitungan sumber: bergantung pada definisi indeks batas mula distribusi)*
+
+**e. Peluang tidak terjadi *failure* sebelum hari ke-$i$ ($F_i$):**
+
+$$F_i = \sum_{l=i}^{\infty} (1-b)b^l = (1-b) \frac{b^i}{1-b} = b^i$$
+Jadi, $F_i = b^i$ untuk $i = 1,2, \dots$
+
+---
+
+## Soal 6 & 7: Penentuan Range (Ruang Sampel)
+
+**Soal 6:**
+*   **Timbangan elektrik (maks 5 digit):**
+{{< pause >}}
+
+ $R_X = \{0, 1, 2, \dots, 99999\}$
+*   **Sample 5 part dari 500 (10 cacat):**
+{{< pause >}}
+
+ $R_X = \{0, 1, 2, 3, 4, 5\}$
+*   **Ambil acak sampai nemu yang cacat (total 500, cacat 10):**
+
+ $R_X = \{1, 2, \dots, 491\}$ *(karena jumlah part baik maksimal ada 490, tarikan ke 491 pasti mendapat cacat)*.
+
+**Soal 7 (Sistem Komunikasi Bisnis):**
+4 jalur eksternal, peluang sedang digunakan $p=0,8$.
+
+ Mengikuti proses Bernoulli $n=4$:
+| Jumlah Digunakan ($x$) | $f(x)$ |
+|:---:|:---|
+| 0 | 0,0016 |
+| 1 | 0,0256 |
+| 2 | 0,1536 |
+| 3 | 0,4096 |
+| 4 | 0,4096 |
+
+---
+
+## Soal 8: Distribusi Binomial (Uji Wafer)
+
+**Soal:** 3 wafer diuji. Peluang lolos adalah $p=0,8$.
+
+**Solusi:** Distribusi Binomial dengan $n=3$, $p=0,8$.
+$$f(x) = \binom{3}{x} (0,8)^x (0,2)^{3-x}$$
+
+| $x$ | $f(x)$ (PMF) | $F(x)$ (CMF) |
+|-----|-------------|-------------|
+| 0   | 0,008       | 0,008       |
+| 1   | 0,096       | 0,104       |
+| 2   | 0,384       | 0,488       |
+| 3   | 0,512       | 1,000       |
+
+**Mean ($E[X]$):** $\mu = np = 3 \times 0,8 = 2,4$
+**Variansi ($Var(X)$):** $\sigma^2 = npq = 3 \times 0,8 \times 0,2 = 0,48$
+
+---
+
+## Soal 9 & 10: Poisson & Binomial Lanjut
+
+**Soal 9 (Kesalahan Ketik - Poisson):** 
+
+Mean $\lambda = 0,01$ per halaman. Tinjau $t=100$ halaman $\implies \lambda_{new} = 1$. Probabilitas $\le 3$ kesalahan:
+$$P(X \le 3) = \sum_{x=0}^{3} \frac{e^{-1} 1^x}{x!} \approx 0,981$$
+
+
+**Soal 10 (Lampu Sinyal - Binomial):**
+
+Peluang hijau $p=0,2$. Tiap percobaan independen.
+
+**a. Dalam 5 hari ($n=5$), hijau tepat 1 kali:**
+{{< pause >}}
+$$P(X=1) = b(1; 5; 0,2) = 0,4096$$
+**b. Dalam 20 hari ($n=20$), hijau tepat 4 kali:**
+{{< pause >}}
+$$P(X=4) = b(4; 20; 0,2) = 0,2182$$
+**c. Dalam 20 minggu ($n = 140$ hari), hijau persis 4 kali:**
+{{< pause >}}
+$$P(X=4) = b(4; 140; 0,2) = 1,6214 \times 10^{-9}$$

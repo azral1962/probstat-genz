@@ -13,9 +13,8 @@ format:
     include-in-header: "custom.typ"
     commands: [small-cite]
 execute: 
-  echo: false
+  echo: true
   warning: false
-bibliography: [static/references.bib]
 brand:
   typography: 
     fonts: 

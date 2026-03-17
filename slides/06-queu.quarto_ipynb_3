@@ -1,0 +1,265 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Minggu 06: Distribusi Khusus Diskrit\"\n",
+        "subttle: \"Antrian M/M/1\"\n",
+        "---\n",
+        "\n",
+        "# Kuliah 5\n",
+        "\n",
+        "## Beberapa soal\n",
+        "\n",
+        "11. **Soal:** Tulis skrip Python untuk menghitung mean dan variansi dari distribusi probabilitas diskrit yang diberikan dalam bentuk dictionary.\n",
+        "    - **Solusi:**"
+      ],
+      "id": "b6868646"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "dist = {1: 0.2, 2: 0.5, 3: 0.3} # Value: Prob  \n",
+        "mean = sum(x * p for x, p in dist.items())  \n",
+        "variance = sum((x - mean)**2 * p for x, p in dist.items())  \n",
+        "print(f\"Mean: {mean}, Variance: {variance}\")  "
+      ],
+      "id": "01a2f078",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "12. **Soal:** Gunakan `scipy.stats` untuk menghasilkan 1.000 sampel dari variabel acak kustom dan bandingkan rata-rata sampelnya dengan nilai harapan teoretis.\n",
+        "    - **Solusi:**"
+      ],
+      "id": "f90e5e54"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from scipy.stats import rv_discrete  \n",
+        "xk = [10, 11, 12]; pk = [0.2, 0.5, 0.3]  \n",
+        "cust_dist = rv_discrete(name='cust', values=(xk, pk))  \n",
+        "samples = cust_dist.rvs(size=1000)  \n",
+        "print(f\"Sample Mean: {samples.mean()}, Theory Mean: {cust_dist.mean()}\")  "
+      ],
+      "id": "5ee4e5f7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "13. **Soal:** Plot fungsi massa probabilitas (PMF) dan CDF dari sebuah variabel acak diskrit menggunakan step plot di matplotlib.\n",
+        "    - **Solusi:**"
+      ],
+      "id": "7974ddcc"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import matplotlib.pyplot as plt  \n",
+        "import numpy as np  \n",
+        "x = [10, 11, 12]; p = [0.2, 0.5, 0.3]  \n",
+        "cdf = np.cumsum(p)  \n",
+        "plt.step(x, cdf, where='post', label='CDF')  \n",
+        "plt.bar(x, p, label='PMF', alpha=0.5)  \n",
+        "plt.legend(); plt.show()  "
+      ],
+      "id": "232b2d3c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "14. **Soal:** Implementasikan fungsi untuk menghitung variansi menggunakan rumus $E[X^2] - (E[X])^2$.\n",
+        "    - **Solusi:**"
+      ],
+      "id": "16ef7408"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "def calc_variance(values, probs):  \n",
+        "    ex = sum(v * p for v, p in zip(values, probs))  \n",
+        "    ex2 = sum((v**2) * p for v, p in zip(values, probs))  \n",
+        "    return ex2 - ex**2  "
+      ],
+      "id": "6be4a021",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "15. **Soal:** Buat simulasi pelemparan dadu 10.000 kali dan tunjukkan secara visual bagaimana rata-rata kumulatifnya konvergen ke 3,5.\n",
+        "    - **Solusi:**"
+      ],
+      "id": "368c955c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import numpy as np; import matplotlib.pyplot as plt  \n",
+        "n = 100\n",
+        "rolls = np.random.randint(1, 7, n)  \n",
+        "print(rolls,\"\\n\")\n",
+        "avgs = np.cumsum(rolls) / np.arange(1, n+1)  \n",
+        "# plt.plot(avgs); plt.axhline(3.5, color='r'); # plt.show()  "
+      ],
+      "id": "626744bb",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# Persiapan\n",
+        "\n",
+        "## **Blok 1: Persiapan Library**"
+      ],
+      "id": "99c31ecf"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "import scipy.stats as stats\n",
+        "from scipy.stats import binom, poisson\n",
+        "\n",
+        "print(\"Siap untuk komputasi Minggu 06!\") "
+      ],
+      "id": "0785a298",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## **Blok 2: Visualisasi Distribusi Binomial (\"Visualizing Luck\")**"
+      ],
+      "id": "235d508d"
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Kode ini memplot probabilitas jumlah \"sukses\" (k) dari bereksperimen sebanyak 20 kali ($n=20$) dengan peluang sukses 50% ($p=0.5$).\n",
+        "\n",
+        "```python\n",
+        "# Plot probabilitas sukses 0 hingga 20 dalam eksperimen n=20 dan p=0.5\n",
+        "x = range(21)\n",
+        "plt.bar(x, binom.pmf(x, 20, 0.5))\n",
+        "plt.title(\"Distribusi Binomial (n=20, p=0.5)\")\n",
+        "plt.xlabel(\"Jumlah Sukses\")\n",
+        "plt.ylabel(\"Probabilitas\")\n",
+        "plt.show()\n",
+        "```\n",
+        "\n",
+        "## **Blok 3: Visualisasi Perubahan Bentuk Kurva Binomial**\n",
+        "Melihat bagaimana distribusi bergeser seiring dengan berubahnya nilai probabilitas sukses ($p$).\n",
+        "```python\n",
+        "n = 20\n",
+        "for p in [0.1, 0.5, 0.9]:\n",
+        "    plt.plot(binom.pmf(range(n+1), n, p), label=f'p={p}')\n",
+        "plt.legend()\n",
+        "plt.title(\"Perubahan Bentuk Distribusi Binomial\")\n",
+        "plt.show()\n",
+        "```\n",
+        "\n",
+        "## **Blok 4: Membuktikan Hukum Kejadian Jarang (Binomial vs Poisson)**\n",
+        "Skenario inspeksi pabrik: ada 1% kemungkinan produk cacat ($p=0.01$). Jika kita mengambil sampel 100 unit ($n=100$), berapa peluang tepat menemukan 2 barang cacat? Mari kita bandingkan perhitungan akurat Binomial vs pendekatan Poisson.\n",
+        "```python\n",
+        "n, p = 100, 0.01\n",
+        "mu = n * p # Rumus hukum kejadian jarang: lambda (mu) = n * p\n",
+        "\n",
+        "print(f\"Pendekatan Binomial P(X=2): {binom.pmf(2, n, p)}\")\n",
+        "print(f\"Pendekatan Poisson  P(X=2): {poisson.pmf(2, mu)}\")\n",
+        "# Hasilnya akan sangat mirip, membuktikan bahwa Poisson bisa menaksir Binomial dengan baik jika n besar dan p kecil.\n",
+        "```\n",
+        "\n",
+        "\n",
+        "## **Blok 5: Simulasi Trafik Jaringan (\"The Traffic Controller\")**\n",
+        "Mensimulasikan kedatangan lalu lintas jaringan menggunakan pemodelan Poisson untuk memonitor trafik normal dan memprediksi lonjakan (*event*).\n",
+        "```python\n",
+        "# Mensimulasikan data trafik jaringan selama 1000 jam, dengan rata-rata 5 event/jam\n",
+        "simulasi_trafik = np.random.poisson(lam=5, size=1000)\n",
+        "\n",
+        "print(f\"Rata-rata trafik hasil simulasi: {np.mean(simulasi_trafik)}\")\n",
+        "\n",
+        "# Menghitung peluang server mengalami LEBIH DARI 10 event dalam 1 jam (indikasi anomali)\n",
+        "# Menggunakan Cumulative Distribution Function (CDF)\n",
+        "prob_overload = 1 - poisson.cdf(10, 5)\n",
+        "print(f\"Probabilitas trafik melebihi 10 event/jam: {prob_overload:.5f}\")\n",
+        "```\n",
+        "\n",
+        "## Antrian"
+      ],
+      "id": "ab354e9b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import numpy as np\n",
+        "\n",
+        "arrival_rate = 2\n",
+        "service_rate = 3\n",
+        "\n",
+        "n = 1000\n",
+        "\n",
+        "interarrival = np.random.exponential(1/arrival_rate, n)\n",
+        "service_time = np.random.exponential(1/service_rate, n)\n",
+        "\n",
+        "arrival_time = np.cumsum(interarrival)\n",
+        "\n",
+        "start_service = np.zeros(n)\n",
+        "finish_service = np.zeros(n)\n",
+        "\n",
+        "for i in range(n):\n",
+        "    if i == 0:\n",
+        "        start_service[i] = arrival_time[i]\n",
+        "    else:\n",
+        "        start_service[i] = max(arrival_time[i], finish_service[i-1])\n",
+        "    \n",
+        "    finish_service[i] = start_service[i] + service_time[i]\n",
+        "\n",
+        "waiting_time = start_service - arrival_time\n",
+        "\n",
+        "print(\"Average waiting time:\", np.mean(waiting_time))"
+      ],
+      "id": "e69ab017",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\Armein Z. R. Langi\\AppData\\Local\\Python\\pythoncore-3.14-64\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

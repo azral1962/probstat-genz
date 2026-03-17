@@ -2,6 +2,96 @@
 title: "Minggu 06: Variabel Acak Diskrit"
 subtitle: "Binomial Distribution, Poisson Distribution"
 ---
+
+11. **Soal:** Tulis skrip Python untuk menghitung mean dan variansi dari distribusi probabilitas diskrit yang diberikan dalam bentuk dictionary.
+    - **Solusi:**
+```{python}
+dist = {1: 0.2, 2: 0.5, 3: 0.3} # Value: Prob  
+mean = sum(x * p for x, p in dist.items())  
+variance = sum((x - mean)**2 * p for x, p in dist.items())  
+print(f"Mean: {mean}, Variance: {variance}")  
+```
+```{python}
+import numpy as np
+
+data = np.array([1, 2, 1.5, 1, 3, 2, 2, 2, 4])
+hist_counts, bin_edges = np.histogram(data, bins=[0, 1, 2, 3, 4, 5])
+
+print("Counts:", hist_counts)
+print("Bin Edges:", bin_edges)
+
+
+```
+12. **Soal:** Gunakan `scipy.stats` untuk menghasilkan 1.000 sampel dari variabel acak kustom dan bandingkan rata-rata sampelnya dengan nilai harapan teoretis.
+    - **Solusi:**
+```{python}
+from scipy.stats import rv_discrete  
+xk = [10, 11, 12]; pk = [0.2, 0.5, 0.3]  
+cust_dist = rv_discrete(name='cust', values=(xk, pk))  
+samples = cust_dist.rvs(size=100) 
+print("Samples:", samples)
+print(f"Sample Mean: {samples.mean()}, Theory Mean: {cust_dist.mean()}")  
+
+
+import matplotlib.pyplot as plt  
+import numpy as np  
+arr=np.array(samples)
+x, y = np.unique(arr, return_counts=True)
+histog , binedg = np.histogram(arr, bins=[9.5, 10.5, 11.5, 12.5], range=None, density=True, weights=None)
+print(histog)
+
+plt.bar(x, y/len(samples), label='PMF', alpha=0.5)  
+plt.legend(); plt.show()
+
+```
+```{python}
+import numpy as np
+
+arr = np.array([1, 2, 3, 2, 4, 1, 3, 4, 4, 4])
+
+# Get the unique values and their counts
+unique_values, counts = np.unique(arr, return_counts=True)
+print(unique_values)
+print(counts)
+# Print the results
+for value, count in zip(unique_values, counts):
+    print(f"{value} occurs {count} times")
+```
+
+13. **Soal:** Plot fungsi massa probabilitas (PMF) dan CDF dari sebuah variabel acak diskrit menggunakan step plot di matplotlib.
+    - **Solusi:**
+```{python}
+import matplotlib.pyplot as plt  
+import numpy as np  
+x = [10, 11, 12]; p = [0.2, 0.5, 0.3]  
+cdf = np.cumsum(p)  
+plt.step(x, cdf, where='post', label='CDF')  
+plt.bar(x, p, label='PMF', alpha=0.5)  
+plt.legend(); plt.show()  
+```
+
+14. **Soal:** Implementasikan fungsi untuk menghitung variansi menggunakan rumus $E[X^2] - (E[X])^2$.
+    - **Solusi:**
+```{python}
+def calc_variance(values, probs):  
+    ex = sum(v * p for v, p in zip(values, probs))  
+    ex2 = sum((v**2) * p for v, p in zip(values, probs))  
+    return ex2 - ex**2  
+```
+
+15. **Soal:** Buat simulasi pelemparan dadu 10.000 kali dan tunjukkan secara visual bagaimana rata-rata kumulatifnya konvergen ke 3,5.
+    - **Solusi:**
+```{python}
+import numpy as np; import matplotlib.pyplot as plt  
+n = 100
+rolls = np.random.randint(1, 7, n)  
+print(rolls,"\n")
+avgs = np.cumsum(rolls) / np.arange(1, n+1)  
+# plt.plot(avgs); plt.axhline(3.5, color='r'); # plt.show()  
+```
+
+# Pendahuluan
+
 Baik. Simulasi **Poisson process** sebenarnya sangat sederhana dan sangat bagus untuk membantu mahasiswa memahami konsep **arrival acak** dalam sistem.
 
 Kita akan mensimulasikan dua hal:
@@ -13,7 +103,7 @@ Ini langsung menunjukkan hubungan teori yang kita bahas sebelumnya.
 
 ---
 
-# 1. Simulasi Poisson Process dengan Python
+## 1. Simulasi Poisson Process dengan Python
 
 Ide dasar:
 
@@ -22,19 +112,19 @@ Ide dasar:
 
 Contoh: simulasi **request server selama 10 detik**.
 
-```python
+```{python}
 import numpy as np
 import matplotlib.pyplot as plt
 
-# parameter
-lambda_rate = 2   # rata-rata 2 request per detik
-T = 10            # total waktu simulasi (detik)
+## parameter
+lambda_rate = 2   ## rata-rata 2 request per detik
+T = 10            ## total waktu simulasi (detik)
 
 arrival_times = []
 t = 0
 
 while t < T:
-    # generate waktu antar kedatangan
+    ## generate waktu antar kedatangan
     interarrival = np.random.exponential(1/lambda_rate)
     t += interarrival
     
@@ -43,6 +133,7 @@ while t < T:
 
 print("Arrival times:", arrival_times)
 print("Total arrivals:", len(arrival_times))
+print("rata-rata",len(arrival_times)/T )
 ```
 
 Contoh output:
@@ -58,9 +149,9 @@ selama 10 detik terjadi **18 request**.
 
 ---
 
-# 2. Visualisasi Arrival
+## 2. Visualisasi Arrival
 
-```python
+```{python}
 plt.eventplot(arrival_times)
 plt.xlabel("Time")
 plt.title("Poisson Arrival Process")
@@ -78,12 +169,12 @@ tetapi rata-ratanya stabil
 
 ---
 
-# 3. Simulasi Distribusi Poisson
+## 3. Simulasi Distribusi Poisson
 
 Sekarang kita simulasi **jumlah kejadian dalam interval waktu tetap**.
 
-```python
-lambda_rate = 4   # rata-rata 4 kejadian
+```{python}
+lambda_rate = 4   ## rata-rata 4 kejadian
 samples = np.random.poisson(lambda_rate, 10000)
 
 plt.hist(samples, bins=15, density=True)
@@ -96,11 +187,11 @@ Ini akan menghasilkan histogram yang mengikuti distribusi **Poisson**.
 
 ---
 
-# 4. Simulasi Waiting Time (Exponential)
+## 4. Simulasi Waiting Time (Exponential)
 
 Kita lihat distribusi waktu antar kedatangan.
 
-```python
+```{python}
 interarrival = np.random.exponential(1/lambda_rate, 10000)
 
 plt.hist(interarrival, bins=50, density=True)
@@ -118,15 +209,15 @@ Ini ciri khas **exponential distribution**.
 
 ---
 
-# 5. Demonstrasi yang sangat kuat di kelas
+## 5. Demonstrasi yang sangat kuat di kelas
 
 Anda bisa melakukan eksperimen sederhana:
 
 Misalnya untuk **web server**:
 
 ```python
-lambda_rate = 5   # 5 request per detik
-T = 60            # simulasi 1 menit
+lambda_rate = 5   ## 5 request per detik
+T = 60            ## simulasi 1 menit
 ```
 
 Lalu mahasiswa menghitung:
@@ -145,15 +236,20 @@ ke **sistem nyata**.
 
 ---
 
-# 6. Simulasi M/M/1 Queue (bonus kecil)
+
+```{python}
+
+
+```
+## 6. Simulasi M/M/1 Queue (bonus kecil)
 
 Contoh sangat sederhana:
 
-```python
+```{python}
 arrival_rate = 2
 service_rate = 3
 
-n = 1000
+n = 100
 
 interarrival = np.random.exponential(1/arrival_rate, n)
 service_time = np.random.exponential(1/service_rate, n)
@@ -174,13 +270,50 @@ for i in range(n):
 waiting_time = start_service - arrival_time
 
 print("Average waiting time:", np.mean(waiting_time))
+
+import matplotlib.pyplot as plt1
+
+events = [arrival_time, start_service, finish_service]
+
+fig, (ax1, ax2) = plt1.subplots(2,1)
+
+ax1.eventplot(events, orientation='horizontal', 
+             colors=['black','blue', 'red'], 
+             lineoffsets=[1, 0, -1],  # Y-offset for each row
+             linelengths=0.8)          # Length of each line          # Length of each line
+
+# ax2.eventplot(waiting_time)
+ax2.hist(waiting_time, bins=10)
+
+plt1.tight_layout()
+
+plt1.show()
+
 ```
+
+```{python}
+import matplotlib.pyplot as plt1
+
+fig, (ax1,ax2, ax3, ax4) = plt1.subplots(4,1)
+ax1.eventplot(arrival_time)
+
+
+ax2.eventplot(start_service)
+
+ax3.eventplot(finish_service)
+
+ax4.eventplot(waiting_time)
+
+plt1.show()
+
+```
+
 
 Ini sudah menjadi **simulasi dasar sistem antrian**.
 
 ---
 
-# 7. Insight penting untuk mahasiswa
+## 7. Insight penting untuk mahasiswa
 
 Dengan simulasi ini mahasiswa melihat bahwa:
 
@@ -200,3 +333,106 @@ Jika Anda mau, saya juga bisa buat **satu demo Python yang sangat menarik untuk 
 **simulasi supermarket / web server real-time dengan animasi antrian**.
 
 Biasanya mahasiswa langsung “mengerti” teori antrian hanya dengan melihat simulasi itu selama 2 menit.
+
+
+**Catatan Kuliah Minggu 06: Variabel Acak Diskrit – Distribusi Binomial & Poisson**
+
+**Tema:** *"The Digital Pulse: Counting Clicks, Bugs, and Attacks"*.
+**Fokus Utama:** Memilih model probabilitas yang tepat ("Simulation First, Math Later") dan menerapkannya pada kasus nyata seperti *gacha games*, lalu lintas server, dan keamanan siber.
+
+---
+
+### **1. Konsep Dasar**
+
+**Distribusi Binomial ($n, p$)**
+*   **Definisi:** Mengukur jumlah sukses ($k$) dalam $n$ percobaan yang saling independen.
+*   **Syarat Eksperimen:** Terdiri dari $n$ percobaan identik, hanya memiliki dua hasil (sukses/gagal), dan probabilitas sukses ($p$) selalu konstan di setiap percobaan.
+*   **Rumus Matematis:** $P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$.
+*   **Contoh Kasus:** Menghitung jumlah klik iklan dari 100 impresi dengan *Click-Through Rate* (CTR) 2%, atau peluang mendapatkan tepat 2 barang cacat dari sampel 100 unit produksi di pabrik.
+
+**Distribusi Poisson ($\lambda$)**
+*   **Definisi:** Mengukur jumlah kejadian dalam interval waktu atau ruang tertentu, dan sangat cocok untuk memodelkan **kejadian langka**.
+*   **Parameter:** $\lambda$ (lambda) merepresentasikan rata-rata jumlah kejadian per satuan waktu/ruang (misal: jumlah paket data per detik).
+*   **Rumus Matematis:** $P(X=k) = \frac{e^{-\lambda} \lambda^k}{k!}$.
+*   **Contoh Kasus:** Rata-rata serangan siber 2 kali per jam pada *firewall*, atau melayani rata-rata 50 *query* database per detik.
+
+**Hukum Kejadian Jarang (Kapan Binomial $\approx$ Poisson?)**
+*   Distribusi Poisson dapat digunakan sebagai pendekatan atau limit dari distribusi Binomial saat jumlah percobaan ($n$) sangat besar ($n \to \infty$ atau $n \ge 30$) dan probabilitas sukses ($p$) sangat kecil ($p \to 0$ atau $p \le 0.05$).
+*   Dalam kondisi ini, rata-rata dirumuskan sebagai $\lambda = n \cdot p$.
+
+---
+
+### **2. Aplikasi di Sistem Informasi**
+
+*   **Reliabilitas Komunikasi:** Menghitung peluang data rusak (*Bit Error Rate*) dari transmisi paket bit.
+*   **Perencanaan Kapasitas Server:** Menghitung probabilitas server *crash* akibat lonjakan trafik (misalnya probabilitas menerima >60 *query* dalam 1 detik ketika rata-ratanya hanya 50).
+*   **Cybersecurity & Deteksi Anomali:** Mengidentifikasi serangan *Brute Force* atau DDoS jika probabilitas kejadian trafik/login yang melonjak sangat rendah berdasarkan distribusi Poisson (misal $< 0.05\%$).
+
+---
+
+### **3. Sesi Live Coding Python (Bisa dicoba di kelas)**
+
+Berikut adalah rangkaian kode komputasi menggunakan `scipy.stats` dan `numpy` untuk mensimulasikan probabilitas.
+
+**Blok 1: Persiapan Library**
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+from scipy.stats import binom, poisson
+
+print("Siap untuk komputasi Minggu 06!") 
+```
+
+**Blok 2: Visualisasi Distribusi Binomial ("Visualizing Luck")**
+
+```{python}
+
+```
+Kode ini memplot probabilitas jumlah "sukses" (k) dari bereksperimen sebanyak 20 kali ($n=20$) dengan peluang sukses 50% ($p=0.5$).
+```python
+# Plot probabilitas sukses 0 hingga 20 dalam eksperimen n=20 dan p=0.5
+x = range(21)
+plt.bar(x, binom.pmf(x, 20, 0.5))
+plt.title("Distribusi Binomial (n=20, p=0.5)")
+plt.xlabel("Jumlah Sukses")
+plt.ylabel("Probabilitas")
+plt.show()
+```
+
+**Blok 3: Visualisasi Perubahan Bentuk Kurva Binomial**
+Melihat bagaimana distribusi bergeser seiring dengan berubahnya nilai probabilitas sukses ($p$).
+```python
+n = 20
+for p in [0.1, 0.5, 0.9]:
+    plt.plot(binom.pmf(range(n+1), n, p), label=f'p={p}')
+plt.legend()
+plt.title("Perubahan Bentuk Distribusi Binomial")
+plt.show()
+```
+
+**Blok 4: Membuktikan Hukum Kejadian Jarang (Binomial vs Poisson)**
+Skenario inspeksi pabrik: ada 1% kemungkinan produk cacat ($p=0.01$). Jika kita mengambil sampel 100 unit ($n=100$), berapa peluang tepat menemukan 2 barang cacat? Mari kita bandingkan perhitungan akurat Binomial vs pendekatan Poisson.
+```python
+n, p = 100, 0.01
+mu = n * p # Rumus hukum kejadian jarang: lambda (mu) = n * p
+
+print(f"Pendekatan Binomial P(X=2): {binom.pmf(2, n, p)}")
+print(f"Pendekatan Poisson  P(X=2): {poisson.pmf(2, mu)}")
+# Hasilnya akan sangat mirip, membuktikan bahwa Poisson bisa menaksir Binomial dengan baik jika n besar dan p kecil.
+```
+
+**Blok 5: Simulasi Trafik Jaringan ("The Traffic Controller")**
+Mensimulasikan kedatangan lalu lintas jaringan menggunakan pemodelan Poisson untuk memonitor trafik normal dan memprediksi lonjakan (*event*).
+```python
+# Mensimulasikan data trafik jaringan selama 1000 jam, dengan rata-rata 5 event/jam
+simulasi_trafik = np.random.poisson(lam=5, size=1000)
+
+print(f"Rata-rata trafik hasil simulasi: {np.mean(simulasi_trafik)}")
+
+# Menghitung peluang server mengalami LEBIH DARI 10 event dalam 1 jam (indikasi anomali)
+# Menggunakan Cumulative Distribution Function (CDF)
+prob_overload = 1 - poisson.cdf(10, 5)
+print(f"Probabilitas trafik melebihi 10 event/jam: {prob_overload:.5f}")
+```
