@@ -145,7 +145,10 @@ window.Quarto = {
 <li>kita terus menambahkan waktu sampai melewati batas waktu total</li>
 </ul>
 <p>Contoh: simulasi <strong>request server selama 10 detik</strong>.</p>
-<div id="61863cea" class="cell" data-execution_count="1">
+<div id="fig-datang" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-datang-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="8f4a51f4" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -167,20 +170,28 @@ window.Quarto = {
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Arrival times:"</span>, arrival_times)</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total arrivals:"</span>, <span class="bu">len</span>(arrival_times))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Arrival times: [0.11621831632404221, 0.38674174320921434, 0.680659725750516, 0.960215516737422, 1.0176348145240555, 1.090236605991473, 1.4805898729414169, 3.9173263573155124, 4.228046765267703, 4.89528196087458, 5.036675792153291, 5.047501790527934, 5.157966837365614, 5.670552498641967, 5.997930523121867, 7.298937191794604, 7.6266946325479745, 8.301804377442771, 8.796292694968425, 9.657163846308755, 9.888693510000463]
-Total arrivals: 21</code></pre>
+<pre><code>Arrival times: [0.00921036241913964, 0.5392342889815637, 0.9670480821326723, 1.8391220966707946, 3.0149943404407384, 3.1259840498905733, 3.431264825004668, 3.781577983425302, 3.9666978862041575, 4.118067982015942, 6.079538975003409, 7.138637567621662, 7.40212461054526, 7.882184942650635, 8.573614505250033, 8.940922794140395, 9.029363237142954, 9.554374841975207]
+Total arrivals: 18</code></pre>
 </div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-datang-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Simulasi Kedatangan exponensial
+</figcaption>
+</figure>
 </div>
 <p>Contoh output:</p>
 <pre><code>Arrival times: [0.3, 0.7, 1.1, 1.6, ...]
 Total arrivals: 18</code></pre>
 <p>Artinya:</p>
 <p>selama 10 detik terjadi <strong>18 request</strong>.</p>
-<hr>
 </section>
 <section id="visualisasi-arrival" class="level2">
 <h2 class="anchored" data-anchor-id="visualisasi-arrival">2. Visualisasi Arrival</h2>
-<div id="e0f24154" class="cell" data-execution_count="2">
+<div id="fig-plotevent" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-plotevent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="c93b44ff" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.eventplot(arrival_times)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Poisson Arrival Process"</span>)</span>
@@ -188,21 +199,25 @@ Total arrivals: 18</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="06_antrian_files/figure-html/cell-3-output-1.png" width="579" height="449" class="figure-img"></p>
+<p><img src="06_antrian_files/figure-html/cell-3-output-1.png" width="586" height="449" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Grafik ini menunjukkan <strong>kedatangan request secara acak sepanjang waktu</strong>.</p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plotevent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Grafik ini menunjukkan <strong>kedatangan request secara acak sepanjang waktu</strong>.
+</figcaption>
+</figure>
+</div>
 <p>Mahasiswa biasanya langsung memahami bahwa:</p>
 <pre class="text"><code>arrival tidak teratur
 tetapi rata-ratanya stabil</code></pre>
-<hr>
 </section>
 <section id="simulasi-distribusi-poisson" class="level2">
 <h2 class="anchored" data-anchor-id="simulasi-distribusi-poisson">3. Simulasi Distribusi Poisson</h2>
 <p>Sekarang kita simulasi <strong>jumlah kejadian dalam interval waktu tetap</strong>.</p>
-<div id="467f92ea" class="cell" data-execution_count="3">
+<div id="8a6cba4e" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lambda_rate <span class="op">=</span> <span class="dv">4</span>   <span class="co">## rata-rata 4 kejadian</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> np.random.poisson(lambda_rate, <span class="dv">10000</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -219,12 +234,11 @@ tetapi rata-ratanya stabil</code></pre>
 </div>
 </div>
 <p>Ini akan menghasilkan histogram yang mengikuti distribusi <strong>Poisson</strong>.</p>
-<hr>
 </section>
 <section id="simulasi-waiting-time-exponential" class="level2">
 <h2 class="anchored" data-anchor-id="simulasi-waiting-time-exponential">4. Simulasi Waiting Time (Exponential)</h2>
 <p>Kita lihat distribusi waktu antar kedatangan.</p>
-<div id="678d7b2c" class="cell" data-execution_count="4">
+<div id="4d0d36ca" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>interarrival <span class="op">=</span> np.random.exponential(<span class="dv">1</span><span class="op">/</span>lambda_rate, <span class="dv">10000</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.hist(interarrival, bins<span class="op">=</span><span class="dv">50</span>, density<span class="op">=</span><span class="va">True</span>)</span>
@@ -245,13 +259,12 @@ tetapi rata-ratanya stabil</code></pre>
 <li>beberapa <strong>panjang</strong></li>
 </ul>
 <p>Ini ciri khas <strong>exponential distribution</strong>.</p>
-<hr>
 </section>
 <section id="demonstrasi-yang-sangat-kuat-di-kelas" class="level2">
 <h2 class="anchored" data-anchor-id="demonstrasi-yang-sangat-kuat-di-kelas">5. Demonstrasi yang sangat kuat di kelas</h2>
 <p>Anda bisa melakukan eksperimen sederhana:</p>
 <p>Misalnya untuk <strong>web server</strong>:</p>
-<div id="b7882d10" class="cell" data-execution_count="5">
+<div id="9ef97e1b" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lambda_rate <span class="op">=</span> <span class="dv">5</span>   <span class="co">## 5 request per detik</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="dv">60</span>            <span class="co">## simulasi 1 menit</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -264,7 +277,6 @@ tetapi rata-ratanya stabil</code></pre>
 <p>Ini langsung menghubungkan teori:</p>
 <pre class="text"><code>Bernoulli → Binomial → Poisson → Exponential</code></pre>
 <p>ke <strong>sistem nyata</strong>.</p>
-<hr>
 </section>
 <section id="simulasi-mm1-queue-bonus-kecil" class="level2">
 <h2 class="anchored" data-anchor-id="simulasi-mm1-queue-bonus-kecil">6. Simulasi M/M/1 Queue (bonus kecil)</h2>
@@ -294,7 +306,6 @@ waiting_time = start_service - arrival_time
 
 print("Average waiting time:", np.mean(waiting_time))</code></pre>
 <p>Ini sudah menjadi <strong>simulasi dasar sistem antrian</strong>.</p>
-<hr>
 </section>
 <section id="insight-penting-untuk-mahasiswa" class="level2">
 <h2 class="anchored" data-anchor-id="insight-penting-untuk-mahasiswa">7. Insight penting untuk mahasiswa</h2>

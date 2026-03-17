@@ -1,3 +1,16 @@
+---
+title: "Pemodelan Antrian: Sebuah Studi Kasus Pengubah Acak Diskrit"
+subtitle: "Catatan Kuliah Probabilitas dan Statistika"  
+bibliography: ref.bib 
+format:
+    typst:
+        keep-typ: true
+        include-before-body:
+            - file:
+                06_antrian_main.typ
+---
+
+Simulasi dulu baru teori.
 
 # Simulasi Model Antrian
 
@@ -10,7 +23,12 @@ Kita akan mensimulasikan dua hal:
 
 Ini langsung menunjukkan hubungan teori yang kita bahas sebelumnya.
 
+Seperti biasa kita mulai dengan impor python library yang diperlukan
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
 
+```
 ## 1. Simulasi Poisson Process dengan Python
 
 Ide dasar:
@@ -20,13 +38,15 @@ Ide dasar:
 
 Contoh: simulasi **request server selama 10 detik**.
 
+Kita mulai dengan parameter dari random generator.
 ```{python}
-import numpy as np
-import matplotlib.pyplot as plt
-
 ## parameter
 lambda_rate = 2   ## rata-rata 2 request per detik
 T = 10            ## total waktu simulasi (detik)
+```
+
+
+```{python}
 
 arrival_times = []
 t = 0
@@ -38,43 +58,40 @@ while t < T:
     
     if t < T:
         arrival_times.append(t)
-
-print("Arrival times:", arrival_times)
-print("Total arrivals:", len(arrival_times))
 ```
+
 
 Contoh output:
 
+```{python}
+request=len(arrival_times)
+print("Arrival times:", arrival_times)
+print("Total arrivals:", request)
 ```
-Arrival times: [0.3, 0.7, 1.1, 1.6, ...]
-Total arrivals: 18
-```
 
-Artinya:
-
-selama 10 detik terjadi **18 request**.
-
----
+Artinya: selama `{python} T` detik terjadi  `{python} request` ** request**.
 
 ## 2. Visualisasi Arrival
+Kemudian kita melihatnya secara visual
 
 ```{python}
+#| label: fig-plotevent
+#| fig-cap: "Grafik ini menunjukkan kedatangan request secara acak sepanjang waktu."
+
 plt.eventplot(arrival_times)
 plt.xlabel("Time")
 plt.title("Poisson Arrival Process")
 plt.show()
 ```
 
-Grafik ini menunjukkan **kedatangan request secara acak sepanjang waktu**.
 
-Mahasiswa biasanya langsung memahami bahwa:
+Kita langsung memahami bahwa:
 
-```text
-arrival tidak teratur
-tetapi rata-ratanya stabil
-```
+::: {.block fill="luma(230)" inset="8pt" radius="4pt"}
+arrival tidak teratur, tetapi rata-ratanya stabil
+:::
 
----
+
 
 ## 3. Simulasi Distribusi Poisson
 
@@ -92,7 +109,7 @@ plt.show()
 
 Ini akan menghasilkan histogram yang mengikuti distribusi **Poisson**.
 
----
+
 
 ## 4. Simulasi Waiting Time (Exponential)
 
@@ -114,7 +131,7 @@ Mahasiswa akan melihat bahwa:
 
 Ini ciri khas **exponential distribution**.
 
----
+
 
 ## 5. Demonstrasi yang sangat kuat di kelas
 
@@ -141,13 +158,13 @@ Bernoulli → Binomial → Poisson → Exponential
 
 ke **sistem nyata**.
 
----
+
 
 ## 6. Simulasi M/M/1 Queue (bonus kecil)
 
 Contoh sangat sederhana:
 
-```[python]
+```{python}
 arrival_rate = 2
 service_rate = 3
 
@@ -176,7 +193,7 @@ print("Average waiting time:", np.mean(waiting_time))
 
 Ini sudah menjadi **simulasi dasar sistem antrian**.
 
----
+
 
 ## 7. Insight penting untuk mahasiswa
 
@@ -198,12 +215,13 @@ Ini membuat probabilitas terasa **hidup**, bukan sekadar rumus.
 Bernoulli → Binomial → Poisson → Exponential → Queueing Theory 
 ```
 
-Kita bahas satu per satu secara intuitif.
+Menggunakan rujukan antara lain @mahayana, Kita bahas satu per satu secara intuitif.
 
-## 1. Bernoulli — kejadian dasar (sukses / gagal)
+$## 1. Bernoulli — kejadian dasar (sukses / gagal)
 
+$$
 P(X=1)=p,; P(X=0)=1-p
-
+$$
 Bernoulli adalah **atom dari probabilitas diskrit**.
 
 Contoh:
@@ -402,3 +420,8 @@ Bernoulli → Geometric → Negative Binomial → Poisson → Exponential → Ga
 Ini sebenarnya adalah **keluarga distribusi yang berasal dari proses yang sama**.
 
 Dan ini sangat indah secara matematis.
+
+# References
+
+::: {#refs}
+:::
