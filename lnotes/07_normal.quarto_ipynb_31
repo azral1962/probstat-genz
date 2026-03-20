@@ -1,0 +1,163 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "0d4ccaca",
+   "metadata": {},
+   "source": [
+    "---\n",
+    "format: \n",
+    "   typst:\n",
+    "      keep-typst: true\n",
+    "---\n",
+    "\n",
+    "Distribusi normal memiliki dua parameter yaiut $\\mu$ daan $\\sigma$.  menggunakan lbirary scipy.stats berbentuk"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "e3b2535b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np\n",
+    "from scipy.stats import norm"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "bcb5a2b7",
+   "metadata": {},
+   "source": [
+    "```python\n",
+    "norm.pdf(x)\n",
+    "norm.cdf(x)\n",
+    "norm.ppf(q)\n",
+    "norm.pdf(x, loc, scale)\n",
+    "norm.cdf(x, loc, scale)\n",
+    "norm.ppf(q, loc, scale)\n",
+    "\n",
+    "x : titik dalam rentang RV\n",
+    "loc: mean (default = 0)\n",
+    "scale : deviasi standar (defautlt = 1)\n",
+    "```\n",
+    "\n",
+    "contoh"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "4f23dbea",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "0.6826894921370859\n",
+      "0.9544997361036416\n",
+      "0.9973002039367398\n",
+      "1.6448536269514722\n",
+      "2.3263478740408408\n",
+      "-1.959963984540054\n",
+      "-2.5758293035489004\n"
+     ]
+    }
+   ],
+   "source": [
+    "std1 = norm.cdf(1) - norm.cdf(-1)\n",
+    "print(std1)\n",
+    "std2 = norm.cdf(2) - norm.cdf(-2)\n",
+    "print(std2)\n",
+    "std3 = norm.cdf(3) - norm.cdf(-3)\n",
+    "print(std3)\n",
+    "c_0_95 = norm.ppf(0.95)\n",
+    "c_0_99 = norm.ppf(0.99)\n",
+    "h_0_95 = norm.ppf((1-0.95)/2)\n",
+    "h_0_99 = norm.ppf((1-0.99)/2)\n",
+    "\n",
+    "print(c_0_95)\n",
+    "print(c_0_99)\n",
+    "print(h_0_95)\n",
+    "print(h_0_99)\n",
+    "radius =1"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "94cc2593",
+   "metadata": {},
+   "source": [
+    "1. **Analisis Normal (30 poin):**\n",
+    "    - Diketahui umur lampu $N(\\mu=10.000 \\text{ jam}, \\sigma=1.000 \\text{ jam})$.\n",
+    "    - Hitung probabilitas lampu mati sebelum 8.000 jam.\n",
+    "    - Cari \"titik aman\" jam ke berapa sehingga 95% lampu masih hidup."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "b522d0bc",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      " 0.0227501319481792, 0.95, 11644.853626951472, 0.9499999999999998 \n"
+     ]
+    }
+   ],
+   "source": [
+    "mu = 10000\n",
+    "sigma = 1000\n",
+    "\n",
+    "p = norm.cdf(8000, mu, sigma)\n",
+    "p_aman = 0.95\n",
+    "titik_95 = norm.ppf(p_aman, mu, sigma)\n",
+    "uji = norm.cdf(titik_95, mu, sigma)\n",
+    "\n",
+    "print(f\" {p}, {p_aman}, {titik_95}, {uji} \")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "684cdaff",
+   "metadata": {},
+   "source": [
+    "2. **Analisis Eksponensial (30 poin):**\n",
+    "    - Modul Wi-Fi pada lampu memiliki laju kegagalan $\\lambda=0.00005$ per jam.\n",
+    "    - Hitung probabilitas modul ini bertahan lebih dari 20.000 jam.\n",
+    "    - Buktikan sifat *memoryless* dengan simulasi: Bandingkan peluang bertahan 1000 jam lagi untuk modul baru vs modul yang sudah nyala 5000 jam.\n",
+    "3. **Keputusan Bisnis (40 poin):**\n",
+    "    - Biaya produksi = $5. Harga jual = $15. Biaya ganti rugi garansi = $10 (rugi total).\n",
+    "    - Simulasikan profit total untuk 10.000 unit dengan opsi Garansi A (9.000 jam) vs Garansi B (8.000 jam).\n",
+    "    - Buat rekomendasi: Mana yang memberikan profit bersih terbesar?\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3",
+   "path": "C:\\Users\\Armein Z. R. Langi\\AppData\\Local\\Python\\pythoncore-3.14-64\\share\\jupyter\\kernels\\python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.14.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

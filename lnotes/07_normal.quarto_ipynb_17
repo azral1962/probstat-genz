@@ -1,0 +1,124 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "62bcd23c",
+   "metadata": {},
+   "source": [
+    "Distribusi normal memiliki dua parameter yaiut $\\mu$ daan $\\sigma$.  menggunakan lbirary scipy.stats berbentuk"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "93a8fa5a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from scipy.stats import norm"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d3a0f562",
+   "metadata": {},
+   "source": [
+    "```python\n",
+    "norm.pdf(x)\n",
+    "norm.cdf(x)\n",
+    "norm.ppf(q)\n",
+    "norm.pdf(x, loc, scale)\n",
+    "norm.cdf(x, loc, scale)\n",
+    "norm.ppf(q, loc, scale)\n",
+    "\n",
+    "x : titik dalam rentang RV\n",
+    "loc: mean (default = 0)\n",
+    "scale : deviasi standar (defautlt = 1)\n",
+    "```\n",
+    "\n",
+    "contoh"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "bdf6ae1a",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "0.6826894921370859\n",
+      "0.9544997361036416\n",
+      "0.9973002039367398\n",
+      "1.6448536269514722\n",
+      "2.3263478740408408\n",
+      "-0.06270677794321385\n",
+      "-0.012533469508069276\n"
+     ]
+    }
+   ],
+   "source": [
+    "std1 = norm.cdf(1) - norm.cdf(-1)\n",
+    "print(std1)\n",
+    "std2 = norm.cdf(2) - norm.cdf(-2)\n",
+    "print(std2)\n",
+    "std3 = norm.cdf(3) - norm.cdf(-3)\n",
+    "print(std3)\n",
+    "c_0_95 = norm.ppf(0.95)\n",
+    "c_0_99 = norm.ppf(0.99)\n",
+    "h_0_95 = norm.ppf(0.95/2)\n",
+    "h_0_99 = norm.ppf(0.99/2)\n",
+    "\n",
+    "print(c_0_95)\n",
+    "print(c_0_99)\n",
+    "print(h_0_95)\n",
+    "print(h_0_99)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9978fe39",
+   "metadata": {
+    "user_expressions": [
+     {
+      "expression": "print(std1)",
+      "result": {
+       "data": {
+        "text/plain": "None"
+       },
+       "metadata": {},
+       "status": "ok"
+      }
+     }
+    ]
+   },
+   "source": [
+    "$=$ `{python} print(std1)`"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3",
+   "path": "C:\\Users\\Armein Z. R. Langi\\AppData\\Local\\Python\\pythoncore-3.14-64\\share\\jupyter\\kernels\\python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.14.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

@@ -1,0 +1,71 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Distribusi normal memiliki dua parameter yaiut $\\mu$ daan $\\sigma$.  menggunakan lbirary scipy.stats berbentuk"
+      ],
+      "id": "2d95a195"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from scipy.stats import norm"
+      ],
+      "id": "a6626bdb",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "```python\n",
+        "norm.pdf(x)\n",
+        "norm.cdf(x)\n",
+        "norm.ppdf(q)\n",
+        "norm.pdf(x, loc, scale)\n",
+        "norm.cdf(x, loc, scale)\n",
+        "norm.ppdf(q, loc, scale)\n",
+        "\n",
+        "x : titik dalam rentang RV\n",
+        "loc: mean (default = 0)\n",
+        "scale : deviasi standar (defautlt = 1)\n",
+        "```\n",
+        "\n",
+        "contoh"
+      ],
+      "id": "0846557f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "std1 = norm.cdf(1) - norm.cdf(-1)"
+      ],
+      "id": "22f2903d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "$$=$$`{python} #std1`"
+      ],
+      "id": "e6fb45c5"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\Armein Z. R. Langi\\AppData\\Local\\Python\\pythoncore-3.14-64\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

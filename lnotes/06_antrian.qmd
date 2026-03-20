@@ -10,7 +10,78 @@ format:
                 06_antrian_main.typ
 ---
 
-Simulasi dulu baru teori.
+Simulasi dulu baru teori. Seperti biasa kita mulai dengan impor python library yang diperlukan
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+```
+
+
+# Perhitungan Secara Manual 
+Katakanlah dalam suatu interval 60 menit rata rata 5 kendaraan per 10 menit pelanggan tiba di loket pelayanan, meskipun tidak bersamaan.
+
+
+```{python}
+## parameter
+lambda_rate = 5/10   ## rata-rata 5 request per 10 m4nit
+T = 60            ## total waktu simulasi (menit)
+```
+
+
+Misalnya waktu pelanngan dengan no urut idx tiba di loket pelayanan adalah waktu_tiba[idx]. Durasi antar kedatangan pelanggan [idx] dengan idx-1 adalah selang_tiba[idx] dimana 
+
+waktu_tiba[idx] - waktu_tiba[idx-1] = selang_tiba[idx]
+
+```{python}
+
+waktu_tiba = []
+t = 0
+
+while t < T:
+    ## generate waktu antar kedatangan
+    selang_tiba = np.random.exponential(1/lambda_rate)
+    t += selang_tiba
+    
+    if t < T:
+        waktu_tiba.append(t)
+
+
+```
+Asumsi daralm sebuah interval waktu (mislany 1 hari, atau 8 Jam, atau 1 jam)kedatangan terjadi secara acak
+
+
+Contoh output:
+
+```{python}
+tiba_total=len(waktu_tiba)
+
+print("Arrival times:", waktu_tiba)
+print("Total arrivals:", tiba_total)
+```
+
+Artinya: selama `{python} T` detik terjadi `{python} tiba_total` \*\* request\*\*.
+
+## 2. Visualisasi Arrival
+
+Kemudian kita melihatnya secara visual
+
+```{python}
+#| label: fig-plotevent
+#| fig-cap: "Grafik ini menunjukkan kedatangan request secara acak sepanjang waktu."
+
+plt.eventplot(waktu_tiba)
+plt.xlabel("Time")
+plt.title("Poisson Arrival Process")
+plt.show()
+```
+
+Kita langsung memahami bahwa:
+
+::: {.block fill="luma(230)" inset="8pt" radius="4pt"}
+arrival tidak teratur, tetapi rata-ratanya stabil
+:::
 
 # Simulasi Model Antrian
 
@@ -18,33 +89,35 @@ Simulasi **Poisson process** sebenarnya sangat sederhana dan sangat bagus untuk 
 
 Kita akan mensimulasikan dua hal:
 
-1. **jumlah kejadian dalam waktu tertentu** (Poisson)
-2. **waktu antar kejadian** (Exponential)
+1.  **jumlah kejadian dalam waktu tertentu** (Poisson)
+2.  **waktu antar kejadian** (Exponential)
 
 Ini langsung menunjukkan hubungan teori yang kita bahas sebelumnya.
 
 Seperti biasa kita mulai dengan impor python library yang diperlukan
+
 ```{python}
 import numpy as np
 import matplotlib.pyplot as plt
 
 ```
+
 ## 1. Simulasi Poisson Process dengan Python
 
 Ide dasar:
 
-* waktu antar kedatangan mengikuti **Exponential**
-* kita terus menambahkan waktu sampai melewati batas waktu total
+- waktu antar kedatangan mengikuti **Exponential**
+- kita terus menambahkan waktu sampai melewati batas waktu total
 
 Contoh: simulasi **request server selama 10 detik**.
 
 Kita mulai dengan parameter dari random generator.
+
 ```{python}
 ## parameter
 lambda_rate = 2   ## rata-rata 2 request per detik
 T = 10            ## total waktu simulasi (detik)
 ```
-
 
 ```{python}
 
@@ -60,7 +133,6 @@ while t < T:
         arrival_times.append(t)
 ```
 
-
 Contoh output:
 
 ```{python}
@@ -69,13 +141,14 @@ print("Arrival times:", arrival_times)
 print("Total arrivals:", request)
 ```
 
-Artinya: selama `{python} T` detik terjadi  `{python} request` ** request**.
+Artinya: selama `{python} T` detik terjadi `{python} request` \*\* request\*\*.
 
 ## 2. Visualisasi Arrival
+
 Kemudian kita melihatnya secara visual
 
 ```{python}
-#| label: fig-plotevent
+#| label: fig-plot-event
 #| fig-cap: "Grafik ini menunjukkan kedatangan request secara acak sepanjang waktu."
 
 plt.eventplot(arrival_times)
@@ -84,14 +157,11 @@ plt.title("Poisson Arrival Process")
 plt.show()
 ```
 
-
 Kita langsung memahami bahwa:
 
 ::: {.block fill="luma(230)" inset="8pt" radius="4pt"}
 arrival tidak teratur, tetapi rata-ratanya stabil
 :::
-
-
 
 ## 3. Simulasi Distribusi Poisson
 
@@ -109,8 +179,6 @@ plt.show()
 
 Ini akan menghasilkan histogram yang mengikuti distribusi **Poisson**.
 
-
-
 ## 4. Simulasi Waiting Time (Exponential)
 
 Kita lihat distribusi waktu antar kedatangan.
@@ -126,12 +194,10 @@ plt.show()
 
 Mahasiswa akan melihat bahwa:
 
-* banyak waktu tunggu **pendek**
-* beberapa **panjang**
+- banyak waktu tunggu **pendek**
+- beberapa **panjang**
 
 Ini ciri khas **exponential distribution**.
-
-
 
 ## 5. Demonstrasi yang sangat kuat di kelas
 
@@ -146,19 +212,17 @@ T = 60            ## simulasi 1 menit
 
 Lalu mahasiswa menghitung:
 
-* total request
-* waktu antar request
-* distribusi arrival
+- total request
+- waktu antar request
+- distribusi arrival
 
 Ini langsung menghubungkan teori:
 
-```text
+``` text
 Bernoulli → Binomial → Poisson → Exponential
 ```
 
 ke **sistem nyata**.
-
-
 
 ## 6. Simulasi M/M/1 Queue (bonus kecil)
 
@@ -193,13 +257,11 @@ print("Average waiting time:", np.mean(waiting_time))
 
 Ini sudah menjadi **simulasi dasar sistem antrian**.
 
-
-
 ## 7. Insight penting untuk mahasiswa
 
 Dengan simulasi ini mahasiswa melihat bahwa:
 
-```text
+``` text
 random events
 → Poisson arrival
 → Exponential waiting time
@@ -207,7 +269,6 @@ random events
 ```
 
 Ini membuat probabilitas terasa **hidup**, bukan sekadar rumus.
-
 
 # Rantai Distribusi Probabilitas dalam Engineering
 
@@ -217,11 +278,9 @@ Bernoulli → Binomial → Poisson → Exponential → Queueing Theory
 
 Menggunakan rujukan antara lain @mahayana, Kita bahas satu per satu secara intuitif.
 
-$## 1. Bernoulli — kejadian dasar (sukses / gagal)
+\$## 1. Bernoulli — kejadian dasar (sukses / gagal)
 
-$$
-P(X=1)=p,; P(X=0)=1-p
-$$
+$$P(X=1)=p,; P(X=0)=1-p$$
 Bernoulli adalah **atom dari probabilitas diskrit**.
 
 Contoh:
@@ -242,9 +301,7 @@ error bit = Bernoulli trial
 
 ## 2. Binomial — jumlah sukses dalam n percobaan
 
-$$
-P(X=k)=\binom{n}{k}p^k (1-p)^{n-k}
-$$
+$$P(X=k)=\binom{n}{k}p^k (1-p)^{n-k}$$
 
 Jika kita melakukan **banyak Bernoulli trial**, kita mendapat distribusi Binomial.
 
@@ -264,10 +321,7 @@ berapa banyak kejadian sukses dalam n percobaan
 
 ## 3. Poisson — kejadian langka dalam waktu/ruang
 
-$$
-P(X=k)=\frac{\lambda^k e^{-\lambda}}{k!}
-$$
-
+$$P(X=k)=\frac{\lambda^k e^{-\lambda}}{k!}$$
 
 Jika:
 
@@ -279,9 +333,7 @@ maka Binomial menjadi **Poisson**.
 
 Parameter:
 
-$$
-\lambda = np
-$$
+$$\lambda = np$$
 
 Contoh nyata engineering:
 
@@ -301,9 +353,7 @@ berapa kejadian dalam interval waktu
 
 Jika kejadian mengikuti Poisson process, maka **jarak waktu antar kejadian** mengikuti distribusi **Exponential**.
 
-$$
-f(t)=\lambda e^{-\lambda t}
-$$
+$$f(t)=\lambda e^{-\lambda t}$$
 
 Contoh:
 
@@ -411,7 +461,7 @@ Ini adalah dasar:
 
 - performance modeling
 
-Terdapat juga bisa  **hubungan yang lebih dalam lagi yang sangat elegan**, yaitu:
+Terdapat juga bisa **hubungan yang lebih dalam lagi yang sangat elegan**, yaitu:
 
 ```         
 Bernoulli → Geometric → Negative Binomial → Poisson → Exponential → Gamma 

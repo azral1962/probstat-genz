@@ -456,7 +456,84 @@
   ],
 )
 
-Simulasi dulu baru teori.
+Simulasi dulu baru teori. Seperti biasa kita mulai dengan impor python library yang diperlukan
+
+#block[
+#Skylighting(([#ImportTok("import");#NormalTok(" numpy ");#ImportTok("as");#NormalTok(" np");],
+[#ImportTok("import");#NormalTok(" matplotlib.pyplot ");#ImportTok("as");#NormalTok(" plt");],));
+]
+= Perhitungan Secara Manual
+<perhitungan-secara-manual>
+Katakanlah dalam suatu interval 60 menit rata rata 5 kendaraan per 10 menit pelanggan tiba di loket pelayanan, meskipun tidak bersamaan.
+
+#block[
+#Skylighting(([#CommentTok("## parameter");],
+[#NormalTok("lambda_rate ");#OperatorTok("=");#NormalTok(" ");#DecValTok("5");#OperatorTok("/");#DecValTok("10");#NormalTok("   ");#CommentTok("## rata-rata 5 request per 10 m4nit");],
+[#NormalTok("T ");#OperatorTok("=");#NormalTok(" ");#DecValTok("60");#NormalTok("            ");#CommentTok("## total waktu simulasi (menit)");],));
+]
+Misalnya waktu pelanngan dengan no urut idx tiba di loket pelayanan adalah waktu\_tiba\[idx\]. Durasi antar kedatangan pelanggan \[idx\] dengan idx-1 adalah selang\_tiba\[idx\] dimana
+
+waktu\_tiba\[idx\] - waktu\_tiba\[idx-1\] = selang\_tiba\[idx\]
+
+#block[
+#Skylighting(([#NormalTok("waktu_tiba ");#OperatorTok("=");#NormalTok(" []");],
+[#NormalTok("t ");#OperatorTok("=");#NormalTok(" ");#DecValTok("0");],
+[],
+[#ControlFlowTok("while");#NormalTok(" t ");#OperatorTok("<");#NormalTok(" T:");],
+[#NormalTok("    ");#CommentTok("## generate waktu antar kedatangan");],
+[#NormalTok("    selang_tiba ");#OperatorTok("=");#NormalTok(" np.random.exponential(");#DecValTok("1");#OperatorTok("/");#NormalTok("lambda_rate)");],
+[#NormalTok("    t ");#OperatorTok("+=");#NormalTok(" selang_tiba");],
+[#NormalTok("    ");],
+[#NormalTok("    ");#ControlFlowTok("if");#NormalTok(" t ");#OperatorTok("<");#NormalTok(" T:");],
+[#NormalTok("        waktu_tiba.append(t)");],));
+]
+Asumsi daralm sebuah interval waktu (mislany 1 hari, atau 8 Jam, atau 1 jam)kedatangan terjadi secara acak
+
+Contoh output:
+
+#block[
+#Skylighting(([#NormalTok("tiba_total");#OperatorTok("=");#BuiltInTok("len");#NormalTok("(waktu_tiba)");],
+[],
+[#BuiltInTok("print");#NormalTok("(");#StringTok("\"Arrival times:\"");#NormalTok(", waktu_tiba)");],
+[#BuiltInTok("print");#NormalTok("(");#StringTok("\"Total arrivals:\"");#NormalTok(", tiba_total)");],));
+#block[
+#Skylighting(([#NormalTok("Arrival times: [1.9385108320726023, 3.2000994089880783, 9.419685769673078, 12.49538745671005, 12.676694663362545, 14.982158748199897, 19.06415741966172, 20.063163161756272, 20.065154520374243, 24.749522432721157, 35.363900121657565, 39.771512314379706, 41.93152287771641, 43.05975847653915, 44.588057752177306, 45.39501430622771, 45.747532175489546, 49.934361679710356, 50.25344521940932, 52.74696550410564, 53.030029561009165, 57.89642786114467, 57.95783375321613, 58.067594692478124, 58.60098228839955, 59.197631166161415]");],
+[#NormalTok("Total arrivals: 26");],));
+]
+]
+Artinya: selama 60 detik terjadi 26 \*\* request\*\*.
+
+== 2. Visualisasi Arrival
+<visualisasi-arrival>
+Kemudian kita melihatnya secara visual
+
+#Skylighting(([#NormalTok("plt.eventplot(waktu_tiba)");],
+[#NormalTok("plt.xlabel(");#StringTok("\"Time\"");#NormalTok(")");],
+[#NormalTok("plt.title(");#StringTok("\"Poisson Arrival Process\"");#NormalTok(")");],
+[#NormalTok("plt.show()");],));
+#figure([
+#box(image("06_antrian_files/figure-typst/fig-plotevent-output-1.svg"))
+], caption: figure.caption(
+position: bottom, 
+[
+Grafik ini menunjukkan kedatangan request secara acak sepanjang waktu.
+]), 
+kind: "quarto-float-fig", 
+supplement: "Figure", 
+)
+<fig-plotevent>
+
+
+Kita langsung memahami bahwa:
+
+#block(
+fill:luma(230),
+inset:8pt,
+radius:4pt,
+[
+arrival tidak teratur, tetapi rata-ratanya stabil
+
+])
 
 = Simulasi Model Antrian
 <simulasi-model-antrian>
@@ -510,14 +587,14 @@ Contoh output:
 [#BuiltInTok("print");#NormalTok("(");#StringTok("\"Arrival times:\"");#NormalTok(", arrival_times)");],
 [#BuiltInTok("print");#NormalTok("(");#StringTok("\"Total arrivals:\"");#NormalTok(", request)");],));
 #block[
-#Skylighting(([#NormalTok("Arrival times: [0.3838311786971692, 0.866046384460099, 0.919327046400785, 1.4606148367746215, 1.806691232612223, 1.996119127446669, 2.528463024878903, 2.8540871960540235, 4.3148520835864, 4.615033158969175, 4.992447858554086, 5.290937457097894, 5.4773112249360985, 6.340288726567937, 6.558077598610753, 6.565144104908227, 7.056180319526557, 7.194312813310429, 8.44208938592831, 8.635981478333857, 8.966502760227755]");],
+#Skylighting(([#NormalTok("Arrival times: [0.24947022065891236, 0.705758691002432, 0.8157438412088059, 1.3920899732554146, 1.931987065974343, 2.7330129627650344, 3.0295950234436724, 3.138441961911517, 3.5984261542878575, 3.8220475049578475, 3.9798398255049254, 4.065220622468721, 4.161779684551403, 4.326349825267032, 4.4491237099303635, 6.196320929076668, 6.37392445573316, 6.600172693339279, 6.92238303687704, 7.3949852671, 8.530629222540139]");],
 [#NormalTok("Total arrivals: 21");],));
 ]
 ]
 Artinya: selama 10 detik terjadi 21 \*\* request\*\*.
 
 == 2. Visualisasi Arrival
-<visualisasi-arrival>
+<visualisasi-arrival-1>
 Kemudian kita melihatnya secara visual
 
 #Skylighting(([#NormalTok("plt.eventplot(arrival_times)");],
@@ -525,7 +602,7 @@ Kemudian kita melihatnya secara visual
 [#NormalTok("plt.title(");#StringTok("\"Poisson Arrival Process\"");#NormalTok(")");],
 [#NormalTok("plt.show()");],));
 #figure([
-#box(image("06_antrian_files/figure-typst/fig-plotevent-output-1.svg"))
+#box(image("06_antrian_files/figure-typst/fig-plot-event-output-1.svg"))
 ], caption: figure.caption(
 position: bottom, 
 [
@@ -534,7 +611,7 @@ Grafik ini menunjukkan kedatangan request secara acak sepanjang waktu.
 kind: "quarto-float-fig", 
 supplement: "Figure", 
 )
-<fig-plotevent>
+<fig-plot-event>
 
 
 Kita langsung memahami bahwa:
@@ -559,7 +636,7 @@ Sekarang kita simulasi #strong[jumlah kejadian dalam interval waktu tetap].
 [#NormalTok("plt.xlabel(");#StringTok("\"Number of events\"");#NormalTok(")");],
 [#NormalTok("plt.title(");#StringTok("\"Poisson Distribution Simulation\"");#NormalTok(")");],
 [#NormalTok("plt.show()");],));
-#box(image("06_antrian_files/figure-typst/cell-7-output-1.svg"))
+#box(image("06_antrian_files/figure-typst/cell-12-output-1.svg"))
 
 Ini akan menghasilkan histogram yang mengikuti distribusi #strong[Poisson].
 
@@ -573,7 +650,7 @@ Kita lihat distribusi waktu antar kedatangan.
 [#NormalTok("plt.xlabel(");#StringTok("\"Waiting time\"");#NormalTok(")");],
 [#NormalTok("plt.title(");#StringTok("\"Exponential Distribution\"");#NormalTok(")");],
 [#NormalTok("plt.show()");],));
-#box(image("06_antrian_files/figure-typst/cell-8-output-1.svg"))
+#box(image("06_antrian_files/figure-typst/cell-13-output-1.svg"))
 
 Mahasiswa akan melihat bahwa:
 
@@ -633,7 +710,7 @@ Contoh sangat sederhana:
 [],
 [#BuiltInTok("print");#NormalTok("(");#StringTok("\"Average waiting time:\"");#NormalTok(", np.mean(waiting_time))");],));
 #block[
-#Skylighting(([#NormalTok("Average waiting time: 0.5530552198684195");],));
+#Skylighting(([#NormalTok("Average waiting time: 0.7018971085492183");],));
 ]
 ]
 Ini sudah menjadi #strong[simulasi dasar sistem antrian].

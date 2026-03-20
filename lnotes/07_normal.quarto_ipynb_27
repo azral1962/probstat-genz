@@ -1,0 +1,95 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "format: \n",
+        "   typst:\n",
+        "      keep-typst: true\n",
+        "---\n",
+        "\n",
+        "Distribusi normal memiliki dua parameter yaiut $\\mu$ daan $\\sigma$.  menggunakan lbirary scipy.stats berbentuk"
+      ],
+      "id": "f89c06eb"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import numpy as np\n",
+        "from scipy.stats import norm"
+      ],
+      "id": "7729e9f2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "```python\n",
+        "norm.pdf(x)\n",
+        "norm.cdf(x)\n",
+        "norm.ppf(q)\n",
+        "norm.pdf(x, loc, scale)\n",
+        "norm.cdf(x, loc, scale)\n",
+        "norm.ppf(q, loc, scale)\n",
+        "\n",
+        "x : titik dalam rentang RV\n",
+        "loc: mean (default = 0)\n",
+        "scale : deviasi standar (defautlt = 1)\n",
+        "```\n",
+        "\n",
+        "contoh"
+      ],
+      "id": "11f377bf"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "std1 = norm.cdf(1) - norm.cdf(-1)\n",
+        "print(std1)\n",
+        "std2 = norm.cdf(2) - norm.cdf(-2)\n",
+        "print(std2)\n",
+        "std3 = norm.cdf(3) - norm.cdf(-3)\n",
+        "print(std3)\n",
+        "c_0_95 = norm.ppf(0.95)\n",
+        "c_0_99 = norm.ppf(0.99)\n",
+        "h_0_95 = norm.ppf((1-0.95)/2)\n",
+        "h_0_99 = norm.ppf((1-0.99)/2)\n",
+        "\n",
+        "print(c_0_95)\n",
+        "print(c_0_99)\n",
+        "print(h_0_95)\n",
+        "print(h_0_99)\n",
+        "radius =1"
+      ],
+      "id": "489d1782",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        " `{python} std1`\n",
+        "\n",
+        " `{python} print(f\"std2 = {std2}\")`"
+      ],
+      "id": "801e477e"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\Armein Z. R. Langi\\AppData\\Local\\Python\\pythoncore-3.14-64\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
