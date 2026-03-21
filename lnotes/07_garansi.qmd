@@ -1,0 +1,132 @@
+# Keputusan Garansi pada Produk Lampu Pintar dengan Ketidakpastian Umur Komponen
+
+Sebuah produsen lampu hendak bersaing memeperebutkan pangsa pasar lampu. Hasil survey menyatakan bahwa daya saing ditentukan antara lain oleh garansi. Semakin semakin panjang masa garansi semakin kuat daya saing, Bila daya tahan rata-rata lampu yang dihasilkan adalah 10000 jam, berapa peluang garansi yang harus dibayar bila garansi di set pada 8000 jam dan 9000 jam.
+
+Perusahaan memiliki empat jenis alat produksi yang berbeda, masing masing berdistribusi uniform, normal (std=1000), eksponensial, dan weibull (k=2). sehingga meskipun bisa di-set untuk menghasilkan produk lampu dengan usia rata-rata 10000 jam, distribusi usia nya berbeda,
+
+Gunakan empat asumsi distribusi umur produk berikut:
+
+
+```{python}
+
+
+import numpy as np
+from scipy.stats import norm, expon, weibull_min, uniform
+from scipy.special import gamma
+
+# Parameter umum
+mean = 10000
+```
+```{python}
+# ======================
+# 1. Normal Distribution
+# ======================
+mu = 10000
+sigma = 1000
+
+p_norm_9000 = norm.cdf(9000, loc=mu, scale=sigma)
+p_norm_8500 = norm.cdf(8500, loc=mu, scale=sigma)
+```
+```{python}
+
+# ======================
+# 2. Exponential Distribution
+# ======================
+scale_exp = mean  # mean = scale
+
+p_exp_9000 = expon.cdf(9000, scale=scale_exp)
+p_exp_8500 = expon.cdf(8500, scale=scale_exp)
+```
+```{python}
+
+# ======================
+# 3. Weibull Distribution (k=2)
+# ======================
+k = 2
+scale_weibull = mean / gamma(1 + 1/k)
+
+p_weibull_9000 = weibull_min.cdf(9000, c=k, scale=scale_weibull)
+p_weibull_8500 = weibull_min.cdf(8500, c=k, scale=scale_weibull)
+```
+```{python}
+
+# ======================
+# 4. Uniform Distribution (0, 20000)
+# ======================
+a = 0
+b = 20000
+
+# di scipy: loc=a, scale=b-a
+p_uniform_9000 = uniform.cdf(9000, loc=a, scale=b-a)
+p_uniform_8500 = uniform.cdf(8500, loc=a, scale=b-a)
+```
+```{python}
+
+# ======================
+# Print results
+# ======================
+print("Normal:")
+print("P(X < 9000) =", p_norm_9000)
+print(
+
+```
+
+```{python}
+import math
+mu = 10000
+garansi=[8500,9000]
+
+def F_uniform(w):
+    A=0
+    B=20000
+    return (w-A)/(B-A)
+
+def F_normal(w):
+    z = (w - 10000) / 1000
+    return 0.5 * (1 + math.erf(z / math.sqrt(2)))
+
+
+def F_exponential(w):
+    return 1 - math.exp(-0.00005 * w)
+
+
+def F_weibull(w, k=2, eta=11000):
+    return 1 - math.exp(- (w / eta) ** k)
+
+models={
+    "uniform": F_uniform,
+    "normal": F_normal,
+    "exp": F_exponential,
+    "weibull": F_weibull,
+}
+
+for w in garansi:
+    print(f"\n=== Garansi {w} ===")
+    for name, F in models.items(): 
+        claim = F(w)
+        print(
+            f"{name}, Claim ={claim:.4f}"
+        )
+```
+
+### Model 1: Normal
+
+T∼N(μ,σ2)T \sim N(\mu,\sigma^2)T∼N(μ,σ2)
+
+dengan μ=10,000\mu=10{,}000μ=10,000 jam dan σ=1,000\sigma=1{,}000σ=1,000 jam.
+
+### Model 2: Eksponensial
+
+T∼Exp(λ)T \sim \text{Exp}(\lambda)T∼Exp(λ)
+
+dengan λ=0.00005\lambda = 0.00005λ=0.00005 per jam.
+
+### Model 3: Weibull
+
+T∼Weibull(k,η)T \sim \text{Weibull}(k,\eta)T∼Weibull(k,η)
+
+dengan shape k=2k=2k=2 dan scale η=11,000\eta=11{,}000η=11,000 jam.
+
+Untuk analisis pasar, gunakan parameter:
+
+b=0.25,d=0.00015,K=1.5b=0.25,\qquad d=0.00015,\qquad K=1.5b=0.25,d=0.00015,K=1.5

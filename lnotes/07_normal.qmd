@@ -72,4 +72,40 @@ print(f" {p}, {p_aman}, {roung(titik_95)}, {uji} ")
     - Biaya produksi = $5. Harga jual = $15. Biaya ganti rugi garansi = $10 (rugi total).
     - Simulasikan profit total untuk 10.000 unit dengan opsi Garansi A (9.000 jam) vs Garansi B (8.000 jam).
     - Buat rekomendasi: Mana yang memberikan profit bersih terbesar?
+```{python}
+import numpy as np
+import scipy.stats as st
+class produk:
+    def __init__(self,mu,sigma):
+        self.mu = mu
+        self.sigma = sigma
 
+    def jumlah_ganti(self,N,garansi):
+        ganti = N * st.norm.cdf(garansi,self.mu,self.sigma)
+        return ganti
+
+class bisnis:
+    def __init__(self, cogs, bea_garansi, harga):
+        self.cogs = cogs
+        self.bea_garansi = bea_garansi
+        self.harga = harga
+
+    def untung(self, laku, ganti):
+        revenue=laku*self.harga
+        biaya_total = ganti * self.bea_garansi + laku * self.cogs 
+        profit = revenue - biaya_total
+        return profit
+
+laku = 10000
+lampu = produk(10000,1000) 
+usaha = bisnis(5,10,15) 
+garansiA = lampu.jumlah_ganti(laku,9000)
+garansiB = lampu.jumlah_ganti(laku,8000)
+profit_skema_A=usaha.untung(laku,garansiA)
+profit_skema_B=usaha.untung(laku,garansiB)
+
+print(profit_skema_A)
+print(profit_skema_B)
+
+
+```
