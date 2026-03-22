@@ -1,16 +1,915 @@
 ---
 title: "Pemodelan Antrian: Sebuah Studi Kasus Pengubah Acak Diskrit"
-subtitle: "Catatan Kuliah Probabilitas dan Statistika"  
-bibliography: ref.bib 
-format:
-    typst:
-        keep-typ: true
-        include-before-body:
-            - file:
-                06_antrian_main.typ
 ---
+Suatu kantor catatan sipil bisa melayani rata-rata 400 orang per hari, dengan jam kerja 8-16. Dalam kenyataannya bisa 100, 300, 500, 700, atau angka lain, karena beda orang beda keperluan.  Ini dimodelkan dengan distribusi poisson.
+
+misalnya rata-rata kedatangan masyarakat juga 400 orang perhari. juga berditribusi poisson``
+antrian muncul bila semua loket penuh ada yang dtang
+
+hitung dalam satu jam pk 08-09 berapa peluang terjadi antian? Bila ruang tunggu brerkpsitas 10 kursi, brerpa peluang luber pada jam tersebut
+
+
 
 Simulasi dulu baru teori. Seperti biasa kita mulai dengan impor python library yang diperlukan
+
+Berikut demo Python yang reusable dengan **class**, untuk:
+
+* memodelkan **kedatangan** dan **pelayanan** per jam dengan Poisson
+* menghitung:
+
+  * peluang **terjadi antrian** dalam 1 jam
+  * peluang **ruang tunggu luber** bila kapasitas kursi tertentu
+* membuat **visualisasi**
+* menjalankan **simulasi Monte Carlo** untuk verifikasi
+
+Kode ini cocok untuk demo kelas dan mudah diubah parameternya.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import poisson
+
+
+class PoissonQueueHourModel:
+    """
+    Model sederhana untuk 1 interval waktu (mis. 1 jam),
+    dengan:
+      - jumlah kedatangan ~ Poisson(arrival_rate)
+      - jumlah pelayanan selesai ~ Poisson(service_rate)
+
+    Queue muncul bila arrivals > services.
+    Overflow terjadi bila arrivals - services > waiting_capacity.
+    """
+
+    def __init__(self, arrival_rate_per_hour, service_rate_per_hour, waiting_capacity=10):
+        self.lambda_arrival = arrival_rate_per_hour
+        self.lambda_service = service_rate_per_hour
+        self.waiting_capacity = waiting_capacity
+
+    def pmf_arrivals(self, k):
+        return poisson.pmf(k, self.lambda_arrival)
+
+    def pmf_services(self, k):
+        return poisson.pmf(k, self.lambda_service)
+
+    def exact_prob_queue(self, max_k=None):
+        """
+        Hitung P(A > S) secara eksak diskret.
+        """
+        if max_k is None:
+            max_k = int(max(self.lambda_arrival, self.lambda_service) + 6 * np.sqrt(max(self.lambda_arrival, self.lambda_service)))
+
+        a_vals = np.arange(0, max_k + 1)
+        s_vals = np.arange(0, max_k + 1)
+
+        p_a = poisson.pmf(a_vals, self.lambda_arrival)
+        p_s = poisson.pmf(s_vals, self.lambda_service)
+
+        prob = 0.0
+        for i, a in enumerate(a_vals):
+            # jumlahkan probabilitas semua s < a
+            prob += p_a[i] * p_s[s_vals < a].sum()
+        return prob
+
+    def exact_prob_overflow(self, max_k=None):
+        """
+        Hitung P(A - S > waiting_capacity) secara eksak diskret.
+        """
+        if max_k is None:
+            max_k = int(max(self.lambda_arrival, self.lambda_service) + 6 * np.sqrt(max(self.lambda_arrival, self.lambda_service)))
+
+        a_vals = np.arange(0, max_k + 1)
+        s_vals = np.arange(0, max_k + 1)
+
+        p_a = poisson.pmf(a_vals, self.lambda_arrival)
+        p_s = poisson.pmf(s_vals, self.lambda_service)
+
+        cap = self.waiting_capacity
+        prob = 0.0
+        for i, a in enumerate(a_vals):
+            prob += p_a[i] * p_s[s_vals < (a - cap)].sum()
+        return prob
+
+    def simulate(self, n_sim=100_000, random_seed=123):
+        """
+        Simulasi Monte Carlo.
+        """
+        rng = np.random.default_rng(random_seed)
+        arrivals = rng.poisson(self.lambda_arrival, size=n_sim)
+        services = rng.poisson(self.lambda_service, size=n_sim)
+        backlog = arrivals - services
+
+        result = {
+            "arrivals": arrivals,
+            "services": services,
+            "backlog": backlog,
+            "prob_queue_sim": np.mean(backlog > 0),
+            "prob_overflow_sim": np.mean(backlog > self.waiting_capacity),
+        }
+        return result
+
+    def summary(self):
+        pq = self.exact_prob_queue()
+        po = self.exact_prob_overflow()
+        return {
+            "arrival_rate_per_hour": self.lambda_arrival,
+            "service_rate_per_hour": self.lambda_service,
+            "waiting_capacity": self.waiting_capacity,
+            "prob_queue_exact": pq,
+            "prob_overflow_exact": po,
+        }
+
+    def plot_poisson_distributions(self, max_k=None):
+        """
+        Plot distribusi jumlah kedatangan dan pelayanan.
+        """
+        if max_k is None:
+            max_k = int(max(self.lambda_arrival, self.lambda_service) + 4 * np.sqrt(max(self.lambda_arrival, self.lambda_service)))
+
+        k = np.arange(0, max_k + 1)
+        p_a = poisson.pmf(k, self.lambda_arrival)
+        p_s = poisson.pmf(k, self.lambda_service)
+
+        plt.figure(figsize=(10, 5))
+        plt.plot(k, p_a, marker='o', label=f'Arrivals ~ Poisson({self.lambda_arrival:.1f})')
+        plt.plot(k, p_s, marker='s', label=f'Services ~ Poisson({self.lambda_service:.1f})')
+        plt.title('Distribusi Kedatangan dan Pelayanan per Jam')
+        plt.xlabel('Jumlah orang')
+        plt.ylabel('Probabilitas')
+        plt.grid(True, alpha=0.3)
+        plt.legend()
+        plt.show()
+
+    def plot_backlog_histogram(self, n_sim=100_000, random_seed=123):
+        """
+        Plot histogram backlog = arrivals - services.
+        """
+        sim = self.simulate(n_sim=n_sim, random_seed=random_seed)
+        backlog = sim["backlog"]
+
+        min_x = min(backlog.min(), -20)
+        max_x = max(backlog.max(), 20)
+        bins = np.arange(min_x - 0.5, max_x + 1.5, 1)
+
+        plt.figure(figsize=(10, 5))
+        plt.hist(backlog, bins=bins, density=True, alpha=0.75, edgecolor='black')
+        plt.axvline(0.5, linestyle='--', label='Batas mulai antrian (>0)')
+        plt.axvline(self.waiting_capacity + 0.5, linestyle='--',
+                    label=f'Batas luber (>{self.waiting_capacity})')
+        plt.title('Histogram Selisih (Arrivals - Services)')
+        plt.xlabel('Backlog')
+        plt.ylabel('Frekuensi relatif')
+        plt.grid(True, alpha=0.3)
+        plt.legend()
+        plt.show()
+
+    def plot_queue_risk_curve(self, max_capacity=30, max_k=None):
+        """
+        Plot peluang overflow untuk berbagai kapasitas ruang tunggu.
+        """
+        capacities = np.arange(0, max_capacity + 1)
+        probs = []
+
+        old_cap = self.waiting_capacity
+        for cap in capacities:
+            self.waiting_capacity = cap
+            probs.append(self.exact_prob_overflow(max_k=max_k))
+        self.waiting_capacity = old_cap
+
+        plt.figure(figsize=(10, 5))
+        plt.plot(capacities, probs, marker='o')
+        plt.title('Peluang Luber vs Kapasitas Ruang Tunggu')
+        plt.xlabel('Kapasitas kursi tunggu')
+        plt.ylabel('P(luber)')
+        plt.grid(True, alpha=0.3)
+        plt.show()
+
+
+# =========================
+# DEMO PAKAI DATA SOAL
+# =========================
+
+if __name__ == "__main__":
+    # Data:
+    # rata-rata 400 orang/hari
+    # jam kerja 8 jam => 50 orang/jam
+    model = PoissonQueueHourModel(
+        arrival_rate_per_hour=400 / 8,
+        service_rate_per_hour=400 / 8,
+        waiting_capacity=10
+    )
+
+    # Ringkasan eksak
+    summary = model.summary()
+    print("=== RINGKASAN MODEL ===")
+    for k, v in summary.items():
+        print(f"{k}: {v}")
+
+    # Simulasi untuk verifikasi
+    sim = model.simulate(n_sim=200_000, random_seed=42)
+    print("\n=== HASIL SIMULASI ===")
+    print(f"Prob. queue (simulasi)    : {sim['prob_queue_sim']:.4f}")
+    print(f"Prob. overflow (simulasi) : {sim['prob_overflow_sim']:.4f}")
+
+    # Visualisasi
+    model.plot_poisson_distributions()
+    model.plot_backlog_histogram()
+    model.plot_queue_risk_curve(max_capacity=25)
+```
+
+### Apa yang dilakukan kode ini
+
+Class `PoissonQueueHourModel` bisa dipakai ulang untuk kasus lain. Misalnya:
+
+```python
+model2 = PoissonQueueHourModel(
+    arrival_rate_per_hour=60,
+    service_rate_per_hour=55,
+    waiting_capacity=15
+)
+print(model2.summary())
+```
+
+### Interpretasi model
+
+Dalam 1 jam:
+
+* `arrivals ~ Poisson(50)`
+* `services ~ Poisson(50)`
+
+Lalu:
+
+* **antrian terjadi** bila `arrivals > services`
+* **luber** bila `arrivals - services > 10`
+
+### Kelebihan desain class ini
+
+* parameter mudah diubah
+* ada metode **eksak**
+* ada **simulasi**
+* ada **plot**
+* cocok dikembangkan ke model yang lebih realistis
+
+### Catatan penting
+
+Ini masih model **sederhana per jam**, belum model antrian kontinu menit demi menit. Untuk model yang lebih realistis, tahap berikutnya adalah membuat class **M/M/c** dengan:
+
+* arrival Poisson
+* service time exponential
+* jumlah loket `c`
+
+Kalau Anda mau, saya bisa lanjutkan dengan versi **M/M/c reusable class** juga.
+## penjelasan
+Dengan data yang diberikan, cara paling sederhana adalah memodelkan **selisih antara jumlah datang dan jumlah yang bisa dilayani selama 1 jam**.
+
+## 1) Ubah ke laju per jam
+
+Jam kerja 8–16 = **8 jam**.
+
+* Rata-rata **kedatangan** per hari = 400 orang
+  ⇒ rata-rata per jam = (400/8 = 50)
+
+* Rata-rata **pelayanan** per hari = 400 orang
+  ⇒ rata-rata per jam = (400/8 = 50)
+
+Jadi untuk jam **08.00–09.00** kita ambil:
+
+[
+A \sim \text{Poisson}(50), \qquad S \sim \text{Poisson}(50)
+]
+
+dengan:
+
+* (A) = jumlah orang datang dalam 1 jam
+* (S) = jumlah orang yang selesai dilayani dalam 1 jam
+
+---
+
+## 2) Kapan terjadi antrian?
+
+Dalam pendekatan sederhana ini, **antrian muncul** bila dalam jam itu jumlah datang **lebih banyak** daripada jumlah yang dapat dilayani:
+
+[
+A > S
+]
+
+Karena rata-ratanya sama, distribusi selisih (D=A-S) simetris di sekitar 0.
+
+Maka:
+
+[
+P(A>S)=\frac{1-P(A=S)}{2}
+]
+
+Untuk (\lambda_A=\lambda_S=50), hasilnya:
+
+[
+P(A=S)\approx 0.03994
+]
+
+sehingga:
+
+[
+P(A>S)\approx \frac{1-0.03994}{2} \approx 0.4800
+]
+
+### Jadi peluang terjadi antrian pada jam 08–09 kira-kira:
+
+[
+\boxed{0.48 \text{ atau } 48%}
+]
+
+---
+
+## 3) Kapan ruang tunggu 10 kursi luber?
+
+Ruang tunggu luber bila yang tidak tertangani melebihi 10 orang, yaitu:
+
+[
+A-S>10
+]
+
+Hasilnya:
+
+[
+P(A-S>10)\approx 0.1466
+]
+
+### Jadi peluang luber pada jam 08–09 kira-kira:
+
+[
+\boxed{0.1466 \text{ atau } 14.7%}
+]
+
+---
+
+## 4) Intuisi
+
+Walaupun **rata-rata datang = rata-rata pelayanan = 50 per jam**, karena keduanya acak:
+
+* kadang datang 43, dilayani 55 → tidak ada antrian
+* kadang datang 58, dilayani 47 → ada antrian 11 orang
+* kadang datang 50, dilayani 50 → seimbang
+
+Jadi **rata-rata sama tidak berarti antrian hilang**.
+
+---
+
+## 5) Catatan penting
+
+Hasil di atas memakai **penyederhanaan per jam**:
+
+* sistem dianggap mulai kosong pada pukul 08.00
+* antrian dilihat dari **selisih total datang dan total pelayanan dalam 1 jam**
+* belum memodelkan detail banyak loket, lama pelayanan per orang, dan dinamika menit demi menit
+
+Kalau ingin model antrian yang lebih realistis, biasanya dipakai **M/M/c**:
+
+* arrival Poisson
+* service time eksponensial
+* (c) loket
+
+Di sana kita bisa hitung:
+
+* peluang semua loket sibuk
+* rata-rata panjang antrian
+* peluang ruang tunggu penuh
+
+Untuk itu saya perlu tahu **berapa jumlah loket** dan **rata-rata waktu pelayanan per orang**.
+
+# MMC
+
+Berikut versi **M/M/c** yang **reusable dengan class**, dengan asumsi:
+
+* kedatangan mengikuti **Poisson** dengan laju `λ`
+* waktu pelayanan tiap loket mengikuti **Eksponensial** dengan laju `μ`
+* jumlah loket aktif **tidak tetap**, tetapi acak:
+  [
+  C \sim \text{Binomial}(n, p)
+  ]
+  artinya dari `n` loket maksimum, tiap loket aktif dengan peluang `p`.
+
+Ini cocok untuk situasi seperti:
+
+* ada `n` loket terpasang,
+* tapi tidak semua petugas selalu hadir / aktif,
+* sehingga jumlah loket yang benar-benar melayani berubah-ubah.
+
+Kode di bawah memberi:
+
+* metrik analitik berbasis **conditioning pada c**
+* simulasi **discrete-event** per jam
+* visualisasi:
+
+  * distribusi jumlah loket aktif
+  * peluang antrian terhadap jumlah loket aktif
+  * histogram panjang antrian akhir
+  * kurva risiko overflow vs kapasitas kursi
+
+---
+
+## Python code
+
+```python
+import math
+import heapq
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import binom
+
+
+class MMcBinomialServers:
+    """
+    M/M/c dengan jumlah loket aktif C ~ Binomial(n_servers_max, p_active).
+
+    Asumsi:
+    - Arrival process: Poisson dengan rate lambda_per_hour
+    - Service time per server: Exponential dengan rate mu_per_server_per_hour
+    - Jumlah server aktif untuk setiap interval/simulasi diambil dari Binomial(n, p)
+
+    Fitur:
+    - Analitik steady-state dengan conditioning pada c
+    - Simulasi discrete-event selama satu horizon waktu (mis. 1 jam)
+    - Visualisasi reusable
+    """
+
+    def __init__(
+        self,
+        lambda_per_hour,
+        mu_per_server_per_hour,
+        n_servers_max,
+        p_active,
+        waiting_capacity=10,
+    ):
+        self.lam = float(lambda_per_hour)
+        self.mu = float(mu_per_server_per_hour)
+        self.n = int(n_servers_max)
+        self.p = float(p_active)
+        self.waiting_capacity = int(waiting_capacity)
+
+    # =========================
+    # Bagian 1: Distribusi jumlah loket aktif
+    # =========================
+    def server_pmf(self):
+        c_vals = np.arange(0, self.n + 1)
+        probs = binom.pmf(c_vals, self.n, self.p)
+        return c_vals, probs
+
+    # =========================
+    # Bagian 2: Rumus M/M/c klasik
+    # =========================
+    def _p0_mmc(self, c):
+        """
+        Probabilitas sistem kosong untuk M/M/c steady-state.
+        Berlaku bila rho = lam / (c*mu) < 1.
+        """
+        if c <= 0:
+            return None
+        a = self.lam / self.mu
+        rho = self.lam / (c * self.mu)
+        if rho >= 1:
+            return None
+
+        s = sum((a ** k) / math.factorial(k) for k in range(c))
+        s += ((a ** c) / math.factorial(c)) * (1 / (1 - rho))
+        return 1 / s
+
+    def erlang_c_prob_wait_given_c(self, c):
+        """
+        P(wait | c) untuk M/M/c steady-state.
+        """
+        if c <= 0:
+            return 1.0 if self.lam > 0 else 0.0
+
+        rho = self.lam / (c * self.mu)
+        if rho >= 1:
+            return 1.0
+
+        p0 = self._p0_mmc(c)
+        a = self.lam / self.mu
+        pw = ((a ** c) / math.factorial(c)) * (1 / (1 - rho)) * p0
+        return pw
+
+    def lq_given_c(self, c):
+        """
+        Expected queue length Lq | c.
+        """
+        if c <= 0:
+            return math.inf if self.lam > 0 else 0.0
+
+        rho = self.lam / (c * self.mu)
+        if rho >= 1:
+            return math.inf
+
+        pw = self.erlang_c_prob_wait_given_c(c)
+        return pw * rho / (1 - rho)
+
+    def wq_given_c(self, c):
+        """
+        Expected waiting time Wq | c.
+        """
+        lq = self.lq_given_c(c)
+        if math.isinf(lq):
+            return math.inf
+        return lq / self.lam if self.lam > 0 else 0.0
+
+    def summary_by_c(self):
+        """
+        Ringkasan metrik untuk setiap kemungkinan c.
+        """
+        rows = []
+        c_vals, probs = self.server_pmf()
+        for c, pc in zip(c_vals, probs):
+            if c == 0:
+                util = math.inf if self.lam > 0 else 0.0
+            else:
+                util = self.lam / (c * self.mu)
+
+            rows.append({
+                "c": int(c),
+                "P(C=c)": float(pc),
+                "utilization_rho": util,
+                "P_wait_given_c": self.erlang_c_prob_wait_given_c(int(c)),
+                "Lq_given_c": self.lq_given_c(int(c)),
+                "Wq_hours_given_c": self.wq_given_c(int(c)),
+            })
+        return rows
+
+    def unconditional_prob_wait(self):
+        """
+        P(wait) = E[ P(wait | C) ]
+        """
+        c_vals, probs = self.server_pmf()
+        return float(sum(
+            pc * self.erlang_c_prob_wait_given_c(int(c))
+            for c, pc in zip(c_vals, probs)
+        ))
+
+    def unconditional_expected_lq(self):
+        """
+        E[Lq], bisa tak hingga jika ada peluang state tidak stabil.
+        """
+        c_vals, probs = self.server_pmf()
+        vals = []
+        for c, pc in zip(c_vals, probs):
+            lq = self.lq_given_c(int(c))
+            if math.isinf(lq) and pc > 0:
+                return math.inf
+            vals.append(pc * lq)
+        return float(sum(vals))
+
+    def unconditional_expected_wq(self):
+        """
+        E[Wq], bisa tak hingga jika ada peluang state tidak stabil.
+        """
+        c_vals, probs = self.server_pmf()
+        vals = []
+        for c, pc in zip(c_vals, probs):
+            wq = self.wq_given_c(int(c))
+            if math.isinf(wq) and pc > 0:
+                return math.inf
+            vals.append(pc * wq)
+        return float(sum(vals))
+
+    def analytical_summary(self):
+        return {
+            "lambda_per_hour": self.lam,
+            "mu_per_server_per_hour": self.mu,
+            "n_servers_max": self.n,
+            "p_active": self.p,
+            "expected_active_servers": self.n * self.p,
+            "P_wait_unconditional": self.unconditional_prob_wait(),
+            "E_Lq_unconditional": self.unconditional_expected_lq(),
+            "E_Wq_hours_unconditional": self.unconditional_expected_wq(),
+        }
+
+    # =========================
+    # Bagian 3: Simulasi discrete-event
+    # =========================
+    def _simulate_one_run(self, horizon_hours=1.0, rng=None):
+        """
+        Simulasi satu horizon waktu.
+        Mengembalikan statistik run.
+        """
+        if rng is None:
+            rng = np.random.default_rng()
+
+        c = rng.binomial(self.n, self.p)
+
+        # Generate arrival times selama horizon
+        arrival_times = []
+        t = 0.0
+        while True:
+            if self.lam <= 0:
+                break
+            t += rng.exponential(1 / self.lam)
+            if t > horizon_hours:
+                break
+            arrival_times.append(t)
+
+        # Min-heap waktu selesai pelayanan
+        service_heap = []
+
+        num_arrivals = 0
+        num_waited = 0
+        max_queue_len = 0
+        overflow_happened = False
+        queue_len_trace = []
+
+        for t_arr in arrival_times:
+            num_arrivals += 1
+
+            # Bersihkan semua layanan yang sudah selesai sebelum arrival ini
+            while service_heap and service_heap[0] <= t_arr:
+                heapq.heappop(service_heap)
+
+            in_service = len(service_heap)
+            queue_len = max(0, in_service - c) if c > 0 else 0
+            # Untuk implementasi yang benar, jumlah dalam heap = sedang dilayani + yang sudah dijadwalkan dari antrian.
+            # Maka queue sebenarnya adalah total dalam sistem selain yang sedang dilayani.
+            queue_len = max(0, len(service_heap) - c)
+
+            if c == 0:
+                # semua harus menunggu
+                num_waited += 1
+                queue_len += 1
+                # pelanggan akan mulai dilayani setelah server tersedia? Dalam horizon ini server nol terus.
+                # Untuk simulasi satu jam, kita anggap dia tetap di antrean.
+                service_completion = float("inf")
+                heapq.heappush(service_heap, service_completion)
+            elif len(service_heap) < c:
+                # langsung dilayani
+                service_time = rng.exponential(1 / self.mu)
+                finish_time = t_arr + service_time
+                heapq.heappush(service_heap, finish_time)
+            else:
+                # harus menunggu sampai server tercepat selesai
+                num_waited += 1
+                earliest_finish = heapq.heappop(service_heap)
+                start_service = earliest_finish
+                service_time = rng.exponential(1 / self.mu)
+                new_finish = start_service + service_time
+                heapq.heappush(service_heap, new_finish)
+
+                # Queue length saat sesaat setelah kedatangan
+                queue_len = max(0, len(service_heap) - c)
+
+            max_queue_len = max(max_queue_len, queue_len)
+            if queue_len > self.waiting_capacity:
+                overflow_happened = True
+
+            queue_len_trace.append(queue_len)
+
+        end_queue_len = 0 if c == 0 and len(service_heap) == 0 else max(0, len(service_heap) - c)
+
+        return {
+            "active_servers": c,
+            "num_arrivals": num_arrivals,
+            "num_waited": num_waited,
+            "prob_wait_empirical_run": (num_waited / num_arrivals) if num_arrivals > 0 else 0.0,
+            "max_queue_len": max_queue_len,
+            "overflow_happened": overflow_happened,
+            "end_queue_len": end_queue_len,
+            "queue_len_trace": queue_len_trace,
+        }
+
+    def simulate(self, n_sim=5000, horizon_hours=1.0, random_seed=123):
+        rng = np.random.default_rng(random_seed)
+        runs = [self._simulate_one_run(horizon_hours=horizon_hours, rng=rng) for _ in range(n_sim)]
+
+        active_servers = np.array([r["active_servers"] for r in runs])
+        num_arrivals = np.array([r["num_arrivals"] for r in runs])
+        max_queue_len = np.array([r["max_queue_len"] for r in runs])
+        end_queue_len = np.array([r["end_queue_len"] for r in runs])
+        overflow = np.array([r["overflow_happened"] for r in runs], dtype=float)
+        waited = np.array([r["prob_wait_empirical_run"] for r in runs])
+
+        return {
+            "runs": runs,
+            "avg_active_servers": active_servers.mean(),
+            "avg_num_arrivals": num_arrivals.mean(),
+            "avg_prob_wait_per_run": waited.mean(),
+            "prob_overflow": overflow.mean(),
+            "avg_max_queue_len": max_queue_len.mean(),
+            "avg_end_queue_len": end_queue_len.mean(),
+            "active_servers_samples": active_servers,
+            "max_queue_len_samples": max_queue_len,
+            "end_queue_len_samples": end_queue_len,
+        }
+
+    # =========================
+    # Bagian 4: Visualisasi
+    # =========================
+    def plot_server_distribution(self):
+        c_vals, probs = self.server_pmf()
+        plt.figure(figsize=(8, 4))
+        plt.bar(c_vals, probs)
+        plt.title("Distribusi Jumlah Loket Aktif")
+        plt.xlabel("Jumlah loket aktif (c)")
+        plt.ylabel("Probabilitas")
+        plt.grid(alpha=0.3)
+        plt.show()
+
+    def plot_prob_wait_by_c(self):
+        c_vals, _ = self.server_pmf()
+        pw = [self.erlang_c_prob_wait_given_c(int(c)) for c in c_vals]
+
+        plt.figure(figsize=(8, 4))
+        plt.plot(c_vals, pw, marker="o")
+        plt.title("Peluang Harus Menunggu vs Jumlah Loket Aktif")
+        plt.xlabel("Jumlah loket aktif (c)")
+        plt.ylabel("P(wait | c)")
+        plt.grid(alpha=0.3)
+        plt.show()
+
+    def plot_simulated_end_queue_hist(self, n_sim=5000, horizon_hours=1.0, random_seed=123):
+        sim = self.simulate(n_sim=n_sim, horizon_hours=horizon_hours, random_seed=random_seed)
+        data = sim["end_queue_len_samples"]
+
+        bins = np.arange(data.min() - 0.5, data.max() + 1.5, 1)
+        plt.figure(figsize=(8, 4))
+        plt.hist(data, bins=bins, density=True, edgecolor="black")
+        plt.axvline(self.waiting_capacity + 0.5, linestyle="--", label="Batas kursi tunggu")
+        plt.title("Histogram Panjang Antrean di Akhir Horizon")
+        plt.xlabel("Jumlah dalam antrean")
+        plt.ylabel("Frekuensi relatif")
+        plt.legend()
+        plt.grid(alpha=0.3)
+        plt.show()
+
+    def plot_overflow_vs_capacity(self, max_capacity=20, n_sim=3000, horizon_hours=1.0, random_seed=123):
+        caps = np.arange(0, max_capacity + 1)
+        probs = []
+        old_cap = self.waiting_capacity
+
+        for cap in caps:
+            self.waiting_capacity = int(cap)
+            sim = self.simulate(n_sim=n_sim, horizon_hours=horizon_hours, random_seed=random_seed)
+            probs.append(sim["prob_overflow"])
+
+        self.waiting_capacity = old_cap
+
+        plt.figure(figsize=(8, 4))
+        plt.plot(caps, probs, marker="o")
+        plt.title("Peluang Overflow vs Kapasitas Kursi Tunggu")
+        plt.xlabel("Kapasitas kursi tunggu")
+        plt.ylabel("P(overflow dalam horizon)")
+        plt.grid(alpha=0.3)
+        plt.show()
+
+
+# =========================
+# DEMO
+# =========================
+if __name__ == "__main__":
+    # Contoh:
+    # rata-rata kedatangan 50 orang/jam
+    # tiap loket rata-rata melayani 12 orang/jam
+    # ada maksimum 6 loket
+    # tiap loket aktif dengan peluang 0.8
+    # kapasitas kursi tunggu 10
+    model = MMcBinomialServers(
+        lambda_per_hour=50,
+        mu_per_server_per_hour=12,
+        n_servers_max=6,
+        p_active=0.8,
+        waiting_capacity=10,
+    )
+
+    print("=== ANALYTICAL SUMMARY ===")
+    summary = model.analytical_summary()
+    for k, v in summary.items():
+        print(f"{k}: {v}")
+
+    print("\n=== SUMMARY BY c ===")
+    for row in model.summary_by_c():
+        print(row)
+
+    print("\n=== SIMULATION SUMMARY ===")
+    sim = model.simulate(n_sim=5000, horizon_hours=1.0, random_seed=42)
+    for k, v in sim.items():
+        if k != "runs" and not isinstance(v, np.ndarray):
+            print(f"{k}: {v}")
+
+    # plots
+    model.plot_server_distribution()
+    model.plot_prob_wait_by_c()
+    model.plot_simulated_end_queue_hist(n_sim=5000, horizon_hours=1.0, random_seed=42)
+    model.plot_overflow_vs_capacity(max_capacity=20, n_sim=3000, horizon_hours=1.0, random_seed=42)
+```
+
+---
+
+## Cara membaca model ini
+
+### 1. Jumlah loket aktif acak
+
+Kalau ada maksimum 6 loket dan tiap loket aktif dengan peluang 0.8, maka:
+
+[
+C \sim \text{Binomial}(6, 0.8)
+]
+
+Jadi bisa saja:
+
+* 4 loket aktif
+* 5 loket aktif
+* 6 loket aktif
+  dengan probabilitas masing-masing.
+
+---
+
+### 2. Conditional M/M/c
+
+Begitu `c` diketahui, sistem menjadi **M/M/c biasa**.
+
+Untuk tiap `c`, kita bisa hitung:
+
+* (P(\text{wait} \mid c))
+* (L_q \mid c)
+* (W_q \mid c)
+
+Lalu dirata-ratakan terhadap distribusi Binomial jumlah loket aktif.
+
+---
+
+### 3. Overflow
+
+Untuk **overflow ruang tunggu**, saya pakai **simulasi discrete-event**, karena:
+
+* jumlah loket aktif acak,
+* horizon waktu terbatas,
+* kapasitas tunggu terbatas,
+
+sehingga simulasi lebih mudah dipakai dan lebih fleksibel untuk demo kelas.
+
+---
+
+## Contoh interpretasi parameter
+
+Misalnya:
+
+* `lambda_per_hour = 50`
+  rata-rata 50 orang datang per jam
+
+* `mu_per_server_per_hour = 12`
+  satu loket rata-rata melayani 12 orang per jam
+  berarti rata-rata 1 orang tiap 5 menit
+
+* `n_servers_max = 6`
+
+* `p_active = 0.8`
+  rata-rata loket aktif = (6 \times 0.8 = 4.8)
+
+Karena kapasitas pelayanan rata-rata kira-kira:
+
+[
+4.8 \times 12 = 57.6 \text{ orang/jam}
+]
+
+maka sistem cenderung masih aman, tetapi bila loket aktif kebetulan hanya 3 atau 4, antrean bisa muncul.
+
+---
+
+## Kalau ingin dipakai untuk kasus kantor catatan sipil tadi
+
+Anda bisa mulai dengan misalnya:
+
+```python
+model = MMcBinomialServers(
+    lambda_per_hour=50,      # 400/hari selama 8 jam
+    mu_per_server_per_hour=10,
+    n_servers_max=6,
+    p_active=0.9,
+    waiting_capacity=10,
+)
+```
+
+Lalu ubah `mu`, `n`, dan `p` sesuai skenario:
+
+* petugas penuh
+* petugas kurang
+* beberapa loket sering kosong
+* jam sibuk vs jam sepi
+
+---
+
+## Catatan penting
+
+Model ini memakai asumsi:
+
+* kedatangan Poisson
+* waktu pelayanan eksponensial
+* jumlah loket aktif tetap selama satu horizon simulasi, tetapi berubah antar run
+
+Kalau Anda ingin, langkah berikutnya yang sangat bagus adalah membuat versi yang lebih realistis, misalnya:
+
+* **jumlah loket aktif berubah per menit**
+* **kedatangan berbeda per jam**
+* **pelanggan prioritas**
+* **kapasitas sistem total terbatas**
+* atau **dashboard interaktif** dengan slider memakai `ipywidgets` atau `streamlit`
+
 
 ```{python}
 import numpy as np
@@ -19,7 +918,8 @@ import matplotlib.pyplot as plt
 ```
 
 
-# Perhitungan Secara Manual 
+## Perhitungan Secara Manual
+suato kantor catab sipil  elayanirata-rata 400 orang per hari. b=dalam kenyataannya bisa 100, 300, 500, 700, atau angka lainberarti rata-rata per jam 50 orang. 8sa30, bisa 100, yang pasti rata rata 50. ini poisson
 Katakanlah dalam suatu interval 60 menit rata rata 5 kendaraan per 10 menit pelanggan tiba di loket pelayanan, meskipun tidak bersamaan.
 
 
