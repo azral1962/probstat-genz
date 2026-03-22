@@ -1,0 +1,19 @@
+{
+  "index.qmd": {
+    "index.html": "fc520518",
+    "index.tex": "8047f1d2",
+    "index.typ": "64ad51bf"
+  },
+  "intro.qmd": {
+    "intro.html": "a00b6119",
+    "intro.typ": "fb1b2dd2"
+  },
+  "references.qmd": {
+    "references.html": "2c0d4e14",
+    "references.typ": "3dd3b174"
+  },
+  "summary.qmd": {
+    "summary.html": "c164d3b4",
+    "summary.typ": "f5308925"
+  }
+}

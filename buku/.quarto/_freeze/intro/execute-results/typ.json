@@ -1,0 +1,11 @@
+{
+  "hash": "ed6415f039eb8b6735885553812dd059",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "# Introduction\n\nThis is a book created from markdown and executable code.\n\nSee @knuth84 for additional discussion of literate programming.\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\nimport matplotlib.pyplot as plt\n# -*- coding: utf-8 -*-\nn_plgn = 100\nselang = 60\ntiba_selang_rata = 10\nlyn_selang_rata = 7\n\ntiba_selang  = np.random.exponential(tiba_selang_rata, n_plgn)\n\nprint(\"rata-rata selang tiba: \",sum(tiba_selang)/len(tiba_selang))\ntiba_waktu = np.cumsum(tiba_selang)\n\nlyn_selang =  np.random.exponential(lyn_selang_rata, len(tiba_selang))\n\nprint(\"rata-rata selang layanan: \",sum(lyn_selang)/len(lyn_selang))\n\nlyn_start = np.zeros(len(tiba_selang))\nlyn_finish = np.zeros(len(tiba_selang))\n\nidx_pelanggan=list(range(len(tiba_selang)))\nfor i in idx_pelanggan :\n    if i == 0:\n        lyn_start[i] = tiba_waktu[i]\n    else:\n        lyn_start[i] = max(tiba_waktu[i], lyn_finish[i - 1])\n    lyn_finish[i] = lyn_start[i] + lyn_selang[i]\n\nwaiting_duration = lyn_start - tiba_waktu\n\nprint(\"rata-rata antrian: \",sum(waiting_duration)/len(waiting_duration))\nsystem = lyn_finish - tiba_waktu\n\nprint(\"rata-rata total layanan: \",sum(waiting_duration+lyn_selang)/len(waiting_duration+lyn_selang))\n\nfig, ([ax11, ax12], [ax21, ax22],[ax31, ax32]) = plt.subplots(3,2)\nax11.eventplot(tiba_waktu)\nax21.eventplot(lyn_start)\nax31.eventplot(lyn_finish)\nax22.bar(idx_pelanggan, lyn_selang)\nax12.bar(idx_pelanggan, waiting_duration)\nax32.bar(idx_pelanggan, waiting_duration + lyn_selang)\nplt.tight_layout()\nplt.show()\n\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nrata-rata selang tiba:  11.47402609668567\nrata-rata selang layanan:  6.224575980320161\nrata-rata antrian:  5.212786790972691\nrata-rata total layanan:  11.437362771292849\n```\n:::\n\n::: {.cell-output .cell-output-display}\n![](intro_files/figure-typst/cell-2-output-2.svg){}\n:::\n:::\n\n\n",
+    "supporting": [
+      "intro_files\\figure-typst"
+    ],
+    "filters": []
+  }
+}

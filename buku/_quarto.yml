@@ -1,0 +1,26 @@
+project:
+  type: book
+
+book:
+  title: "Pengambilan Keputusan Dengan Probabilitas dan Statiastika"
+  subtitle: "Kode Python dan Teowri dam Aplikasi"
+  author: "Armein Z. R. Langi"
+
+  date: "12/6/2025"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  typst:
+    keep-typ: true
+    lang: id
+    papersize: iso-b5
+    include-in-header:
+       - text: |
+           #import "@preview/bookly:2.0.0": *
+
