@@ -1,0 +1,31 @@
+---
+title: "Minggu 05: Variabel Acak"
+subtitle: "Random Variable Definition, Probability Function, Expectation, Variance"
+---
+
+![“Kamu dikasih dua opsi investasi: A stabil, B bisa tinggi tapi bisa jeblok. Pertanyaannya: keputusan yang ‘dewasa’ itu bukan cuma lihat rata-rata—tapi lihat risiko. Variabel acak itu cara kita memetakan dunia random jadi angka. Ekspektasi itu ‘rata-rata jangka panjang’, variansi itu ‘seberapa liar’. Hari ini kamu mulai bicara seperti engineer: bukan ‘feeling’, tapi ‘E dan Var’. Dan kamu akan bikin keputusan yang bisa dipertanggungjawabkan.”](../The_Decision_Engineer.png/image5.png)
+
+
+{{< include ../agenda/w05.qmd >}}
+
+## 1. Konsep Pengetahuan
+Pemetaan hasil eksperimen ke nilai numerik (variabel acak), Nilai Harapan (E[X]) sebagai rata-rata jangka panjang, dan Variansi sebagai ukuran sebaran.
+
+## 2. Tipikal Problem
+Seorang investor memiliki dua opsi investasi dengan profil risiko berbeda. Opsi A memberikan hasil pasti, Opsi B memberikan hasil tinggi tapi berisiko rugi.
+
+## 3. Solusi & Pengambilan Keputusan
+Menghitung E[X] (expected return) dan Variansi (risiko) dari kedua opsi. Keputusan diambil dengan memilih E[X] tertinggi yang masih berada dalam toleransi risiko (variansi) investor tersebut.
+
+## 4. Eksplorasi Komputasi (Python)
+*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
+
+```{python}
+# Tulis kode Python Anda di sini
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+print("Siap untuk komputasi Minggu 05!")
+```

@@ -1,0 +1,35 @@
+Berdasarkan silabus, **Materi Week 3** berfokus pada **"Studi Kasus (Aplikasi Teknik)"** atau penerapan kerangka kerja probabilitas di dunia nyata. 
+
+Minggu ini adalah momen di mana teori matematika yang bikin pusing diubah menjadi *skill* dewa untuk merancang sistem teknologi yang anti-tumbang. Berikut adalah bedah materi Week 3 dengan gaya yang lebih *relatable*!
+
+---
+
+### 🚀 **Tema Week 3: Probabilistic Framework in Engineering Application**
+Di minggu ketiga, kita nggak lagi cuma ngomongin dadu atau koin, tapi **Keandalan Sistem (*System Reliability*)**. Bayangin kamu adalah seorang *Cloud Architect* atau *Lead Engineer*. Misi utamamu: **Gimana caranya bikin Data Center atau *Machine Learning Pipeline* yang nggak gampang *down*?**.
+
+### 🛠️ **Konsep Inti: The Architecture of Survival (Seri vs Paralel)**
+Kamu akan belajar cara menghitung probabilitas kegagalan sistem berdasarkan bentuk arsitekturnya. Ada dua aliran utama:
+
+**1. Sistem Seri (The "Domino" Effect) 🔴**
+*   **Logika:** Komponen disusun berurutan. (Contoh: Database $\rightarrow$ Server $\rightarrow$ UI).
+*   **Risiko:** Kalau *satu aja* komponen mati, seluruh sistem langsung *crash*. Semua komponen wajib hidup biar sistem berjalan.
+
+**2. Sistem Paralel (The "Redundancy" Hack) 🟢**
+*   **Logika:** Komponen disusun sejajar sebagai *backup*. (Contoh: Server A dan Server B nyala barengan).
+*   **Kekuatan:** Sistem baru akan mati kalau **semua** komponen mati barengan. Kalau cuma satu yang *down*, sistem tetap aman karena ada *backup*. Ini adalah trik rahasia di balik layanan raksasa kayak Google atau Netflix yang jarang banget *down*.
+
+### 🎮 **Real-World Boss Fights (Studi Kasus)**
+
+Dosen biasanya akan ngasih "studi kasus" yang menguji nalar *engineering* kamu:
+
+*   **Kasus 1: Perang Generator Data Center** ⚡
+    *   *Masalah:* Sebuah Data Center punya dua generator listrik cadangan. Harus dipasang seri atau paralel? 
+    *   *Solusi Probabilitas:* Kalau dipasang **paralel**, peluang sistem mati total adalah hasil kali dari peluang rusaknya masing-masing generator. Misal peluang generator rusak adalah 1% ($0.01$). Kalau paralel, peluang sistem mati total jadi $0.01 \times 0.01 = 0.0001$ (sangat kecil!). Keputusan paling logis adalah paralel untuk menaikkan reliabilitas.
+*   **Kasus 2: *Machine Learning Pipeline* yang Rapuh** 🤖
+    *   *Masalah:* Sistem punya rantai data: *Ingestion* $\rightarrow$ *Feature Store* $\rightarrow$ *Training* $\rightarrow$ *Serving*. Berapa peluang layanan prediksi macet total?
+    *   *Solusi Probabilitas:* Karena mereka ini sistem "seri", risiko *downtime* bakal numpuk. Kamu bisa hitung probabilitasnya, lalu pakai hasilnya untuk minta *budget* ke bos buat bikin komponen "paralel" (redundansi) di bagian yang paling gampang rusak.
+
+### 💡 **Kenapa Materi Ini Penting Banget? (The "So What?")**
+Di Week 3 ini, kamu diajarin kalau probabilitas itu adalah alat untuk **mengambil keputusan bisnis dan teknologi**. Kamu bukan sekadar ngitung angka desimal, tapi kamu sedang membuat argumen berbasis data ("*data-driven decision*"). 
+
+Misalnya: "Kita harus beli server *backup* (paralel), karena secara probabilitas, kalau kita nggak pakai *backup*, risiko kerugian akibat server *down* jauh lebih mahal!".

@@ -1,0 +1,1631 @@
+Berdasarkan **Problem Set 1** dan materi pendukung dari catatan kuliah serta buku referensi yang Anda berikan (terutama sumber dan), berikut adalah kerangka kerja teoretis, analisis jenis masalah, dan penerapan solusi untuk memecahkan masalah tersebut.
+
+---
+
+### **1. Konsep Teori yang Mendasari**
+
+Untuk memecahkan Problem Set 1, kita memerlukan kerangka kerja "Kerangka Kerja Probabilitas" yang terdiri dari tiga komponen utama:
+1.  **Eksperimen dalam Pikiran ($\epsilon$):** Suatu proses yang menghasilkan *outcome* yang tidak pasti.
+2.  **Ruang Sampel ($S$):** Himpunan dari semua hasil (*outcome*) yang mungkin terjadi.
+    *   *Diskrit:* Dapat dihitung (finite atau countable infinite), misal jumlah kiriman data.
+    *   *Kontinu:* Tak terhitung (interval bilangan real), misal waktu atau dimensi fisik.
+3.  **Kejadian ($Event/A$):** Himpunan bagian (subset) dari ruang sampel.
+4.  **Probabilitas ($P$):** Pemetaan dari kejadian ke angka yang memenuhi **Aksioma Probabilitas**:
+    *   $P(A) \ge 0$
+    *   $P(S) = 1$
+    *   Jika $A$ dan $B$ *mutually exclusive* (saling asing/terpisah), maka $P(A \cup B) = P(A) + P(B)$.
+
+---
+
+### **2. Analisis Jenis Masalah, Pola, dan Prinsip Pemecahan**
+
+Dalam Problem Set 1, masalah dapat dikelompokkan menjadi 4 kategori utama. Berikut adalah pola dan prinsip untuk memecahkannya:
+
+#### **Jenis A: Definisi Ruang Sampel (Sample Space Definition)**
+*   **Masalah:** No. 1, 2, 3, 4, 5, 9(a), 10.
+*   **Pola:** Menentukan seluruh kemungkinan hasil dari deskripsi fisik atau logika sistem.
+*   **Prinsip Pemecahan:**
+    *   Identifikasi kapan eksperimen berhenti.
+    *   Tentukan apakah hasilnya diskrit (bisa didaftar) atau kontinu (interval).
+    *   Gunakan **Diagram Pohon** untuk eksperimen bertahap (sekuensial).
+    *   Gunakan **Notasi Himpunan** atau **Sistem Koordinat** (untuk 2 dimensi).
+
+#### **Jenis B: Operasi Himpunan & Diagram Venn**
+*   **Masalah:** No. 6, 8, 9(c).
+*   **Pola:** Menggambarkan hubungan antar kejadian (gabungan, irisan, komplemen).
+*   **Prinsip Pemecahan:**
+    *   **Union ($\cup$):** "Atau", gabungan area.
+    *   **Intersection ($\cap$):** "Dan", irisan/tumpang tindih area.
+    *   **Complement ($A^c$ atau $A'$):** "Bukan", area di luar himpunan tersebut.
+    *   Gunakan **Hukum De Morgan**: $(A \cup B)^c = A^c \cap B^c$.
+
+#### **Jenis C: Perhitungan Probabilitas Dasar & Aksioma**
+*   **Masalah:** No. 7, 14.
+*   **Pola:** Diberikan probabilitas kejadian elementer atau gabungan, diminta mencari probabilitas lain atau memvalidasi logika.
+*   **Prinsip Pemecahan:**
+    *   Total probabilitas ruang sampel harus = 1.
+    *   Jika *mutually exclusive*, jumlah probabilitas kejadian individu tidak boleh melebihi 1.
+    *   Rumus Penjumlahan: $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.
+
+#### **Jenis D: Analisis Data Tabel (Joint & Marginal Probability)**
+*   **Masalah:** No. 11, 12, 13, 15.
+*   **Pola:** Data disajikan dalam tabel kontingensi (baris vs kolom).
+*   **Prinsip Pemecahan:**
+    *   **Marginal Probability:** Jumlahkan baris atau kolom dibagi total sampel.
+    *   **Joint Probability ($A \cap B$):** Nilai sel spesifik dibagi total sampel.
+    *   **Union ($A \cup B$):** (Total Baris A + Total Kolom B - Nilai Sel Irisan) / Total Sampel.
+
+---
+
+### **3. Penerapan Pemecahan Masalah (Problem Set 1)**
+
+Berikut adalah penerapan prinsip di atas untuk memecahkan soal-soal di Problem Set 1:
+
+#### **Solusi Jenis A: Ruang Sampel**
+
+*   **No. 1 (Pengiriman Berulang):**
+    *   Eksperimen berlanjut sampai sukses. Jumlah kiriman adalah bilangan bulat positif.
+    *   $S = \{1, 2, 3, \dots \}$ (Diskrit, *Countable Infinite*).
+
+*   **No. 3 (Papan Sirkuit):**
+    *   Tahap 1: Lolos ($L$) atau Gagal ($G$).
+    *   Tahap 2: Jika $G$, ada 5 tipe cacat ($C_1, \dots, C_5$).
+    *   $S = \{L, G_{C1}, G_{C2}, G_{C3}, G_{C4}, G_{C5}\}$.
+
+*   **No. 5 (Penyimpanan Magnetik - Diagram Pohon):**
+    *   *Prinsip:* Ikuti alur logika. Baca ($s/f$). Jika $f$, lakukan pemulihan ($S/F$). Ulangi maksimal 3 kali pemulihan.
+    *   **Ruang Sampel:**
+        1.  Sukses langsung: $\{s\}$
+        2.  Gagal baca, Pulih Sukses, Baca Sukses: $\{fSs\}$
+        3.  Gagal baca, Pulih Sukses, Baca Gagal, Pulih Sukses, Baca Sukses: $\{fS fS s\}$
+        4.  Gagal total (Abort): $\{fF, fSfF, fSfSfF, fSfSfS\}$ (tergantung detail kapan *abort* dipicu, biasanya jika pemulihan gagal atau setelah 3x loop).
+
+#### **Solusi Jenis B: Operasi Himpunan**
+
+*   **No. 6 (Diagram Venn):**
+    *   $A \cup (B \cap C)$: Arsir daerah irisan B dan C, lalu gabungkan dengan seluruh lingkaran A.
+    *   $(A \cap B) \cup C$: Arsir irisan A dan B, lalu gabungkan dengan seluruh lingkaran C.
+
+*   **No. 8 (Cetakan Injeksi):**
+    *   Daerah $A$: Garis vertikal antara $X=48$ dan $X=52$.
+    *   Daerah $B$: Garis horizontal antara $Y=9$ dan $Y=11$.
+    *   $A \cap B$: Daerah persegi panjang pertemuan kedua batasan tersebut.
+    *   *Analisis:* Jika $X=50, Y=10$, titik ini berada di pusat $A \cap B$, yang berarti produk memenuhi spesifikasi panjang dan lebar.
+
+#### **Solusi Jenis C: Perhitungan Probabilitas**
+
+*   **No. 7 (Probabilitas Diskrit):**
+    *   $S = \{a, b, c, d, e\}$ dengan $P = \{0.1, 0.1, 0.2, 0.4, 0.2\}$.
+    *   $A = \{a, b, c\} \rightarrow P(A) = 0.1 + 0.1 + 0.2 = 0.4$.
+    *   $B = \{c, d, e\} \rightarrow P(B) = 0.2 + 0.4 + 0.2 = 0.8$.
+    *   $A \cap B = \{c\} \rightarrow P(A \cap B) = 0.2$.
+    *   $P(A \cup B) = P(A) + P(B) - P(A \cap B) = 0.4 + 0.8 - 0.2 = 1.0$ (Atau jumlahkan elemen unik $\{a,b,c,d,e\}$).
+
+*   **No. 14 (Mutually Exclusive Check):**
+    *   Diketahui: $A, B, C$ saling eksklusif. $P(A)=0.3, P(B)=0.4, P(C)=0.5$.
+    *   *Prinsip:* Aksioma 3. Jika saling eksklusif, $P(A \cup B \cup C) = P(A) + P(B) + P(C)$.
+    *   *Perhitungan:* $0.3 + 0.4 + 0.5 = 1.2$.
+    *   *Kesimpulan:* **Tidak Mungkin**, karena total probabilitas tidak boleh lebih dari 1.
+
+#### **Solusi Jenis D: Analisis Tabel (Contoh No. 11 - Piringan Plastik)**
+
+Data: Total = 100.
+*   Gores Tinggi, Guncang Tinggi (HT) = 70
+*   Gores Tinggi, Guncang Rendah (HR) = 9
+*   Gores Rendah, Guncang Tinggi (LT) = 16
+*   Gores Rendah, Guncang Rendah (LR) = 5
+
+Misal $A$ = Gores Tinggi, $B$ = Guncang Tinggi.
+*   **a. $P(A)$ (Marginal Gores Tinggi):** $(70 + 9) / 100 = 0.79$.
+*   **b. $P(B)$ (Marginal Guncang Tinggi):** $(70 + 16) / 100 = 0.86$.
+*   **d. $P(A \cap B)$ (Joint):** Sel pertemuan A dan B adalah 70. Maka $70/100 = 0.70$.
+*   **e. $P(A \cup B)$:** $P(A) + P(B) - P(A \cap B) = 0.79 + 0.86 - 0.70 = 0.95$.
+    *   *Alternatif:* Jumlahkan sel yang relevan: $(70+9+16)/100 = 0.95$.
+
+Pola ini dapat diterapkan serupa untuk soal No. 12 (Emisi), No. 13 (Lampu), dan No. 15 (Lapisan).
+
+## Python
+
+Untuk merancang skrip Python yang **universal** dan dapat menangani seluruh variasi soal pada **Problem Set 1** (yang mencakup ruang sampel diskrit, kontinu, operasi himpunan, dan analisis data tabel), pendekatan terbaik adalah menggunakan **Desain Berorientasi Objek (Object-Oriented Programming/OOP)**.
+
+Desain ini membagi skrip menjadi **3 Modul Utama** sesuai dengan pola masalah yang telah diidentifikasi dari sumber,,.
+
+Berikut adalah rancangan arsitektur lengkapnya:
+
+---
+
+### **Arsitektur Skrip: `ProbSolver` Framework**
+
+Kita akan membuat paket sederhana yang terdiri dari tiga kelas utama:
+1.  **`SetCalculator`**: Untuk menangani Aksioma Probabilitas, Union, Intersect, dan Diagram Venn (Soal 6, 7, 14).
+2.  **`TableAnalyzer`**: Menggunakan `pandas` untuk menangani Joint & Marginal Probability dari data tabel (Soal 11, 12, 13, 15).
+3.  **`ContinuousSpace`**: Menangani probabilitas berbasis area/geometri (Soal 8, 10).
+
+---
+
+### **1. Implementasi Kode Python**
+
+Berikut adalah implementasi lengkap yang dapat Anda gunakan sebagai *library* untuk menyelesaikan Problem Set 1.
+
+#### **A. Modul 1: Kalkulator Himpunan (The Axiom Engine)**
+Digunakan untuk menyelesaikan soal seperti nomor 2, 6, 7, dan 14 yang mengandalkan aturan penjumlahan dan pengurangan himpunan.
+
+```python
+class SetCalculator:
+    def __init__(self):
+        pass
+
+    def union(self, p_a, p_b, p_intersect=0):
+        """Menghitung P(A U B) = P(A) + P(B) - P(A n B)"""
+        return p_a + p_b - p_intersect
+
+    def intersection(self, p_a, p_b, p_union):
+        """Menghitung P(A n B) = P(A) + P(B) - P(A U B)"""
+        return p_a + p_b - p_union
+
+    def check_mutually_exclusive(self, prob_list):
+        """
+        Mengecek apakah himpunan kejadian saling eksklusif valid.
+        Syarat: Total probabilitas tidak boleh > 1.
+        (Relevan untuk Soal No. 14)
+        """
+        total = sum(prob_list)
+        if total > 1.0:
+            return False, f"Tidak mungkin (Total={total} > 1)"
+        return True, f"Mungkin (Total={total} <= 1)"
+
+    def complement(self, p_a):
+        """Menghitung P(A')"""
+        return 1 - p_a
+```
+
+#### **B. Modul 2: Analisis Tabel Kontingensi (The Data Engine)**
+Digunakan untuk menyelesaikan soal nomor 11, 12, 13, dan 15 yang menyajikan data dalam bentuk matriks/tabel.
+
+```python
+import pandas as pd
+
+class TableAnalyzer:
+    def __init__(self, data_dict, index_names, column_names):
+        """
+        Inisialisasi dengan data matriks.
+        data_dict: Dictionary data
+        index_names: Label baris (misal: Goresan Tinggi/Rendah)
+        column_names: Label kolom (misal: Guncangan Tinggi/Rendah)
+        """
+        self.df = pd.DataFrame(data_dict, index=index_names)
+        self.df.columns = column_names
+        self.total_sample = self.df.values.sum()
+
+    def show_table(self):
+        print("\n--- Tabel Data ---")
+        print(self.df)
+        print(f"Total Sampel: {self.total_sample}\n")
+
+    def marginal_prob(self, category, axis='index'):
+        """
+        Menghitung Probabilitas Marginal (Total Baris atau Total Kolom).
+        axis: 'index' untuk baris, 'columns' untuk kolom.
+        """
+        if axis == 'index':
+            count = self.df.loc[category].sum()
+        else:
+            count = self.df[category].sum()
+        
+        return count / self.total_sample
+
+    def joint_prob(self, row_cat, col_cat):
+        """
+        Menghitung P(A n B) - Probabilitas Irisan sel tertentu.
+        """
+        count = self.df.loc[row_cat, col_cat]
+        return count / self.total_sample
+
+    def union_prob(self, row_cat, col_cat):
+        """
+        Menghitung P(A U B) menggunakan data tabel.
+        Rumus: (Total Baris + Total Kolom - Irisan) / Total Sampel
+        """
+        prob_a = self.marginal_prob(row_cat, axis='index')
+        prob_b = self.marginal_prob(col_cat, axis='columns')
+        prob_intersect = self.joint_prob(row_cat, col_cat)
+        return prob_a + prob_b - prob_intersect
+```
+
+#### **C. Modul 3: Geometri Probabilitas (The Continuous Engine)**
+Untuk soal nomor 8 dan 10 yang melibatkan area persegi panjang pada bidang Cartesius (Rise time, Cetakan Injeksi).
+
+```python
+class RectangularSpace:
+    def __init__(self, x_range, y_range):
+        """
+        Mendefinisikan ruang sampel persegi panjang.
+        x_range: tuple (x_min, x_max)
+        y_range: tuple (y_min, y_max)
+        """
+        self.x_min, self.x_max = x_range
+        self.y_min, self.y_max = y_range
+        self.total_area = (self.x_max - self.x_min) * (self.y_max - self.y_min)
+
+    def calc_prob_region(self, x_limit, y_limit):
+        """
+        Menghitung probabilitas area yang dibatasi x_limit dan y_limit.
+        Asumsi distribusi uniform (Probabilitas = Luas Area Target / Luas Total).
+        """
+        # Menghitung lebar (width) irisan
+        x0 = max(self.x_min, x_limit)
+        x1 = min(self.x_max, x_limit)
+        width = max(0, x1 - x0)
+
+        # Menghitung tinggi (height) irisan
+        y0 = max(self.y_min, y_limit)
+        y1 = min(self.y_max, y_limit)
+        height = max(0, y1 - y0)
+
+        target_area = width * height
+        return target_area / self.total_area
+```
+
+---
+
+### **2. Contoh Penerapan untuk Soal Problem Set 1**
+
+Berikut adalah cara menggunakan skrip di atas untuk menyelesaikan soal-soal spesifik dari Problem Set 1 Anda.
+
+#### **Kasus 1: Soal No. 11 (Piringan Plastik)**
+*Soal: Tabel ketahanan gores (Tinggi/Rendah) vs Guncang (Tinggi/Rendah). Data: 70, 9, 16, 5.*
+
+```python
+# 1. Setup Data
+data = {
+    'Guncang_Tinggi':,
+    'Guncang_Rendah':
+}
+rows = ['Gores_Tinggi', 'Gores_Rendah']
+cols = ['Guncang_Tinggi', 'Guncang_Rendah']
+
+# 2. Inisialisasi Engine
+analyzer = TableAnalyzer(data, rows, cols)
+analyzer.show_table()
+
+# 3. Menjawab Pertanyaan
+p_A = analyzer.marginal_prob('Gores_Tinggi', axis='index')
+p_B = analyzer.marginal_prob('Guncang_Tinggi', axis='columns')
+p_A_iris_B = analyzer.joint_prob('Gores_Tinggi', 'Guncang_Tinggi')
+p_A_union_B = analyzer.union_prob('Gores_Tinggi', 'Guncang_Tinggi')
+
+print(f"a. P(A) [Gores Tinggi]       = {p_A:.2f}")
+print(f"b. P(B) [Guncang Tinggi]     = {p_B:.2f}")
+print(f"d. P(A n B) [Joint]          = {p_A_iris_B:.2f}")
+print(f"e. P(A U B) [Union]          = {p_A_union_B:.2f}")
+```
+
+#### **Kasus 2: Soal No. 7 (Probabilitas Diskrit & Aksioma)**
+*Soal: P(a,b,c) = A, P(c,d,e) = B. Hitung P(A U B).*
+
+```python
+calc = SetCalculator()
+
+# Diketahui dari soal
+P_A = 0.1 + 0.1 + 0.2  # {a, b, c}
+P_B = 0.2 + 0.4 + 0.2  # {c, d, e}
+P_intersect = 0.2      # {c} adalah irisan
+
+# Hitung Union
+res = calc.union(P_A, P_B, P_intersect)
+print(f"P(A U B) = {res:.1f}") # Output harus 1.0
+```
+
+#### **Kasus 3: Soal No. 14 (Mutually Exclusive Check)**
+*Soal: P(A)=0.3, P(B)=0.4, P(C)=0.5. Apakah mungkin saling eksklusif?*
+
+```python
+calc = SetCalculator()
+probs = [0.3, 0.4, 0.5]
+possible, message = calc.check_mutually_exclusive(probs)
+print(f"Soal 14: {message}") 
+# Output: Tidak mungkin (Total=1.2 > 1)
+```
+
+#### **Kasus 4: Soal No. 8 (Cetakan Injeksi)**
+*Soal: Cari irisan range Panjang (X) 48-52 dan Lebar (Y) 9-11.*
+
+```python
+# Anggap ruang sampel total X(40-60) dan Y(5-15) untuk contoh
+# (Soal asli mungkin tidak mendefinisikan batas luar, tapi logika ini tetap berlaku untuk irisan)
+space = RectangularSpace((40, 60), (5, 15))
+
+# Probabilitas X antara 48-52 DAN Y antara 9-11
+prob = space.calc_prob_region((48, 52), (9, 11))
+# Karena distribusi uniform, ini akan menghitung rasio luas area target terhadap total.
+```
+
+### **Kesimpulan Desain**
+Dengan desain 3 modul ini, Anda dapat memecahkan seluruh jenis soal di Problem Set 1:
+1.  Gunakan `SetCalculator` untuk logika himpunan dan validasi aksioma.
+2.  Gunakan `TableAnalyzer` untuk soal berbasis data riil (sampel piringan, lampu, emisi).
+3.  Gunakan `RectangularSpace` untuk soal berbasis area kontinu.
+
+## Agenda
+Berikut adalah rencana pembelajaran (Lesson Plan) yang dirancang khusus untuk mahasiswa Gen Z, menggabungkan visualisasi, relevansi dunia nyata (seperti *data science* & *gaming*), serta integrasi langsung antara teori dan *coding* Python.
+
+Materi ini disusun berdasarkan **Problem Set 1** dan referensi teoretis dari catatan kuliah serta buku teks yang disediakan (Schaum’s, Pishro-Nik, & Catatan Kuliah Dimitri Mahayana).
+
+---
+
+### **Overview Kurikulum: "Hack Probability with Python"**
+
+*   **Target:** Menyelesaikan Problem Set 1 dengan pemahaman konsep + verifikasi komputasi.
+*   **Gaya Pengajaran:** *Visual learning*, studi kasus teknologi (Data Center/Server), dan *live coding*.
+
+---
+
+### **SESI 1: Senin (1 Jam)**
+**Topik: The Architecture of Chance (Ruang Sampel & Logika Himpunan)**
+*Fokus Soal Problem Set 1: Nomor 1-6, 8, 9, 10.*
+
+#### **1. Intro & Hook (10 Menit): "Dunia Tidak Pasti"**
+*   **Konsep:** Ketidakpastian dalam sistem (Sinyal 0/1, Server Down, Gacha Games).
+*   **Aktivitas:** Tanyakan: "Berapa banyak kemungkinan *outcome* jika kamu melempar 3 koin?" (Kaitkan dengan *binary states* di ilmu komputer).
+*   **Materi:** Definisi Eksperimen, Ruang Sampel ($S$), dan Kejadian ($E$).
+    *   *Sumber:* Gunakan contoh **Data Center (ON/OFF)** dari slide kuliah-.
+    *   *Gen Z Context:* Ruang sampel adalah "Database" dari semua kemungkinan yang bisa terjadi.
+
+#### **2. Visualisasi Logika: Diagram Venn & Tree (20 Menit)**
+*   **Teori:**
+    *   **Diskrit vs Kontinu:** Diskrit = Jumlah kiriman data (Soal 1), Kontinu = Waktu respon/*Rise time* (Soal 10).
+    *   **Tree Diagram:** Cara memetakan eksperimen bertahap (Soal 5 - Sistem Pemulihan).
+*   **Studi Kasus (Soal 5):**
+    *   Gambarkan *flowchart* kegagalan baca data $\rightarrow$ pemulihan $\rightarrow$ sukses/gagal.
+*   **Aktivitas:** Mahasiswa menggambar diagram pohon untuk 3 kali pengiriman sinyal (Soal 2).
+
+#### **3. Operasi Himpunan: "The Venn Logic" (15 Menit)**
+*   **Teori:** Union ($\cup$ = OR), Intersection ($\cap$ = AND), Complement ($A^c$ = NOT), Mutually Exclusive (Terpisah).
+*   **Problem Solving (Soal 6 & 8):**
+    *   Gunakan warna berbeda untuk mengarsir daerah $A \cup (B \cap C)$.
+    *   Jelaskan **Hukum De Morgan**: $(A \cup B)^c = A^c \cap B^c$ (Penting untuk Soal 9c).
+    *   *Sumber:* Schaum's Outline Chapter 1.
+
+#### **4. Python Corner: Set Operations (15 Menit)**
+*   **Tujuan:** Menggunakan Python untuk menyelesaikan operasi himpunan yang rumit.
+*   **Live Coding:**
+    ```python
+    # Definisi Himpunan Semesta (S) dan Kejadian
+    S = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+    A = {1, 2, 3, 4}
+    B = {3, 4, 5, 6}
+
+    # Operasi Dasar (Menjawab tipe Soal 6 & 9)
+    print(f"Union (A U B): {A.union(B)}")
+    print(f"Intersection (A n B): {A.intersection(B)}")
+    print(f"Complement A: {S - A}") # Python set difference
+    print(f"De Morgan Check: {(S - A.union(B)) == (S - A).intersection(S - B)}")
+    ```
+
+---
+
+### **SESI 2: Rabu (2 Jam)**
+**Topik: Quantifying Uncertainty (Perhitungan Probabilitas & Analisis Data)**
+*Fokus Soal Problem Set 1: Nomor 7, 11, 12, 13, 14, 15.*
+
+#### **JAM KE-1: Konsep & Perhitungan Manual**
+
+**1. Aksioma Probabilitas (20 Menit)**
+*   **Teori:**
+    *   Total $P(S) = 1$.
+    *   $P(A \cup B) = P(A) + P(B) - P(A \cap B)$ (Rumus "Sakti" untuk Soal 7 & 14).
+*   **Bedah Soal 14 (Critical Thinking):**
+    *   *Soal:* $P(A)=0.3, P(B)=0.4, P(C)=0.5$. Bisakah *Mutually Exclusive*?
+    *   *Logika:* Jika *exclusive*, totalnya $0.3+0.4+0.5 = 1.2$. Karena $>1$, maka **TIDAK MUNGKIN**. (Melanggar Aksioma 2).
+    *   *Sumber:* Pishro-Nik Chapter 1.
+
+**2. Data Tabel: Joint & Marginal Probability (30 Menit)**
+*   **Konteks:** Analisis data riil (Piringan Plastik Soal 11, Lampu Soal 13).
+*   **Cara Baca Tabel:**
+    *   **Joint ($P(A \cap B)$):** "Irisan" sel di tengah tabel (Contoh: Gores Tinggi & Guncang Tinggi).
+    *   **Marginal:** Total Baris atau Total Kolom (Contoh: Total Gores Tinggi).
+    *   **Conditional ($P(A|B)$):** Fokus ke satu baris/kolom saja.
+*   **Latihan Cepat:** Hitung probabilitas dari Tabel Soal 11 secara manual.
+
+**3. Kuis Interaktif (10 Menit)**
+*   Gunakan Kahoot/Quizizz. Soal cepat tentang Union, Intersect, dan pembacaan tabel sederhana.
+
+---
+
+#### **JAM KE-2: Python Implementation (Data Science Approach)**
+
+**1. Membangun "Probability Engine" (20 Menit)**
+*   **Konsep:** Membuat fungsi Python untuk menghindari kesalahan hitung manual pada rumus Aksioma.
+*   **Kode:**
+    ```python
+    def calc_union(p_a, p_b, p_intersect):
+        """Menghitung P(A U B)"""
+        return p_a + p_b - p_intersect
+
+    # Cek Soal 7
+    p_a = 0.4
+    p_b = 0.8 # Hati-hati, cek soal apakah P(A)+P(B) > 1?
+    # Diskusikan bagaimana Python membantu validasi logika
+    ```
+
+**2. Solving Table Problems with Pandas (30 Menit)**
+*   **Konsep:** Gen Z perlu skill data. Gunakan library `pandas` untuk menyelesaikan Soal 11, 12, 13.
+*   **Live Coding (Soal 11 - Piringan Plastik):**
+    ```python
+    import pandas as pd
+
+    # Membuat DataFrame dari Soal 11
+    data = {
+        'Guncang_Tinggi':,
+        'Guncang_Rendah':
+    }
+    df = pd.DataFrame(data, index=['Gores_Tinggi', 'Gores_Rendah'])
+
+    # Menghitung Total (Marginal)
+    total_sampel = df.values.sum()
+    total_gores_tinggi = df.loc['Gores_Tinggi'].sum()
+    total_guncang_tinggi = df['Guncang_Tinggi'].sum()
+
+    # Menjawab Pertanyaan
+    p_gores_tinggi = total_gores_tinggi / total_sampel
+    p_joint = df.loc['Gores_Tinggi', 'Guncang_Tinggi'] / total_sampel
+
+    print(f"P(Gores Tinggi): {p_gores_tinggi}")
+    print(f"P(Gores Tinggi DAN Guncang Tinggi): {p_joint}")
+    ```
+
+**3. Challenge & Recap (10 Menit)**
+*   **Challenge:** "Gunakan script Pandas di atas untuk memecahkan Soal 13 (Lampu Mobil)."
+*   **Takeaway:** Probabilitas bukan hanya rumus hafalan, tapi logika untuk mengelola ketidakpastian data.
+
+---
+
+### **Ringkasan Cheat Sheet untuk Mahasiswa**
+
+| Jenis Masalah | Kata Kunci | Rumus/Logika | Alat Python |
+| :--- | :--- | :--- | :--- |
+| **Himpunan** | "Atau" ($\cup$), "Dan" ($\cap$) | Venn Diagram | `set()`, `A | B`, `A & B` |
+| **Aksioma** | "Saling Lepas", "Gabungan" | $P(A \cup B) = P(A) + P(B) - P(A \cap B)$ | Fungsi hitung sederhana |
+| **Tabel Data** | "Dari sampel...", "Total" | Marginal = Pinggir, Joint = Tengah | `pandas`, `df.sum()` |
+| **Validasi** | "Apakah mungkin?" | Total Probabilitas $\le 1$ | `sum(probs) <= 1.0` |
+
+Dengan struktur ini, mahasiswa Gen Z tidak hanya diajarkan cara "mengerjakan PR", tetapi juga dibekali *mindset* komputasional dan *data analytics* dasar yang relevan dengan karier masa depan mereka.
+
+## Agenda
+Berikut adalah agenda pembelajaran untuk menyelesaikan **Problem Set 1** yang ditulis ulang dari sudut pandang mahasiswa (Gen Z). Agenda ini dirancang sebagai panduan strategi "bertahan hidup" dan "menaklukkan" tugas dengan cara yang efisien, menggabungkan logika manual dan *cheat codes* menggunakan Python.
+
+---
+
+# 🚀 Misi Minggu Ini: *Cracking the Probability Code* (Problem Set 1)
+
+**Target Utama:** Menyelesaikan 15 soal di Problem Set 1 tanpa pusing, sambil belajar cara *coding* solusi biar nggak perlu hitung manual terus-terusan.
+**Tools:** Otak, Kertas HVS A4 (buat dikumpul), Laptop (Python/Google Colab).
+
+---
+
+### **📅 Senin: Membangun Logika "Database" (1 Jam)**
+*Fokus: Memahami "Semesta" Masalah (Soal 1-6, 8, 9, 10)*
+
+**1. 15 Menit Pertama: Apa itu "Ruang Sampel"? (Think like a Database Admin)**
+*   **Realita:** Dosen bilang "Eksperimen dalam Pikiran", tapi gue bakal bayangin ini kayak *database* yang isinya semua kemungkinan *outcome*.
+*   **Studi Kasus:**
+    *   **Data Center (Soal Kuliah):** Server bisa ON atau OFF. Kalau ada 3 server, kemungkinannya kayak biner: 000, 001, 010... total $2^3 = 8$ kemungkinan,.
+    *   **Papan Sirkuit (Soal 3):** Barangnya bisa "Lolos" atau "Gagal". Kalau gagal, ada 5 jenis cacat. Jadi total *outcome*-nya cuma 6, bukan tak hingga.
+*   **Action:** Tulis ruang sampel $(S)$ pake notasi himpunan biasa.
+
+**2. 30 Menit: Visualisasi Logika (Venn Diagram & Tree)**
+*   **Masalah:** Soal teks panjang (Soal 5 tentang *recovery* data) itu membingungkan.
+*   **Solusi:** Gambar **Diagram Pohon**.
+    *   *Start* $\rightarrow$ Baca Gagal $\rightarrow$ Recovery Sukses $\rightarrow$ Baca Sukses. Ini visual banget buat mecah alur cerita yang ribet.
+*   **Masalah Himpunan (Soal 6 & 9):** Gambar lingkaran-lingkaran (Venn).
+    *   *Hack:* Inget **De Morgan's Law**. Kalau dibilang "Bukan A DAN Bukan B", itu sama aja kayak "Kebalikan dari (A Gabung B)" atau $(A \cup B)^c$.
+
+**3. 15 Menit: Python "Cheat Code" untuk Himpunan**
+*   **Ngapain pusing logika himpunan?** Cek jawaban pake Python `set()`.
+    ```python
+    # Cek Soal 6 pake logika Python
+    A = {1, 2, 3}; B = {3, 4}; C = {4, 5}
+    print(A.union(B.intersection(C))) # Buat mastiin arsirannya bener
+    ```
+
+---
+
+### **📅 Rabu: Number Crunching & Data Science (2 Jam)**
+*Fokus: Hitungan Angka & Analisis Tabel (Soal 7, 11-15)*
+
+#### **Jam Ke-1: Teori & Validasi Logika**
+
+**1. The "Golden Rules" (Aksioma Probabilitas)**
+*   **Rule #1:** Probabilitas gak mungkin minus atau lebih dari 1 ($0 \le P \le 1$).
+*   **Rule #2:** Total peluang semua kejadian harus 1.
+*   **Rule #3 (Kunci Jawaban Soal 14):**
+    *   *Soal:* $P(A)=0.3, P(B)=0.4, P(C)=0.5$. Bisakah mereka *Mutually Exclusive* (saling pisah)?
+    *   *Logika:* Jumlahin aja: $0.3 + 0.4 + 0.5 = 1.2$. Karena $>1$, jawabannya **IMPOSSIBLE**. Gak usah mikir panjang, itu melanggar aturan main.
+
+**2. Rumus Sakti "Inclusion-Exclusion",**
+*   Kalau mau gabungin dua kejadian ($A \cup B$), jangan cuma jumlahin $P(A) + P(B)$.
+*   *Kenapa?* Karena irisan di tengah ($A \cap B$) kehitung dua kali.
+*   *Rumus:* $P(A \cup B) = P(A) + P(B) - P(A \cap B)$. Pake ini buat ngerjain Soal 7 & 11.
+
+#### **Jam Ke-2: Selesaikan Tabel Data pake Python (Data Science Mode)**
+
+**1. Bedah Soal Tabel (Soal 11 - Piringan Plastik & Soal 13 - Lampu),**
+*   Dikasih tabel angka-angka (Goresan Tinggi/Rendah vs Guncangan Tinggi/Rendah).
+*   **Joint Probability:** Angka di tengah kotak (misal: 70 piringan kuat gores & guncang). Peluangnya = $70/100$.
+*   **Marginal Probability:** Total pinggiran (jumlah baris atau kolom).
+*   **Conditional Probability:** Fokus ke satu baris aja. Misal: "Dari yang tahan gores tinggi, berapa yang tahan guncang?".
+
+**2. Python Strategy (Biar gak salah hitung)**
+*   Daripada kalkulator, mending masukin data ke `pandas` DataFrame.
+    ```python
+    # Contoh strategi buat Soal 11
+    import pandas as pd
+    data = {'Guncang_Tinggi':, 'Guncang_Rendah':}
+    df = pd.DataFrame(data, index=['Gores_Tinggi', 'Gores_Rendah'])
+    # Langsung dapet total baris/kolom (Marginal) tanpa nambahin manual
+    print(df.sum()) 
+    ```
+*   Tinggal salin hasil *print* Python ke kertas jawaban HVS. *Work smart, not hard.*
+
+---
+
+### **💡 Summary: Cheat Sheet Buat Ngerjain PR**
+
+| Istilah di Soal | Artinya buat Gue | Cara Jawab |
+| :--- | :--- | :--- |
+| **Ruang Sampel** | Daftar semua kemungkinan | Tulis pake kurung kurawal $\{...\}$ atau gambar Pohon. |
+| **Mutually Exclusive** | Gak bisa kejadian bareng | Cek irisannya. Kalau irisannya kosong ($0$), berarti *Yes*. |
+| **Union ($\cup$)** | A atau B (gabungan) | Jumlahin peluangnya, kurangi irisannya. |
+| **Intersection ($\cap$)** | A dan B (barengan) | Cari area yang tumpang tindih atau sel pertemuan di tabel. |
+| **Probability > 1** | Salah itung / Soal jebakan | Langsung tulis "Tidak Mungkin" (Aksioma 2). |
+
+**Final Note:** Selesai kelas Rabu, PR Problem Set 1 harusnya udah beres 90% dengan bantuan validasi skrip Python tadi. Tinggal rapihin tulisan di HVS.
+
+## Soal
+
+Berikut adalah penyusunan ulang **Problem Set 1** menjadi lembar soal yang rapi dan terstruktur berdasarkan potongan dokumen sumber yang Anda berikan.
+
+---
+
+# PROBLEM SET 1: KERANGKA KERJA PROBABILITAS
+
+**Mata Kuliah:** Probabilitas dan Statistik
+**Dosen:** Dimitri Mahayana
+**Instruksi:** Kerjakan pada kertas HVS A4 dan kumpulkan!
+
+---
+
+### **BAGIAN A: Ruang Sampel & Diagram Pohon**
+
+**1. Transmisi Informasi**
+Definisikan ruang sampel dari eksperimen dalam pikiran berikut: Suatu blok informasi dikirimkan berulang-ulang melalui saluran yang terganggu sampai suatu blok informasi yang tidak rusak mencapai penerima. Hitung jumlah kiriman yang dibutuhkan.
+
+**2. Sistem Komunikasi Biner**
+Definisikan ruang sampel untuk suatu sistem komunikasi biner yang mengirimkan sinyal $X$ antara sinyal tegangan $+2$ atau sinyal tegangan $-2$.
+
+**3. Pengujian Papan Sirkuit**
+Suatu pengujian dilakukan pada papan sirkuit yang dicetak, di mana setiap sirkuit bisa **tidak lolos** atau **lolos** uji. Papan sirkuit yang tidak lolos uji akan diperiksa untuk menentukan satu dari lima jenis cacat yang dimilikinya. Definisikan ruang sampelnya.
+
+**4. Benda Jatuh**
+Definisikan ruang sampel untuk waktu sampai suatu benda jatuh kembali ke tanah setelah dilempar ke atas.
+
+**5. Penyimpanan Magnetik (Diagram Pohon)**
+Dalam suatu alat penyimpanan magnetik, tiga percobaan dilakukan untuk membaca data sebelum suatu prosedur pemulihan galat dilakukan. Prosedur ini mengatur ulang posisi *head* magnetik yang digunakan. Prosedur ini dilakukan sebanyak tiga kali sebelum pesan "*abort* (gagal)" dikirimkan ke operator.
+
+Misalkan:
+*   $s$: operasi pembacaan sukses
+*   $f$: operasi pembacaan gagal
+*   $F$: prosedur pemulihan gagal
+*   $S$: prosedur pemulihan sukses
+*   $A$: pesan gagal dikirimkan ke operator
+
+Gambarkan ruang sampel eksperimen ini dengan menggunakan **diagram pohon**.
+
+---
+
+### **BAGIAN B: Operasi Himpunan & Diagram Venn**
+
+**6. Diagram Venn**
+Diketahui tiga kejadian A, B, dan C. Gambarkan ulang diagram Venn dan arsir daerah yang sesuai dengan kejadian sebagai berikut:
+a. $A^c$
+b. $A \cup (B \cap C)$
+c. $(A \cup B^c) \cap C^c$
+d. $B \cup C^c$
+e. $(A \cap B) \cup C$
+f. $A \cap (B^c \cup C)$
+
+**7. Perhitungan Probabilitas Diskrit**
+Ruang sampel dari suatu percobaan acak adalah $S=\{a, b, c, d, e\}$ dengan probabilitas masing-masing 0,1; 0,1; 0,2; 0,4; dan 0,2 secara berurutan.
+Misalkan $A=\{a, b, c\}$ dan $B=\{c, d, e\}$. Tentukan:
+a. $P(A)$
+b. $P(A^c)$
+c. $P(B)$
+d. $P(A \cap B)$
+e. $P(A \cup B)$
+
+**8. Operasi Cetakan Injeksi (Geometri Probabilitas)**
+Pada sebuah operasi cetakan injeksi, setiap hasil pencetakan memiliki panjang ($X$) dan lebar ($Y$). Anggap:
+*   $A$: kejadian di mana $48 < X < 52$ cm
+*   $B$: kejadian di mana $9 < Y < 11$ cm
+*   $C$: kejadian di mana besar panjang kritis sesuai kebutuhan pelanggan
+
+Buatlah diagram Venn dan arsir bagian yang merepresentasikan:
+a. $A$
+b. $A \cap B$
+c. $A \cup B$
+d. $A^c \cup B$
+
+*Pertanyaan Tambahan:* Jika setiap kejadian saling eksklusif, seberapa sukses operasi produksi ini? Akankah proses tersebut menghasilkan cetakan dengan nilai $X = 50$ cm dan $Y = 10$ cm?
+
+**9. Transmisi Bit (Notasi Himpunan)**
+Empat buah bit ditransmisikan pada sebuah saluran komunikasi digital. Setiap bit memiliki kemungkinan distorsi. Anggap $A_i$ melambangkan kejadian di mana bit ke-$i$ mengalami distorsi ($i = 1, \dots, 4$).
+a. Definisikan ruang sampel dari eksperimen ini.
+b. Apakah setiap $A_i$ saling eksklusif satu sama lain?
+c. Jelaskan arti dari notasi himpunan berikut:
+    *   $A_1$
+    *   $A_1'$
+    *   $A_1 \cap A_2 \cap A_3 \cap A_4$
+    *   $(A_1 \cup A_2) \cap (A_3 \cup A_4)$
+    *   $(A_1' \cap A_2')' \cup (A_1' \cap A_3')'$
+
+**10. *Rise Time* Reaktor**
+*Rise time* dari dua *batch* reaktor diukur (bilangan real positif).
+*   $A$: *rise time* batch pertama $< 70$ menit.
+*   $B$: *rise time* batch kedua $> 50$ menit.
+
+Jelaskan secara grafis ruang sampel dalam plot dua dimensi dan gambarkan kejadian berikut:
+a. $A$
+b. $B^c$
+c. $A \cap B$
+d. $A \cup B$
+e. $A' \cap B$
+
+---
+
+### **BAGIAN C: Probabilitas Berbasis Data Tabel**
+
+**11. Piringan Plastik Polycarbonate**
+Hasil uji ketahanan terhadap goresan dan guncangan dari 100 piringan adalah sebagai berikut:
+
+| | **Ketahanan Guncang** | |
+| :--- | :---: | :---: |
+| **Ketahanan Gores** | **Tinggi** | **Rendah** |
+| **Tinggi** | 70 | 9 |
+| **Rendah** | 16 | 5 |
+
+Misalkan $A$ = Ketahanan gores tinggi, $B$ = Ketahanan guncang tinggi. Tentukan:
+a. $P(A)$
+b. $P(B)$
+c. $P(A^c)$
+d. $P(A \cap B)$
+e. $P(A \cup B)$
+f. $P(A^c \cup B)$
+
+**12. Emisi Pemasok**
+Sampel emisi dari tiga pemasok diklasifikasikan berdasarkan kesesuaian spesifikasi:
+
+| | **Kesesuaian** | |
+| :--- | :---: | :---: |
+| **Pemasok** | **Sesuai** | **Tidak Sesuai** |
+| **1** | 19 | 15 |
+| **2** | 24 | 10 |
+| **3** | 27 | 5 |
+
+Anggap $A$ = Sampel dari pemasok 1, $B$ = Sampel sesuai spesifikasi. Tentukan:
+a. $P(A)$
+b. $P(B)$
+c. $P(A')$
+d. $P(A \cap B)$
+e. $P(A \cup B)$
+f. $P(A \cup B')$
+
+**13. Lampu Depan Mobil**
+Performa 125 sampel lampu diuji intensitas dan umur gunanya:
+
+| | **Umur Guna** | |
+| :--- | :---: | :---: |
+| **Intensitas** | **Memuaskan** | **Tidak Memuaskan** |
+| **Memuaskan** | 107 | 5 |
+| **Tidak Memuaskan** | 10 | 3 |
+
+a. Tentukan probabilitas lampu memiliki performa **tidak memuaskan pada semua kriteria**.
+b. Jika pelanggan menuntut hasil memuaskan minimal 95%, apakah lampu produksi perusahaan ini memenuhi permintaan tersebut?
+
+**14. Konsep *Mutually Exclusive***
+Jika A, B, dan C merupakan kejadian yang saling eksklusif (*Mutually Exclusive*), apakah mungkin $P(A) = 0,3$, $P(B) = 0,4$, dan $P(C) = 0,5$? Jelaskan alasannya.
+
+**15. Minyak Goreng**
+Data pengujian sampel minyak goreng:
+
+| | **Tipe Minyak** | |
+| :--- | :---: | :---: |
+| **Ketidakjenuhan** | **Kanola** | **Jagung** |
+| **Tunggal** | 8 | 14 |
+| **Ganda** | 90 | 78 |
+
+a. Berapakah probabilitas didapatkannya variasi minyak goreng tak jenuh ganda?
+b. Berapakah probabilitas didapatkannya variasi minyak goreng tak jenuh tunggal yang berbahan dasar jagung?
+
+**16. Baja Tergalvanisasi**
+Analisis sampel baja pada indikator berat lapisan dan tingkat kekasaran:
+
+| | **Berat Lapisan** | |
+| :--- | :---: | :---: |
+| **Kekasaran** | **Tinggi** | **Rendah** |
+| **Tinggi** | 11 | 19 |
+| **Rendah** | 87 | 33 |
+
+a. Jika berat lapisan sampel acak adalah **tinggi**, berapa probabilitas tingkat kekasarannya **tinggi**?
+b. Jika tingkat kekasaran sampel acak adalah **tinggi**, berapa probabilitas berat lapisannya **tinggi**?
+c. Jika tingkat kekasaran sampel acak adalah **rendah**, berapa probabilitas berat lapisannya **tinggi**?
+
+## Solusi
+Berikut adalah analisis komprehensif untuk **Problem Set 1** berdasarkan dokumen sumber yang disediakan. Saya telah menyusunnya mulai dari kerangka teori, identifikasi pola masalah, hingga penerapan solusi untuk setiap soal.
+
+---
+
+### **1. Konsep Teori yang Mendasari (Theoretical Framework)**
+
+Untuk memecahkan masalah ini, kita harus berpegang pada **Kerangka Kerja Probabilitas** yang dijelaskan dalam bahan kuliah. Tiga pilar utamanya adalah:
+
+1.  **Eksperimen dalam Pikiran ($\epsilon$):** Suatu narasi yang membatasi subjek penelitian di mana hasilnya tidak pasti.
+2.  **Ruang Sampel ($S$):** Himpunan dari semua hasil (*outcome*) yang mungkin terjadi dari eksperimen tersebut.
+    *   Bisa berupa **Diskrit** (bisa dihitung, misal: {Lolos, Gagal}) atau **Kontinu** (interval bilangan real, misal: waktu, kecepatan).
+3.  **Kejadian ($Event/A$):** Himpunan bagian (subset) dari ruang sampel yang menjadi fokus perhatian.
+4.  **Aksioma Probabilitas:** Aturan dasar perhitungan probabilitas:
+    *   $0 \le P(A) \le 1$.
+    *   $P(S) = 1$ (Probabilitas semesta adalah 1).
+    *   Jika kejadian saling eksklusif (*mutually exclusive*), probabilitas gabungan adalah jumlah probabilitas masing-masing ($P(A \cup B) = P(A) + P(B)$).
+
+---
+
+### **2. Analisis Jenis Masalah & Penemuan Pola**
+
+Berdasarkan *Problem Set 1*, terdapat 4 pola masalah utama. Berikut adalah strategi pemecahannya:
+
+#### **Tipe A: Definisi Ruang Sampel & Diagram Pohon**
+*   **Masalah:** Soal 1, 6(a).
+*   **Pola:** Menentukan "daftar isi" dari semua kemungkinan hasil.
+*   **Prinsip Solusi:**
+    *   Identifikasi **kondisi berhenti** (kapan eksperimen selesai?).
+    *   Gunakan **Diagram Pohon** untuk eksperimen bertahap (sekuensial).
+    *   Gunakan **Notasi Himpunan** ($S = \{...\}$).
+
+#### **Tipe B: Logika Himpunan (Venn Diagram)**
+*   **Masalah:** Soal 2, 3, 5, 6(c-g).
+*   **Pola:** Hubungan visual antar kejadian (Irisan, Gabungan, Komplemen).
+*   **Prinsip Solusi:**
+    *   **Irisan ($\cap$):** Wilayah tumpang tindih ("DAN").
+    *   **Gabungan ($\cup$):** Total wilayah kedua himpunan ("ATAU").
+    *   **Komplemen ($A^c$ atau $A'$):** Wilayah di luar himpunan ("BUKAN").
+    *   **De Morgan:** $(A \cup B)^c = A^c \cap B^c$.
+
+#### **Tipe C: Perhitungan Aksiomatik**
+*   **Masalah:** Soal 4, 11.
+*   **Pola:** Diberikan nilai probabilitas angka, diminta menghitung relasi lain atau memvalidasi logika.
+*   **Prinsip Solusi:**
+    *   Gunakan **Rumus Penjumlahan Umum**: $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.
+    *   Validasi: Total probabilitas kejadian yang saling eksklusif tidak boleh $> 1$.
+
+#### **Tipe D: Analisis Data Tabel (Joint, Marginal, Conditional)**
+*   **Masalah:** Soal 8, 9, 10, 12, 13, 16.
+*   **Pola:** Data disajikan dalam matriks/tabel kontingensi.
+*   **Prinsip Solusi:**
+    *   **Joint Prob ($P(A \cap B)$):** Nilai sel spesifik / Total Sampel.
+    *   **Marginal Prob ($P(A)$):** Total Baris atau Kolom / Total Sampel.
+    *   **Conditional Prob ($P(A|B)$):** Nilai sel / Total Baris (atau Kolom) syaratnya (seperti pada Soal 13).
+
+---
+
+### **3. Penerapan Solusi pada Problem Set 1**
+
+Berikut adalah solusi yang diterapkan berdasarkan prinsip di atas:
+
+#### **Soal 1: Ruang Sampel**
+*   **1a (Transmisi):** Eksperimen berulang sampai sukses. $S = \{1, 2, 3, \dots, \infty\}$ (Jumlah kiriman bisa tak hingga).
+*   **1b (Sinyal Biner):** Hanya dua kemungkinan tegangan. $S = \{+2, -2\}$.
+*   **1c (Sirkuit):** Lolos atau Gagal (dengan 5 tipe cacat). $S = \{Lolos, Gagal_1, Gagal_2, Gagal_3, Gagal_4, Gagal_5\}$.
+*   **1d (Benda Jatuh):** Waktu adalah kontinu. $S = \{t \mid t > 0\}$ (bilangan real positif).
+*   **1e (Diagram Pohon):** Mulai $\to$ Read. Jika sukses ($s$) stop. Jika gagal ($f$) $\to$ Recovery. Jika recovery sukses ($S$) $\to$ Read lagi. Jika recovery gagal ($F$) $\to$ Abort ($A$). Diagram akan bercabang hingga 3 siklus sebelum berakhir di $A$.
+
+#### **Soal 2 & 3: Diagram Venn**
+*   **2a ($A^c$):** Arsir semua area **di luar** lingkaran A.
+*   **2b ($A \cup (B \cap C)$):** Arsir irisan B dan C, lalu gabungkan dengan seluruh lingkaran A.
+*   **2d ($(B \cup C)^c$):** Arsir area di luar gabungan B dan C (area yang hanya A saja atau di luar semua lingkaran).
+
+#### **Soal 4: Perhitungan Diskrit**
+Diketahui: $P(a)=0.1, P(b)=0.1, P(c)=0.2, P(d)=0.4, P(e)=0.2$.
+$A=\{a,b,c\}, B=\{c,d,e\}$.
+*   **a. $P(A)$:** $0.1 + 0.1 + 0.2 = \mathbf{0.4}$.
+*   **b. $P(A^c)$:** $1 - 0.4 = \mathbf{0.6}$.
+*   **d. $P(A \cap B)$:** Irisannya adalah $\{c\}$. Maka probabilitasnya $\mathbf{0.2}$.
+*   **e. $P(A \cup B)$:** Gunakan rumus penjumlahan: $P(A) + P(B) - P(A \cap B) = 0.4 + 0.8 - 0.2 = \mathbf{1.0}$. (Logis, karena gabungannya adalah semesta $S$).
+
+#### **Soal 5: Geometri Probabilitas (Cetakan Injeksi)**
+*   Prinsip: Probabilitas direpresentasikan oleh luas area persegi panjang.
+*   $A$: Area vertikal antara $X=48$ dan $X=52$.
+*   $B$: Area horizontal antara $Y=9$ dan $Y=11$.
+*   $A \cap B$: Persegi panjang di tengah (pertemuan A dan B). Jika $X=50, Y=10$ (titik tengah), maka produk tersebut masuk dalam kejadian $A \cap B$ (Lolos spesifikasi).
+
+#### **Soal 6: Transmisi 4 Bit**
+*   **6a (Ruang Sampel):** Setiap bit bisa Distorsi (D) atau Baik (B). Ada 4 bit. Total kemungkinan = $2^4 = 16$.
+    $S = \{BBBB, BBBD, ..., DDDD\}$.
+*   **6b (Mutually Exclusive?):** $A_i$ adalah kejadian bit ke-$i$ distorsi.
+    Apakah $A_1$ dan $A_2$ saling eksklusif? **TIDAK**. Karena bisa saja bit 1 distorsi **DAN** bit 2 distorsi secara bersamaan (misal kejadian $DD BB$).
+
+#### **Soal 7: Rise Time (2 Dimensi)**
+*   Plot sumbu X (Batch 1) dan Y (Batch 2).
+*   $A$: Daerah di kiri garis vertikal $X=70$.
+*   $B$: Daerah di atas garis horizontal $Y=50$.
+*   $A \cap B$: Daerah di kuadran kiri-atas (dimana $X<70$ DAN $Y>50$).
+
+#### **Soal 8: Tabel Piringan Plastik**
+Total Sampel = 100.
+*   **a. $P(A)$ (Gores Tinggi):** $(70+9)/100 = \mathbf{0.79}$.
+*   **d. $P(A \cap B)$ (Gores Tinggi DAN Guncang Tinggi):** Lihat sel pertemuan $\to 70/100 = \mathbf{0.70}$.
+*   **e. $P(A \cup B)$:** $P(A) + P(B) - P(A \cap B) = 0.79 + 0.86 - 0.70 = \mathbf{0.95}$.
+    *(Tips: Atau jumlahkan semua sel kecuali "Rendah-Rendah": $(70+9+16)/100$).*
+
+#### **Soal 9: Tabel Emisi**
+Total Sampel = 100.
+*   $A$: Pemasok 1 (Total = 19+15 = 34).
+*   $B$: Sesuai (Total = 19+24+27 = 70).
+*   **f. $P(A \cup B')$:** Pemasok 1 ATAU Tidak Sesuai.
+    Hitung manual: (Pemasok 1 Sesuai) + (Pemasok 1 Tdk Sesuai) + (Pemasok 2 Tdk Sesuai) + (Pemasok 3 Tdk Sesuai).
+    $= 19 + 15 + 10 + 5 = 49$. Jadi $49/100 = \mathbf{0.49}$.
+
+#### **Soal 10: Lampu Mobil**
+Total = 125.
+*   **a. Tidak memuaskan semua kriteria:** Sel pertemuan "Tidak" dan "Tidak" = 3. Probabilitas = $3/125 = \mathbf{0.024}$.
+*   **b. Evaluasi 95%:** Jumlah yang "Memuaskan" secara umum (biasanya berarti memuaskan di kedua aspek untuk dianggap produk bagus) adalah 107.
+    $107/125 = 85.6\%$. Karena $85.6\% < 95\%$, maka **Tidak Memenuhi Permintaan**.
+
+#### **Soal 11: Cek Logika Mutually Exclusive**
+*   Diketahui: $P(A)=0.3, P(B)=0.4, P(C)=0.5$.
+*   Jika *mutually exclusive*, maka $P(A \cup B \cup C) = 0.3 + 0.4 + 0.5 = 1.2$.
+*   Karena Probabilitas tidak boleh $> 1$, maka kejadian ini **TIDAK MUNGKIN** *mutually exclusive*.
+
+#### **Soal 12: Minyak Goreng**
+Total sampel = $8+14+90+78 = 190$.
+*   **a. Tak jenuh ganda (Polyunsaturated):** Total baris ganda = $90+78=168$. Prob = $168/190 \approx \mathbf{0.884}$.
+*   **b. Tunggal DAN Jagung:** Sel pertemuan = 14. Prob = $14/190 \approx \mathbf{0.074}$.
+
+#### **Soal 13: Baja Tergalvanisasi (Probabilitas Bersyarat)**
+Ini adalah soal **Conditional Probability** (membatasi ruang sampel ke baris/kolom tertentu).
+*   **a. Jika Berat Tinggi ($P(Kekasaran Tinggi | Berat Tinggi)$):**
+    Fokus hanya ke kolom "Berat Tinggi" (Total = $11+87 = 98$).
+    Yang kasar tinggi = 11.
+    Prob = $11/98 \approx \mathbf{0.112}$.
+*   **b. Jika Kekasaran Tinggi ($P(Berat Tinggi | Kekasaran Tinggi)$):**
+    Fokus hanya ke baris "Kekasaran Tinggi" (Total = $11+19 = 30$).
+    Yang berat tinggi = 11.
+    Prob = $11/30 \approx \mathbf{0.367}$.
+*   **c. Jika Kekasaran Rendah ($P(Berat Tinggi | Kekasaran Rendah)$):**
+    Fokus ke baris "Kekasaran Rendah" (Total = $87+33 = 120$).
+    Yang berat tinggi = 87.
+    Prob = $87/120 = \mathbf{0.725}$.
+
+# Python App
+
+Berdasarkan analisis terhadap **Problem Set 1**, masalah-masalah tersebut dapat dikelompokkan menjadi tiga kategori logika yang berbeda: **Logika Himpunan (Aksioma)**, **Analisis Data Tabel (Empiris)**, dan **Pembangkitan Ruang Sampel**.
+
+Untuk membuat desain skrip Python yang bisa menangani semua soal tersebut, pendekatan terbaik adalah menggunakan **Desain Modular Berorientasi Objek (OOP)**. Kita akan memisahkan logika menjadi tiga modul (Class) utama agar kode rapi dan dapat digunakan ulang.
+
+Berikut adalah desain lengkap skrip Python yang universal untuk Problem Set 1:
+
+### **1. Arsitektur Desain**
+
+Kita akan membuat paket bernama `ProbSolver` yang terdiri dari:
+1.  **`SetEngine`**: Menangani soal matematika himpunan, diagram Venn, dan validasi aksioma (Soal 2, 4, 6, 7, 11).
+2.  **`TableEngine`**: Menangani soal berbasis data tabel menggunakan `pandas` (Soal 8, 9, 10, 12, 13).
+3.  **`SpaceGenerator`**: Menangani pembangkitan ruang sampel dan permutasi (Soal 1, 3, 5).
+
+---
+
+### **2. Implementasi Kode Python**
+
+Anda dapat menyalin kode ini ke dalam Google Colab atau Jupyter Notebook.
+
+#### **Modul 1: SetEngine (Logika Himpunan & Aksioma)**
+Modul ini menangani rumus-rumus probabilitas dasar seperti $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.
+
+```python
+class SetEngine:
+    def __init__(self):
+        pass
+
+    def union(self, P_A, P_B, P_intersect=0):
+        """Menghitung P(A U B). Rumus: P(A) + P(B) - P(A n B)"""
+        result = P_A + P_B - P_intersect
+        return min(result, 1.0) # Cap at 1.0
+
+    def intersection(self, P_A, P_B, P_union):
+        """Menghitung P(A n B). Rumus: P(A) + P(B) - P(A U B)"""
+        return P_A + P_B - P_union
+
+    def complement(self, P_A):
+        """Menghitung P(A') atau P(Ac). Rumus: 1 - P(A)"""
+        return 1 - P_A
+
+    def check_validity(self, probs_list):
+        """
+        Validasi Aksioma (Soal 11).
+        Mengecek apakah kumpulan kejadian mutually exclusive itu valid (Total <= 1).
+        """
+        total = sum(probs_list)
+        if total > 1.0 + 1e-9: # Toleransi floating point
+            return False, f"TIDAK MUNGKIN. Total probabilitas = {total:.2f} (> 1)"
+        return True, f"MUNGKIN. Total probabilitas = {total:.2f} (<= 1)"
+```
+
+#### **Modul 2: TableEngine (Analisis Data Tabel)**
+Modul ini menggunakan `pandas` untuk menyelesaikan soal matriks (baris vs kolom).
+
+```python
+import pandas as pd
+
+class TableEngine:
+    def __init__(self, data_dict, index_labels, column_labels):
+        """
+        Input:
+        - data_dict: Dictionary data kolom
+        - index_labels: List nama baris
+        - column_labels: List nama kolom
+        """
+        self.df = pd.DataFrame(data_dict, index=index_labels)
+        self.total = self.df.values.sum()
+        print(f"Data Loaded. Total Sample: {self.total}")
+        display(self.df) # Jika di Jupyter/Colab
+
+    def get_prob(self, row_filter=None, col_filter=None):
+        """
+        Menghitung Joint Probability (Irisan).
+        Contoh: P(A n B) -> P(Gores Tinggi DAN Guncang Tinggi)
+        """
+        if row_filter and col_filter:
+            val = self.df.loc[row_filter, col_filter]
+        elif row_filter:
+            val = self.df.loc[row_filter].sum()
+        elif col_filter:
+            val = self.df[col_filter].sum()
+        else:
+            return 1.0
+        
+        return val / self.total
+
+    def get_conditional_prob(self, target_row=None, target_col=None, given_row=None, given_col=None):
+        """
+        Menghitung Probabilitas Bersyarat P(A | B).
+        (Soal 13: Jika berat lapisan tinggi, berapa peluang kekasaran tinggi?)
+        """
+        # 1. Tentukan Ruang Sampel Baru (Penyebut)
+        if given_row:
+            subset_total = self.df.loc[given_row].sum()
+            # Pembilang: Target kolom di dalam baris tersebut
+            numerator = self.df.loc[given_row, target_col]
+        elif given_col:
+            subset_total = self.df[given_col].sum()
+            # Pembilang: Target baris di dalam kolom tersebut
+            numerator = self.df.loc[target_row, given_col]
+        else:
+            return 0
+        
+        return numerator / subset_total
+
+    def get_union(self, row_cat, col_cat):
+        """
+        Menghitung P(A U B) dari tabel.
+        Rumus: (Total Baris + Total Kolom - Irisan) / Total Sampel
+        """
+        val_row = self.df.loc[row_cat].sum()
+        val_col = self.df[col_cat].sum()
+        val_intersect = self.df.loc[row_cat, col_cat]
+        
+        return (val_row + val_col - val_intersect) / self.total
+```
+
+#### **Modul 3: SpaceGenerator (Ruang Sampel)**
+Untuk soal pembangkitan kombinasi sinyal atau kejadian berulang.
+
+```python
+import itertools
+
+class SpaceGenerator:
+    @staticmethod
+    def generate_binary(n_bits):
+        """Untuk Soal 1b (Sinyal) atau 6 (Bit Transmisi)"""
+        outcomes = list(itertools.product(, repeat=n_bits))
+        print(f"Ruang Sampel ({len(outcomes)} titik):")
+        print(outcomes)
+        return outcomes
+    
+    @staticmethod
+    def continuous_area_prob(x_range, y_range, target_x, target_y):
+        """
+        Untuk Soal 5 (Cetakan Injeksi) & 7 (Rise Time).
+        Menghitung probabilitas berdasarkan rasio luas area (Area Target / Area Total).
+        """
+        total_area = (x_range - x_range) * (y_range - y_range)
+        
+        # Hitung overlap area target dengan area total
+        dx = max(0, min(x_range, target_x) - max(x_range, target_x))
+        dy = max(0, min(y_range, target_y) - max(y_range, target_y))
+        
+        target_area = dx * dy
+        return target_area / total_area
+```
+
+---
+
+### **3. Contoh Penerapan pada Soal Problem Set 1**
+
+Berikut adalah cara menggunakan skrip di atas untuk menyelesaikan soal-soal spesifik dari Problem Set 1 Anda.
+
+#### **A. Menyelesaikan Soal 8 (Piringan Plastik)**
+*Soal: Tabel 2x2 (Gores Tinggi/Rendah vs Guncang Tinggi/Rendah). Hitung P(A), P(B), P(A U B).*
+
+```python
+# Setup Data
+data_soal_8 = {
+    'Guncang_Tinggi':,
+    'Guncang_Rendah':
+}
+rows = ['Gores_Tinggi', 'Gores_Rendah']
+cols = ['Guncang_Tinggi', 'Guncang_Rendah']
+
+# Panggil Engine
+solver = TableEngine(data_soal_8, rows, cols)
+
+# Jawab Pertanyaan
+print(f"a. P(A) [Gores Tinggi]   = {solver.get_prob(row_filter='Gores_Tinggi')}")
+print(f"b. P(B) [Guncang Tinggi] = {solver.get_prob(col_filter='Guncang_Tinggi')}")
+print(f"e. P(A U B)              = {solver.get_union('Gores_Tinggi', 'Guncang_Tinggi')}")
+```
+
+#### **B. Menyelesaikan Soal 11 (Validasi Mutually Exclusive)**
+*Soal: P(A)=0.3, P(B)=0.4, P(C)=0.5. Apakah mungkin mutually exclusive?*
+
+```python
+logic_solver = SetEngine()
+status, message = logic_solver.check_validity([0.3, 0.4, 0.5])
+print(f"Jawaban Soal 11: {message}")
+# Output akan mendeteksi Total = 1.2, jadi False.
+```
+
+#### **C. Menyelesaikan Soal 13 (Probabilitas Bersyarat Baja)**
+*Soal: Jika berat lapisan tinggi (Given), berapa peluang kekasaran tinggi (Target)?*
+
+```python
+data_soal_13 = {
+    'Berat_Tinggi':,
+    'Berat_Rendah':
+}
+rows = ['Kasar_Tinggi', 'Kasar_Rendah']
+cols = ['Berat_Tinggi', 'Berat_Rendah']
+
+baja_solver = TableEngine(data_soal_13, rows, cols)
+
+# a. P(Kasar Tinggi | Berat Tinggi)
+ans_a = baja_solver.get_conditional_prob(
+    target_row='Kasar_Tinggi', 
+    given_col='Berat_Tinggi'
+)
+print(f"a. P(Kasar Tinggi | Berat Tinggi) = {ans_a:.4f}")
+```
+
+#### **D. Menyelesaikan Soal 5 (Geometri/Area)**
+*Soal: Probabilitas cacat berdasarkan dimensi X dan Y.*
+
+```python
+geo_solver = SpaceGenerator()
+# Misal Total Area X(45-55) dan Y(5-15) - Asumsi dari soal jika tidak spesifik
+# Target A: 48 < X < 52
+# Target B: 9 < Y < 11
+
+prob = geo_solver.continuous_area_prob(
+    x_range=(45, 55), y_range=(5, 15), # Total Semesta
+    target_x=(48, 52), target_y=(9, 11) # Target A n B
+)
+print(f"Probabilitas area (A n B) = {prob}")
+```
+
+### **Kesimpulan**
+Desain skrip ini mencakup seluruh jenis masalah dalam Problem Set 1:
+1.  **`SetEngine`**: Untuk Soal 2, 4, 6, 11.
+2.  **`TableEngine`**: Untuk Soal 8, 9, 10, 12, 13 (Solusi paling efisien untuk soal tipe ini).
+3.  **`SpaceGenerator`**: Untuk visualisasi Soal 1, 3, 5, 7.
+
+## Kuliah
+Berikut adalah draf **Lembar Soal** dan **Template Jawaban (Python)** yang dirancang untuk platform GitHub Classroom. Materi ini didasarkan pada **Problem Set 1** (Kerangka Kerja Probabilitas) dan disesuaikan dengan pendekatan modern (Gen Z/Data Science) yang telah kita bahas.
+
+---
+
+### **BAGIAN 1: LEMBAR SOAL (README.md)**
+
+Ini adalah konten yang akan ditampilkan di halaman depan repositori GitHub Classroom mahasiswa.
+
+```markdown
+# 🚀 Problem Set 1: Hacking Probability
+
+**Mata Kuliah:** Probabilitas dan Statistik (II2111)  
+**Topik:** Sample Space, Events, & Axioms  
+**Deadline:** [Isi Tanggal]  
+
+---
+
+## 🎯 Misi Anda
+Sebagai seorang *Data Engineer* junior, Anda diminta untuk memvalidasi logika probabilitas dari beberapa sistem nyata (Server, Manufaktur, dan User Database). Tugas Anda adalah menerjemahkan masalah "textbook" menjadi kode Python yang dapat dieksekusi untuk memverifikasi perhitungan manual.
+
+## 📝 Daftar Masalah
+
+### Soal 1: The Recovery Protocol (Diagram Pohon)
+*Referensi: Problem Set 1, No. 1e & 5*
+
+Sebuah sistem penyimpanan data (Storage) memiliki mekanisme *Read/Recovery*.
+1.  Sistem mencoba membaca data (`read`).
+2.  Jika sukses (`s`), proses selesai.
+3.  Jika gagal (`f`), sistem masuk ke mode *recovery*.
+    *   Recovery bisa sukses (`S`) atau gagal (`F`).
+    *   Jika Recovery sukses (`S`), sistem mencoba `read` lagi.
+    *   Jika Recovery gagal (`F`), sistem langsung *Abort* (`A`).
+4.  Siklus ini (gagal baca -> recovery sukses -> baca lagi) bisa berulang maksimal **3 kali**. Jika setelah 3 kali recovery masih gagal baca, sistem *Abort* (`A`).
+
+**Tugas:**
+Implementasikan fungsi untuk men-generate semua kemungkinan *outcome* (Ruang Sampel) dari protokol ini.
+
+### Soal 2: User Segmentation (Operasi Himpunan)
+*Referensi: Problem Set 1, No. 6 & 9*
+
+Diketahui database user dengan kategori berikut:
+*   $A$: User yang aktif di Mobile App.
+*   $B$: User yang aktif di Web.
+*   $C$: User yang sudah melakukan transaksi Premium.
+
+Gunakan logika himpunan Python untuk merepresentasikan user yang:
+1.  Hanya aktif di Mobile (tidak Web, tidak Premium).
+2.  Aktif di Mobile ATAU Web, tapi belum Premium.
+3.  User yang memenuhi kriteria: $(A \cup B) \cap C^c$.
+
+### Soal 3: The Impossible Probability (Validasi Aksioma)
+*Referensi: Problem Set 1, No. 11 & 14*
+
+Anda diberikan data probabilitas dari tiga kejadian yang diklaim *Mutually Exclusive* (saling lepas): $P(A)$, $P(B)$, dan $P(C)$.
+Sistem seringkali memberikan data sampah (glitch). Buatlah fungsi validasi untuk menolak data jika total probabilitasnya melanggar Aksioma Probabilitas Kolmogorov (Total > 1).
+
+### Soal 4: Quality Control Matrix (Analisis Tabel)
+*Referensi: Problem Set 1, No. 8 (Piringan Plastik)*
+
+Diberikan data hasil uji ketahanan komponen GPU terhadap **Panas** (Tinggi/Rendah) dan **Guncangan** (Tinggi/Rendah) dalam tabel berikut (Total Sampel = 100):
+
+| | Guncang Tinggi | Guncang Rendah |
+| :--- | :---: | :---: |
+| **Panas Tinggi** | 70 | 9 |
+| **Panas Rendah** | 16 | 5 |
+
+Hitunglah menggunakan Pandas:
+1.  Marginal Probability: Komponen tahan Panas Tinggi.
+2.  Joint Probability: Tahan Panas Tinggi DAN Guncang Tinggi.
+3.  Union Probability: Tahan Panas Tinggi ATAU Guncang Tinggi.
+
+### Soal 5: Touchscreen Sensitivity (Geometri Probabilitas)
+*Referensi: Problem Set 1, No. 5 & 8*
+
+Sebuah layar sentuh memiliki area sensitif berbentuk persegi panjang dengan dimensi:
+*   $X$ (Lebar): 0 s.d 10 cm
+*   $Y$ (Tinggi): 0 s.d 20 cm
+
+Area yang dianggap "Dead Zone" (cacat) adalah jika sentuhan jatuh pada:
+*   $4 < X < 6$  **DAN**  $9 < Y < 11$
+
+Hitung probabilitas sebuah sentuhan acak jatuh di area "Dead Zone" tersebut.
+
+---
+
+## 🛠️ Cara Mengerjakan
+1.  Clone repository ini ke komputer lokal Anda.
+2.  Buka file `prob_solver.py`.
+3.  Lengkapi kode di bagian yang bertanda `# TODO`.
+4.  Jalankan test lokal dengan `python prob_solver.py`.
+5.  Commit dan Push pekerjaan Anda kembali ke GitHub.
+
+Happy Coding! 💻
+```
+
+---
+
+### **BAGIAN 2: TEMPLATE JAWABAN (`prob_solver.py`)**
+
+Ini adalah file Python yang harus diisi oleh mahasiswa. File ini sudah menggunakan struktur OOP sesuai desain yang kita bahas sebelumnya.
+
+```python
+import pandas as pd
+import itertools
+
+class ProbSolver:
+    """
+    Toolkit untuk menyelesaikan Problem Set 1 (Week 2).
+    Mahasiswa harus melengkapi method yang memiliki tanda # TODO.
+    """
+
+    def __init__(self):
+        print("ProbSolver Initialized ready for Week 2 Challenges!")
+
+    # ---------------------------------------------------------
+    # SOAL 1: Diagram Pohon & Ruang Sampel
+    # ---------------------------------------------------------
+    def generate_recovery_outcomes(self):
+        """
+        Men-generate ruang sampel untuk protokol recovery data.
+        Aturan:
+        - Mulai Read -> Sukses (s) -> Selesai.
+        - Gagal (f) -> Recovery.
+        - Recovery Gagal (F) -> Abort (A) -> Selesai.
+        - Recovery Sukses (S) -> Coba Read lagi.
+        - Maksimal 3x siklus recovery.
+        
+        Return:
+            list of strings: Contoh ["s", "fFs", "fFfA", ...]
+        """
+        outcomes = []
+        
+        # TODO: Implementasikan logika untuk men-generate outcome.
+        # Hint: Anda bisa manual append list karena kasusnya terbatas,
+        # atau gunakan loop/rekursi sederhana.
+        # Ingat logika: s (sukses), fS (gagal lalu recovery sukses), fF (gagal lalu recovery gagal -> A)
+        
+        # CONTOH LOGIKA SEDERHANA (LENGKAPI INI):
+        # 1. Langsung sukses
+        outcomes.append("s") 
+        
+        # 2. Gagal sekali, recovery gagal
+        outcomes.append("fFA")
+        
+        # 3. Gagal sekali, recovery sukses, baca sukses
+        outcomes.append("fSs")
+        
+        # Silakan lengkapi untuk siklus ke-2 dan ke-3...
+        
+        return outcomes
+
+    # ---------------------------------------------------------
+    # SOAL 2: Operasi Himpunan
+    # ---------------------------------------------------------
+    def set_operations(self, set_A, set_B, set_C, universe_S):
+        """
+        Melakukan operasi himpunan.
+        Input berupa Python Sets (e.g., {1, 2, 3}).
+        """
+        # 1. Hanya A (Active Mobile Only): A dikurangi (B gabung C)
+        # TODO: Tulis kode menggunakan set operations python ( - , | , & )
+        only_A = set() 
+
+        # 2. (A U B) - C
+        # TODO: Tulis kode di sini
+        A_union_B_not_C = set()
+
+        # 3. De Morgan Check: Apakah (A U B)' == A' n B' ?
+        # Python set difference: S - A
+        complement_union = universe_S - (set_A.union(set_B))
+        intersect_complements = (universe_S - set_A).intersection(universe_S - set_B)
+        
+        is_demorgan_valid = (complement_union == intersect_complements)
+
+        return only_A, A_union_B_not_C, is_demorgan_valid
+
+    # ---------------------------------------------------------
+    # SOAL 3: Validasi Aksioma
+    # ---------------------------------------------------------
+    def validate_axioms(self, probabilities):
+        """
+        Mengecek apakah list probabilitas valid untuk kejadian Mutually Exclusive.
+        Syarat: Total tidak boleh > 1.
+        
+        Input: list of floats [0.3, 0.4, 0.5]
+        Return: (Boolean, String Message)
+        """
+        # TODO: Hitung total
+        total = 0 
+        
+        if total > 1.0:
+            return False, f"Invalid! Total probability {total} > 1"
+        else:
+            return True, "Valid probability space"
+
+    # ---------------------------------------------------------
+    # SOAL 4: Analisis Tabel (Pandas)
+    # ---------------------------------------------------------
+    def analyze_gpu_quality(self):
+        """
+        Menghitung probabilitas marginal, joint, dan union dari tabel GPU.
+        Data:
+        - Panas Tinggi: Guncang Tinggi (70), Rendah (9)
+        - Panas Rendah: Guncang Tinggi (16), Rendah (5)
+        """
+        # Setup Data Frame
+        data = {
+            'Guncang_Tinggi':,
+            'Guncang_Rendah':
+        }
+        df = pd.DataFrame(data, index=['Panas_Tinggi', 'Panas_Rendah'])
+        
+        total_sample = df.values.sum()
+        
+        # TODO: Hitung Probabilitas
+        
+        # 1. P(Panas Tinggi) - Marginal
+        # Hint: Jumlahkan baris 'Panas_Tinggi', bagi total_sample
+        p_panas_tinggi = 0.0 
+        
+        # 2. P(Panas Tinggi DAN Guncang Tinggi) - Joint
+        # Hint: Ambil nilai sel spesifik df.loc[...], bagi total_sample
+        p_joint = 0.0
+        
+        # 3. P(Panas Tinggi ATAU Guncang Tinggi) - Union
+        # Hint: Gunakan rumus P(A) + P(B) - P(A n B)
+        # Anda perlu menghitung P(Guncang Tinggi) dulu
+        p_guncang_tinggi = 0.0
+        p_union = 0.0
+        
+        return p_panas_tinggi, p_joint, p_union
+
+    # ---------------------------------------------------------
+    # SOAL 5: Geometri Probabilitas
+    # ---------------------------------------------------------
+    def calc_dead_zone_prob(self, screen_w, screen_h, dead_x_range, dead_y_range):
+        """
+        Menghitung probabilitas sentuhan jatuh di dead zone.
+        Asumsi distribusi uniform (Prob = Luas Target / Luas Total).
+        """
+        # TODO: Hitung luas area
+        total_area = 0.0
+        
+        # Dead zone width = max_x - min_x
+        target_area = 0.0
+        
+        probability = 0.0
+        
+        return probability
+
+# ==========================================
+# MAIN EXECUTION (Untuk Testing Mahasiswa)
+# ==========================================
+if __name__ == "__main__":
+    solver = ProbSolver()
+    
+    print("\n--- Test Soal 1: Tree Diagram ---")
+    outcomes = solver.generate_recovery_outcomes()
+    print(f"Sample Outcomes: {outcomes[:3]} ... (Total {len(outcomes)} outcomes)")
+    
+    print("\n--- Test Soal 3: Axioms ---")
+    valid, msg = solver.validate_axioms([0.3, 0.4, 0.5])
+    print(f"Input [0.3, 0.4, 0.5]: {msg}")
+    
+    print("\n--- Test Soal 4: GPU Table ---")
+    p1, p2, p3 = solver.analyze_gpu_quality()
+    print(f"P(Panas Tinggi): {p1:.2f}")
+    print(f"P(Joint): {p2:.2f}")
+    print(f"P(Union): {p3:.2f}")
+    
+    print("\n--- Test Soal 5: Geometry ---")
+    # Screen 10x20. Dead zone: X(4-6), Y(9-11)
+    # Luas total = 200. Luas target = 2 * 2 = 4. Prob = 4/200 = 0.02
+    prob = solver.calc_dead_zone_prob(10, 20, (4,6), (9,11))
+    print(f"Probability Dead Zone: {prob} (Expected: 0.02)")
+```
+
+---
+
+### **BAGIAN 3: KUNCI JAWABAN (Untuk Dosen/Grader)**
+
+Ini adalah referensi singkat logika pengisian kode untuk memastikan Anda memahami ekspektasi jawaban.
+
+*   **Soal 1:** `outcomes` harus berisi semua permutasi sampai abort atau sukses. Contoh: `s`, `fSs`, `fFA`, `fSfSs`, `fSfFA`, dll.
+*   **Soal 2:**
+    *   `only_A = set_A - (set_B | set_C)`
+    *   `A_union_B_not_C = (set_A | set_B) - set_C`
+*   **Soal 3:** `sum(probabilities)`. Jika > 1 return False.
+*   **Soal 4:**
+    *   `p_panas_tinggi = (70+9)/100 = 0.79`
+    *   `p_joint = 70/100 = 0.70`
+    *   `p_union = 0.79 + 0.86 - 0.70 = 0.95` (Total Guncang Tinggi = 86)
+*   **Soal 5:**
+    *   `total = 10 * 20 = 200`
+    *   `target = (6-4) * (11-9) = 2 * 2 = 4`
+    *   `prob = 4 / 200 = 0.02`
+    # agenda
+    Berikut adalah agenda kuliah yang disusun ulang dari perspektif mahasiswa ("Survivor's Guide"), lengkap dengan strategi pengerjaan tugas Python untuk GitHub Classroom dan template laporan Quarto.
+
+---
+
+# 🎓 **Agenda Minggu 2: Hacking Uncertainty**
+**Tema:** *From Chaos to Code* – Mengubah ketidakpastian dunia nyata menjadi logika yang bisa dihitung.
+
+Tujuan kita minggu ini simpel: Jangan cuma hitung manual di kertas. Kita akan membedah logika di balik **Problem Set 1**, lalu menerjemahkannya jadi kode Python biar komputer yang kerja buat kita.
+
+---
+
+### **📅 Senin: The Blueprint (1 Jam)**
+*Membangun Mental Model: Apa itu "Eksperimen dalam Pikiran"?*
+
+**00:00 - 00:15 | Intro: Glitch in the Matrix**
+*   **Topik:** Deterministik vs Probabilistik.
+*   **Discussion:** Kenapa *Data Center* bisa down? Kenapa *gacha* game itu ampas?
+*   **Insight:** Kita belajar memetakan "Semesta Kemungkinan" (Ruang Sampel) dari sistem yang *chaotic*. Kalau kita tahu semua kemungkinan, kita bisa prediksi risiko.
+
+**00:15 - 00:40 | Mapping the Multiverse (Sample Space)**
+*   **Bedah Soal PS1 (No. 1 & 5):**
+    *   *Kasus:* Transmisi sinyal biner (+2/-2) atau Sistem *Recovery* Data.
+    *   *Visualisasi:* Kita akan gambar **Diagram Pohon**.
+    *   *Student Hack:* Jangan tulis semua hasil kalau infinit. Cari polanya. Kalau sistemnya biner (0/1) dan ada 3 slot, berarti ada $2^3 = 8$ kemungkinan.
+
+**00:40 - 01:00 | The Rules of the Game (Aksioma & Event)**
+*   **Konsep:** Kejadian ($Event$) adalah subset dari Semesta.
+*   **Aturan Main (Aksioma):**
+    1.  Peluang gak mungkin negatif.
+    2.  Total peluang semesta = 1.
+    3.  Kalau kejadian saling pisah (*mutually exclusive*), peluang gabungannya tinggal dijumlah.
+*   **Persiapan Rabu:** "Install Pandas & Clone Repo GitHub kalian!"
+
+---
+
+### **📅 Rabu: The Build (2 Jam)**
+*Executuion: Math Verification & Python Implementation*
+
+**Jam 1: Logic Check (Manual Problem Solving)**
+*   **00:00 - 00:30 | Operasi Himpunan (Venn Diagram Battle):**
+    *   *Soal:* PS1 No. 6 & 8.
+    *   *Challenge:* Apa bedanya "A ATAU B" ($A \cup B$) dengan "A DAN B" ($A \cap B$)?
+    *   *Trik:* Ingat **De Morgan**. "Bukan A DAN Bukan B" = "Kebalikan dari (A Gabung B)".
+*   **00:30 - 01:00 | The "Impossible" Probability:**
+    *   *Bedah Soal PS1 No. 11:* Dikasih $P(A)=0.3, P(B)=0.4, P(C)=0.5$.
+    *   *Logika:* Jumlahin aja. $0.3+0.4+0.5 = 1.2$. Lebih dari 1? **Mustahil**. Langsung vonis data itu salah/glitch. Ini validasi dasar *Data Science*.
+
+**Jam 2: Coding Session (GitHub Classroom)**
+*   **01:00 - 01:45 | Python Live Lab:**
+    *   Menerjemahkan tabel data (Soal Piringan Plastik) menjadi `pandas.DataFrame`.
+    *   Menghitung *Joint Probability* dan *Marginal Probability* otomatis.
+*   **01:45 - 02:00 | Reporting:**
+    *   Cara pakai **Quarto** buat bikin laporan tugas yang rapi (Code + Text jadi satu PDF).
+
+---
+
+### **💻 GitHub Classroom: Survival Kit**
+
+Tugas kalian bukan cuma jawab soal, tapi bikin *tools* untuk jawab soal.
+
+**Nama Repo:** `prob-stats-ps1-solver`
+**Misi:** Lengkapi file `prob_solver.py`.
+
+**Strategi Pengerjaan:**
+
+1.  **Jangan Hardcode Jawaban!**
+    *   *Salah:* `return 0.79`
+    *   *Benar:* `return df.loc['Baris_A'].sum() / total_sample`
+    *   *Alasan:* Kalau data soal diganti dosen, kodemu tetap jalan.
+
+2.  **Gunakan `set()` untuk Soal Himpunan**
+    *   Python punya fitur `set`. Gunakan operator `|` untuk Union dan `&` untuk Intersection. Ini cara paling cepat buat validasi jawaban diagram Venn kalian.
+
+3.  **Validasi Input (Defensive Programming)**
+    *   Untuk soal validasi probabilitas, pakai `assert sum(probs) <= 1.0`. Kalau lebih, kasih pesan error yang jelas: "Sistem Error: Total Probabilitas > 100%".
+
+---
+
+### **📄 Template Laporan: Quarto (qmd)**
+
+Gunakan template ini untuk mengumpulkan tugas. Quarto memungkinkan kalian menulis narasi (jawaban esai) dan kode Python dalam satu dokumen, lalu di-*render* jadi PDF profesional.
+
+Simpan file ini sebagai `laporan_ps1.qmd`.
+
+```markdown
+---
+title: "Laporan Problem Set 1: Kerangka Kerja Probabilitas"
+author: "Nama Mahasiswa (NIM)"
+date: "2023-10-XX"
+format:
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
+jupyter: python3
+---
+
+# Pendahuluan
+Laporan ini berisi solusi untuk Problem Set 1, mencakup definisi ruang sampel, operasi himpunan, dan perhitungan probabilitas menggunakan pendekatan analitik dan komputasi Python.
+
+# Bagian 1: Ruang Sampel & Logika
+
+## Soal 1: Transmisi Informasi
+**Analisis Manual:**
+Eksperimen mengirim blok informasi berulang kali sampai sukses. Karena tidak ada batas atas kegagalan yang disebutkan, ruang sampel bersifat *countably infinite*.
+
+$$ S = \{1, 2, 3, \dots \} $$
+
+**Verifikasi Python (Simulasi):**
+```{python}
+# Simulasi sederhana konsep geometric distribution (berhenti saat sukses)
+import random
+
+def simulasi_transmisi(p_sukses=0.5):
+    percobaan = 1
+    while random.random() > p_sukses:
+        percobaan += 1
+    return percobaan
+
+# Cek 5 contoh hasil eksperimen
+print([simulasi_transmisi() for _ in range(5)])
+```
+
+## Soal 5: Diagram Pohon (Sistem Penyimpanan)
+Eksperimen *Read/Recovery* memiliki struktur bertingkat.
+*   **s**: Read Sukses
+*   **f**: Read Gagal -> Masuk Recovery
+*   **S**: Recovery Sukses
+*   **F**: Recovery Gagal
+
+Ruang sampel ($S$) yang merepresentasikan semua jalur yang mungkin:
+$$ S = \{s, fSs, fSfSs, fF, fSfF, \dots\} $$
+
+---
+
+# Bagian 2: Analisis Data Tabel
+
+## Soal 8: Piringan Plastik
+Diberikan data ketahanan gores dan guncang.
+
+```{python}
+import pandas as pd
+
+# Membuat Data Frame dari Soal
+data = {
+    'Guncang_Tinggi':,
+    'Guncang_Rendah':
+}
+df = pd.DataFrame(data, index=['Gores_Tinggi', 'Gores_Rendah'])
+
+# Menampilkan Tabel Marginal
+df['Total'] = df.sum(axis=1)
+df.loc['Total'] = df.sum()
+print(df)
+```
+
+**Jawaban:**
+1.  **P(Gores Tinggi):**
+    Berdasarkan tabel di atas, total sampel gores tinggi adalah 79 dari 100.
+    $$ P(A) = \frac{79}{100} = 0.79 $$
+
+2.  **P(Gores Tinggi $\cap$ Guncang Tinggi):**
+    Irisan baris 'Gores Tinggi' dan kolom 'Guncang Tinggi' adalah 70.
+    $$ P(A \cap B) = \frac{70}{100} = 0.70 $$
+
+3.  **P(Gores Tinggi $\cup$ Guncang Tinggi):**
+    Menggunakan Python untuk validasi rumus $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.
+
+```{python}
+total_sample = 100
+p_A = 79 / total_sample
+p_B = 86 / total_sample # Total Guncang Tinggi
+p_iris = 70 / total_sample
+
+p_union = p_A + p_B - p_iris
+print(f"Probabilitas Union: {p_union:.2f}")
+```
+
+---
+
+# Bagian 3: Validasi Aksioma
+
+## Soal 11: Cek Mutually Exclusive
+Diketahui $P(A)=0.3, P(B)=0.4, P(C)=0.5$.
+
+**Analisis:**
+Untuk kejadian yang saling lepas (*mutually exclusive*), berlaku:
+$$ P(S) = P(A) + P(B) + P(C) $$
+$$ P(S) = 0.3 + 0.4 + 0.5 = 1.2 $$
+
+**Kesimpulan:**
+Karena total probabilitas $1.2 > 1$, maka hal ini melanggar Aksioma Probabilitas. Kejadian-kejadian tersebut **tidak mungkin** saling lepas.
+
+# Referensi
+1. Mahayana, D. (2023). *Catatan Kuliah Probabilitas dan Statistik: Konsep Probabilitas*.
+```

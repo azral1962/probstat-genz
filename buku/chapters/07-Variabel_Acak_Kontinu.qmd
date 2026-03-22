@@ -1,0 +1,30 @@
+---
+title: "Minggu 07: Variabel Acak Kontinu"
+subtitle: "Normal Distribution, Exponential Distribution"
+---
+
+![“Lampu rata-rata hidup 900 jam, simpangan 50 jam. Kamu mau kasih garansi 700 jam, 800 jam, atau 900 jam? Ini bukan sekadar ‘baik hati’—ini strategi biaya klaim. Normal sering muncul di data pengukuran; eksponensial sering muncul di waktu tunggu. Hari ini kamu belajar menghitung peluang rusak sebelum waktu T, lalu menentukan T yang masuk akal untuk target klaim. Kamu akan melihat: statistik bisa jadi alat desain produk.”](../The_Decision_Engineer.png/image7.png)
+
+{{< include ../agenda/w07.qmd >}}
+
+## 1. Konsep Pengetahuan
+Distribusi Normal (kurva lonceng) untuk data pengukuran alami, Distribusi Eksponensial untuk waktu tunggu antar kejadian.
+
+## 2. Tipikal Problem
+Menentukan garansi produk lampu. Diketahui masa hidup lampu berdistribusi Normal dengan rata-rata 900 jam dan standar deviasi 50 jam.
+
+## 3. Solusi & Pengambilan Keputusan
+Menghitung peluang lampu mati sebelum waktu tertentu (misal P(X < 700)). Perusahaan menetapkan masa garansi di titik di mana hanya sebagian kecil (misal 1%) lampu yang akan rusak, untuk meminimalkan biaya penggantian klaim garansi.
+
+## 4. Eksplorasi Komputasi (Python)
+*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
+
+```{python}
+# Tulis kode Python Anda di sini
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+print("Siap untuk komputasi Minggu 07!")
+```

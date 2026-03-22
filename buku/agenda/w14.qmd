@@ -1,0 +1,200 @@
+ Week 14: Aplikasi Statistika Lanjutan (A/B Testing, Anomaly Detection)
+
+## Agenda Perkuliahan Minggu 14
+**Topik:** Aplikasi Lanjutan (A/B Testing, Deteksi Anomali, & Evaluasi Model)
+**Tema Misi:** "The Data Detective: Finding Signals in the Noise"
+
+### Pertemuan 1: Senin (1 Jam) - The Strategy
+**Fokus:** Memahami bagaimana raksasa teknologi (Google, Netflix, Gojek) menggunakan statistik untuk mengambil keputusan otomatis.
+
+- **00:00 - 00:10 | The Hook: "The $300 Million Button"**
+    - Kisah: Ceritakan bagaimana perubahan warna tombol di Bing atau Amazon menghasilkan kenaikan revenue jutaan dolar.
+    - Pertanyaan: "Bagaimana mereka tahu itu bukan kebetulan? Apakah mereka hanya menebak?"
+    - Konsep: Pengantar A/B Testing sebagai standar emas pengambilan keputusan produk digital.
+
+- **00:10 - 00:30 | Bedah Kasus: Deteksi Anomali (Security)**
+    - Visual: Tampilkan grafik traffic server yang normal, lalu tiba-tiba ada lonjakan (spike).
+    - Diskusi: "Kapan sebuah lonjakan disebut serangan DDoS dan kapan disebut 'viral marketing'? Bagaimana membedakannya secara matematis?"
+    - Konsep: Menggunakan Skor-Z dan distribusi probabilitas untuk menentukan threshold alarm.
+
+- **00:30 - 00:50 | Deep Dive: Metrik Evaluasi (Bukan Sekadar Akurasi)**
+    - Masalah: "Model deteksi kanker akurasinya 99%, tapi dia menebak semua orang 'sehat'. Berguna?"
+    - Konsep: Precision vs. Recall dan F1-Score. Pentingnya memahami imbalanced data dalam sistem informasi.
+
+- **00:50 - 01:00 | Pod Formation & Mission Brief**
+    - Misi GitHub: "The DevOps Guardian". Mahasiswa akan menganalisis log server untuk mendeteksi serangan dan mengevaluasi eksperimen fitur baru.
+
+### Pertemuan 2: Rabu (2 Jam) - Integration Lab
+**Fokus:** Menggunakan Python untuk simulasi end-to-end: dari data mentah -> analisis statistik -> keputusan bisnis.
+
+- **00:00 - 00:20 | Micro-Lecture: Multiple Testing Problem**
+    - Masalah: "Jika kamu melakukan A/B test pada 100 tombol berbeda, kemungkinan besar 5 tombol akan terlihat 'signifikan' secara kebetulan (jika $\alpha=0.05$)."
+    - Solusi: Hati-hati dengan P-hacking. Fokus pada hipotesis yang kuat sebelum coding.
+
+- **00:20 - 01:10 | Pod Challenge: "A/B Testing & Anomaly Hunt"**
+    - Dataset: `server_logs.csv` (berisi timestamp, cpu_usage, response_time, group_variant).
+    - Tugas (Python):
+        1. A/B Test: Bandingkan `response_time` antara Grup A (Algoritma Lama) dan Grup B (Algoritma Baru). Apakah B lebih cepat secara signifikan? (Pakai T-test).
+        2. Anomaly Detection: Cari jam-jam di mana `cpu_usage` menyimpang > 3 standar deviasi dari rata-rata (Z-score > 3).
+        3. Visualisasi: Plot time-series dengan garis merah di titik-titik anomali.
+
+- **01:10 - 01:40 | Studi Kasus: "To Block or Not to Block?"**
+    - Skenario: Sistem mendeteksi anomali.
+        - Jika diblokir (padahal user asli) $\to$ Komplain (Cost: High).
+        - Jika dibiarkan (padahal hacker) $\to$ Data Breach (Cost: Ultra High).
+    - Diskusi: Menentukan threshold keputusan berdasarkan Expected Loss (Materi Minggu 13).
+
+- **01:40 - 01:50 | Showcase & Debat**
+    - Pods mempresentasikan temuan anomali mereka. "Apakah serangan terjadi pada jam 2 pagi atau jam 2 siang?"
+
+- **01:50 - 02:00 | Exit Ticket**
+    - Pertanyaan: "Mengapa akurasi tinggi bisa menipu dalam deteksi anomali?" (Jawab: Karena kelas anomali sangat jarang/minoritas).
+
+---
+
+## Materi Kuliah: Konsep, Aplikasi, & Komputasi
+
+### 1. Konsep Dasar
+- **A/B Testing:** Implementasi praktis dari Uji Hipotesis Dua Sampel (Independent T-test). Membagi traffic user ke versi Kontrol (A) dan Eksperimen (B) untuk mengukur dampak perubahan fitur.
+- **Deteksi Anomali (Outlier Detection)::** Mengidentifikasi data yang menyimpang jauh dari pola normal. Menggunakan konsep Skor-Z ($z = \frac{x-\mu}{\sigma}$) atau Interquartile Range (IQR).
+- **Evaluasi Klasifikasi:**
+    - **Presisi:** Dari semua yang ditebak positif, berapa yang benar? (TP/(TP+FP)).
+    - **Recall:** Dari semua kejadian positif asli, berapa yang ditemukan? (TP/(TP+FN)).
+
+### 2. Aplikasi Sistem Informasi
+- **Keamanan Siber:** Mendeteksi serangan DDoS atau intrusi jaringan dengan memantau lonjakan trafik yang memiliki probabilitas kejadian sangat kecil di bawah kondisi normal.
+- **Optimasi UI/UX:** Memutuskan apakah font baru meningkatkan waktu baca pengguna. Keputusan didasarkan pada P-value dan Confidence Interval dari data eksperimen.
+- **Monitoring Kesehatan Sistem:** Predictive Maintenance. Jika suhu server mulai menunjukkan tren naik (regresi) atau variansi tinggi, sistem mengirim peringatan sebelum server meledak.
+
+### 3. Komputasi (Python)
+- **A/B Testing:** `scipy.stats.ttest_ind` untuk uji beda rata-rata, `statsmodels.stats.proportion` untuk uji beda konversi (proporsi).
+- **Z-Score:** `scipy.stats.zscore` atau manual `(df - df.mean()) / df.std()`.
+- **Metrik:** `sklearn.metrics.classification_report` untuk menghitung Presisi, Recall, dan F1 secara otomatis.
+
+---
+
+## Tugas Kelompok (GitHub Classroom)
+**Judul:** Week 14 Mission: The System Guardian - Data-Driven Defense
+
+**Deskripsi:**
+Anda adalah Site Reliability Engineer (SRE). Sistem baru saja mengalami insiden dan manajemen ingin tahu penyebabnya serta apakah fitur "Auto-Scaler" baru bekerja efektif.
+
+**Set Soal (Notebook):**
+1. **Incident Forensics (30 poin):**
+    - Load data `system_metrics.csv`.
+    - Hitung rata-rata dan standar deviasi CPU Usage pada jam kerja normal.
+    - Identifikasi timestamp di mana CPU Usage > $\mu + 3\sigma$. Tandai sebagai "Potential Attack".
+2. **Feature Evaluation (30 poin):**
+    - Data memuat kolom `scaler_version` ('v1' vs 'v2').
+    - Lakukan A/B Testing: Apakah rata-rata latency pada 'v2' lebih rendah secara signifikan dibanding 'v1'? (Gunakan $\alpha=0.05$).
+    - Visualisasikan distribusi latency kedua versi dengan `seaborn.kdeplot` (lihat bagian ekor/tail).
+3. **Model Metrics (20 poin):**
+    - Diberikan hasil prediksi deteksi serangan (array `y_true` dan `y_pred`).
+    - Hitung Confusion Matrix, Precision, dan Recall.
+    - Jelaskan: Untuk kasus keamanan bank, mana yang lebih penting dimaksimalkan, Precision atau Recall?
+4. **Reporting (20 poin):**
+    - Tulis Executive Summary (maks 5 kalimat): Apakah v2 harus di-deploy? Apakah serangan terdeteksi?
+
+---
+
+## 15 Soal & Solusi
+
+### A. Pertanyaan Konseptual
+
+1. **Soal:** Bagaimana statistika membantu dalam optimasi algoritma pencarian di web?
+   - **Solusi:** Statistika (khususnya A/B testing dan regresi) digunakan untuk mengevaluasi apakah perubahan pada algoritma ranking meningkatkan relevansi hasil (misal: click-through rate). Probabilitas juga digunakan dalam model bahasa (seperti n-gram) untuk memprediksi kata kunci pencarian.
+
+2. **Soal:** Jelaskan peran probabilitas dalam menjaga keamanan protokol kriptografi.
+   - **Solusi:** Keamanan kriptografi bergantung pada probabilitas yang sangat kecil (negligible probability) bagi penyerang untuk menebak kunci privat atau menemukan collision pada fungsi hash secara acak. Konsep entropi (ketidakpastian) digunakan untuk mengukur kekuatan kunci.
+
+3. **Soal:** Apa yang dimaksud dengan pengujian A/B dalam pengembangan antarmuka pengguna (UI)?
+   - **Solusi:** Pengujian A/B adalah eksperimen terkontrol di mana dua varian UI (A dan B) ditunjukkan kepada dua kelompok pengguna secara acak. Analisis statistik (uji hipotesis) kemudian digunakan untuk menentukan varian mana yang memberikan performa lebih baik berdasarkan metrik tertentu (misal: konversi).
+
+4. **Soal:** Bagaimana konsep statistika deskriptif digunakan dalam memonitor kesehatan sistem (system health monitoring)?
+   - **Solusi:** Metrik deskriptif seperti rata-rata (mean), persentil (misal p99 latency), dan standar deviasi digunakan untuk menetapkan baseline performa normal. Penyimpangan dari nilai-nilai ini (anomali) menjadi sinyal peringatan dini adanya masalah sistem.
+
+5. **Soal:** Diskusi: Mengapa pemahaman statistik krusial bagi seorang data scientist di era AI?
+   - **Solusi:** AI dan Machine Learning pada dasarnya adalah inferensi statistik otomatis. Pemahaman statistik diperlukan untuk memahami cara kerja model, validasi hasil (menghindari overfitting), mengukur ketidakpastian prediksi, dan menghindari bias dalam data atau algoritma.
+
+### B. Pertanyaan Aplikatif
+
+6. **Soal:** Rancanglah sebuah eksperimen pengujian A/B untuk membandingkan dua desain tombol "Checkout" pada aplikasi e-commerce.
+   - **Solusi:**
+     1. Tentukan metrik keberhasilan: Conversion Rate (Klik/Total View).
+     2. Bagi trafik user 50:50 secara acak ke Desain A dan Desain B.
+     3. Kumpulkan data sampel hingga mencapai power statistik yang cukup.
+     4. Lakukan uji beda proporsi (Z-test) dengan $\alpha=0.05$.
+     5. Jika $P < 0.05$, implementasikan desain pemenang.
+
+7. **Soal:** Gunakan deteksi anomali berbasis skor-Z untuk mengidentifikasi trafik jaringan yang mencurigakan (potensi serangan DDoS).
+   - **Solusi:** Hitung rata-rata ($\mu$) dan standar deviasi ($\sigma$) trafik harian. Hitung skor-Z untuk trafik saat ini: $Z=(X-\mu)/\sigma$. Jika $|Z| > 3$ (di luar 3 sigma), tandai sebagai anomali/potensi DDoS.
+
+8. **Soal:** Analisis sentimen pengguna aplikasi menggunakan distribusi multinomial untuk kategori positif, netral, dan negatif.
+   - **Solusi:** Modelkan jumlah ulasan untuk setiap kategori (Positif, Netral, Negatif) sebagai vektor acak yang mengikuti distribusi Multinomial dengan parameter probabilitas ($p_1, p_2, p_3$). Lakukan estimasi parameter ini dari data sampel ulasan untuk memahami sentimen populasi.
+
+9. **Soal:** Evaluasi performa model klasifikasi gambar menggunakan metrik akurasi, presisi, dan recall berbasis tabel kontingensi.
+   - **Solusi:** Buat Confusion Matrix (TP, TN, FP, FN). Hitung:
+     - Akurasi = (TP+TN)/Total.
+     - Presisi = TP/(TP+FP) (Relevansi prediksi positif).
+     - Recall = TP/(TP+FN) (Sensitivitas deteksi).
+
+10. **Soal:** Gunakan rantai Markov sederhana untuk memprediksi perilaku navigasi user di sebuah website.
+    - **Solusi:** Definisikan states (misal: Home, Produk, Cart, Checkout, Exit). Hitung matriks probabilitas transisi $P_{ij}$ (peluang pindah dari halaman i ke j) berdasarkan data historis log server. Gunakan matriks ini untuk memprediksi peluang user mencapai halaman "Checkout" dari "Home".
+
+### C. Pertanyaan Komputasional
+
+11. **Soal:** Implementasikan skrip Python untuk melakukan pengujian A/B (uji t dua sampel) pada dataset log klik user.
+    - **Solusi:**
+```python
+from scipy import stats  
+# Data durasi sesi (detik)  
+group_a = [6, 8, 9, 7, 10]  
+group_b = [9, 12, 11, 13, 14]  
+t_stat, p_val = stats.ttest_ind(group_a, group_b)  
+print(f"P-value: {p_val}") # Jika < 0.05, beda signifikan  
+```
+
+12. **Soal:** Buatlah sistem peringatan dini sederhana yang mendeteksi lonjakan penggunaan CPU di atas 3 standar deviasi dari rata-rata.
+    - **Solusi:**
+```python
+import numpy as np  
+data_cpu = np.array([12, 15, 14, 13, 50, 15, 12]) # 50 adalah anomali  
+mean, std = np.mean(data_cpu), np.std(data_cpu)  
+threshold = mean + 3 * std  
+alarms = data_cpu[data_cpu > threshold]  
+print(f"Alarm pada nilai: {alarms}")  
+```
+
+13. **Soal:** Gunakan pustaka pandas untuk melakukan analisis korelasi pada dataset besar berisi metrik performa sistem informasi.
+    - **Solusi:**
+```python
+import pandas as pd  
+df = pd.read_csv('system_metrics.csv')  
+correlation_matrix = df.corr()  
+print(correlation_matrix['latency']) # Cek faktor yang paling ngaruh ke latency  
+```
+
+14. **Soal:** Tulis program untuk menghitung metrik evaluasi model (F1-score) berdasarkan input jumlah True Positive, False Positive, dan False Negative.
+    - **Solusi:**
+```python
+def calculate_f1(tp, fp, fn):  
+    precision = tp / (tp + fp)  
+    recall = tp / (tp + fn)  
+    f1 = 2 * (precision * recall) / (precision + recall)  
+    return f1  
+print(calculate_f1(80, 20, 10))  
+```
+
+15. **Soal:** Visualisasikan distribusi "tail" dari latensi aplikasi untuk memahami performa pada persentil ke-99 (P99).
+    - **Solusi:**
+```python
+import matplotlib.pyplot as plt  
+import numpy as np  
+latency = np.random.exponential(scale=100, size=1000) # Data simulasi  
+plt.hist(latency, bins=50, density=True)  
+plt.axvline(np.percentile(latency, 99), color='r', linestyle='--', label='P99')  
+plt.legend(); plt.show()  
+```
+
+
+

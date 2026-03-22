@@ -1,5 +1,19 @@
-# Preface {.unnumbered}
+# Python dulu, Baru Teori {.unnumbered}
 
-This is a Quarto book.
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+Buku ini menerapkan pendekatan Python untuk menjelaskan konsep Probabilitas dan Statistika.
+
+## Cara pakai buku ini
+
+Buku ini adalah laboratorium mini:
+
+1. Hook (Real life)
+2. Try first (Python)
+3. Insight
+4. Visual
+5. Mini challenge
+6. Dunia nyata
+
+::: {.callout-tip}
+Aturan emas: kalau kamu belum mencoba kodenya, kamu belum belajar konsepnya.
+:::

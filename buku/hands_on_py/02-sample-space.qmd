@@ -1,0 +1,8 @@
+---
+title: "Ruang Sampel & Kejadian"
+---
+
+```{python}
+import itertools
+list(itertools.product(["H","T"], repeat=2))
+```

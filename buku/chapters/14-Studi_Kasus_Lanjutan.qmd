@@ -1,0 +1,31 @@
+---
+title: "Minggu 14-15: Studi Kasus Lanjutan"
+subtitle: "Advanced Case Studies (Application in Computing/Electrical Engineering)"
+
+---
+
+![“Di dunia nyata selalu ada noise: lingkungan berubah, sensor drift, proses manufaktur goyang. Produk bagus bukan yang sempurna di lab, tapi yang *robust* di lapangan. Minggu ini kamu menggabungkan semua: estimasi, uji, regresi—dipakai untuk masalah kompleks seperti desain parameter robust atau deteksi sinyal di tengah noise. Kamu tidak cuma menghitung; kamu merancang eksperimen dan memilih parameter kontrol yang menekan variansi output. Ini level ‘engineer beneran’.”](../The_Decision_Engineer.png/image14.png)
+
+{{< include ../agenda/w14.qmd >}}
+
+## 1. Konsep Pengetahuan
+Penerapan integratif dari estimasi, uji hipotesis, dan regresi pada masalah dunia nyata yang kompleks, seperti Robust Parameter Design atau deteksi sinyal.
+
+## 2. Tipikal Problem
+Mengoptimalkan parameter proses manufaktur agar tahan terhadap variasi lingkungan (noise) atau mendeteksi sinyal radar di tengah noise.
+
+## 3. Solusi & Pengambilan Keputusan
+Menggunakan desain eksperimen (DOE) dan analisis statistik untuk memilih parameter 'kontrol' yang meminimalkan variansi output (membuat produk robust/tangguh), sehingga menekan biaya cacat produksi.
+
+## 4. Eksplorasi Komputasi (Python)
+*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
+
+```{python}
+# Tulis kode Python Anda di sini
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+print("Siap untuk komputasi Minggu 14-15!")
+```

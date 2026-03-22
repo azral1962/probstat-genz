@@ -1,0 +1,31 @@
+---
+title: "Minggu 13: Regresi"
+subtitle: "Regression Line, Coefficient of Correlation"
+
+---
+![“Besok operator harus siapin bahan bakar. Kalau salah prediksi beban, bisa boros atau blackout. Kita punya data suhu dan konsumsi listrik. Pertanyaannya: ada hubungan linear nggak? Hari ini kamu belajar bikin garis regresi dengan least squares, mengukur kekuatan hubungan lewat korelasi, lalu memakai model untuk prediksi praktis. Targetnya bukan ‘gambar garis’—targetnya keputusan operasional yang lebih presisi.”](../The_Decision_Engineer.png/image13.png)
+
+
+{{< include ../agenda/w13.qmd >}}
+
+## 1. Konsep Pengetahuan
+Memodelkan hubungan linear antara variabel independen (x) dan dependen (y) dengan metode kuadrat terkecil (y = b0 + b1x).
+
+## 2. Tipikal Problem
+Memprediksi konsumsi daya listrik berdasarkan suhu lingkungan.
+
+## 3. Solusi & Pengambilan Keputusan
+Mengumpulkan data historis, membuat model regresi linear. Model ini digunakan operator pembangkit listrik untuk merencanakan berapa banyak bahan bakar yang harus disiapkan besok berdasarkan ramalan cuaca (suhu).
+
+## 4. Eksplorasi Komputasi (Python)
+*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
+
+```{python}
+# Tulis kode Python Anda di sini
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+print("Siap untuk komputasi Minggu 13!")
+```
