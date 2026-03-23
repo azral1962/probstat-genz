@@ -1,0 +1,64 @@
+# Random Variable Kontinu
+
+## Kita Beri Garansi Berapa Lama?
+![“Lampu rata-rata hidup 900 jam, simpangan 50 jam. Kamu mau kasih garansi 700 jam, 800 jam, atau 900 jam? Ini bukan sekadar ‘baik hati’—ini strategi biaya klaim. Normal sering muncul di data pengukuran; eksponensial sering muncul di waktu tunggu. Hari ini kamu belajar menghitung peluang rusak sebelum waktu T, lalu menentukan T yang masuk akal untuk target klaim. Kamu akan melihat: statistik bisa jadi alat desain produk.”](./The_Decision_Engineer.png/image7.png)
+
+## Live Coding: "Normal is Everywhere"**
+Suatu variable random bisa memiliki *probability density function* (pdf) berbentuk lonceng, dengan dua parameter $\mu$ dan $\sigma$.
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Instantiate a default random number generator
+rng = np.random.default_rng()
+```
+
+Untuk distribuasi normal dan standar, lokasi titik tengah = 0 dan deviasi standar = 1.
+```{python}
+# Generate a single random number from the standard normal distribution (mean=0, std=1)
+sample_scalar = rng.normal()
+print(f"1. Single sample: {sample_scalar}")
+
+```
+
+Dalam kasus kita  lokasi titik tengah = 900 dan deviasi standar = 50. maka berapa jam lima lampu ini mati?
+
+```{python}
+mu = 900
+sigma = 50
+
+# Generate a 1D array of 5 numbers with mean=900, standard deviation=50
+samples_1d = rng.normal(loc=mu, scale=sigma, size=5)
+print(f"2. 1D array: {samples_1d}")
+```
+
+Berbeda beda yaitu: `{python} samples_1d[0]`
+
+
+1. Generate data acak `numpy.random.normal`.
+2. Tunjukkan aturan empiris: 68% data ada di $\mu \pm \sigma$, 95% di $\mu \pm 2\sigma$.
+3. Visualisasi: Plot kurva lonceng dengan seaborn dan arsir area probabilitas.
+
+```{python}
+
+data = rng.normal(loc=mu, scale=sigma, size=1000)
+np.histogram(data, bins=30, density=True)
+```
+
+```{python}
+# 3. Menambahkan label dan judul
+plt.hist(data,bins=30, density=True)
+plt.title('Histogram Normal Distribution (NumPy)')
+plt.xlabel('Value')
+plt.ylabel('Density')
+plt.grid(axis='y', alpha=0.5)
+
+# 4. Menampilkan plot
+plt.show()
+```
+
+```{python}
+# Generate a 2x3 matrix with default parameters
+samples_2d = rng.normal(size=(2, 3))
+print(f"3. 2D array:\n{samples_2d}")
+```

@@ -664,7 +664,7 @@
     "href": "chapters/07-Variabel_Acak_Kontinu.html#eksplorasi-komputasi-python",
     "title": "8  Minggu 07: Variabel Acak Kontinu",
     "section": "8.8 4. Eksplorasi Komputasi (Python)",
-    "text": "8.8 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 07!\")",
+    "text": "8.8 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 07!\")\n\n\nSiap untuk komputasi Minggu 07!",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Minggu 07: Variabel Acak Kontinu</span>"
     ]
