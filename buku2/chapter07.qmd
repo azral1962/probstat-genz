@@ -37,12 +37,34 @@ Berbeda beda yaitu: `{python} samples_1d[0]`
 
 1. Generate data acak `numpy.random.normal`.
 2. Tunjukkan aturan empiris: 68% data ada di $\mu \pm \sigma$, 95% di $\mu \pm 2\sigma$.
-3. Visualisasi: Plot kurva lonceng dengan seaborn dan arsir area probabilitas.
+3. Visualisasi: Plot kurva lonceng dengan seaborn dan arsir area probabilitas. kita coba untuk 100
 
 ```{python}
+N= 1000
 
-data = rng.normal(loc=mu, scale=sigma, size=1000)
+data = rng.normal(loc=mu, scale=sigma, size=N)
 np.histogram(data, bins=30, density=True)
+```
+
+Kita hitung berapa data antara
+1. $850< X < 950$
+2. $800<  X < 1000$
+3. $750 < X <1050$
+
+```{python}
+counter1=0
+counter2=0
+counter3=0
+for n in data:
+    if n >= 850 and n < 950:
+        counter1 += 1  
+    elif n >= 800 and n < 1000:
+        counter2 += 1
+    elif n >= 750 and n < 1050:
+        counter3 += 1
+
+print(counter1/N, counter2/N, counter3/N)
+
 ```
 
 ```{python}

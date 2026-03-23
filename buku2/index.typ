@@ -521,7 +521,7 @@ Untuk distribuasi normal dan standar, lokasi titik tengah = 0 dan deviasi standa
 [#NormalTok("sample_scalar ");#OperatorTok("=");#NormalTok(" rng.normal()");],
 [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"1. Single sample: ");#SpecialCharTok("{");#NormalTok("sample_scalar");#SpecialCharTok("}");#SpecialStringTok("\"");#NormalTok(")");],));
 #block[
-#Skylighting(([#NormalTok("1. Single sample: 0.24416642202191122");],));
+#Skylighting(([#NormalTok("1. Single sample: 0.10169687687306037");],));
 ]
 ]
 Dalam kasus kita lokasi titik tengah = 900 dan deviasi standar = 50. maka berapa jam lima lampu ini mati?
@@ -534,18 +534,32 @@ Dalam kasus kita lokasi titik tengah = 900 dan deviasi standar = 50. maka berapa
 [#NormalTok("samples_1d ");#OperatorTok("=");#NormalTok(" rng.normal(loc");#OperatorTok("=");#NormalTok("mu, scale");#OperatorTok("=");#NormalTok("sigma, size");#OperatorTok("=");#DecValTok("5");#NormalTok(")");],
 [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"2. 1D array: ");#SpecialCharTok("{");#NormalTok("samples_1d");#SpecialCharTok("}");#SpecialStringTok("\"");#NormalTok(")");],));
 #block[
-#Skylighting(([#NormalTok("2. 1D array: [ 921.64135141  981.44396981  858.85745202 1035.86023778  972.51206834]");],));
+#Skylighting(([#NormalTok("2. 1D array: [966.35004949 880.08778343 938.60044462 902.11915409 897.42158321]");],));
 ]
 ]
-Berbeda beda yaitu: np.float64(921.6413514058673)
+Berbeda beda yaitu: np.float64(966.3500494894314)
 
-#Skylighting(([#NormalTok("    1. Generate data acak `numpy.random.normal`.");],
-[#NormalTok("    2. Tunjukkan aturan empiris: 68% data ada di $\\mu \\pm \\sigma$, 95% di $\\mu \\pm 2\\sigma$.");],
-[#NormalTok("    3. Visualisasi: Plot kurva lonceng dengan seaborn dan arsir area probabilitas.");],));
++ Generate data acak #NormalTok("numpy.random.normal");.
++ Tunjukkan aturan empiris: 68% data ada di $mu plus.minus sigma$, 95% di $mu plus.minus 2 sigma$.
++ Visualisasi: Plot kurva lonceng dengan seaborn dan arsir area probabilitas. kita coba ubtuk 100
+
 #Skylighting(([#NormalTok("data ");#OperatorTok("=");#NormalTok(" rng.normal(loc");#OperatorTok("=");#NormalTok("mu, scale");#OperatorTok("=");#NormalTok("sigma, size");#OperatorTok("=");#DecValTok("1000");#NormalTok(")");],
-[#NormalTok("np.histogram(data, bins");#OperatorTok("=");#DecValTok("30");#NormalTok(", density");#OperatorTok("=");#VariableTok("True");#NormalTok(")");],
-[],
-[#CommentTok("# 3. Menambahkan label dan judul");],
+[#NormalTok("np.histogram(data, bins");#OperatorTok("=");#DecValTok("30");#NormalTok(", density");#OperatorTok("=");#VariableTok("True");#NormalTok(")");],));
+#Skylighting(([#NormalTok("(array([0.00081132, 0.00030425, 0.00081132, 0.00070991, 0.00172406,");],
+[#NormalTok("        0.00212972, 0.00273822, 0.00314388, 0.0039552 , 0.00456369,");],
+[#NormalTok("        0.00740332, 0.00760616, 0.00872172, 0.00882314, 0.00740332,");],
+[#NormalTok("        0.00760616, 0.00649059, 0.00628776, 0.00496935, 0.00365095,");],
+[#NormalTok("        0.00344812, 0.00212972, 0.00253539, 0.00152123, 0.00101415,");],
+[#NormalTok("        0.00020283, 0.00040566, 0.00020283, 0.        , 0.00010142]),");],
+[#NormalTok(" array([ 766.68891955,  776.54935438,  786.4097892 ,  796.27022402,");],
+[#NormalTok("         806.13065884,  815.99109367,  825.85152849,  835.71196331,");],
+[#NormalTok("         845.57239813,  855.43283296,  865.29326778,  875.1537026 ,");],
+[#NormalTok("         885.01413742,  894.87457225,  904.73500707,  914.59544189,");],
+[#NormalTok("         924.45587671,  934.31631154,  944.17674636,  954.03718118,");],
+[#NormalTok("         963.897616  ,  973.75805083,  983.61848565,  993.47892047,");],
+[#NormalTok("        1003.33935529, 1013.19979012, 1023.06022494, 1032.92065976,");],
+[#NormalTok("        1042.78109458, 1052.64152941, 1062.50196423]))");],));
+#Skylighting(([#CommentTok("# 3. Menambahkan label dan judul");],
 [#NormalTok("plt.hist(data,bins");#OperatorTok("=");#DecValTok("30");#NormalTok(", density");#OperatorTok("=");#VariableTok("True");#NormalTok(")");],
 [#NormalTok("plt.title(");#StringTok("'Histogram Normal Distribution (NumPy)'");#NormalTok(")");],
 [#NormalTok("plt.xlabel(");#StringTok("'Value'");#NormalTok(")");],
@@ -554,7 +568,7 @@ Berbeda beda yaitu: np.float64(921.6413514058673)
 [],
 [#CommentTok("# 4. Menampilkan plot");],
 [#NormalTok("plt.show()");],));
-#box(image("chapter07_files/figure-typst/cell-5-output-1.svg"))
+#box(image("chapter07_files/figure-typst/cell-6-output-1.svg"))
 
 #block[
 #Skylighting(([#CommentTok("# Generate a 2x3 matrix with default parameters");],
@@ -562,8 +576,8 @@ Berbeda beda yaitu: np.float64(921.6413514058673)
 [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"3. 2D array:");#CharTok("\\n");#SpecialCharTok("{");#NormalTok("samples_2d");#SpecialCharTok("}");#SpecialStringTok("\"");#NormalTok(")");],));
 #block[
 #Skylighting(([#NormalTok("3. 2D array:");],
-[#NormalTok("[[ 0.65561043  0.12842887  0.17154068]");],
-[#NormalTok(" [ 1.22288256 -0.37581476  2.31328241]]");],));
+[#NormalTok("[[-0.27825679  0.67046155  0.46609911]");],
+[#NormalTok(" [ 1.35062457 -2.39468166  0.02774372]]");],));
 ]
 ]
 = Summary
