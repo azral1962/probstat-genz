@@ -3,7 +3,9 @@
 ## Kita Beri Garansi Berapa Lama?
 ![“Lampu rata-rata hidup 900 jam, simpangan 50 jam. Kamu mau kasih garansi 700 jam, 800 jam, atau 900 jam? Ini bukan sekadar ‘baik hati’—ini strategi biaya klaim. Normal sering muncul di data pengukuran; eksponensial sering muncul di waktu tunggu. Hari ini kamu belajar menghitung peluang rusak sebelum waktu T, lalu menentukan T yang masuk akal untuk target klaim. Kamu akan melihat: statistik bisa jadi alat desain produk.”](./The_Decision_Engineer.png/image7.png)
 
-## Live Coding: "Normal is Everywhere"**
+## Live Coding: "Normal is Everywhere"
+Misalnya suatu pabrik bisa menghasilkan 10000 lampu pertahun yang bisa bekerja rata-rata 900 jam, meskipun dalam kenyataanya individual lampu bisa mati bervariasi setelah suatu angka jam positif yang random. Seberapa besar varians ini diukur oleh besaran deviasi, misalnya 50 jam yang berarti variance 2500 jam^2
+
 Suatu variable random bisa memiliki *probability density function* (pdf) berbentuk lonceng, dengan dua parameter $\mu$ dan $\sigma$.
 ```{python}
 import matplotlib.pyplot as plt
@@ -13,7 +15,7 @@ import numpy as np
 rng = np.random.default_rng()
 ```
 
-Untuk distribuasi normal dan standar, lokasi titik tengah = 0 dan deviasi standar = 1.
+Untuk distribusi normal standar, lokasi titik tengah = 0 dan deviasi standar = 1.
 ```{python}
 # Generate a single random number from the standard normal distribution (mean=0, std=1)
 sample_scalar = rng.normal()
@@ -21,7 +23,7 @@ print(f"1. Single sample: {sample_scalar}")
 
 ```
 
-Dalam kasus kita  lokasi titik tengah = 900 dan deviasi standar = 50. maka berapa jam lima lampu ini mati?
+Dalam kasus kita  lokasi titik tengah = 900 dan deviasi standar = 50. Kita ukur waktu hidup 5 buah lampu, maka berapa jam hidup sampai lampu ini mati?
 
 ```{python}
 mu = 900
@@ -37,13 +39,13 @@ Berbeda beda yaitu: `{python} samples_1d[0]`
 
 1. Generate data acak `numpy.random.normal`.
 2. Tunjukkan aturan empiris: 68% data ada di $\mu \pm \sigma$, 95% di $\mu \pm 2\sigma$.
-3. Visualisasi: Plot kurva lonceng dengan seaborn dan arsir area probabilitas. kita coba untuk 100
+3. Visualisasi: Plot kurva lonceng dengan seaborn dan arsir area probabilitas. kita coba untuk 10000
 
 ```{python}
-N= 1000
+N= 10000
 
 data = rng.normal(loc=mu, scale=sigma, size=N)
-np.histogram(data, bins=30, density=True)
+np.histogram(data, bins=10)
 ```
 
 Kita hitung berapa data antara
@@ -63,13 +65,13 @@ for n in data:
     elif n >= 750 and n < 1050:
         counter3 += 1
 
-print(counter1/N, counter2/N, counter3/N)
+print(counter1/N, (counter1+counter2)/N, (counter1+counter2+counter3)/N)
 
 ```
 
 ```{python}
 # 3. Menambahkan label dan judul
-plt.hist(data,bins=30, density=True)
+plt.hist(data,bins=10, density=True)
 plt.title('Histogram Normal Distribution (NumPy)')
 plt.xlabel('Value')
 plt.ylabel('Density')
@@ -79,8 +81,173 @@ plt.grid(axis='y', alpha=0.5)
 plt.show()
 ```
 
+Jadi kita hendak beri garansi berapa jam kalau kita tahu berapa ongkos produksi (misalnya $5), berapa harga jual (misalnya $10), dan berapa biaya penggantian garansi (misalnya $7). Bila garansi terlalu rendah, produk ini kalah bersaing. Misalnya kita hendak memilih antara garansi 750 jam, 800 jam, dan Karena rata-rata 900 jam, dari 10000 yang diproduksi kita hitung berapa yang rusak, lalu kita hitung biaya serta pengaruh pada profit. Asumsi deviasi 50 atau 100. 
+```{python}
+import numpy as np
+
+# Parameter
+n_units = 10000
+mu = 900      # mean umur lampu
+sigma = 50    # std dev
+
+price = 10
+cost = 5
+warranty_cost = 7
+rng = np.random.default_rng()
+# Generate umur lampu (random normal)
+nrg.seed(42)  # agar reproducible
+lifetimes = nrg.normal(mu, sigma, n_units)
+
+# Fungsi hitung profit
+def simulate_profit(lifetimes, warranty_limit):
+    profit_per_unit = []
+    
+    for life in lifetimes:
+        if life < warranty_limit:
+            # kena klaim garansi
+            profit = price - cost - warranty_cost
+        else:
+            # tidak klaim
+            profit = price - cost
+        profit_per_unit.append(profit)
+    
+    total_profit = np.sum(profit_per_unit)
+    return total_profit
+
+# Simulasi
+profit_A = simulate_profit(lifetimes, 9000)
+profit_B = simulate_profit(lifetimes, 8000)
+
+# Output hasil
+print("=== HASIL SIMULASI ===")
+print(f"Profit Garansi A (9000 jam): ${profit_A:,.2f}")
+print(f"Profit Garansi B (8000 jam): ${profit_B:,.2f}")
+
+# Bandingkan
+if profit_A > profit_B:
+    print("Rekomendasi: Garansi A lebih menguntungkan")
+else:
+    print("Rekomendasi: Garansi B lebih menguntungkan")
+
+model
+```
+
 ```{python}
 # Generate a 2x3 matrix with default parameters
 samples_2d = rng.normal(size=(2, 3))
 print(f"3. 2D array:\n{samples_2d}")
 ```
+
+Masalah penentuan waktu garansi ini pada dasarnya adalah masalah optimasi risiko yang menggabungkan Nilai Harapan (*Expected Value*) dan Fungsi Distribusi Kumulatif (CDF) dari probabilitas kegagalan lampu.
+
+**1. Pemodelan Bisnis & Keuntungan (Profit)**
+Untuk menganalisis pengaruh garansi terhadap profit, kita memodelkannya dengan persamaan ekspektasi bisnis berikut:
+*   **Total Pendapatan:** $10.000 \text{ lampu} \times \$10 = \$100.000$
+*   **Total Ongkos Produksi:** $10.000 \text{ lampu} \times \$5 = \$50.000$
+*   **Profit Dasar (Tanpa Klaim):** $\$100.000 - \$50.000 = \$50.000$
+*   **Biaya Klaim Garansi:** $\text{Jumlah lampu rusak} \times \$7$
+*   **Jumlah Lampu Rusak:** $10.000 \times P(X < T_w)$, di mana $P(X < T_w)$ adalah probabilitas (*Cumulative Distribution Function*/CDF) sebuah lampu mati sebelum waktu garansi $T_w$ habis.
+
+**2. Karakteristik Fungsi Distribusi Kumulatif (CDF)**
+Untuk membandingkan probabilitas kegagalan $P(X < T_w)$, kita mengevaluasi 4 jenis distribusi:
+*   **Distribusi Normal:** Menggunakan parameter mean $\mu = 900$ dan standar deviasi $\sigma \in \{50, 100\}$. CDF dihitung menggunakan standarisasi $Z = (X - \mu) / \sigma$.
+*   **Distribusi Seragam (Uniform):** Karena variansi berdistribusi seragam adalah $\frac{(b-a)^2}{12}$, kita dapat menentukan rentang umur lampu minimum $a$ dan maksimum $b$ berdasarkan $\mu=900$ dan $\sigma \in \{50, 100\}$.
+*   **Distribusi Weibull:** Sangat ideal dan umum digunakan untuk memodelkan laju kegagalan umur komponen (fungsi *hazard*/*survival*). Parameter *shape* ($k$) dan *scale* ($\lambda$) dapat dicari melalui persamaan non-linear yang dicocokkan dengan $\mu$ dan $\sigma$.
+*   **Distribusi Eksponensial:** Distribusi ini tidak memiliki memori (*memoryless*) dan variasinya selalu sama dengan rata-ratanya. Oleh karena itu, parameter $\sigma = 50$ atau $100$ diabaikan, dan perhitungan hanya murni bergantung pada laju kerusakan $\lambda = 1/900$.
+
+**3. Solusi Skrip Python**
+Berikut adalah desain *class* Python yang mensimulasikan dan mengembalikan *dictionary* untuk membandingkan jumlah kerusakan, biaya, dan profit dari penentuan garansi (misal 750 jam dan 800 jam) di keempat distribusi di atas.
+
+```python
+import numpy as np
+import scipy.stats as stats
+from scipy.optimize import fsolve
+from scipy.special import gamma
+import json
+
+class WarrantyAnalyzer:
+    def __init__(self, mu=900, N=10000, cost=5, price=10, replacement_cost=7):
+        self.mu = mu
+        self.N = N
+        self.base_profit = N * (price - cost)
+        self.rep_cost = replacement_cost
+
+    def _get_weibull_params(self, sigma):
+        """
+        Mencari parameter Weibull (k=shape, lam=scale) 
+        berdasarkan mu (mean) dan sigma (standar deviasi).
+        """
+        def equation(k):
+            # Variansi Weibull = lam^2 * [Gamma(1+2/k) - Gamma(1+1/k)^2]
+            return (gamma(1 + 2/k) / (gamma(1 + 1/k)**2)) - 1 - (sigma**2 / self.mu**2)
+        
+        # Mencari nilai shape (k) secara numerik
+        k_opt = fsolve(equation, 5.0)
+        # Menghitung nilai scale (lam)
+        lam_opt = self.mu / gamma(1 + 1/k_opt)
+        return k_opt, lam_opt
+
+    def analyze(self, warranty_hours, sigmas):
+        """
+        Menghasilkan dictionary perbandingan profit berdasarkan 
+        distribusi, waktu garansi, dan standar deviasi.
+        """
+        results = {}
+        for w in warranty_hours:
+            results[f"Garansi_{w}_Jam"] = {}
+            for sig in sigmas:
+                
+                # 1. Distribusi Normal CDF
+                p_norm = stats.norm.cdf(w, loc=self.mu, scale=sig)
+
+                # 2. Distribusi Seragam (Uniform) CDF
+                # Var = (b-a)^2 / 12 = sig^2  -->  b-a = sig * sqrt(12)
+                a = self.mu - np.sqrt(3) * sig
+                b = self.mu + np.sqrt(3) * sig
+                p_uni = stats.uniform.cdf(w, loc=a, scale=b-a)
+
+                # 3. Distribusi Weibull CDF
+                k, lam = self._get_weibull_params(sig)
+                p_weib = stats.weibull_min.cdf(w, c=k, scale=lam)
+
+                # 4. Distribusi Eksponensial CDF (Hanya bergantung pada mu)
+                p_exp = stats.expon.cdf(w, scale=self.mu)
+
+                dist_probs = {
+                    'Normal': p_norm,
+                    'Uniform': p_uni,
+                    'Weibull': p_weib,
+                    'Eksponensial': p_exp
+                }
+
+                profit_comparison = {}
+                for dist_name, p_fail in dist_probs.items():
+                    # Kalkulasi Bisnis
+                    n_fail = self.N * p_fail
+                    total_warranty_cost = n_fail * self.rep_cost
+                    profit = self.base_profit - total_warranty_cost
+
+                    profit_comparison[dist_name] = {
+                        'Probabilitas_Mati': round(p_fail, 4),
+                        'Jumlah_Rusak': int(n_fail),
+                        'Biaya_Garansi ($)': round(total_warranty_cost, 2),
+                        'Profit_Akhir ($)': round(profit, 2)
+                    }
+
+                results[f"Garansi_{w}_Jam"][f"Sigma_{sig}"] = profit_comparison
+
+        return results
+
+# --- Eksekusi Simulasi ---
+analyzer = WarrantyAnalyzer(mu=900, N=10000, cost=5, price=10, replacement_cost=7)
+# Menguji garansi 750 jam dan 800 jam dengan asumsi deviasi 50 dan 100
+hasil_analisis = analyzer.analyze(warranty_hours=, sigmas=)
+
+# Cetak hasil (Format JSON agar mudah dibaca sebagai Dictionary)
+print(json.dumps(hasil_analisis, indent=4))
+```
+
+**Analisis Output Bisnis:**
+Berdasarkan pendekatan probabilitas tersebut, ketika skrip dieksekusi, Anda akan menemukan bahwa pemilihan deviasi ($\sigma$) dan waktu garansi sangat krusial:
+1.  **Meningkatkan Garansi:** Jika Anda menetapkan garansi 800 jam pada model **Normal** dengan $\sigma=100$, jumlah lampu yang rusak secara signifikan lebih besar dibandingkan garansi 750 jam karena nilai 800 jam sudah sangat dekat dengan batas kiri kurva *bell-curve* nilai rata-rata ($\mu = 900$).
+2.  **Pemilihan Model:** Model **Eksponensial** akan memprediksi tingkat kerusakan prematur (*infant mortality*) yang paling ekstrem (paling merugikan), karena laju kerusakannya dimulai sejak hari pertama. Sedangkan **Weibull** akan memberikan prediksi yang paling akurat dengan realita keausan pabrik (*wear-out*). Keputusan mengalokasikan garansi harus melihat estimasi profit pada metrik *Profit_Akhir* di model Weibull atau Normal.
