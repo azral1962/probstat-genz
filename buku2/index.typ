@@ -487,10 +487,10 @@ This is a book created from markdown and executable code.
 
 See #cite(<knuth84>, form: "prose") for additional discussion of literate programming.
 
-= Random Variable Kontinu
-<random-variable-kontinu>
-== Kita Beri Garansi Berapa Lama?
+= Kita Beri Garansi Berapa Lama?
 <kita-beri-garansi-berapa-lama>
+\[\# Random Variable Kontinu
+
 #figure([
 #box(image("./The_Decision_Engineer.png/image7.png"))
 ], caption: figure.caption(
@@ -523,7 +523,7 @@ Untuk distribusi normal standar, lokasi titik tengah = 0 dan deviasi standar = 1
 [#NormalTok("sample_scalar ");#OperatorTok("=");#NormalTok(" rng.normal()");],
 [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"1. Single sample: ");#SpecialCharTok("{");#NormalTok("sample_scalar");#SpecialCharTok("}");#SpecialStringTok("\"");#NormalTok(")");],));
 #block[
-#Skylighting(([#NormalTok("1. Single sample: 0.47047132284139653");],));
+#Skylighting(([#NormalTok("1. Single sample: -0.04657625240198787");],));
 ]
 ]
 Dalam kasus kita lokasi titik tengah = 900 dan deviasi standar = 50. Kita ukur waktu hidup 5 buah lampu, maka berapa jam hidup sampai lampu ini mati?
@@ -536,10 +536,10 @@ Dalam kasus kita lokasi titik tengah = 900 dan deviasi standar = 50. Kita ukur w
 [#NormalTok("samples_1d ");#OperatorTok("=");#NormalTok(" rng.normal(loc");#OperatorTok("=");#NormalTok("mu, scale");#OperatorTok("=");#NormalTok("sigma, size");#OperatorTok("=");#DecValTok("5");#NormalTok(")");],
 [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"2. 1D array: ");#SpecialCharTok("{");#NormalTok("samples_1d");#SpecialCharTok("}");#SpecialStringTok("\"");#NormalTok(")");],));
 #block[
-#Skylighting(([#NormalTok("2. 1D array: [902.19030939 927.79329825 882.95265228 864.22977427 867.42985082]");],));
+#Skylighting(([#NormalTok("2. 1D array: [ 966.61596593  938.90906854  939.52041278  864.42804026 1043.27082055]");],));
 ]
 ]
-Berbeda beda yaitu: np.float64(902.1903093858832)
+Berbeda beda yaitu: np.float64(966.6159659252387)
 
 + Generate data acak #NormalTok("numpy.random.normal");.
 + Tunjukkan aturan empiris: 68% data ada di $mu plus.minus sigma$, 95% di $mu plus.minus 2 sigma$.
@@ -549,10 +549,10 @@ Berbeda beda yaitu: np.float64(902.1903093858832)
 [],
 [#NormalTok("data ");#OperatorTok("=");#NormalTok(" rng.normal(loc");#OperatorTok("=");#NormalTok("mu, scale");#OperatorTok("=");#NormalTok("sigma, size");#OperatorTok("=");#NormalTok("N)");],
 [#NormalTok("np.histogram(data, bins");#OperatorTok("=");#DecValTok("10");#NormalTok(")");],));
-#Skylighting(([#NormalTok("(array([   9,   97,  458, 1334, 2499, 2775, 1810,  785,  198,   35]),");],
-[#NormalTok(" array([ 714.75712619,  750.10098844,  785.4448507 ,  820.78871295,");],
-[#NormalTok("         856.13257521,  891.47643746,  926.82029972,  962.16416197,");],
-[#NormalTok("         997.50802423, 1032.85188649, 1068.19574874]))");],));
+#Skylighting(([#NormalTok("(array([  31,  150,  678, 1616, 2647, 2557, 1581,  580,  141,   19]),");],
+[#NormalTok(" array([ 725.96325526,  760.93493061,  795.90660597,  830.87828132,");],
+[#NormalTok("         865.84995668,  900.82163203,  935.79330739,  970.76498274,");],
+[#NormalTok("        1005.7366581 , 1040.70833345, 1075.68000881]))");],));
 Kita hitung berapa data antara 1. $850 < X < 950$ 2. $800 < X < 1000$ 3. $750 < X < 1050$
 
 #block[
@@ -569,7 +569,7 @@ Kita hitung berapa data antara 1. $850 < X < 950$ 2. $800 < X < 1000$ 3. $750 < 
 [],
 [#BuiltInTok("print");#NormalTok("(counter1");#OperatorTok("/");#NormalTok("N, (counter1");#OperatorTok("+");#NormalTok("counter2)");#OperatorTok("/");#NormalTok("N, (counter1");#OperatorTok("+");#NormalTok("counter2");#OperatorTok("+");#NormalTok("counter3)");#OperatorTok("/");#NormalTok("N)");],));
 #block[
-#Skylighting(([#NormalTok("0.6891 0.9575 0.9981");],));
+#Skylighting(([#NormalTok("0.6826 0.9558 0.9974");],));
 ]
 ]
 #Skylighting(([#CommentTok("# 3. Menambahkan label dan judul");],
@@ -583,18 +583,470 @@ Kita hitung berapa data antara 1. $850 < X < 950$ 2. $800 < X < 1000$ 3. $750 < 
 [#NormalTok("plt.show()");],));
 #box(image("chapter07_files/figure-typst/cell-7-output-1.svg"))
 
-Jadi kita hendak beri garansi berapa kalau kita tahu
+Jadi kita hendak beri garansi berapa jam kalau kita tahu berapa ongkos produksi (misalnya \$5), berapa harga jual (misalnya \$10), dan berapa biaya penggantian garansi (misalnya \$7). Bila garansi terlalu rendah, produk ini kalah bersaing. Misalnya kita hendak memilih antara garansi 750 jam, 800 jam, dan Karena rata-rata 900 jam, dari 10000 yang diproduksi kita hitung berapa yang rusak, lalu kita hitung biaya serta pengaruh pada profit. Asumsi deviasi 50 atau 100.
 
+#block[
+#Skylighting(([#ImportTok("import");#NormalTok(" numpy ");#ImportTok("as");#NormalTok(" np");],
+[],
+[#CommentTok("# Parameter");],
+[#NormalTok("n_units ");#OperatorTok("=");#NormalTok(" ");#DecValTok("10000");],
+[#NormalTok("mu ");#OperatorTok("=");#NormalTok(" ");#DecValTok("900");#NormalTok("      ");#CommentTok("# mean umur lampu");],
+[#NormalTok("sigma ");#OperatorTok("=");#NormalTok(" ");#DecValTok("50");#NormalTok("    ");#CommentTok("# std dev");],
+[],
+[#NormalTok("price ");#OperatorTok("=");#NormalTok(" ");#DecValTok("10");],
+[#NormalTok("cost ");#OperatorTok("=");#NormalTok(" ");#DecValTok("5");],
+[#NormalTok("warranty_cost ");#OperatorTok("=");#NormalTok(" ");#DecValTok("7");],
+[#NormalTok("nrg ");#OperatorTok("=");#NormalTok(" np.random.default_rng()");],
+[#CommentTok("# Generate umur lampu (random normal)");],
+[#CommentTok("# nrg.seed(42)  # agar reproducible");],
+[#NormalTok("lifetimes ");#OperatorTok("=");#NormalTok(" nrg.normal(mu, sigma, n_units)");],
+[],
+[#CommentTok("# Fungsi hitung profit");],
+[#KeywordTok("def");#NormalTok(" simulate_profit(lifetimes, warranty_limit):");],
+[#NormalTok("    profit_per_unit ");#OperatorTok("=");#NormalTok(" []");],
+[#NormalTok("    ");],
+[#NormalTok("    ");#ControlFlowTok("for");#NormalTok(" life ");#KeywordTok("in");#NormalTok(" lifetimes:");],
+[#NormalTok("        ");#ControlFlowTok("if");#NormalTok(" life ");#OperatorTok("<");#NormalTok(" warranty_limit:");],
+[#NormalTok("            ");#CommentTok("# kena klaim garansi");],
+[#NormalTok("            profit ");#OperatorTok("=");#NormalTok(" price ");#OperatorTok("-");#NormalTok(" cost ");#OperatorTok("-");#NormalTok(" warranty_cost");],
+[#NormalTok("        ");#ControlFlowTok("else");#NormalTok(":");],
+[#NormalTok("            ");#CommentTok("# tidak klaim");],
+[#NormalTok("            profit ");#OperatorTok("=");#NormalTok(" price ");#OperatorTok("-");#NormalTok(" cost");],
+[#NormalTok("        profit_per_unit.append(profit)");],
+[#NormalTok("    ");],
+[#NormalTok("    total_profit ");#OperatorTok("=");#NormalTok(" np.");#BuiltInTok("sum");#NormalTok("(profit_per_unit)");],
+[#NormalTok("    ");#ControlFlowTok("return");#NormalTok(" total_profit");],
+[],
+[#CommentTok("# Simulasi");],
+[#NormalTok("profit_A ");#OperatorTok("=");#NormalTok(" simulate_profit(lifetimes, ");#DecValTok("850");#NormalTok(")");],
+[#NormalTok("profit_B ");#OperatorTok("=");#NormalTok(" simulate_profit(lifetimes, ");#DecValTok("800");#NormalTok(")");],
+[#NormalTok("profit_C ");#OperatorTok("=");#NormalTok(" simulate_profit(lifetimes, ");#DecValTok("750");#NormalTok(")");],
+[],
+[#CommentTok("# Output hasil");],
+[#BuiltInTok("print");#NormalTok("(");#StringTok("\"=== HASIL SIMULASI ===\"");#NormalTok(")");],
+[#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"Profit Garansi A (850 jam): $");#SpecialCharTok("{");#NormalTok("profit_A");#SpecialCharTok(":,.2f}");#SpecialStringTok("\"");#NormalTok(")");],
+[#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"Profit Garansi B (800 jam): $");#SpecialCharTok("{");#NormalTok("profit_B");#SpecialCharTok(":,.2f}");#SpecialStringTok("\"");#NormalTok(")");],
+[#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"Profit Garansi C (700 jam): $");#SpecialCharTok("{");#NormalTok("profit_C");#SpecialCharTok(":,.2f}");#SpecialStringTok("\"");#NormalTok(")");],
+[],
+[#CommentTok("# Bandingkan");],
+[#ControlFlowTok("if");#NormalTok(" profit_A ");#OperatorTok(">");#NormalTok(" profit_B ");#KeywordTok("and");#NormalTok(" profit_A ");#OperatorTok(">");#NormalTok(" profit_C:");],
+[#NormalTok("    ");#BuiltInTok("print");#NormalTok("(");#StringTok("\"Rekomendasi: Garansi A lebih menguntungkan\"");#NormalTok(")");],
+[#ControlFlowTok("elif");#NormalTok(" profit_B ");#OperatorTok(">");#NormalTok(" profit_C:");],
+[#NormalTok("    ");#BuiltInTok("print");#NormalTok("(");#StringTok("\"Rekomendasi: Garansi B lebih menguntungkan\"");#NormalTok(")");],
+[#ControlFlowTok("else");#NormalTok(": ");],
+[#NormalTok("    ");#BuiltInTok("print");#NormalTok("(");#StringTok("\"Rekomendasi: Garansi C lebih menguntungkan\"");#NormalTok(")");],));
+#block[
+#Skylighting(([#NormalTok("=== HASIL SIMULASI ===");],
+[#NormalTok("Profit Garansi A (850 jam): $38,562.00");],
+[#NormalTok("Profit Garansi B (800 jam): $48,418.00");],
+[#NormalTok("Profit Garansi C (700 jam): $49,916.00");],
+[#NormalTok("Rekomendasi: Garansi C lebih menguntungkan");],));
+]
+]
 #block[
 #Skylighting(([#CommentTok("# Generate a 2x3 matrix with default parameters");],
 [#NormalTok("samples_2d ");#OperatorTok("=");#NormalTok(" rng.normal(size");#OperatorTok("=");#NormalTok("(");#DecValTok("2");#NormalTok(", ");#DecValTok("3");#NormalTok("))");],
 [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"3. 2D array:");#CharTok("\\n");#SpecialCharTok("{");#NormalTok("samples_2d");#SpecialCharTok("}");#SpecialStringTok("\"");#NormalTok(")");],));
 #block[
 #Skylighting(([#NormalTok("3. 2D array:");],
-[#NormalTok("[[-1.34351469 -0.67630945  1.23977722]");],
-[#NormalTok(" [-0.63204131  0.5381015  -0.02090343]]");],));
+[#NormalTok("[[-0.16298189  0.9681246  -0.58785859]");],
+[#NormalTok(" [ 1.84399774  1.24289279  0.16475956]]");],));
 ]
 ]
+Masalah penentuan waktu garansi ini pada dasarnya adalah masalah optimasi risiko yang menggabungkan Nilai Harapan (#emph[Expected Value]) dan Fungsi Distribusi Kumulatif (CDF) dari probabilitas kegagalan lampu.
+
+#strong[\1. Pemodelan Bisnis & Keuntungan (Profit)] Untuk menganalisis pengaruh garansi terhadap profit, kita memodelkannya dengan persamaan ekspektasi bisnis berikut:
+
+- #strong[Total Pendapatan:] $10.000 upright(" lampu") times \$ 10 = \$ 100.000$
+
+- #strong[Total Ongkos Produksi:] $10.000 upright(" lampu") times \$ 5 = \$ 50.000$
+
+- #strong[Profit Dasar (Tanpa Klaim):] $\$ 100.000 - \$ 50.000 = \$ 50.000$
+
+- #strong[Biaya Klaim Garansi:] $upright("Jumlah lampu rusak") times \$ 7$ \* #strong[Jumlah Lampu Rusak:] $10.000 times P \( X < T_w \)$, di mana $P \( X < T_w \)$ adalah probabilitas (#emph[Cumulative Distribution Function]/CDF) sebuah lampu mati sebelum waktu garansi $T_w$ habis.
+
+== Beda Pabrik, Beda Karakter Lampu
+<beda-pabrik-beda-karakter-lampu>
+Asumsi beda teknologi menyebabkan beda distribusi probabilitas lifetime lampu, meskipun rata-rata dan deviasi nya sama.
+
+#strong[\2. Karakteristik Fungsi Distribusi Kumulatif (CDF)] Untuk membandingkan probabilitas kegagalan $P \( X < T_w \)$, kita mengevaluasi 4 jenis distribusi:
+
+- #strong[Distribusi Normal:] Menggunakan parameter mean $mu = 900$ dan standar deviasi $sigma in { 50 \, 100 }$. CDF dihitung menggunakan standarisasi $Z = \( X - mu \) \/ sigma$.
+
+- #strong[Distribusi Seragam (Uniform):] Karena variansi berdistribusi seragam adalah $frac(\( b - a \)^2, 12)$, kita dapat menentukan rentang umur lampu minimum $a$ dan maksimum $b$ berdasarkan $mu = 900$ dan $sigma in { 50 \, 100 }$.
+
+- #strong[Distribusi Weibull:] Sangat ideal dan umum digunakan untuk memodelkan laju kegagalan umur komponen (fungsi #emph[hazard]/#emph[survival]). Parameter #emph[shape] ($k$) dan #emph[scale] ($lambda$) dapat dicari melalui persamaan non-linear yang dicocokkan dengan $mu$ dan $sigma$.
+
+- #strong[Distribusi Eksponensial:] Distribusi ini tidak memiliki memori (#emph[memoryless]) dan variasinya selalu sama dengan rata-ratanya. Oleh karena itu, parameter $sigma = 50$ atau $100$ diabaikan, dan perhitungan hanya murni bergantung pada laju kerusakan $lambda = 1 \/ 900$.
+
+#strong[\3. Solusi Skrip Python] Berikut adalah desain #emph[class] Python yang mensimulasikan dan mengembalikan #emph[dictionary] untuk membandingkan jumlah kerusakan, biaya, dan profit dari penentuan garansi (misal 750 jam dan 800 jam) di keempat distribusi di atas.
+
+#block[
+#Skylighting(([#ImportTok("import");#NormalTok(" numpy ");#ImportTok("as");#NormalTok(" np");],
+[#ImportTok("import");#NormalTok(" scipy.stats ");#ImportTok("as");#NormalTok(" stats");],
+[#ImportTok("from");#NormalTok(" scipy.optimize ");#ImportTok("import");#NormalTok(" fsolve");],
+[#ImportTok("from");#NormalTok(" scipy.special ");#ImportTok("import");#NormalTok(" gamma");],
+[#ImportTok("import");#NormalTok(" json");],
+[],
+[#KeywordTok("class");#NormalTok(" WarrantyAnalyzer:");],
+[#NormalTok("    ");#KeywordTok("def");#NormalTok(" ");#FunctionTok("__init__");#NormalTok("(");#VariableTok("self");#NormalTok(", mu");#OperatorTok("=");#DecValTok("900");#NormalTok(", N");#OperatorTok("=");#DecValTok("10000");#NormalTok(", cost");#OperatorTok("=");#DecValTok("5");#NormalTok(", price");#OperatorTok("=");#DecValTok("10");#NormalTok(", replacement_cost");#OperatorTok("=");#DecValTok("7");#NormalTok("):");],
+[#NormalTok("        ");#VariableTok("self");#NormalTok(".mu ");#OperatorTok("=");#NormalTok(" mu");],
+[#NormalTok("        ");#VariableTok("self");#NormalTok(".N ");#OperatorTok("=");#NormalTok(" N");],
+[#NormalTok("        ");#VariableTok("self");#NormalTok(".base_profit ");#OperatorTok("=");#NormalTok(" N ");#OperatorTok("*");#NormalTok(" (price ");#OperatorTok("-");#NormalTok(" cost)");],
+[#NormalTok("        ");#VariableTok("self");#NormalTok(".rep_cost ");#OperatorTok("=");#NormalTok(" replacement_cost");],
+[],
+[#NormalTok("    ");#KeywordTok("def");#NormalTok(" _get_weibull_params(");#VariableTok("self");#NormalTok(", sigma):");],
+[#NormalTok("        ");#CommentTok("\"\"\"");],
+[#CommentTok("        Mencari parameter Weibull (k=shape, lam=scale) ");],
+[#CommentTok("        berdasarkan mu (mean) dan sigma (standar deviasi).");],
+[#CommentTok("        \"\"\"");],
+[#NormalTok("        ");#KeywordTok("def");#NormalTok(" equation(k):");],
+[#NormalTok("            ");#CommentTok("# Variansi Weibull = lam^2 * [Gamma(1+2/k) - Gamma(1+1/k)^2]");],
+[#NormalTok("            ");#ControlFlowTok("return");#NormalTok(" (gamma(");#DecValTok("1");#NormalTok(" ");#OperatorTok("+");#NormalTok(" ");#DecValTok("2");#OperatorTok("/");#NormalTok("k) ");#OperatorTok("/");#NormalTok(" (gamma(");#DecValTok("1");#NormalTok(" ");#OperatorTok("+");#NormalTok(" ");#DecValTok("1");#OperatorTok("/");#NormalTok("k)");#OperatorTok("**");#DecValTok("2");#NormalTok(")) ");#OperatorTok("-");#NormalTok(" ");#DecValTok("1");#NormalTok(" ");#OperatorTok("-");#NormalTok(" (sigma");#OperatorTok("**");#DecValTok("2");#NormalTok(" ");#OperatorTok("/");#NormalTok(" ");#VariableTok("self");#NormalTok(".mu");#OperatorTok("**");#DecValTok("2");#NormalTok(")");],
+[#NormalTok("        ");],
+[#NormalTok("        ");#CommentTok("# Mencari nilai shape (k) secara numerik");],
+[#NormalTok("        k_opt ");#OperatorTok("=");#NormalTok(" fsolve(equation, ");#FloatTok("5.0");#NormalTok(")");],
+[#NormalTok("        ");#CommentTok("# Menghitung nilai scale (lam)");],
+[#NormalTok("        lam_opt ");#OperatorTok("=");#NormalTok(" ");#VariableTok("self");#NormalTok(".mu ");#OperatorTok("/");#NormalTok(" gamma(");#DecValTok("1");#NormalTok(" ");#OperatorTok("+");#NormalTok(" ");#DecValTok("1");#OperatorTok("/");#NormalTok("k_opt)");],
+[#NormalTok("        ");#ControlFlowTok("return");#NormalTok(" k_opt, lam_opt");],
+[],
+[#NormalTok("    ");#KeywordTok("def");#NormalTok(" analyze(");#VariableTok("self");#NormalTok(", warranty_hours, sigmas):");],
+[#NormalTok("        ");#CommentTok("\"\"\"");],
+[#CommentTok("        Menghasilkan dictionary perbandingan profit berdasarkan ");],
+[#CommentTok("        distribusi, waktu garansi, dan standar deviasi.");],
+[#CommentTok("        \"\"\"");],
+[#NormalTok("        results ");#OperatorTok("=");#NormalTok(" {}");],
+[#NormalTok("        ");#ControlFlowTok("for");#NormalTok(" w ");#KeywordTok("in");#NormalTok(" warranty_hours:");],
+[#NormalTok("            results[");#SpecialStringTok("f\"Garansi_");#SpecialCharTok("{");#NormalTok("w");#SpecialCharTok("}");#SpecialStringTok("_Jam\"");#NormalTok("] ");#OperatorTok("=");#NormalTok(" {}");],
+[#NormalTok("            ");#CommentTok("# print(f\"===Garansi_{w}_Jam===\")");],
+[#NormalTok("            ");#ControlFlowTok("for");#NormalTok(" sig ");#KeywordTok("in");#NormalTok(" sigmas:");],
+[#NormalTok("                ");#CommentTok("# print(f\"**Sigma_{sig}**\")");],
+[#NormalTok("                ");#CommentTok("# 1. Distribusi Normal CDF");],
+[#NormalTok("                p_norm ");#OperatorTok("=");#NormalTok(" stats.norm.cdf(w, loc");#OperatorTok("=");#VariableTok("self");#NormalTok(".mu, scale");#OperatorTok("=");#NormalTok("sig)");],
+[],
+[#NormalTok("                ");#CommentTok("# 2. Distribusi Seragam (Uniform) CDF");],
+[#NormalTok("                ");#CommentTok("# Var = (b-a)^2 / 12 = sig^2  -->  b-a = sig * sqrt(12)");],
+[#NormalTok("                a ");#OperatorTok("=");#NormalTok(" ");#VariableTok("self");#NormalTok(".mu ");#OperatorTok("-");#NormalTok(" np.sqrt(");#DecValTok("3");#NormalTok(") ");#OperatorTok("*");#NormalTok(" sig");],
+[#NormalTok("                b ");#OperatorTok("=");#NormalTok(" ");#VariableTok("self");#NormalTok(".mu ");#OperatorTok("+");#NormalTok(" np.sqrt(");#DecValTok("3");#NormalTok(") ");#OperatorTok("*");#NormalTok(" sig");],
+[#NormalTok("                p_uni ");#OperatorTok("=");#NormalTok(" stats.uniform.cdf(w, loc");#OperatorTok("=");#NormalTok("a, scale");#OperatorTok("=");#NormalTok("b");#OperatorTok("-");#NormalTok("a)");],
+[],
+[#NormalTok("                ");#CommentTok("# 3. Distribusi Weibull CDF");],
+[#NormalTok("                k, lam ");#OperatorTok("=");#NormalTok(" ");#VariableTok("self");#NormalTok("._get_weibull_params(sig)");],
+[#NormalTok("                p_weib ");#OperatorTok("=");#NormalTok(" stats.weibull_min.cdf(w, c");#OperatorTok("=");#NormalTok("k, scale");#OperatorTok("=");#NormalTok("lam)");],
+[],
+[#NormalTok("                ");#CommentTok("# 4. Distribusi Eksponensial CDF (Hanya bergantung pada mu)");],
+[#NormalTok("                p_exp ");#OperatorTok("=");#NormalTok(" stats.expon.cdf(w, scale");#OperatorTok("=");#VariableTok("self");#NormalTok(".mu)");],
+[],
+[#NormalTok("                dist_probs ");#OperatorTok("=");#NormalTok(" {");],
+[#NormalTok("                    ");#StringTok("'Normal'");#NormalTok(": p_norm,");],
+[#NormalTok("                    ");#StringTok("'Uniform'");#NormalTok(": p_uni,");],
+[#NormalTok("                    ");#StringTok("'Weibull'");#NormalTok(": p_weib,");],
+[#NormalTok("                    ");#StringTok("'Eksponensial'");#NormalTok(": p_exp");],
+[#NormalTok("                }");],
+[],
+[#NormalTok("                profit_comparison ");#OperatorTok("=");#NormalTok(" {}");],
+[#NormalTok("                ");#ControlFlowTok("for");#NormalTok(" dist_name, p_fail ");#KeywordTok("in");#NormalTok(" dist_probs.items():");],
+[#NormalTok("                    ");#CommentTok("# Kalkulasi Bisnis");],
+[#NormalTok("                    n_fail ");#OperatorTok("=");#NormalTok(" ");#VariableTok("self");#NormalTok(".N ");#OperatorTok("*");#NormalTok(" p_fail");],
+[#NormalTok("                    total_warranty_cost ");#OperatorTok("=");#NormalTok(" n_fail ");#OperatorTok("*");#NormalTok(" ");#VariableTok("self");#NormalTok(".rep_cost");],
+[#NormalTok("                    profit ");#OperatorTok("=");#NormalTok(" ");#VariableTok("self");#NormalTok(".base_profit ");#OperatorTok("-");#NormalTok(" total_warranty_cost");],
+[],
+[#NormalTok("                    profit_comparison[dist_name] ");#OperatorTok("=");#NormalTok(" {");],
+[#NormalTok("                        ");#StringTok("'Probabilitas_Mati'");#NormalTok(": np.");#BuiltInTok("round");#NormalTok("(p_fail, ");#DecValTok("4");#NormalTok("),");],
+[#NormalTok("                        ");#StringTok("'Jumlah_Rusak'");#NormalTok(": np.");#BuiltInTok("round");#NormalTok("(n_fail,");#DecValTok("0");#NormalTok("),");],
+[#NormalTok("                        ");#StringTok("'Biaya_Garansi ($)'");#NormalTok(": np.");#BuiltInTok("round");#NormalTok("(total_warranty_cost, ");#DecValTok("2");#NormalTok("),");],
+[#NormalTok("                        ");#StringTok("'Profit_Akhir ($)'");#NormalTok(": np.");#BuiltInTok("round");#NormalTok("(profit, ");#DecValTok("2");#NormalTok(")");],
+[#NormalTok("                    }");],
+[#NormalTok("                    ");#CommentTok("# print(f\"Distribusi {dist_name}\",f\"{profit_comparison}\")");],
+[#NormalTok("                results[");#SpecialStringTok("f\"Garansi_");#SpecialCharTok("{");#NormalTok("w");#SpecialCharTok("}");#SpecialStringTok("_Jam\"");#NormalTok("][");#SpecialStringTok("f\"Sigma_");#SpecialCharTok("{");#NormalTok("sig");#SpecialCharTok("}");#SpecialStringTok("\"");#NormalTok("] ");#OperatorTok("=");#NormalTok(" profit_comparison");],
+[],
+[#NormalTok("        ");#ControlFlowTok("return");#NormalTok(" results");],
+[],
+[#CommentTok("# --- Eksekusi Simulasi ---");],
+[#NormalTok("analyzer ");#OperatorTok("=");#NormalTok(" WarrantyAnalyzer(mu");#OperatorTok("=");#DecValTok("900");#NormalTok(", N");#OperatorTok("=");#DecValTok("10000");#NormalTok(", cost");#OperatorTok("=");#DecValTok("5");#NormalTok(", price");#OperatorTok("=");#DecValTok("10");#NormalTok(", replacement_cost");#OperatorTok("=");#DecValTok("7");#NormalTok(")");],
+[#CommentTok("# Menguji garansi 750 jam dan 800 jam dengan asumsi deviasi 50 dan 100");],
+[#NormalTok("hasil_analisis ");#OperatorTok("=");#NormalTok(" analyzer.analyze(warranty_hours");#OperatorTok("=");#NormalTok("[");#DecValTok("850");#NormalTok(", ");#DecValTok("800");#NormalTok(", ");#DecValTok("750");#NormalTok("], sigmas");#OperatorTok("=");#NormalTok("[");#DecValTok("50");#NormalTok(",");#DecValTok("100");#NormalTok("])");],
+[],
+[#CommentTok("# Cetak hasil (Format JSON agar mudah dibaca sebagai Dictionary)");],
+[#CommentTok("# print(json.dumps(hasil_analisis, indent=4))");],
+[#CommentTok("# print(hasil_analisis)");],));
+]
+#strong[Analisis Output Bisnis:] Berdasarkan pendekatan probabilitas tersebut, ketika skrip dieksekusi, Anda akan menemukan bahwa pemilihan deviasi ($sigma$) dan waktu garansi sangat krusial: 1. #strong[Meningkatkan Garansi:] Jika Anda menetapkan garansi 800 jam pada model #strong[Normal] dengan $sigma = 100$, jumlah lampu yang rusak secara signifikan lebih besar dibandingkan garansi 750 jam karena nilai 800 jam sudah sangat dekat dengan batas kiri kurva #emph[bell-curve] nilai rata-rata ($mu = 900$). 2. #strong[Pemilihan Model:] Model #strong[Eksponensial] akan memprediksi tingkat kerusakan prematur (#emph[infant mortality]) yang paling ekstrem (paling merugikan), karena laju kerusakannya dimulai sejak hari pertama. Sedangkan #strong[Weibull] akan memberikan prediksi yang paling akurat dengan realita keausan pabrik (#emph[wear-out]). Keputusan mengalokasikan garansi harus melihat estimasi profit pada metrik #emph[Profit\_Akhir] di model Weibull atau Normal.
+
+bila pasar produk diperebutkan oleh produsen di mana pangsa psar di tentuka oleh harga dan garansi secara proporsional: semakin murah harga semakin besar segmen, semakin tinggi garansi semakin besar segmen, usulkan model sederhana untuk memutuskan harga dan garansi
+
+Bisa. Model sederhananya adalah: #strong[pilih harga dan garansi yang memaksimalkan expected profit total], tetapi #strong[jumlah unit terjual] dibuat bergantung pada #strong[daya tarik pasar], yang dipengaruhi oleh #strong[harga] dan #strong[garansi].
+
+#horizontalrule
+
+== 1) Ide dasar
+<ide-dasar>
+Sebelumnya profit total hanya:
+
+$ upright("Profit Total") = \( upright("profit per unit") \) times \( upright("jumlah unit terjual") \) $
+
+Sekarang:
+
+- #strong[profit per unit] dipengaruhi oleh harga, biaya produksi, dan biaya garansi
+- #strong[jumlah unit terjual / pangsa pasar] dipengaruhi oleh harga dan garansi
+
+Jadi keputusan bisnisnya adalah memilih:
+
+$ \( p \, w \) $
+
+dengan:
+
+- $\( p \)$ = harga jual
+- $\( w \)$ = panjang garansi (jam)
+
+untuk memaksimalkan:
+
+$ Pi \( p \, w \) = Q \( p \, w \) dot.op pi \( p \, w \) $
+
+di mana:
+
+- $\( Q \( p \, w \) \)$ = jumlah unit terjual
+- $\( pi \( p \, w \) \)$ = expected profit per unit
+
+#horizontalrule
+
+== 2) Expected profit per unit
+<expected-profit-per-unit>
+Misalkan:
+
+- biaya produksi = (c)
+- biaya garansi per klaim = (g)
+- umur produk acak (T)
+
+Kalau garansi adalah (w), maka peluang klaim:
+
+$ P \( T < w \) = F \( w \) $
+
+sehingga expected profit per unit:
+
+$ pi \( p \, w \) = p - c - g \, F \( w \) $
+
+=== Untuk kasus eksponensial
+<untuk-kasus-eksponensial>
+Jika ($T tilde.op upright("Exp") \( lambda \)$), maka:
+
+$ F \( w \) = 1 - e^(- lambda w) $
+
+jadi:
+
+$ pi \( p \, w \) = p - c - g \( 1 - e^(- lambda w) \) $
+
+Untuk data Anda:
+
+- \($c = 5$)\$
+- \($g = 10$)
+- \($lambda = 0.00005$\$)
+
+maka:
+
+$ pi \( p \, w \) = p - 5 - 10 \( 1 - e^(- 0.00005 w) \) $
+
+atau bisa ditulis:
+
+$ pi \( p \, w \) = p - 15 + 10 e^(- 0.00005 w) $
+
+Maknanya:
+
+- harga naik () profit per unit naik
+- garansi makin panjang () profit per unit turun, karena klaim naik
+
+#horizontalrule
+
+== 3) Model sederhana pangsa pasar
+<model-sederhana-pangsa-pasar>
+Sekarang kita butuh model bahwa:
+
+- makin #strong[murah] () pangsa pasar makin besar
+- makin #strong[lama garansi] () pangsa pasar makin besar
+
+=== Versi paling sederhana: skor daya tarik linear
+<versi-paling-sederhana-skor-daya-tarik-linear>
+Misalkan pasar total berukuran (M), dan daya tarik produk kita:
+
+$ A \( p \, w \) = alpha (1 / p) + beta w $
+
+dengan:
+
+- \($alpha > 0$): sensitivitas terhadap harga
+- \($beta > 0$): sensitivitas terhadap garansi
+
+Lalu pangsa pasar kita:
+
+$ s \( p \, w \) = frac(A \( p \, w \), A \( p \, w \) + A_(upright("kompetitor"))) $
+
+sehingga jumlah unit terjual:
+
+$ Q \( p \, w \) = M dot.op s \( p \, w \) $
+
+Maka objective function:
+
+$ Pi \( p \, w \) = M dot.op frac(A \( p \, w \), A \( p \, w \) + A_(upright("kompetitor"))) dot.op #scale(x: 120%, y: 120%)[\(] p - c - g F \( w \) #scale(x: 120%, y: 120%)[\)] $
+
+Ini sudah cukup untuk keputusan awal.
+
+#horizontalrule
+
+== 4) Model yang lebih rapi: utilitas relatif
+<model-yang-lebih-rapi-utilitas-relatif>
+Biasanya lebih enak pakai model #strong[daya tarik relatif]:
+
+$ A \( p \, w \) = exp \( a - b p + d w \) $
+
+dengan:
+
+- \($b > 0$): harga makin tinggi, daya tarik turun
+- \($d > 0$): garansi makin tinggi, daya tarik naik
+
+Kalau ada (n) kompetitor, dan produk kita bersaing dengan mereka, pangsa pasar:
+
+$ s \( p \, w \) = frac(exp \( a - b p + d w \), sum_(j = 1)^n exp \( a_j - b_j p_j + d_j w_j \)) $
+
+Jika karakteristik kompetitor dianggap tetap, penyebut bisa dipandang sebagai konstanta plus daya tarik kita.
+
+Lalu:
+
+$ Q \( p \, w \) = M dot.op s \( p \, w \) $
+
+dan total expected profit:
+
+$ Pi \( p \, w \) = M dot.op s \( p \, w \) dot.op \( p - c - g F \( w \) \) $
+
+Ini model yang lebih stabil daripada linear, karena:
+
+- pangsa pasar otomatis antara 0 dan 1
+- tidak jadi negatif
+- cocok untuk kompetisi
+
+#table(
+  columns: (100%),
+  align: (left,),
+  [\#\# 5) Bentuk model keputusan final],
+  [Untuk kasus Wi-Fi eksponensial, model sederhana yang saya sarankan:],
+  [\$\$ boxed{ \(p,w) =],
+  [M {\(a-bp+dw)+K} } \$\$],
+  [dengan:],
+  [\#\# 6) Intuisi manajerial],
+  [Ada trade-off:],
+  [- #strong[Harga tinggi]],
+  [- profit per unit naik - pangsa pasar turun],
+  [- #strong[Harga rendah]],
+  [- pangsa pasar naik - margin turun],
+  [- #strong[Garansi panjang]],
+  [- pangsa pasar naik - biaya garansi naik],
+  [- #strong[Garansi pendek]],
+  [- biaya rendah - daya tarik pasar turun],
+  [Jadi keputusan optimal biasanya berada di #strong[titik tengah], bukan harga termurah atau garansi terpanjang.],
+)
+== 7) Versi sangat sederhana untuk tugas / ujian
+<versi-sangat-sederhana-untuk-tugas-ujian>
+Kalau ingin model yang sangat mudah dijelaskan, bisa pakai:
+
+$ Q \( p \, w \) = M (alpha - beta p + gamma w) $
+
+dengan ($beta \, gamma med 0$), lalu dibatasi agar ($Q \( p \, w \) gt.eq 0$).
+
+Maka:
+
+$ Pi \( p \, w \) = M \( alpha - beta p + gamma w \) dot.op \( p - c - g F \( w \) \) $
+
+Untuk eksponensial:
+
+$ Pi \( p \, w \) = M \( alpha - beta p + gamma w \) dot.op [p - c - g \( 1 - e^(- lambda w) \)] $
+
+Ini sangat sederhana dan mudah dihitung, walaupun kurang realistis dibanding model logit/eksponensial.
+
+#horizontalrule
+
+== 8) Rekomendasi model praktis
+<rekomendasi-model-praktis>
+Untuk praktik, saya sarankan:
+
+- pakai #strong[profit per unit ekspektasian]: $p - c - g F \( w \)$
+
+- pakai #strong[market share logit sederhana]: $s \( p \, w \) = frac(e^(- b p + d w), e^(- b p + d w) + K)$
+
+- maksimalkan: $Pi \( p \, w \) = M \, s \( p \, w \) \, \[ p - c - g F \( w \) \]$
+
+Karena model ini:
+
+- sederhana
+- masuk akal
+- mudah dikalibrasi dari data pasar
+- mudah disimulasikan
+
+#horizontalrule
+
+== 9) Contoh Python kecil
+<contoh-python-kecil>
+#Skylighting(([#ImportTok("import");#NormalTok(" numpy ");#ImportTok("as");#NormalTok(" np");],
+[],
+[#CommentTok("# parameter bisnis");],
+[#NormalTok("M ");#OperatorTok("=");#NormalTok(" ");#DecValTok("100000");#NormalTok("          ");#CommentTok("# total market size");],
+[#NormalTok("c ");#OperatorTok("=");#NormalTok(" ");#DecValTok("5");#NormalTok("               ");#CommentTok("# production cost");],
+[#NormalTok("g ");#OperatorTok("=");#NormalTok(" ");#DecValTok("10");#NormalTok("              ");#CommentTok("# warranty claim cost");],
+[#NormalTok("lam ");#OperatorTok("=");#NormalTok(" ");#FloatTok("0.00005");#NormalTok("       ");#CommentTok("# failure rate");],
+[],
+[#CommentTok("# parameter pasar");],
+[#NormalTok("b ");#OperatorTok("=");#NormalTok(" ");#FloatTok("0.25");#NormalTok("            ");#CommentTok("# price sensitivity");],
+[#NormalTok("d ");#OperatorTok("=");#NormalTok(" ");#FloatTok("0.00015");#NormalTok("         ");#CommentTok("# warranty sensitivity");],
+[#NormalTok("K ");#OperatorTok("=");#NormalTok(" ");#FloatTok("1.5");#NormalTok("             ");#CommentTok("# competitor attractiveness");],
+[],
+[#KeywordTok("def");#NormalTok(" claim_prob(w):");],
+[#NormalTok("    ");#ControlFlowTok("return");#NormalTok(" ");#DecValTok("1");#NormalTok(" ");#OperatorTok("-");#NormalTok(" np.exp(");#OperatorTok("-");#NormalTok("lam ");#OperatorTok("*");#NormalTok(" w)");],
+[],
+[#KeywordTok("def");#NormalTok(" profit_per_unit(p, w):");],
+[#NormalTok("    ");#ControlFlowTok("return");#NormalTok(" p ");#OperatorTok("-");#NormalTok(" c ");#OperatorTok("-");#NormalTok(" g ");#OperatorTok("*");#NormalTok(" claim_prob(w)");],
+[],
+[#KeywordTok("def");#NormalTok(" market_share(p, w):");],
+[#NormalTok("    A ");#OperatorTok("=");#NormalTok(" np.exp(");#OperatorTok("-");#NormalTok("b ");#OperatorTok("*");#NormalTok(" p ");#OperatorTok("+");#NormalTok(" d ");#OperatorTok("*");#NormalTok(" w)");],
+[#NormalTok("    ");#ControlFlowTok("return");#NormalTok(" A ");#OperatorTok("/");#NormalTok(" (A ");#OperatorTok("+");#NormalTok(" K)");],
+[],
+[#KeywordTok("def");#NormalTok(" total_profit(p, w):");],
+[#NormalTok("    ");#ControlFlowTok("return");#NormalTok(" M ");#OperatorTok("*");#NormalTok(" market_share(p, w) ");#OperatorTok("*");#NormalTok(" profit_per_unit(p, w)");],
+[],
+[#CommentTok("# grid search sederhana");],
+[#NormalTok("prices ");#OperatorTok("=");#NormalTok(" np.arange(");#DecValTok("8");#NormalTok(", ");#DecValTok("21");#NormalTok(", ");#FloatTok("0.5");#NormalTok(")");],
+[#NormalTok("warranties ");#OperatorTok("=");#NormalTok(" np.arange(");#DecValTok("2000");#NormalTok(", ");#DecValTok("12001");#NormalTok(", ");#DecValTok("500");#NormalTok(")");],
+[],
+[#NormalTok("best ");#OperatorTok("=");#NormalTok(" ");#VariableTok("None");],
+[#NormalTok("best_profit ");#OperatorTok("=");#NormalTok(" ");#OperatorTok("-");#NormalTok("np.inf");],
+[],
+[#ControlFlowTok("for");#NormalTok(" p ");#KeywordTok("in");#NormalTok(" prices:");],
+[#NormalTok("    ");#ControlFlowTok("for");#NormalTok(" w ");#KeywordTok("in");#NormalTok(" warranties:");],
+[#NormalTok("        prof ");#OperatorTok("=");#NormalTok(" total_profit(p, w)");],
+[#NormalTok("        ");#ControlFlowTok("if");#NormalTok(" prof ");#OperatorTok(">");#NormalTok(" best_profit:");],
+[#NormalTok("            best_profit ");#OperatorTok("=");#NormalTok(" prof");],
+[#NormalTok("            best ");#OperatorTok("=");#NormalTok(" (p, w, prof, market_share(p, w), profit_per_unit(p, w))");],
+[],
+[#BuiltInTok("print");#NormalTok("(");#StringTok("\"Best price =\"");#NormalTok(", best[");#DecValTok("0");#NormalTok("])");],
+[#BuiltInTok("print");#NormalTok("(");#StringTok("\"Best warranty =\"");#NormalTok(", best[");#DecValTok("1");#NormalTok("], ");#StringTok("\"hours\"");#NormalTok(")");],
+[#BuiltInTok("print");#NormalTok("(");#StringTok("\"Best total profit =\"");#NormalTok(", ");#BuiltInTok("round");#NormalTok("(best[");#DecValTok("2");#NormalTok("], ");#DecValTok("2");#NormalTok("))");],
+[#BuiltInTok("print");#NormalTok("(");#StringTok("\"Market share =\"");#NormalTok(", ");#BuiltInTok("round");#NormalTok("(best[");#DecValTok("3");#NormalTok("], ");#DecValTok("4");#NormalTok("))");],
+[#BuiltInTok("print");#NormalTok("(");#StringTok("\"Profit per unit =\"");#NormalTok(", ");#BuiltInTok("round");#NormalTok("(best[");#DecValTok("4");#NormalTok("], ");#DecValTok("4");#NormalTok("))");],));
+
+#horizontalrule
+
+== 10) Kesimpulan
+<kesimpulan>
+Model sederhana yang baik adalah:
+
+$ #box(stroke: black, inset: 3pt, [$ upright("Total Profit") = upright("Market Size") times upright("Market Share") \( p \, w \) times upright("Expected Profit per Unit") \( p \, w \) $]) $
+
+dengan:
+
+$ upright("Expected Profit per Unit") \( p \, w \) = p - c - g F \( w \) $
+
+dan market share dibuat #strong[turun terhadap harga] dan #strong[naik terhadap garansi], misalnya:
+
+$ upright("Market Share") \( p \, w \) = frac(e^(- b p + d w), e^(- b p + d w) + K) $
+
+Lalu pilih ($\( p \, w \)$) yang memaksimalkan fungsi itu.
+
 = Summary
 <summary>
 In summary, this book has no content whatsoever.

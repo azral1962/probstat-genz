@@ -1,0 +1,239 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "\\[# Random Variable Kontinu\n",
+        "\n",
+        "## Kita Beri Garansi Berapa Lama?\n",
+        "\n",
+        "![“Lampu rata-rata hidup 900 jam, simpangan 50 jam. Kamu mau kasih garansi 700 jam, 800 jam, atau 900 jam? Ini bukan sekadar ‘baik hati’—ini strategi biaya klaim. Normal sering muncul di data pengukuran; eksponensial sering muncul di waktu tunggu. Hari ini kamu belajar menghitung peluang rusak sebelum waktu T, lalu menentukan T yang masuk akal untuk target klaim. Kamu akan melihat: statistik bisa jadi alat desain produk.”](./The_Decision_Engineer.png/image7.png)\n",
+        "\n",
+        "## Live Coding: \"Normal is Everywhere\"\n",
+        "\n",
+        "Misalnya suatu pabrik bisa menghasilkan 10000 lampu pertahun yang bisa bekerja rata-rata 900 jam, meskipun dalam kenyataanya individual lampu bisa mati bervariasi setelah suatu angka jam positif yang random. Seberapa besar varians ini diukur oleh besaran deviasi, misalnya 50 jam yang berarti variance 2500 jam\\^2\n",
+        "\n",
+        "Suatu variable random bisa memiliki *probability density function* (pdf) berbentuk lonceng, dengan dua parameter $\\mu$ dan $\\sigma$."
+      ],
+      "id": "c76f8ce8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "import numpy as np\n",
+        "\n",
+        "# Instantiate a default random number generator\n",
+        "rng = np.random.default_rng()"
+      ],
+      "id": "c136d709",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Untuk distribusi normal standar, lokasi titik tengah = 0 dan deviasi standar = 1."
+      ],
+      "id": "47f5a5dc"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Generate a single random number from the standard normal distribution (mean=0, std=1)\n",
+        "sample_scalar = rng.normal()\n",
+        "print(f\"1. Single sample: {sample_scalar}\")"
+      ],
+      "id": "ef31c9d9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Dalam kasus kita lokasi titik tengah = 900 dan deviasi standar = 50. Kita ukur waktu hidup 5 buah lampu, maka berapa jam hidup sampai lampu ini mati?"
+      ],
+      "id": "2c5b19cf"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "mu = 900\n",
+        "sigma = 50\n",
+        "\n",
+        "# Generate a 1D array of 5 numbers with mean=900, standard deviation=50\n",
+        "samples_1d = rng.normal(loc=mu, scale=sigma, size=5)\n",
+        "print(f\"2. 1D array: {samples_1d}\")"
+      ],
+      "id": "40674ab4",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Berbeda beda yaitu: `{python} samples_1d[0]`\n",
+        "\n",
+        "1.  Generate data acak `numpy.random.normal`.\n",
+        "2.  Tunjukkan aturan empiris: 68% data ada di $\\mu \\pm \\sigma$, 95% di $\\mu \\pm 2\\sigma$.\n",
+        "3.  Visualisasi: Plot kurva lonceng dengan seaborn dan arsir area probabilitas. kita coba untuk 10000"
+      ],
+      "id": "dc53a255"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "N= 10000\n",
+        "\n",
+        "data = rng.normal(loc=mu, scale=sigma, size=N)\n",
+        "np.histogram(data, bins=10)"
+      ],
+      "id": "8067a959",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Kita hitung berapa data antara 1. $850< X < 950$ 2. $800<  X < 1000$ 3. $750 < X <1050$"
+      ],
+      "id": "659b82f8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "counter1=0\n",
+        "counter2=0\n",
+        "counter3=0\n",
+        "for n in data:\n",
+        "    if n >= 850 and n < 950:\n",
+        "        counter1 += 1  \n",
+        "    elif n >= 800 and n < 1000:\n",
+        "        counter2 += 1\n",
+        "    elif n >= 750 and n < 1050:\n",
+        "        counter3 += 1\n",
+        "\n",
+        "print(counter1/N, (counter1+counter2)/N, (counter1+counter2+counter3)/N)"
+      ],
+      "id": "750e6aae",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# 3. Menambahkan label dan judul\n",
+        "plt.hist(data,bins=10, density=True)\n",
+        "plt.title('Histogram Normal Distribution (NumPy)')\n",
+        "plt.xlabel('Value')\n",
+        "plt.ylabel('Density')\n",
+        "plt.grid(axis='y', alpha=0.5)\n",
+        "\n",
+        "# 4. Menampilkan plot\n",
+        "plt.show()"
+      ],
+      "id": "8a2f4e9c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Jadi kita hendak beri garansi berapa jam kalau kita tahu berapa ongkos produksi (misalnya \\$5), berapa harga jual (misalnya \\$10), dan berapa biaya penggantian garansi (misalnya \\$7). Bila garansi terlalu rendah, produk ini kalah bersaing. Misalnya kita hendak memilih antara garansi 750 jam, 800 jam, dan Karena rata-rata 900 jam, dari 10000 yang diproduksi kita hitung berapa yang rusak, lalu kita hitung biaya serta pengaruh pada profit. Asumsi deviasi 50 atau 100."
+      ],
+      "id": "232913a7"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import numpy as np\n",
+        "\n",
+        "# Parameter\n",
+        "n_units = 10000\n",
+        "mu = 900      # mean umur lampu\n",
+        "sigma = 50    # std dev\n",
+        "\n",
+        "price = 10\n",
+        "cost = 5\n",
+        "warranty_cost = 7\n",
+        "nrg = np.random.default_rng()\n",
+        "# Generate umur lampu (random normal)\n",
+        "# nrg.seed(42)  # agar reproducible\n",
+        "lifetimes = nrg.normal(mu, sigma, n_units)\n",
+        "\n",
+        "# Fungsi hitung profit\n",
+        "def simulate_profit(lifetimes, warranty_limit):\n",
+        "    profit_per_unit = []\n",
+        "    \n",
+        "    for life in lifetimes:\n",
+        "        if life < warranty_limit:\n",
+        "            # kena klaim garansi\n",
+        "            profit = price - cost - warranty_cost\n",
+        "        else:\n",
+        "            # tidak klaim\n",
+        "            profit = price - cost\n",
+        "        profit_per_unit.append(profit)\n",
+        "    \n",
+        "    total_profit = np.sum(profit_per_unit)\n",
+        "    return total_profit\n",
+        "\n",
+        "# Simulasi\n",
+        "profit_A = simulate_profit(lifetimes, 850)\n",
+        "profit_B = simulate_profit(lifetimes, 800)\n",
+        "profit_C = simulate_profit(lifetimes, 750)\n",
+        "\n",
+        "# Output hasil\n",
+        "print(\"=== HASIL SIMULASI ===\")\n",
+        "print(f\"Profit Garansi A (850 jam): ${profit_A:,.2f}\")\n",
+        "print(f\"Profit Garansi B (800 jam): ${profit_B:,.2f}\")\n",
+        "print(f\"Profit Garansi C (700 jam): ${profit_C:,.2f}\")\n",
+        "\n",
+        "# Bandingkan\n",
+        "if profit_A > profit_B and profit_A > profit_C:\n",
+        "    print(\"Rekomendasi: Garansi A lebih menguntungkan\")\n",
+        "elif profit_B > profit_C:\n",
+        "    print(\"Rekomendasi: Garansi B lebih menguntungkan\")\n",
+        "else: \n",
+        "    print(\"Rekomendasi: Garansi C lebih menguntungkan\")"
+      ],
+      "id": "3f539caf",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Generate a 2x3 matrix with default parameters\n",
+        "samples_2d = rng.normal(size=(2, 3))\n",
+        "print(f\"3. 2D array:\\n{samples_2d}\")"
+      ],
+      "id": "a16ea5e2",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\armein\\AppData\\Local\\Programs\\Python\\Python313\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

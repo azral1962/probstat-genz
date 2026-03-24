@@ -6,7 +6,7 @@ selang = 60
 tiba_selang_rata = 10
 lyn_selang_rata = 7
 
-tiba_selang  = np.random.exponential(tiba_selang_rata, n_plgn)
+tiba_selang  = np.random.exponential`(tiba_selang_rata, n_plgn)
 
 print("rata-rata selang tiba: ",sum(tiba_selang)/len(tiba_selang))
 tiba_waktu = np.cumsum(tiba_selang)

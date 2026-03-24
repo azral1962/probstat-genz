@@ -1,12 +1,15 @@
-# Random Variable Kontinu
+\[# Random Variable Kontinu
 
 ## Kita Beri Garansi Berapa Lama?
+
 ![“Lampu rata-rata hidup 900 jam, simpangan 50 jam. Kamu mau kasih garansi 700 jam, 800 jam, atau 900 jam? Ini bukan sekadar ‘baik hati’—ini strategi biaya klaim. Normal sering muncul di data pengukuran; eksponensial sering muncul di waktu tunggu. Hari ini kamu belajar menghitung peluang rusak sebelum waktu T, lalu menentukan T yang masuk akal untuk target klaim. Kamu akan melihat: statistik bisa jadi alat desain produk.”](./The_Decision_Engineer.png/image7.png)
 
 ## Live Coding: "Normal is Everywhere"
-Misalnya suatu pabrik bisa menghasilkan 10000 lampu pertahun yang bisa bekerja rata-rata 900 jam, meskipun dalam kenyataanya individual lampu bisa mati bervariasi setelah suatu angka jam positif yang random. Seberapa besar varians ini diukur oleh besaran deviasi, misalnya 50 jam yang berarti variance 2500 jam^2
+
+Misalnya suatu pabrik bisa menghasilkan 10000 lampu pertahun yang bisa bekerja rata-rata 900 jam, meskipun dalam kenyataanya individual lampu bisa mati bervariasi setelah suatu angka jam positif yang random. Seberapa besar varians ini diukur oleh besaran deviasi, misalnya 50 jam yang berarti variance 2500 jam\^2
 
 Suatu variable random bisa memiliki *probability density function* (pdf) berbentuk lonceng, dengan dua parameter $\mu$ dan $\sigma$.
+
 ```{python}
 import matplotlib.pyplot as plt
 import numpy as np
@@ -16,6 +19,7 @@ rng = np.random.default_rng()
 ```
 
 Untuk distribusi normal standar, lokasi titik tengah = 0 dan deviasi standar = 1.
+
 ```{python}
 # Generate a single random number from the standard normal distribution (mean=0, std=1)
 sample_scalar = rng.normal()
@@ -23,7 +27,7 @@ print(f"1. Single sample: {sample_scalar}")
 
 ```
 
-Dalam kasus kita  lokasi titik tengah = 900 dan deviasi standar = 50. Kita ukur waktu hidup 5 buah lampu, maka berapa jam hidup sampai lampu ini mati?
+Dalam kasus kita lokasi titik tengah = 900 dan deviasi standar = 50. Kita ukur waktu hidup 5 buah lampu, maka berapa jam hidup sampai lampu ini mati?
 
 ```{python}
 mu = 900
@@ -36,10 +40,9 @@ print(f"2. 1D array: {samples_1d}")
 
 Berbeda beda yaitu: `{python} samples_1d[0]`
 
-
-1. Generate data acak `numpy.random.normal`.
-2. Tunjukkan aturan empiris: 68% data ada di $\mu \pm \sigma$, 95% di $\mu \pm 2\sigma$.
-3. Visualisasi: Plot kurva lonceng dengan seaborn dan arsir area probabilitas. kita coba untuk 10000
+1.  Generate data acak `numpy.random.normal`.
+2.  Tunjukkan aturan empiris: 68% data ada di $\mu \pm \sigma$, 95% di $\mu \pm 2\sigma$.
+3.  Visualisasi: Plot kurva lonceng dengan seaborn dan arsir area probabilitas. kita coba untuk 10000
 
 ```{python}
 N= 10000
@@ -48,10 +51,7 @@ data = rng.normal(loc=mu, scale=sigma, size=N)
 np.histogram(data, bins=10)
 ```
 
-Kita hitung berapa data antara
-1. $850< X < 950$
-2. $800<  X < 1000$
-3. $750 < X <1050$
+Kita hitung berapa data antara 1. $850< X < 950$ 2. $800<  X < 1000$ 3. $750 < X <1050$
 
 ```{python}
 counter1=0
@@ -81,7 +81,8 @@ plt.grid(axis='y', alpha=0.5)
 plt.show()
 ```
 
-Jadi kita hendak beri garansi berapa jam kalau kita tahu berapa ongkos produksi (misalnya $5), berapa harga jual (misalnya $10), dan berapa biaya penggantian garansi (misalnya $7). Bila garansi terlalu rendah, produk ini kalah bersaing. Misalnya kita hendak memilih antara garansi 750 jam, 800 jam, dan Karena rata-rata 900 jam, dari 10000 yang diproduksi kita hitung berapa yang rusak, lalu kita hitung biaya serta pengaruh pada profit. Asumsi deviasi 50 atau 100. 
+Jadi kita hendak beri garansi berapa jam kalau kita tahu berapa ongkos produksi (misalnya \$5), berapa harga jual (misalnya \$10), dan berapa biaya penggantian garansi (misalnya \$7). Bila garansi terlalu rendah, produk ini kalah bersaing. Misalnya kita hendak memilih antara garansi 750 jam, 800 jam, dan Karena rata-rata 900 jam, dari 10000 yang diproduksi kita hitung berapa yang rusak, lalu kita hitung biaya serta pengaruh pada profit. Asumsi deviasi 50 atau 100.
+
 ```{python}
 import numpy as np
 
@@ -93,9 +94,9 @@ sigma = 50    # std dev
 price = 10
 cost = 5
 warranty_cost = 7
-rng = np.random.default_rng()
+nrg = np.random.default_rng()
 # Generate umur lampu (random normal)
-nrg.seed(42)  # agar reproducible
+# nrg.seed(42)  # agar reproducible
 lifetimes = nrg.normal(mu, sigma, n_units)
 
 # Fungsi hitung profit
@@ -115,21 +116,23 @@ def simulate_profit(lifetimes, warranty_limit):
     return total_profit
 
 # Simulasi
-profit_A = simulate_profit(lifetimes, 9000)
-profit_B = simulate_profit(lifetimes, 8000)
+profit_A = simulate_profit(lifetimes, 850)
+profit_B = simulate_profit(lifetimes, 800)
+profit_C = simulate_profit(lifetimes, 750)
 
 # Output hasil
 print("=== HASIL SIMULASI ===")
-print(f"Profit Garansi A (9000 jam): ${profit_A:,.2f}")
-print(f"Profit Garansi B (8000 jam): ${profit_B:,.2f}")
+print(f"Profit Garansi A (850 jam): ${profit_A:,.2f}")
+print(f"Profit Garansi B (800 jam): ${profit_B:,.2f}")
+print(f"Profit Garansi C (700 jam): ${profit_C:,.2f}")
 
 # Bandingkan
-if profit_A > profit_B:
+if profit_A > profit_B and profit_A > profit_C:
     print("Rekomendasi: Garansi A lebih menguntungkan")
-else:
+elif profit_B > profit_C:
     print("Rekomendasi: Garansi B lebih menguntungkan")
-
-model
+else: 
+    print("Rekomendasi: Garansi C lebih menguntungkan")
 ```
 
 ```{python}
@@ -138,27 +141,36 @@ samples_2d = rng.normal(size=(2, 3))
 print(f"3. 2D array:\n{samples_2d}")
 ```
 
+
 Masalah penentuan waktu garansi ini pada dasarnya adalah masalah optimasi risiko yang menggabungkan Nilai Harapan (*Expected Value*) dan Fungsi Distribusi Kumulatif (CDF) dari probabilitas kegagalan lampu.
 
-**1. Pemodelan Bisnis & Keuntungan (Profit)**
-Untuk menganalisis pengaruh garansi terhadap profit, kita memodelkannya dengan persamaan ekspektasi bisnis berikut:
-*   **Total Pendapatan:** $10.000 \text{ lampu} \times \$10 = \$100.000$
-*   **Total Ongkos Produksi:** $10.000 \text{ lampu} \times \$5 = \$50.000$
-*   **Profit Dasar (Tanpa Klaim):** $\$100.000 - \$50.000 = \$50.000$
-*   **Biaya Klaim Garansi:** $\text{Jumlah lampu rusak} \times \$7$
-*   **Jumlah Lampu Rusak:** $10.000 \times P(X < T_w)$, di mana $P(X < T_w)$ adalah probabilitas (*Cumulative Distribution Function*/CDF) sebuah lampu mati sebelum waktu garansi $T_w$ habis.
+**1. Pemodelan Bisnis & Keuntungan (Profit)** Untuk menganalisis pengaruh garansi terhadap profit, kita memodelkannya dengan persamaan ekspektasi bisnis berikut:
 
-**2. Karakteristik Fungsi Distribusi Kumulatif (CDF)**
-Untuk membandingkan probabilitas kegagalan $P(X < T_w)$, kita mengevaluasi 4 jenis distribusi:
-*   **Distribusi Normal:** Menggunakan parameter mean $\mu = 900$ dan standar deviasi $\sigma \in \{50, 100\}$. CDF dihitung menggunakan standarisasi $Z = (X - \mu) / \sigma$.
-*   **Distribusi Seragam (Uniform):** Karena variansi berdistribusi seragam adalah $\frac{(b-a)^2}{12}$, kita dapat menentukan rentang umur lampu minimum $a$ dan maksimum $b$ berdasarkan $\mu=900$ dan $\sigma \in \{50, 100\}$.
-*   **Distribusi Weibull:** Sangat ideal dan umum digunakan untuk memodelkan laju kegagalan umur komponen (fungsi *hazard*/*survival*). Parameter *shape* ($k$) dan *scale* ($\lambda$) dapat dicari melalui persamaan non-linear yang dicocokkan dengan $\mu$ dan $\sigma$.
-*   **Distribusi Eksponensial:** Distribusi ini tidak memiliki memori (*memoryless*) dan variasinya selalu sama dengan rata-ratanya. Oleh karena itu, parameter $\sigma = 50$ atau $100$ diabaikan, dan perhitungan hanya murni bergantung pada laju kerusakan $\lambda = 1/900$.
+-  **Total Pendapatan:** $10.000 \text{ lampu} \times \$10 = \$100.000$
 
-**3. Solusi Skrip Python**
-Berikut adalah desain *class* Python yang mensimulasikan dan mengembalikan *dictionary* untuk membandingkan jumlah kerusakan, biaya, dan profit dari penentuan garansi (misal 750 jam dan 800 jam) di keempat distribusi di atas.
+- **Total Ongkos Produksi:** $10.000 \text{ lampu} \times \$5 = \$50.000$
 
-```python
+- **Profit Dasar (Tanpa Klaim):** $\$100.000 - \$50.000 = \$50.000$
+
+- **Biaya Klaim Garansi:** $\text{Jumlah lampu rusak} \times \$7$ \* **Jumlah Lampu Rusak:** $10.000 \times P(X < T_w)$, di mana $P(X < T_w)$ adalah probabilitas (*Cumulative Distribution Function*/CDF) sebuah lampu mati sebelum waktu garansi $T_w$ habis.
+
+## Beda Pabrik, Beda Karakter Lampu
+
+Asumsi beda teknologi menyebabkan beda distribusi probabilitas lifetime lampu, meskipun rata-rata dan deviasi nya sama.
+
+**2. Karakteristik Fungsi Distribusi Kumulatif (CDF)** Untuk membandingkan probabilitas kegagalan $P(X < T_w)$, kita mengevaluasi 4 jenis distribusi:
+
+-  **Distribusi Normal:** Menggunakan parameter mean $\mu = 900$ dan standar deviasi $\sigma \in \{50, 100\}$. CDF dihitung menggunakan standarisasi $Z = (X - \mu) / \sigma$.
+
+-  **Distribusi Seragam (Uniform):** Karena variansi berdistribusi seragam adalah $\frac{(b-a)^2}{12}$, kita dapat menentukan rentang umur lampu minimum $a$ dan maksimum $b$ berdasarkan $\mu=900$ dan $\sigma \in \{50, 100\}$.
+
+-  **Distribusi Weibull:** Sangat ideal dan umum digunakan untuk memodelkan laju kegagalan umur komponen (fungsi *hazard*/*survival*). Parameter *shape* ($k$) dan *scale* ($\lambda$) dapat dicari melalui persamaan non-linear yang dicocokkan dengan $\mu$ dan $\sigma$.
+
+- **Distribusi Eksponensial:** Distribusi ini tidak memiliki memori (*memoryless*) dan variasinya selalu sama dengan rata-ratanya. Oleh karena itu, parameter $\sigma = 50$ atau $100$ diabaikan, dan perhitungan hanya murni bergantung pada laju kerusakan $\lambda = 1/900$.
+
+**3. Solusi Skrip Python** Berikut adalah desain *class* Python yang mensimulasikan dan mengembalikan *dictionary* untuk membandingkan jumlah kerusakan, biaya, dan profit dari penentuan garansi (misal 750 jam dan 800 jam) di keempat distribusi di atas.
+
+```{python}
 import numpy as np
 import scipy.stats as stats
 from scipy.optimize import fsolve
@@ -195,8 +207,9 @@ class WarrantyAnalyzer:
         results = {}
         for w in warranty_hours:
             results[f"Garansi_{w}_Jam"] = {}
+            # print(f"===Garansi_{w}_Jam===")
             for sig in sigmas:
-                
+                # print(f"**Sigma_{sig}**")
                 # 1. Distribusi Normal CDF
                 p_norm = stats.norm.cdf(w, loc=self.mu, scale=sig)
 
@@ -228,12 +241,12 @@ class WarrantyAnalyzer:
                     profit = self.base_profit - total_warranty_cost
 
                     profit_comparison[dist_name] = {
-                        'Probabilitas_Mati': round(p_fail, 4),
-                        'Jumlah_Rusak': int(n_fail),
-                        'Biaya_Garansi ($)': round(total_warranty_cost, 2),
-                        'Profit_Akhir ($)': round(profit, 2)
+                        'Probabilitas_Mati': np.round(p_fail, 4),
+                        'Jumlah_Rusak': np.round(n_fail,0),
+                        'Biaya_Garansi ($)': np.round(total_warranty_cost, 2),
+                        'Profit_Akhir ($)': np.round(profit, 2)
                     }
-
+                    # print(f"Distribusi {dist_name}",f"{profit_comparison}")
                 results[f"Garansi_{w}_Jam"][f"Sigma_{sig}"] = profit_comparison
 
         return results
@@ -241,13 +254,410 @@ class WarrantyAnalyzer:
 # --- Eksekusi Simulasi ---
 analyzer = WarrantyAnalyzer(mu=900, N=10000, cost=5, price=10, replacement_cost=7)
 # Menguji garansi 750 jam dan 800 jam dengan asumsi deviasi 50 dan 100
-hasil_analisis = analyzer.analyze(warranty_hours=, sigmas=)
+hasil_analisis = analyzer.analyze(warranty_hours=[850, 800, 750], sigmas=[50,100])
 
 # Cetak hasil (Format JSON agar mudah dibaca sebagai Dictionary)
-print(json.dumps(hasil_analisis, indent=4))
+# print(json.dumps(hasil_analisis, indent=4))
+# print(hasil_analisis)
 ```
 
-**Analisis Output Bisnis:**
-Berdasarkan pendekatan probabilitas tersebut, ketika skrip dieksekusi, Anda akan menemukan bahwa pemilihan deviasi ($\sigma$) dan waktu garansi sangat krusial:
-1.  **Meningkatkan Garansi:** Jika Anda menetapkan garansi 800 jam pada model **Normal** dengan $\sigma=100$, jumlah lampu yang rusak secara signifikan lebih besar dibandingkan garansi 750 jam karena nilai 800 jam sudah sangat dekat dengan batas kiri kurva *bell-curve* nilai rata-rata ($\mu = 900$).
-2.  **Pemilihan Model:** Model **Eksponensial** akan memprediksi tingkat kerusakan prematur (*infant mortality*) yang paling ekstrem (paling merugikan), karena laju kerusakannya dimulai sejak hari pertama. Sedangkan **Weibull** akan memberikan prediksi yang paling akurat dengan realita keausan pabrik (*wear-out*). Keputusan mengalokasikan garansi harus melihat estimasi profit pada metrik *Profit_Akhir* di model Weibull atau Normal.
+**Analisis Output Bisnis:** Berdasarkan pendekatan probabilitas tersebut, ketika skrip dieksekusi, Anda akan menemukan bahwa pemilihan deviasi ($\sigma$) dan waktu garansi sangat krusial: 1. **Meningkatkan Garansi:** Jika Anda menetapkan garansi 800 jam pada model **Normal** dengan $\sigma=100$, jumlah lampu yang rusak secara signifikan lebih besar dibandingkan garansi 750 jam karena nilai 800 jam sudah sangat dekat dengan batas kiri kurva *bell-curve* nilai rata-rata ($\mu = 900$). 2. **Pemilihan Model:** Model **Eksponensial** akan memprediksi tingkat kerusakan prematur (*infant mortality*) yang paling ekstrem (paling merugikan), karena laju kerusakannya dimulai sejak hari pertama. Sedangkan **Weibull** akan memberikan prediksi yang paling akurat dengan realita keausan pabrik (*wear-out*). Keputusan mengalokasikan garansi harus melihat estimasi profit pada metrik *Profit_Akhir* di model Weibull atau Normal.
+
+bila pasar produk diperebutkan oleh produsen di mana pangsa psar di tentuka oleh harga dan garansi secara proporsional: semakin murah harga semakin besar segmen, semakin tinggi garansi semakin besar segmen, usulkan model sederhana untuk memutuskan harga dan garansi
+
+Bisa. Model sederhananya adalah: **pilih harga dan garansi yang memaksimalkan expected profit total**, tetapi **jumlah unit terjual** dibuat bergantung pada **daya tarik pasar**, yang dipengaruhi oleh **harga** dan **garansi**.
+
+------------------------------------------------------------------------
+
+## 1) Ide dasar
+
+Sebelumnya profit total hanya:
+
+$$\text{Profit Total} = (\text{profit per unit}) \times (\text{jumlah unit terjual})$$
+
+Sekarang:
+
+- **profit per unit** dipengaruhi oleh harga, biaya produksi, dan biaya garansi
+- **jumlah unit terjual / pangsa pasar** dipengaruhi oleh harga dan garansi
+
+Jadi keputusan bisnisnya adalah memilih:
+
+$$(p,w)$$
+
+dengan:
+
+- $(p)$ = harga jual
+- $(w)$ = panjang garansi (jam)
+
+untuk memaksimalkan:
+
+$$\Pi(p,w)=Q(p,w)\cdot \pi(p,w)$$
+
+di mana:
+
+- $(Q(p,w))$ = jumlah unit terjual
+- $(\pi(p,w))$ = expected profit per unit
+
+------------------------------------------------------------------------
+
+## 2) Expected profit per unit
+
+Misalkan:
+
+- biaya produksi = (c)
+- biaya garansi per klaim = (g)
+- umur produk acak (T)
+
+Kalau garansi adalah (w), maka peluang klaim:
+
+$$P(T<w)=F(w)$$
+
+sehingga expected profit per unit:
+
+$$\pi(p,w)=p-c-g,F(w)$$
+
+### Untuk kasus eksponensial
+
+Jika ($T\sim \text{Exp}(\lambda)$), maka:
+
+$$F(w)=1-e^{-\lambda w}$$
+
+jadi:
+
+$$\pi(p,w)=p-c-g(1-e^{-\lambda w})$$
+
+Untuk data Anda:
+
+- ($c=5$)$
+- ($g=10$)
+- ($\lambda=0.00005$$)
+
+maka:
+
+$$
+\pi(p,w)=p-5-10(1-e^{-0.00005w})
+$$
+
+atau bisa ditulis:
+
+$$
+\pi(p,w)=p-15+10e^{-0.00005w}
+$$
+
+Maknanya:
+
+- harga naik (\to) profit per unit naik
+- garansi makin panjang (\to) profit per unit turun, karena klaim naik
+
+------------------------------------------------------------------------
+
+## 3) Model sederhana pangsa pasar
+
+Sekarang kita butuh model bahwa:
+
+- makin **murah** (\to) pangsa pasar makin besar
+- makin **lama garansi** (\to) pangsa pasar makin besar
+
+### Versi paling sederhana: skor daya tarik linear
+
+Misalkan pasar total berukuran (M), dan daya tarik produk kita:
+
+$$A(p,w)=\alpha\left(\frac{1}{p}\right)+\beta w$$
+
+dengan:
+
+- ($\alpha >0$): sensitivitas terhadap harga
+- ($\beta >0$): sensitivitas terhadap garansi
+
+Lalu pangsa pasar kita:
+
+$$
+s(p,w)=\frac{A(p,w)}{A(p,w)+A_{\text{kompetitor}}}
+$$
+
+sehingga jumlah unit terjual:
+
+$$
+Q(p,w)=M\cdot s(p,w)
+$$
+
+Maka objective function:
+
+$$
+\Pi(p,w)=M \cdot \frac{A(p,w)}{A(p,w)+A_{\text{kompetitor}}}\cdot \bigl(p-c-gF(w)\bigr)
+$$
+
+Ini sudah cukup untuk keputusan awal.
+
+------------------------------------------------------------------------
+
+## 4) Model yang lebih rapi: utilitas relatif
+
+Biasanya lebih enak pakai model **daya tarik relatif**:
+
+$$
+A(p,w)=\exp(a-bp+dw)
+$$
+
+dengan:
+
+- ($b>0$): harga makin tinggi, daya tarik turun
+- ($d>0$): garansi makin tinggi, daya tarik naik
+
+Kalau ada (n) kompetitor, dan produk kita bersaing dengan mereka, pangsa pasar:
+
+$$
+s(p,w)=\frac{\exp(a-bp+dw)}{\sum_{j=1}^{n}\exp(a_j-b_jp_j+d_jw_j)}
+$$
+
+Jika karakteristik kompetitor dianggap tetap, penyebut bisa dipandang sebagai konstanta plus daya tarik kita.
+
+Lalu:
+
+$$
+Q(p,w)=M\cdot s(p,w)
+$$
+
+dan total expected profit:
+
+$$
+\Pi(p,w)=M\cdot s(p,w)\cdot (p-c-gF(w))
+$$
+
+Ini model yang lebih stabil daripada linear, karena:
+
+- pangsa pasar otomatis antara 0 dan 1
+- tidak jadi negatif
+- cocok untuk kompetisi
+
+------------------------------------------------------------------------
+## 5) Bentuk model keputusan final
+
+Untuk kasus Wi-Fi eksponensial, model sederhana yang saya sarankan:
+
+$$ boxed{ \Pi(p,w) =
+
+M\cdot \frac{\exp(a-bp+dw)} {\exp(a-bp+dw)+K} \cdot \left[p-c-g(1-e^{-\lambda w})\right]} 
+$$
+
+dengan:
+
+
+## 6) Intuisi manajerial
+
+Ada trade-off:
+
+- **Harga tinggi**
+
+  - profit per unit naik
+  - pangsa pasar turun
+
+- **Harga rendah**
+
+  - pangsa pasar naik
+  - margin turun
+
+- **Garansi panjang**
+
+  - pangsa pasar naik
+  - biaya garansi naik
+
+- **Garansi pendek**
+
+  - biaya rendah
+  - daya tarik pasar turun
+
+Jadi keputusan optimal biasanya berada di **titik tengah**, bukan harga termurah atau garansi terpanjang.
+
+------------------------------------------------------------------------
+
+## 7) Versi sangat sederhana untuk tugas / ujian
+
+Kalau ingin model yang sangat mudah dijelaskan, bisa pakai:
+
+$$
+Q(p,w)=M\left(\alpha-\beta p+\gamma w\right)
+$$
+
+dengan ($\beta,\gamma\>0$), lalu dibatasi agar ($Q(p,w)\ge 0$).
+
+Maka:
+
+$$
+\Pi(p,w)=M(\alpha-\beta p+\gamma w)\cdot (p-c-gF(w))
+$$
+
+Untuk eksponensial:
+
+$$
+\Pi(p,w)=M(\alpha-\beta p+\gamma w)\cdot \left[p-c-g(1-e^{-\lambda w})\right]
+$$
+
+Ini sangat sederhana dan mudah dihitung, walaupun kurang realistis dibanding model logit/eksponensial.
+
+------------------------------------------------------------------------
+
+## 8) Rekomendasi model praktis
+
+Untuk praktik, saya sarankan:
+
+- pakai **profit per unit ekspektasian**: $p-c-gF(w)$
+
+- pakai **market share logit sederhana**: $s(p,w)=\frac{e^{-bp+dw}}{e^{-bp+dw}+K}$
+
+- maksimalkan: $\Pi(p,w)=M,s(p,w),[p-c-gF(w)]$
+
+Karena model ini:
+
+- sederhana
+- masuk akal
+- mudah dikalibrasi dari data pasar
+- mudah disimulasikan
+
+------------------------------------------------------------------------
+
+## 9) Contoh Python kecil
+
+``` python
+import numpy as np
+
+# parameter bisnis
+M = 100000          # total market size
+c = 5               # production cost
+g = 10              # warranty claim cost
+lam = 0.00005       # failure rate
+
+# parameter pasar
+b = 0.25            # price sensitivity
+d = 0.00015         # warranty sensitivity
+K = 1.5             # competitor attractiveness
+
+def claim_prob(w):
+    return 1 - np.exp(-lam * w)
+
+def profit_per_unit(p, w):
+    return p - c - g * claim_prob(w)
+
+def market_share(p, w):
+    A = np.exp(-b * p + d * w)
+    return A / (A + K)
+
+def total_profit(p, w):
+    return M * market_share(p, w) * profit_per_unit(p, w)
+
+# grid search sederhana
+prices = np.arange(8, 21, 0.5)
+warranties = np.arange(2000, 12001, 500)
+
+best = None
+best_profit = -np.inf
+
+for p in prices:
+    for w in warranties:
+        prof = total_profit(p, w)
+        if prof > best_profit:
+            best_profit = prof
+            best = (p, w, prof, market_share(p, w), profit_per_unit(p, w))
+
+print("Best price =", best[0])
+print("Best warranty =", best[1], "hours")
+print("Best total profit =", round(best[2], 2))
+print("Market share =", round(best[3], 4))
+print("Profit per unit =", round(best[4], 4))
+```
+
+------------------------------------------------------------------------
+
+## 10) Kesimpulan
+
+Model sederhana yang baik adalah:
+
+$$
+\boxed{
+\text{Total Profit}=
+\text{Market Size}\times \text{Market Share}(p,w)\times \text{Expected Profit per Unit}(p,w)
+}
+$$
+
+dengan:
+
+$$
+\text{Expected Profit per Unit}(p,w)=p-c-gF(w)
+$$
+
+dan market share dibuat **turun terhadap harga** dan **naik terhadap garansi**, misalnya:
+
+$$
+\text{Market Share}(p,w)=\frac{e^{-bp+dw}}{e^{-bp+dw}+K}
+$$
+
+Lalu pilih ($(p,w)$) yang memaksimalkan fungsi itu.
+
+## Model Sederhana
+
+```{python}
+import math
+
+M = 100000
+c = 5
+g = 10
+prices = [12, 13.5, 15]
+warranties = [8000, 9000]
+
+
+def market_share(p, w):
+    A = math.exp(-0.25 * p + 0.00015 * w)
+    return A / (A + 1.5)
+
+def F_uniform(w):
+    A=0
+    B=20000
+    return (w-A)/(B-A)
+
+def F_normal(w):
+    z = (w - 10000) / 1000
+    return 0.5 * (1 + math.erf(z / math.sqrt(2)))
+
+
+def F_exponential(w):
+    return 1 - math.exp(-0.00005 * w)
+
+
+def F_weibull(w, k=2, eta=11000):
+    return 1 - math.exp(- (w / eta) ** k)
+
+
+def profit_per_unit(p, w, F):
+    return p - c - g * F(w)
+
+
+def total_profit(p, w, F):
+    return M * market_share(p, w) * profit_per_unit(p, w, F)
+
+
+models = {
+    "Uniform":F_uniform,
+    "Normal": F_normal,
+    "Eksponensial": F_exponential,
+    "Weibull": F_weibull,
+}
+
+for name, F in models.items():
+    print(f"\n=== {name} ===")
+    best = None
+    for p in prices:
+        for w in warranties:
+            claim = F(w)
+            share = market_share(p, w)
+            unit_profit = profit_per_unit(p, w, F)
+            total = total_profit(p, w, F)
+            print(
+                f"p={p:>4}, w={w:>4}, F={claim:.4f}, share={share:.4f}, "
+                f"pi={unit_profit:.4f}, Pi={total:,.2f}"
+            )
+            if best is None or total > best[-1]:
+                best = (p, w, total)
+    print(f"Best: price={best[0]}, warranty={best[1]}, total profit={best[2]:,.2f}")
+
+
+```
