@@ -17,16 +17,7 @@ Sebuah pabrik ingin menjamin kualitas produk. Diketahui rata-rata cacat adalah 1
 Menggunakan rumus distribusi Binomial (atau aproksimasi Poisson jika n besar dan p kecil). Jika peluang cacat melebihi ambang batas toleransi, manajer memutuskan untuk menghentikan lini produksi untuk inspeksi.
 
 ## 4. Eksplorasi Komputasi (Python)
-*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
 
-```{python}
-# Tulis kode Python Anda di sini
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import scipy.stats as stats
-
-print("Siap untuk komputasi Minggu 06!")
-```
+{{< include ../code/c06.qmd >}}
 
 {{< include ../agenda/w06.qmd >}}
