@@ -29,3 +29,4 @@ import scipy.stats as stats
 
 print("Siap untuk komputasi Minggu 09!")
 ```
+{{< include ../agenda/w09.qmd >}}

@@ -1,0 +1,75 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "dc99394b",
+   "metadata": {},
+   "source": [
+    "---\n",
+    "title: \"Minggu 01: Pola Pikir Probabilistik vs Deterministik\"\n",
+    "subtitle: \"Understanding Probabilistic Way of Thinking versus Deterministic Way of Thinking\"\n",
+    "---\n",
+    "\n",
+    "![“Bayangin kamu pegang stok toko. Kalau kamu bilang ‘permintaan pasti 100’, kamu terlihat rapi… sampai kenyataan menampar. Permintaan itu goyang—kadang 70, kadang 160. Nah, pertanyaan pentingnya: kamu mau terlihat yakin, atau mau benar? Probabilitas itu bukan bikin kita ragu—justru bikin kita *berani mengambil keputusan* dengan risiko yang dihitung. Hari ini kita latihan satu skill: membedakan dunia deterministik vs dunia nyata yang random. Dan keputusan kamu akan kita ukur: berapa peluang kehabisan stok kalau kamu nekat ‘pasti 100’?”](../The_Decision_Engineer.png/image1.png)\n",
+    "\n",
+    "## 1. Konsep Pengetahuan\n",
+    "Memahami bahwa dalam dunia nyata, fenomena seringkali mengandung ketidakpastian (randomness) dan tidak dapat diprediksi dengan kepastian mutlak (deterministik), sehingga memerlukan kerangka kerja matematika untuk mengukur ketidakpastian tersebut.\n",
+    "\n",
+    "## 2. Tipikal Problem\n",
+    "Sebuah toko ingin menentukan stok barang. Pendekatan deterministik mengasumsikan permintaan konstan (misal: pasti 100 unit), sedangkan realitanya permintaan berfluktuasi secara acak.\n",
+    "\n",
+    "## 3. Solusi & Pengambilan Keputusan\n",
+    "Menggunakan model probabilistik untuk menghitung peluang terjadinya berbagai tingkat permintaan, sehingga manajer dapat menentukan level safety stock yang optimal untuk meminimalkan risiko kekurangan stok tanpa menimbun barang berlebihan.\n",
+    "\n",
+    "## 4. Eksplorasi Komputasi (Python)\n",
+    "*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "c0040fe2",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Siap untuk komputasi Minggu 01!\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Tulis kode Python Anda di sini\n",
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "import matplotlib.pyplot as plt\n",
+    "import scipy.stats as stats\n",
+    "\n",
+    "print(\"Siap untuk komputasi Minggu 01!\")"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3",
+   "path": "C:\\Users\\armein\\AppData\\Local\\Programs\\Python\\Python313\\share\\jupyter\\kernels\\python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.13.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

@@ -16,14 +16,7 @@ Menentukan garansi produk lampu. Diketahui masa hidup lampu berdistribusi Normal
 Menghitung peluang lampu mati sebelum waktu tertentu (misal P(X < 700)). Perusahaan menetapkan masa garansi di titik di mana hanya sebagian kecil (misal 1%) lampu yang akan rusak, untuk meminimalkan biaya penggantian klaim garansi.
 
 ## 4. Eksplorasi Komputasi (Python)
-*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
 
-```{python}
-# Tulis kode Python Anda di sini
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import scipy.stats as stats
+{{< include ../code/c07.qmd >}}
 
-print("Siap untuk komputasi Minggu 07!")
-```
+{{< include ../agenda/w07.qmd >}}

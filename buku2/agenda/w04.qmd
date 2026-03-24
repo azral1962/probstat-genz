@@ -1,0 +1,211 @@
+Week 04: Teorema Bayes dan Probabilitas Kondisional
+
+## Agenda Perkuliahan Minggu 4
+**Tema Misi:** "Sherlock Holmes 2.0: The Art of Updating Beliefs"
+
+### Pertemuan 1: Senin (1 Jam) - The Intuition & The Paradox
+**Fokus:** Membongkar intuisi yang salah tentang "akurasi" dan memperkenalkan cara berpikir Bayesian.
+
+- **00:00 - 00:10 | The Hook: "Jebakan Tes DNA/Wajah"**
+    - Aktivitas: Tampilkan skenario FaceID/Biometrik. "Jika sistem keamanan punya akurasi 99%, dan alarm berbunyi mendeteksi teroris, berapa persen kemungkinan orang itu benar-benar teroris?"
+    - Tebakan Mahasiswa: Kebanyakan akan menjawab 99%.
+    - Realita: Tunjukkan bahwa jika teroris sangat langka (misal 1 dari 10.000), peluangnya mungkin di bawah 1%. Ini adalah *Base-Rate Fallacy*.
+
+- **00:10 - 00:30 | Live Coding: "Simulation over Formula"**
+    - Dosen (Python Demo):
+        1. Buat populasi 10.000 orang (9.999 User, 1 Hacker).
+        2. Simulasikan alat deteksi dengan False Positive Rate 1%.
+        3. Hitung berapa kali alarm berbunyi vs berapa kali Hacker tertangkap.
+        4. Visual: Tampilkan diagram titik (*Population Matrix*).
+
+- **00:30 - 00:50 | Konsep: Teorema Bayes**
+    - Perkenalkan rumus bukan sebagai hafalan, tapi sebagai mekanisme update:
+        - **Prior:** Keyakinan awal (seberapa sering hacker muncul?).
+        - **Likelihood:** Seberapa jago alat deteksinya?
+        - **Posterior:** Keyakinan baru setelah alarm bunyi.
+    - Bahas perbedaan vital: Independen vs Saling Lepas (Mutually Exclusive).
+
+- **00:50 - 01:00 | Pod Formation & Mission Brief**
+    - Misi GitHub: "Building a Naive Spam Filter". Mahasiswa akan membuat logika dasar filter email berbasis kata kunci.
+
+### Pertemuan 2: Rabu (2 Jam) - Logic & Code Lab
+**Fokus:** Implementasi Python untuk inferensi probabilistik dan penanganan data tidak seimbang.
+
+- **00:00 - 00:20 | Deep Dive: Monty Hall Paradox**
+    - Aktivitas: Simulasikan game show 3 pintu (Monty Hall) secara interaktif atau via kode Python.
+    - Diskusi: Mengapa informasi tambahan (pintu dibuka) mengubah probabilitas? Ini inti dari probabilitas kondisional $P(A|B)$.
+
+- **00:20 - 01:10 | Pod Challenge: "The Spam Assassin"**
+    - Skenario: Diketahui 20% email adalah Spam. Kata "Gratis" muncul di 90% Spam, tapi juga muncul di 5% email Normal.
+    - Tugas (Python):
+        1. Hitung manual: Jika ada kata "Gratis", berapa peluang itu Spam?
+        2. Coding: Buat fungsi `is_spam(word, prior, sensitivity, specificity)`.
+        3. Eksperimen: Apa yang terjadi jika prior spam turun jadi 1%? Apakah filter masih efektif atau terlalu banyak memblokir email penting (False Positive)?
+
+- **01:10 - 01:40 | Studi Kasus: Deteksi Intrusi & Anomali**
+    - Bahas Aplikasi 3 dari laporan ML: Mengapa deteksi fraud/intrusi sangat sulit?
+    - Solusi teknik: Menggabungkan beberapa sinyal independen (misal: IP Address + Jam Login) untuk menaikkan Likelihood.
+
+- **01:40 - 01:50 | Code Review & Debat**
+    - "Kapan kita boleh mengabaikan Prior?" (Jawab: Hampir tidak pernah, kecuali datanya sangat kuat).
+
+- **01:50 - 02:00 | Exit Ticket**
+    - Pertanyaan: "Jelaskan dengan bahasamu sendiri, apa itu False Positive dan kenapa itu berbahaya bagi sistem pemadam kebakaran otomatis?"
+
+---
+
+## Materi Kuliah: Konsep, Aplikasi, & Komputasi
+
+### 1. Konsep Dasar
+- **Probabilitas Kondisional ($P(A|B)$):** Peluang kejadian A terjadi mengingat kejadian B sudah terjadi. Ini menyempitkan ruang sampel dari $\Omega$ menjadi B.
+- **Teorema Bayes:** Rumus untuk membalik probabilitas kondisional.
+  $$ P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} $$
+  Di mana $P(A)$ adalah Prior (keyakinan awal) dan $P(A|B)$ adalah Posterior (keyakinan setelah melihat bukti).
+- **Hukum Probabilitas Total:** Digunakan untuk menghitung penyebut ($P(B)$) dengan memecah masalah menjadi partisi-partisi yang saling lepas.
+
+### 2. Aplikasi Sistem Informasi
+- **Filter Spam (Naive Bayes):** Mengklasifikasikan email berdasarkan kemunculan kata. Disebut "Naive" karena mengasumsikan kemunculan kata bersifat independen satu sama lain untuk menyederhanakan hitungan.
+- **Deteksi Fraud/Intrusi:** Tantangan utamanya adalah *Base-Rate Fallacy*. Karena transaksi fraud sangat jarang (misal 0.1%), sistem dengan akurasi 99% pun akan menghasilkan lebih banyak False Alarm daripada deteksi yang benar.
+- **Diagnosa Medis/Sistem:** Memprediksi kerusakan server berdasarkan gejala (suhu panas, latency tinggi) menggunakan data historis korelasi.
+
+### 3. Komputasi (Python)
+- **Fungsi Bayes:** Membuat fungsi reusable untuk menghitung posterior.
+- **Matriks Konfusi:** Menggunakan pandas atau `sklearn.metrics.confusion_matrix` untuk memvisualisasikan True Positive, False Positive, dll.
+- **Simulasi Monte Carlo:** Membuktikan paradoks probabilitas (seperti Monty Hall) dengan menjalankan ribuan iterasi `random.choice`.
+
+---
+
+## Tugas Kelompok (GitHub Classroom)
+**Judul:** Week 4: The Bayesian Security Analyst
+
+**Deskripsi:**
+Mahasiswa diberikan dataset simulasi trafik jaringan (Normal vs Serangan DDoS). Mereka harus membuat detektor sederhana dan mengevaluasi kinerjanya.
+
+**Soal Python (Notebook):**
+1. **Analisis Manual:** Diketahui $P(\text{DDoS}) = 0.01$. Sebuah sistem deteksi trafik aneh memiliki True Positive Rate 95% dan False Positive Rate 5%. Hitung peluang adanya serangan DDoS sungguhan jika alarm berbunyi.
+2. **Bayes Function:** Implementasikan fungsi `bayes_update(prior, sensitivity, specificity)` di Python. Gunakan untuk memverifikasi jawaban nomor 1.
+3. **Simulation:** Generate 10.000 request (gunakan `numpy.random`). Simulasikan alarm berdasarkan probabilitas di atas. Hitung Precision (Berapa % alarm yang benar).
+4. **Decision Making:** Jika biaya memblokir user asli (False Positive) adalah $10 dan biaya membiarkan DDoS lolos (False Negative) adalah $1000, apakah sistem deteksi ini layak dipakai? Jelaskan dengan perhitungan Expected Loss.
+
+---
+
+## 15 Soal & Solusi
+
+### A. Pertanyaan Konseptual
+
+1. **Soal:** Apa intuisi di balik probabilitas kondisional $P(A|B)$? Bagaimana informasi B mempersempit ruang sampel awal?
+   - **Solusi:** Probabilitas kondisional merefleksikan pembaruan informasi. Intuisinya adalah kita "membuang" semua hasil di ruang sampel $\Omega$ yang tidak memuat B. Ruang sampel yang relevan kini hanya B, sehingga peluang A dihitung sebagai proporsi irisan $A \cap B$ terhadap luas total B ($P(A \cap B)/P(B)$).
+
+2. **Soal:** Jelaskan perbedaan antara prior probability, likelihood, dan posterior probability dalam kerangka Bayes.
+   - **Solusi:**
+     - **Prior ($P(A)$):** Keyakinan awal sebelum melihat data/bukti.
+     - **Likelihood ($P(B|A)$):** Peluang bukti muncul jika hipotesis kita benar.
+     - **Posterior ($P(A|B)$):** Keyakinan yang diperbarui setelah melihat bukti.
+
+3. **Soal:** Apa yang dimaksud dengan independensi statistik dan mengapa itu berbeda dengan kejadian saling lepas?
+   - **Solusi:** Dua kejadian independen berarti terjadinya satu tidak mengubah peluang terjadinya yang lain ($P(A|B)=P(A)$). Kejadian saling lepas berarti keduanya tidak bisa terjadi bersamaan ($A \cap B = \emptyset$). Justru, jika saling lepas, mereka sangat bergantung (jika A terjadi, B pasti tidak terjadi).
+
+4. **Soal:** Bagaimana Hukum Probabilitas Total digunakan sebagai penyebut dalam rumus Bayes?
+   - **Solusi:** Penyebut rumus Bayes ($P(B)$) seringkali sulit dihitung langsung. Hukum Probabilitas Total memecahnya menjadi jumlahan dari semua skenario yang mungkin: $P(B) = \sum P(B|A_i)P(A_i)$. Ini menormalisasi probabilitas posterior agar totalnya menjadi 1.
+
+5. **Soal:** Mengapa "False Positive" menjadi masalah krusial dalam sistem peringatan dini seperti prediksi gempa atau deteksi virus?
+   - **Solusi:** Karena Base Rate (frekuensi kejadian asli) gempa/virus biasanya sangat rendah. Meskipun alat deteksi akurat, secara statistik jumlah alarm palsu (dari populasi sehat/normal yang besar) akan jauh melebihi jumlah alarm benar, menyebabkan kepanikan atau biaya evakuasi yang sia-sia ("Boy Who Cried Wolf").
+
+### B. Pertanyaan Aplikatif
+
+6. **Soal:** Sebuah filter spam mengetahui bahwa 20% email adalah spam. 90% spam mengandung kata "Promo", sementara hanya 5% email normal mengandung kata tersebut. Jika sebuah email mengandung kata "Promo", hitung probabilitas itu adalah spam.
+   - **Solusi:**
+     - $P(S)=0.2$, $P(N)=0.8$.
+     - $P(\text{Promo}|S)=0.9$, $P(\text{Promo}|N)=0.05$.
+     - $P(S|\text{Promo}) = \frac{0.9 \times 0.2}{(0.9 \times 0.2) + (0.05 \times 0.8)} = \frac{0.18}{0.18 + 0.04} = \frac{0.18}{0.22} \approx 0.818$.
+
+7. **Soal:** Analisis probabilitas kegagalan server jika diketahui ada peringatan suhu tinggi, menggunakan data historis korelasi antara suhu dan kegagalan.
+   - **Solusi:** Gunakan Bayes. Kita butuh data: $P(\text{Gagal})$, $P(\text{Panas}|\text{Gagal})$, dan $P(\text{Panas}|\text{Normal})$. Peringatan suhu tinggi akan meningkatkan probabilitas kegagalan dari baseline (prior), namun seberapa besar peningkatannya bergantung pada seberapa sering server panas tapi tidak gagal (False Positive).
+
+8. **Soal:** Dalam pengujian software, jika modul A memiliki bug, probabilitas modul B memiliki bug meningkat menjadi 0,6. Jika probabilitas awal modul B memiliki bug adalah 0,2, apakah A dan B independen?
+   - **Solusi:** Tidak Independen. Definisi independen adalah $P(B|A)=P(B)$. Di sini, $P(B|A)=0.6$ sedangkan $P(B)=0.2$. Karena peluang berubah dengan adanya informasi A, maka mereka dependen (berkorelasi).
+
+9. **Soal:** Gunakan Teorema Bayes untuk mengevaluasi akurasi sistem pengenalan wajah yang memiliki tingkat false match 0,01%.
+   - **Solusi:** Jika database berisi 1 juta orang dan 1 penjahat.
+     - Jika orang random lewat, peluang match salah = 0,01% = 0,0001.
+     - Dari 1.000.000 orang, akan ada $\approx 100$ False Match.
+     - Jika alarm bunyi, peluang benar penjahat hanya $1/(1+100) \approx 1\%$. Akurasi "teknis" tinggi (99.99%) tidak menjamin presisi praktis tinggi pada populasi besar.
+
+10. **Soal:** Analisis probabilitas seorang user adalah bot jika diketahui dia melakukan 100 request dalam 1 detik.
+    - **Solusi:** Ini adalah pembaruan Likelihood. $P(100\text{req}|\text{Manusia}) \approx 0$, sedangkan $P(100\text{req}|\text{Bot})$ tinggi. Dengan Bayes, meskipun Prior bot kecil, Likelihood yang sangat kontras ini akan membuat Posterior $P(\text{Bot}|\text{Data})$ mendekati 1 (Pasti Bot).
+
+### C. Pertanyaan Komputasional
+
+11. **Soal:** Implementasikan fungsi Python `bayes_theorem(prior, likelihood, total_prob)` yang mengembalikan nilai posterior.
+    - **Solusi:**
+```python
+def bayes_theorem(prior, likelihood, neg_likelihood):  
+    # neg_likelihood adalah P(B|Not A)  
+    p_b = (likelihood * prior) + (neg_likelihood * (1 - prior))  
+    return (likelihood * prior) / p_b  
+```
+
+12. **Soal:** Buatlah skrip untuk mensimulasikan masalah Monty Hall dan buktikan secara empiris mengapa berpindah pintu memberikan probabilitas menang lebih tinggi.
+    - **Solusi:**
+```python
+import random  
+wins_stay, wins_switch = 0, 0  
+for _ in range(10000):  
+    doors = [0, 1, 0] # 1 is car  
+    random.shuffle(doors)  
+    choice = 0 # Misal selalu pilih pintu 0  
+    # Host buka pintu zonk  
+    open_door = [i for i in [0, 1, 2] if doors[i] == 0 and i != choice][0]  
+    # Switch ke pintu sisa  
+    switch = [i for i in [0, 1, 2] if i != choice and i != open_door][0]  
+    if doors[choice] == 1: wins_stay += 1  
+    if doors[switch] == 1: wins_switch += 1  
+print(f"Stay: {wins_stay/10000}, Switch: {wins_switch/10000}")  
+# Hasil akan mendekati Stay: 0.33, Switch: 0.66  
+```
+
+13. **Soal:** Gunakan pustaka numpy untuk menghitung matriks probabilitas transisi sederhana dalam sebuah rantai Markov.
+    - **Solusi:**
+```python
+import numpy as np  
+# Matriks transisi: Hujan(0), Cerah(1)  
+# P(0|0)=0.7, P(1|0)=0.3  
+# P(0|1)=0.4, P(1|1)=0.6  
+T = np.array([[0.7, 0.3], [0.4, 0.6]])  
+current_state = np.array([1, 0]) # Hari ini Hujan  
+next_day = current_state.dot(T)  
+print(next_day)  
+```
+
+14. **Soal:** Tulis program yang mengklasifikasikan pesan singkat sebagai "Spam" atau "Ham" menggunakan algoritma Naive Bayes sederhana.
+    - **Solusi:**
+```python
+# Sederhana: P(Spam|Word)  
+p_spam = 0.5  
+p_word_given_spam = 0.8 # Likelihood  
+p_word_given_ham = 0.1  
+def predict(word_present):  
+    if not word_present: return p_spam # Simplifikasi  
+    evidence = (p_word_given_spam * p_spam) + \
+               (p_word_given_ham * (1 - p_spam))  
+    return (p_word_given_spam * p_spam) / evidence  
+```
+
+15. **Soal:** Visualisasikan bagaimana probabilitas posterior berubah seiring dengan bertambahnya jumlah bukti (evidence) dalam simulasi Python.
+    - **Solusi:**
+```python
+import matplotlib.pyplot as plt  
+priors = [0.1] # Keyakinan awal rendah  
+likelihood_true = 0.8 # Bukti mendukung  
+likelihood_false = 0.4  
+for _ in range(10):  
+    curr = priors[-1]  
+    # Update rule: P(A|B)  
+    post = (likelihood_true * curr) / \
+           ((likelihood_true * curr) + (likelihood_false * (1-curr)))  
+    priors.append(post)  
+plt.plot(priors); plt.title("Bayesian Updating"); plt.show()  
+```
+
+
+

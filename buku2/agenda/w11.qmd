@@ -1,0 +1,217 @@
+ Week 11: Estimasi Statistik dan Interval Kepercayaan
+
+## Agenda Perkuliahan Minggu 11
+**Topik:** Estimasi Parameter & Interval Kepercayaan
+**Tema Misi:** "The Confidence Game: Don't Just Guess, Estimate!"
+
+### Pertemuan 1: Senin (1 Jam) - The Intuition & The Sniper
+**Fokus:** Memahami bedanya 'tebakan tunggal' (Point Estimate) yang berisiko dengan 'rentang aman' (Interval) yang bisa dipertanggungjawabkan.
+
+- **00:00 - 00:10 | The Hook: "Margin of Error di E-Sports/Pemilu"**
+    - Masalah: Tampilkan hasil survei atau win-rate tim E-Sports: "Tim A menang 55% $\pm$ 3%".
+    - Pertanyaan: "Apa artinya $\pm$ 3%? Apakah kalau mereka main 100 kali, pasti menang 55 kali? Atau bisa 52? Atau 58?"
+    - Poin: Angka tunggal (55%) itu pasti salah (peluang kena titik tepat itu 0). Kita butuh "Jaring" (Interval) untuk menangkap kebenaran.
+
+- **00:10 - 00:30 | Live Simulation: "Catching the True Mean"**
+    - Dosen (Python Demo):
+        1. Set populasi tersembunyi (misal: Rata-rata tinggi mahasiswa Indonesia = 165cm).
+        2. Ambil 10 sampel acak, hitung rata-rata ($\bar{x}$).
+        3. Buat rentang $\bar{x} \pm \text{Margin}$. Cek: Apakah 165cm tertangkap di dalam rentang?
+        4. Ulangi 100 kali. Tunjukkan bahwa dengan rumus yang benar, 95 dari 100 jaring akan menangkap ikan. Inilah 95% Confidence Level.
+
+- **00:30 - 00:50 | Konsep: T-Distribution vs Normal**
+    - Kapan pakai Z (Normal)? Hanya kalau kita tahu standar deviasi populasi ($\sigma$)-yang mana hampir mustahil di dunia nyata.
+    - Perkenalkan T-Student: Distribusi yang "lebih gemuk" ekornya untuk mengakomodasi ketidaktahuan kita saat sampel sedikit ($n < 30$).
+
+- **00:50 - 01:00 | Pod Formation & Mission Brief**
+    - Misi GitHub: "The Quality Assurance Auditor". Mahasiswa harus memvalidasi klaim spesifikasi produk hardware dari data sampel terbatas.
+
+### Pertemuan 2: Rabu (2 Jam) - Audit Lab
+**Fokus:** Menggunakan Python untuk membuat klaim bisnis yang didukung data (Bootstrap & T-Interval).
+
+- **00:00 - 00:20 | Micro-Lecture: Bootstrap (Cara Modern)**
+    - Konsep: Rumus matematika itu rumit. Cara Gen-Z/Data Scientist: Resampling.
+    - Demo: Ambil data sampel, acak ulang (kocok) 1000x, hitung rata-rata tiap kocokan, ambil persentil ke-2.5 dan ke-97.5. Voila! Jadi 95% CI tanpa rumus t-tabel.
+
+- **00:20 - 01:10 | Pod Challenge: "The Chip Spec Scandal"**
+    - Skenario: Vendor baru mengklaim prosesor mereka punya kecepatan rata-rata 3.2 GHz. Anda membeli 30 sampel untuk tes. Hasil rata-rata sampel cuma 3.15 GHz. Apakah vendor bohong?
+    - Tugas (Python):
+        1. Load data sampel (30 unit).
+        2. Hitung 95% Confidence Interval menggunakan `scipy.stats.t.interval`.
+        3. Analisis: Cek apakah angka "3.2" ada di dalam rentang tersebut?
+            - Jika ada: Klaim vendor diterima (perbedaan cuma kebetulan sampel).
+            - Jika tidak ada: Vendor berbohong (tolak barang).
+        4. Simulasi: Apa yang terjadi pada lebar interval jika kita menaikkan tingkat kepercayaan jadi 99%? (Spoiler: Makin lebar/makin tidak presisi).
+
+- **01:10 - 01:40 | Studi Kasus: Estimasi Proporsi User**
+    - Masalah: "Berapa % user yang suka Dark Mode?"
+    - Tugas: Hitung CI untuk data biner (Suka/Tidak) menggunakan rumus Standard Error proporsi $\sqrt{p(1-p)/n}$.
+
+- **01:40 - 01:50 | Showcase & Keputusan**
+    - Pods mempresentasikan rekomendasi audit mereka: "Approve Vendor" atau "Blacklist Vendor".
+
+- **01:50 - 02:00 | Exit Ticket**
+    - Pertanyaan: "Kenapa kita tidak selalu pakai Confidence Level 100% saja biar pasti benar?" (Jawab: Karena intervalnya jadi $-\infty$ sampai $\infty$, alias tidak berguna).
+
+---
+
+## Materi Kuliah: Konsep, Aplikasi, & Komputasi
+
+### 1. Konsep Dasar
+- **Estimasi Titik (Point Estimate):** Nilai tunggal dari sampel (misal $\bar{x}$ atau $\hat{p}$) untuk menduga parameter populasi ($\mu$ atau p). Sifatnya: Unbiased (tak bias) dan Efficient (variansi kecil).
+- **Interval Kepercayaan (Confidence Interval - CI):** Rentang nilai yang dibuat sedemikian rupa sehingga kita yakin (misal 95%) bahwa parameter populasi yang asli ada di dalamnya.
+  $$ \text{Estimator} \pm (\text{CriticalValue} \times \text{StandardError}) $$
+- **Distribusi T-Student:** Digunakan menggantikan Normal saat $\sigma$ populasi tidak diketahui dan sampel kecil ($n < 30$). Bentuknya mirip lonceng tapi lebih landai (ekor lebih tebal), mencerminkan ketidakpastian yang lebih tinggi.
+
+### 2. Aplikasi Sistem Informasi
+- **SLA Verification:** Cloud provider menjanjikan latency rata-rata 50ms. Dari log 100 request, rata-rata 52ms. Dengan CI, kita bisa cek apakah 52ms ini penyimpangan wajar atau pelanggaran kontrak.
+- **Hardware Benchmarking:** Mengklaim spesifikasi produk (misal: daya tahan baterai HP "10-12 jam") berdasarkan pengujian sampel terbatas di lab.
+- **A/B Testing Metric:** Saat melaporkan kenaikan konversi, jangan bilang "Naik 2%", tapi "Naik antara 1.5% s.d. 2.5%". Ini mencegah ekspektasi berlebihan dari manajemen.
+
+### 3. Komputasi (Python)
+- **T-Interval:**
+  ```python
+  import scipy.stats as st
+  # data = array sampel
+  ci = st.t.interval(confidence=0.95, df=len(data)-1,
+                     loc=np.mean(data), scale=st.sem(data))
+  ```
+- **Bootstrap (Metode Modern):**
+  ```python
+  # Resample data 1000x, hitung mean tiap kali, ambil persentil 2.5 dan 97.5
+  bootstrap_means = [np.mean(np.random.choice(data, size=len(data), replace=True)) for _ in range(1000)]
+  ci_lower = np.percentile(bootstrap_means, 2.5)
+  ci_upper = np.percentile(bootstrap_means, 97.5)
+  ```
+
+---
+
+## Tugas Kelompok (GitHub Classroom)
+**Judul:** Week 11 Mission: The Spec Auditor - Validating Claims with Data
+
+**Deskripsi:**
+Mahasiswa bertindak sebagai auditor independen untuk sebuah aplikasi video conference. Developer mengklaim penggunaan RAM rata-rata aplikasi adalah 500MB. Mahasiswa diberi data log penggunaan memori dari 40 sesi user.
+
+**Set Soal (Notebook):**
+1. **Exploration (20 poin):** Load data `ram_usage.csv`. Hitung rata-rata sampel ($\bar{x}$) dan standar deviasi sampel (s).
+2. **T-Interval Analysis (30 poin):**
+    - Hitung 95% Confidence Interval untuk rata-rata penggunaan RAM populasi.
+    - Gunakan `scipy.stats.t.interval`.
+    - Apakah angka 500MB ada di dalam interval? Simpulkan apakah klaim developer valid.
+3. **Bootstrap Comparison (30 poin):**
+    - Lakukan teknik Bootstrap (10.000 iterasi) untuk mendapatkan CI.
+    - Bandingkan hasil CI Bootstrap dengan CI T-Interval. Apakah hasilnya mirip? (Seharusnya mirip karena n=40 cukup besar).
+4. **Sample Size Planning (20 poin):**
+    - Jika manajemen ingin memperkecil Margin of Error menjadi separuhnya (agar estimasi lebih presisi), berapa kali lipat jumlah sampel yang harus diambil? (Buktikan dengan simulasi atau rumus $SE=s/\sqrt{n}$).
+
+---
+
+## 15 Soal & Solusi
+
+### A. Pertanyaan Konseptual
+
+1. **Soal:** Apa kriteria pengestimasi titik yang baik? Jelaskan konsep unbiasedness dan efisiensi.
+   - **Solusi:** Pengestimasi yang baik harus Tak Bias (*Unbiased*), artinya nilai harapan (rata-rata) dari estimator tersebut sama dengan parameter populasi yang sebenarnya ($E[\hat{\theta}] = \theta$). Ia juga harus Efisien, artinya memiliki variansi yang paling kecil dibandingkan estimator tak bias lainnya (hasilnya konsisten dekat dengan target).
+
+2. **Soal:** Jelaskan interpretasi yang benar dari kalimat "Interval kepercayaan 95% untuk rata-rata adalah [3, 4]".
+   - **Solusi:** Interpretasi yang benar berkaitan dengan prosesnya: "Jika kita mengambil 100 sampel berbeda dan membuat interval kepercayaan untuk masing-masing sampel, maka sekitar 95 dari 100 interval tersebut akan memuat rata-rata populasi yang sebenarnya." (Bukan "peluang rata-rata ada di situ adalah 95%", karena rata-rata populasi itu konstan, bukan variabel acak).
+
+3. **Soal:** Mengapa kita menggunakan distribusi t-Student daripada distribusi Normal ketika simpangan baku populasi tidak diketahui?
+   - **Solusi:** Ketika simpangan baku populasi ($\sigma$) tidak diketahui, kita mengestimasinya dengan simpangan baku sampel (s). Estimasi ini menambah ketidakpastian, terutama pada sampel kecil. Distribusi t-Student memiliki "ekor" yang lebih tebal (lebar) untuk mengakomodasi ketidakpastian tambahan ini, sehingga interval kepercayaan menjadi lebih realistis (lebih lebar) dibanding jika memakai Normal.
+
+4. **Soal:** Bagaimana pengaruh tingkat kepercayaan (misal 90% vs 99%) terhadap lebar interval kepercayaan?
+   - **Solusi:** Semakin tinggi tingkat kepercayaan (misal 99%), semakin lebar interval kepercayaannya. Ini karena untuk menjadi "lebih yakin" bahwa target kita tertangkap, kita harus menebar jaring yang lebih luas. Sebaliknya, kepercayaan rendah (90%) menghasilkan interval yang lebih sempit (presisi tinggi tapi risiko salah tangkap besar).
+
+5. **Soal:** Apa yang dimaksud dengan margin error dalam konteks survei atau polling?
+   - **Solusi:** Margin error adalah setengah dari lebar interval kepercayaan. Ia mencerminkan sejauh mana hasil statistik sampel (misal: 55% pemilih) mungkin menyimpang dari nilai populasi sebenarnya. Rumusnya biasanya $z \times \frac{\sigma}{\sqrt{n}}$.
+
+### B. Pertanyaan Aplikatif
+
+6. **Soal:** Sebuah startup ingin mengestimasi rata-rata waktu yang dihabiskan user di aplikasi mereka. Dari sampel 50 user, rata-rata adalah 15 menit dengan s=5. Hitung interval kepercayaan 95%.
+   - **Solusi:**
+     - $n=50, \bar{x}=15, s=5$. Tingkat kepercayaan 95% ($\alpha=0.05$).
+     - Karena $n \ge 30$, bisa pakai aproksimasi Z atau t. Misal pakai $Z_{0.025} \approx 1.96$.
+     - Standard Error (SE) = $5/\sqrt{50} \approx 0.707$.
+     - Margin Error = $1.96 \times 0.707 \approx 1.38$.
+     - CI = $15 \pm 1.38 = [13.62, 16.38]$ menit.
+
+7. **Soal:** Estimasi proporsi mahasiswa STI yang lebih menyukai Python daripada Java dengan margin error 5% pada tingkat kepercayaan 95%. Berapa ukuran sampel yang dibutuhkan?
+   - **Solusi:**
+     - Rumus Margin Error: $E = Z \sqrt{\frac{p(1-p)}{n}}$.
+     - Karena p tidak diketahui, gunakan estimasi paling konservatif $p=0.5$ (variansi maks).
+     - $0.05 = 1.96 \sqrt{\frac{0.5 \times 0.5}{n}} \Rightarrow \sqrt{n} = \frac{1.96 \times 0.5}{0.05} = 19.6$.
+     - $n = (19.6)^2 = 384.16$. Jadi butuh sampel 385 mahasiswa.
+
+8. **Soal:** Hitung interval kepercayaan untuk perbedaan rata-rata waktu respons antara dua server (A dan B) berdasarkan data sampel performa keduanya.
+   - **Solusi:** Gunakan rumus Two-sample t-interval. $(\bar{x}_A - \bar{x}_B) \pm t_{crit} \times \sqrt{\frac{s_A^2}{n_A} + \frac{s_B^2}{n_B}}$. Jika interval ini mencakup angka 0 (nol), berarti tidak ada perbedaan signifikan antara kedua server.
+
+9. **Soal:** Tentukan batas bawah reliabilitas sebuah sistem cloud dengan tingkat kepercayaan 90% berdasarkan data uptime bulanan.
+   - **Solusi:** Ini adalah One-sided Confidence Interval. Lower Bound = $\bar{x} - (t_{0.10, df} \times SE)$. Kita hanya peduli batas bawah (garansi minimum uptime), batas atasnya bisa dianggap 100% atau tak hingga.
+
+10. **Soal:** Analisis akurasi estimasi pendapatan harian sebuah e-commerce menggunakan interval kepercayaan t-Student.
+    - **Solusi:** Jika data sampel pendapatan harian (n kecil) dihitung, kita buat CI. Jika intervalnya terlalu lebar (misal: Rp 1 Juta $\pm$ Rp 800rb), maka estimasi tersebut tidak akurat untuk perencanaan bisnis. Solusinya: perbanyak hari sampel (n) untuk memperkecil Standard Error dan margin error.
+
+### C. Pertanyaan Komputasional
+
+11. **Soal:** Tulis fungsi Python untuk menghitung interval kepercayaan rata-rata menggunakan distribusi t-Student untuk sampel kecil.
+    - **Solusi:**
+```python
+import numpy as np  
+import scipy.stats as st  
+def get_t_interval(data, confidence=0.95):  
+    n = len(data)  
+    m, se = np.mean(data), st.sem(data)  
+    h = st.t.ppf((1 + confidence) / 2., n-1) * se  
+    return m - h, m + h  
+```
+
+12. **Soal:** Gunakan scipy.stats.t.interval untuk menghitung batas atas dan bawah estimasi secara otomatis.
+    - **Solusi:**
+```python
+data = [3, 5, 8, 4, 6] # Contoh data  
+ci = st.t.interval(confidence=0.95, df=len(data)-1,  
+                   loc=np.mean(data), scale=st.sem(data))  
+print(f"CI: {ci}")  
+```
+
+13. **Soal:** Buat simulasi yang menunjukkan bahwa 95% dari 100 interval kepercayaan yang dihasilkan benar-benar mencakup rata-rata populasi asli.
+    - **Solusi:**
+```python
+pop_mean = 50  
+success = 0  
+for _ in range(100):  
+    sample = np.random.normal(pop_mean, 5, 30) # Ambil sampel  
+    ci = st.t.interval(0.95, 29, np.mean(sample), st.sem(sample))  
+    if ci[0] <= pop_mean <= ci[1]:  
+        success += 1  
+print(f"Success Rate: {success}/100") # Seharusnya dekat dengan 95  
+```
+
+14. **Soal:** Implementasikan rumus untuk menghitung ukuran sampel minimum yang diperlukan untuk estimasi proporsi dengan margin error tertentu.
+    - **Solusi:**
+```python
+def min_sample_size(margin_error, confidence=0.95, p_guess=0.5):  
+    z = st.norm.ppf((1 + confidence) / 2)  
+    n = (z**2 * p_guess * (1 - p_guess)) / (margin_error**2)  
+    return np.ceil(n)  
+print(min_sample_size(0.05)) # Output ~385  
+```
+
+15. **Soal:** Visualisasikan berbagai interval kepercayaan dari sampel yang berbeda menggunakan plot garis horizontal di matplotlib.
+    - **Solusi:**
+```python
+import matplotlib.pyplot as plt  
+pop_mean = 50  
+for i in range(10): # 10 sampel berbeda  
+    sample = np.random.normal(pop_mean, 5, 30)  
+    mean, se = np.mean(sample), st.sem(sample)  
+    ci_width = 1.96 * se # Approx 95%  
+    color = 'blue' if (mean - ci_width <= pop_mean <= mean + ci_width) else 'red'  
+    plt.errorbar(mean, i, xerr=ci_width, fmt='o', color=color)  
+plt.axvline(pop_mean, color='green', linestyle='--')  
+plt.title("Confidence Intervals vs True Mean")  
+plt.show()  
+```
+
+
+

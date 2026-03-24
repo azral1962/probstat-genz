@@ -7,13 +7,13 @@ subtitle: "Probabilistic Experiment, Sample Space, Event, Probability Definition
 
 
 
-## 1. Konsep Pengetahuan
+## Apa Yang Kita pelajari?
 Ruang sampel (S) sebagai himpunan semua hasil yang mungkin, kejadian (E) sebagai himpunan bagian dari ruang sampel, dan aksioma probabilitas (nilai peluang antara 0 dan 1, total peluang semesta = 1).
 
-## 2. Tipikal Problem
+**Tipikal Problem**
 Dalam pengiriman data digital, kita ingin mengetahui peluang terjadinya kesalahan bit. Jika dikirim 3 bit, apa ruang sampelnya dan berapa peluang setidaknya satu bit salah?
 
-## 3. Solusi & Pengambilan Keputusan
+**Solusi & Pengambilan Keputusan**
 Mendaftar ruang sampel S = {000, 001, ..., 111}. Jika kejadian E adalah 'setidaknya satu error', kita hitung jumlah elemen di E dibagi total elemen di S untuk mendapatkan probabilitasnya, yang digunakan untuk menentukan kualitas saluran komunikasi.
 
 ## 4. Eksplorasi Komputasi (Python)
@@ -28,3 +28,5 @@ import scipy.stats as stats
 
 print("Siap untuk komputasi Minggu 02!")
 ```
+
+{{< include ../agenda/w02.qmd >}}

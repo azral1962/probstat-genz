@@ -1,0 +1,199 @@
+ Week 15: Simulasi Monte Carlo dan Teori Keputusan Strategis
+
+## Agenda Perkuliahan Minggu 15
+**Topik:** Studi Kasus Integratif (Monte Carlo, Decision Theory, & Risk Management)
+**Tema Misi:** "Dr. Strange Strategy: Winning in 14,000,605 Futures"
+
+### Pertemuan 1: Senin (1 Jam) - The Strategy of Simulation
+**Fokus:** Memahami bahwa ketika rumus matematika terlalu rumit untuk diselesaikan (analitis), kita bisa "memalsukan" ribuan eksperimen dengan komputer (numerik).
+
+- **00:00 - 00:10 | The Hook: "Menghitung Risiko Kebangkrutan"**
+    - Masalah: Sebuah startup punya modal $100k. Burn rate bulanan tidak pasti (Distribusi Normal), Revenue bulanan tidak pasti (Distribusi Gamma). Berapa peluang startup ini bangkrut dalam 12 bulan?
+    - Diskusi: Menghitung ini dengan rumus kalkulus sangat sulit. Tapi dengan Python, kita bisa mensimulasikan "hidup" startup ini 10.000 kali dalam 1 detik.
+    - Konsep: Pengantar Simulasi Monte Carlo.
+
+- **00:10 - 00:30 | Konsep: Teori Keputusan (Expected Loss)**
+    - Konteks: Mengacu pada Aplikasi 19 dan Aplikasi 11.
+    - Masalah: Model ML memprediksi transaksi fraud dengan skor 0.7. Apakah kita blokir?
+    - Matriks Biaya:
+        - Blokir User Asli (False Positive): Rugi reputasi (Misal $10).
+        - Loloskan Fraud (False Negative): Rugi uang (Misal $1000).
+    - Rumus: $E[Loss] = P(Fraud) \cdot Cost(Miss) + P(\neg Fraud) \cdot Cost(Block)$. Kita pilih aksi dengan kerugian terkecil, bukan sekadar akurasi tertinggi.
+
+- **00:30 - 00:50 | Deep Dive: Extreme Value Theory (EVT)**
+    - Isu: Mengapa server crash padahal rata-rata beban rendah?
+    - Poin: Desain sistem jangan berdasarkan rata-rata, tapi berdasarkan "Ekor" (Tail Risk / P99). Bencana terjadi di ekor distribusi.
+
+- **00:50 - 01:00 | Pod Formation & Mission Brief**
+    - Misi GitHub: "The Risk Analyst Capstone". Mahasiswa akan membangun simulator risiko untuk proyek peluncuran produk IT.
+
+### Pertemuan 2: Rabu (2 Jam) - Simulation Lab
+**Fokus:** Menggunakan Python untuk menjalankan Simulasi Monte Carlo end-to-end dan mengambil keputusan bisnis.
+
+- **00:00 - 00:20 | Micro-Lecture: Membangun Dunia Simulasi**
+    - Teknik: Menggabungkan `numpy.random` (input acak) dengan logika bisnis (fungsi deterministik) untuk menghasilkan output distribusi (histogram hasil).
+
+- **00:20 - 01:10 | Pod Challenge: "Project Deadline Simulator"**
+    - Skenario: Manajer proyek bertanya: "Kapan fitur ini selesai?". Programmer menjawab: "Optimis 5 hari, Pesimis 15 hari, Paling mungkin 8 hari" (Distribusi PERT/Triangular). Ada 5 tugas yang saling bergantung (seri dan paralel).
+    - Tugas (Python):
+        1. Definisikan distribusi durasi untuk setiap tugas.
+        2. Jalankan 10.000 simulasi penyelesaian proyek.
+        3. Analisis: Jangan beri satu angka tanggal. Berikan: "Kami 90% yakin proyek selesai dalam X hari" (Persentil ke-90).
+        4. Visualisasi: Plot histogram total durasi.
+
+- **01:10 - 01:40 | Studi Kasus Integratif: Hazard Function**
+    - Masalah: Kapan waktu terbaik mengganti server? Apakah server semakin tua semakin sering rusak (aging) atau kerusakannya acak (memoryless)?
+    - Analisis: Plot Hazard Function dari data log kegagalan. Jika grafiknya naik, berarti ada penuaan (perlu preventive maintenance).
+
+- **01:40 - 01:50 | Showcase & Rekomendasi**
+    - Pods mempresentasikan: "Berdasarkan simulasi, siapkan budget cadangan sebesar $X agar peluang overbudget < 5%."
+
+- **01:50 - 02:00 | Exit Ticket**
+    - Pertanyaan: "Apa bedanya memprediksi 'Rata-rata Biaya' dengan memprediksi 'Value at Risk (VaR)'?"
+
+---
+
+## Materi Kuliah: Konsep, Aplikasi, & Komputasi
+
+### 1. Konsep Dasar
+- **Simulasi Monte Carlo:** Metode komputasi untuk memahami dampak ketidakpastian risiko dalam prediksi dan peramalan. Caranya dengan melakukan pengambilan sampel acak berulang kali dari distribusi input untuk mendapatkan distribusi kemungkinan hasil (output).
+- **Teori Keputusan (Decision Theory):** Kerangka kerja untuk memilih tindakan di antara beberapa alternatif berdasarkan nilai harapan utilitas (Expected Utility) atau meminimalkan harapan kerugian (Expected Loss).
+- **Extreme Value Theory (EVT):** Cabang statistik yang menangani penyimpangan ekstrim dari median distribusi probabilitas (kejadian langka tapi berdampak besar, seperti beban puncak server).
+
+### 2. Aplikasi Sistem Informasi
+- **Manajemen Risiko Proyek:** Menggantikan estimasi titik tunggal (misal: "selesai 3 bulan") dengan distribusi probabilitas penyelesaian, memperhitungkan ketidakpastian di setiap subtugas.
+- **Analisis Churn (Hazard Function):** Memodelkan laju kehilangan pelanggan. Jika hazard rate tinggi di awal (pengguna baru bingung), perbaiki UI/UX. Jika tinggi di akhir (pengguna lama bosan), rilis fitur baru.
+- **Cost-Sensitive Learning:** Dalam deteksi fraud atau spam, ambang batas (threshold) keputusan digeser tidak hanya berdasarkan akurasi, tapi berdasarkan biaya finansial dari False Positive vs False Negative.
+
+### 3. Komputasi (Python)
+- **Simulasi Loop:** Menggunakan for loop atau vektorisasi numpy untuk menjalankan ribuan skenario.
+- **Visualisasi Hasil:** `matplotlib.pyplot.hist` untuk melihat sebaran hasil simulasi dan `numpy.percentile` untuk menghitung interval kepercayaan atau risiko (misal: P95).
+- **Fungsi Kunci:** `np.random.triangular` (untuk estimasi proyek), `np.random.choice` (untuk skenario diskrit).
+
+---
+
+## Tugas Kelompok (GitHub Classroom)
+**Judul:** Week 15 Mission: The Future Forecaster
+
+**Deskripsi:**
+Anda adalah CTO dari sebuah e-commerce yang bersiap menghadapi "Harbolnas" (Hari Belanja Nasional). Anda harus mensimulasikan kapasitas infrastruktur dan potensi keuntungan.
+
+**Set Soal (Notebook):**
+1. **Traffic Simulation (30 poin):**
+    - Asumsikan trafik user mengikuti pola Mixture Model (Normal saat jam biasa + LogNormal saat flash sale).
+    - Simulasikan beban server per detik selama 24 jam.
+2. **Infrastructure Risk (30 poin):**
+    - Kapasitas server maksimum adalah C. Jika beban > C, sistem crash (Revenue = 0 untuk jam itu).
+    - Tentukan nilai C yang optimal: Biaya sewa server mahal vs Risiko kehilangan revenue saat crash. Gunakan pendekatan Expected Loss Minimization.
+3. **Revenue Projection (20 poin):**
+    - Diketahui Conversion Rate adalah variabel acak Beta($\alpha, \beta$).
+    - Hitung estimasi total revenue hari itu dengan Confidence Interval 95% menggunakan Monte Carlo.
+4. **Executive Report (20 poin):**
+    - Buat rekomendasi: "Kita harus menyewa kapasitas server sebanyak X unit. Ini menjamin 99% uptime dengan profit maksimal."
+
+---
+
+## 15 Soal & Solusi
+
+### A. Pertanyaan Konseptual
+
+1. **Soal:** Jelaskan konsep Expected Loss dalam pengambilan keputusan klasifikasi pada machine learning.
+   - **Solusi:** Expected Loss adalah jumlahan dari probabilitas setiap jenis kesalahan dikalikan dengan biaya kesalahan tersebut. Rumusnya: $E[L] = P(FN) \cdot Cost(FN) + P(FP) \cdot Cost(FP)$. Tujuannya adalah memilih threshold yang meminimalkan total kerugian finansial, bukan sekadar meminimalkan jumlah error.
+
+2. **Soal:** Apa kegunaan Hazard Function h(t) dalam analisis retensi pengguna aplikasi?
+   - **Solusi:** Hazard function menggambarkan laju kejadian (misal: churn atau berhenti berlangganan) sesaat pada waktu t, dengan syarat pengguna tersebut masih aktif hingga waktu t. Jika h(t) menurun seiring waktu, artinya pengguna semakin setia semakin lama mereka menggunakan aplikasi.
+
+3. **Soal:** Mengapa kita menggunakan simulasi Monte Carlo untuk kuantifikasi ketidakpastian (Uncertainty Quantification)?
+   - **Solusi:** Karena banyak sistem nyata terlalu kompleks untuk diturunkan rumus variansinya secara analitis (terutama yang melibatkan fungsi non-linear atau dependensi rumit). Monte Carlo memungkinkan kita mengestimasi distribusi output dengan cara mensimulasikan ribuan input acak dan mengamati hasilnya secara empiris.
+
+4. **Soal:** Jelaskan perbedaan antara distribusi Gumbel (Tipe I) dan Frechet (Tipe II) dalam Teori Nilai Ekstrim.
+   - **Solusi:** Distribusi Gumbel digunakan untuk memodelkan nilai maksimum dari populasi yang memiliki ekor distribusi "ringan" (seperti Normal atau Eksponensial). Distribusi Frechet digunakan untuk populasi dengan ekor distribusi "berat" (seperti Pareto), yang sering ditemukan dalam fenomena alam atau finansial yang ekstrim.
+
+5. **Soal:** Dalam konteks Mixture Model, bagaimana kita memodelkan distribusi latensi yang memiliki dua karakteristik berbeda (misal: cache hit vs cache miss)?
+   - **Solusi:** Kita memodelkan distribusi total sebagai penjumlahan terbobot dari dua distribusi komponen: $f(x) = \pi_1f_1(x) + \pi_2f_2(x)$, di mana $\pi$ adalah proporsi kejadian (misal: 80% cache hit, 20% miss). Ini menjelaskan distribusi yang memiliki dua puncak (bimodal).
+
+### B. Pertanyaan Aplikatif
+
+6. **Soal:** Sebuah sistem mitigasi bencana memiliki tiga opsi aksi: Aksi A (Biaya 10, Risiko sisa 5), Aksi B (Biaya 50, Risiko sisa 1), Aksi C (Biaya 0, Risiko sisa 20). Jika risiko dikuantifikasi dalam uang, aksi mana yang optimal?
+   - **Solusi:** Hitung Total Expected Cost = Biaya Aksi + Risiko Sisa.
+     - A: 10+5=15
+     - B: 50+1=51
+     - C: 0+20=20
+     - Keputusan: Pilih Aksi A karena meminimalkan total biaya.
+
+7. **Soal:** Jika traffic puncak harian server mengikuti distribusi Nilai Ekstrim, bagaimana kita menentukan kapasitas server agar hanya overload sekali dalam 100 hari (Return Period = 100)?
+   - **Solusi:** Kita mencari nilai x (kapasitas) di mana $1-F(x)=1/100$ atau $F(x)=0.99$. Kita menggunakan invers dari CDF distribusi Nilai Ekstrim (seperti Gumbel) untuk menemukan kapasitas tersebut.
+
+8. **Soal:** Sensor IoT memberikan data posisi yang berisik (noisy). Bagaimana kita menggabungkan prediksi model pergerakan (Prior) dengan data sensor baru (Likelihood) untuk mendapatkan estimasi posisi terbaik?
+   - **Solusi:** Gunakan prinsip filter Kalman (atau Bayesian Update untuk kasus Gaussian). Estimasi baru adalah rata-rata tertimbang antara prediksi model dan pengukuran sensor, di mana bobotnya ditentukan oleh kebalikan dari variansi masing-masing (semakin kecil variansi/noise, semakin besar bobotnya).
+
+9. **Soal:** Beban pada struktur data center (Q) dihitung dengan rumus $Q=aH^2$ di mana H adalah kecepatan angin (variabel acak). Bagaimana cara menentukan distribusi probabilitas dari Q?
+   - **Solusi:** Gunakan metode transformasi variabel. Jika H memiliki PDF $f_H(h)$, maka PDF dari Q adalah $f_Q(q) = f_H(\sqrt{q/a}) \cdot \frac{1}{2\sqrt{aq}}$. Ini penting untuk menghitung peluang beban melebihi kekuatan struktur.
+
+10. **Soal:** Analisis pola login pengguna menunjukkan bahwa jika pengguna aktif hari ini, peluang dia aktif besok adalah 0.8. Jika dia tidak aktif hari ini, peluang dia aktif besok hanya 0.1. Modelkan ini.
+    - **Solusi:** Ini adalah Rantai Markov dengan matriks transisi: $P = \begin{bmatrix} 0.2 & 0.8 \\ 0.9 & 0.1 \end{bmatrix}$ (Baris 1: Aktif, Baris 2: Tidak Aktif). Kita bisa menghitung peluang pengguna aktif dalam jangka panjang dengan mencari distribusi stasioner.
+
+### C. Pertanyaan Komputasional
+
+11. **Soal:** Implementasikan simulasi Monte Carlo sederhana di Python untuk menghitung estimasi nilai $\pi$ dengan melempar titik acak ke dalam persegi.
+    - **Solusi:**
+```python
+import numpy as np  
+n = 10000  
+x, y = np.random.rand(n), np.random.rand(n)  
+inside = (x**2 + y**2) <= 1  
+pi_est = 4 * np.sum(inside) / n  
+print(f"Estimasi Pi: {pi_est}")  
+```
+
+12. **Soal:** Tulis fungsi Python untuk mencari threshold optimal pada klasifikasi biner yang meminimalkan Expected Loss diberikan cost matrix.
+    - **Solusi:**
+```python
+def optimize_threshold(y_true, y_prob, cost_fp, cost_fn):  
+    thresholds = np.linspace(0, 1, 100)  
+    costs = []  
+    for t in thresholds:  
+        y_pred = (y_prob >= t).astype(int)  
+        fp = np.sum((y_pred == 1) & (y_true == 0))  
+        fn = np.sum((y_pred == 0) & (y_true == 1))  
+        costs.append(fp * cost_fp + fn * cost_fn)  
+    return thresholds[np.argmin(costs)]  
+```
+
+13. **Soal:** Gunakan metode bootstrap untuk menghitung selang kepercayaan 95% dari median data latensi server.
+    - **Solusi:**
+```python
+data = np.random.exponential(50, 100) # Data sampel  
+medians = [np.median(np.random.choice(data, len(data), replace=True)) for _ in range(1000)]  
+ci = np.percentile(medians, [2.5, 97.5])  
+print(f"95% CI Median: {ci}")  
+```
+
+14. **Soal:** Visualisasikan Hazard Function dari data waktu kegagalan (lifetimes) yang disimulasikan.
+    - **Solusi:**
+```python
+import matplotlib.pyplot as plt  
+from lifelines import NelsonAalenFitter # Library khusus survival analysis  
+T = np.random.exponential(10, 100) # Data waktu  
+naf = NelsonAalenFitter()  
+naf.fit(T)  
+naf.plot_hazard(bandwidth=5)  
+plt.show()  
+```
+
+15. **Soal:** Buatlah data simulasi dari Mixture Model (gabungan dua distribusi Normal) dan plot histogramnya.
+    - **Solusi:**
+```python
+n = 1000  
+# 70% dari N(0,1), 30% dari N(5,2)  
+data = np.concatenate([  
+    np.random.normal(0, 1, int(0.7*n)),  
+    np.random.normal(5, 2, int(0.3*n))  
+])  
+plt.hist(data, bins=30, density=True)  
+plt.title("Mixture Model Simulation")  
+plt.show()  
+```
+
+
+
