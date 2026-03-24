@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Randomness: Acak itu bukan asal – Probabilitas &amp; Statistika (Python)</title>
+<title>2&nbsp; Minggu 01: Pola Pikir Probabilistik vs Deterministik – Probabilitas &amp; Statistika (Python)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -113,35 +113,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -463,24 +434,10 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#agenda-perkuliahan-minggu-1" id="toc-agenda-perkuliahan-minggu-1" class="nav-link active" data-scroll-target="#agenda-perkuliahan-minggu-1"><span class="header-section-number">2.1</span> <strong>Agenda Perkuliahan Minggu 1</strong></a>
-  <ul class="collapse">
-  <li><a href="#pertemuan-1-senin-1-jam-konsep-intuisi" id="toc-pertemuan-1-senin-1-jam-konsep-intuisi" class="nav-link" data-scroll-target="#pertemuan-1-senin-1-jam-konsep-intuisi"><span class="header-section-number">2.1.1</span> <strong>Pertemuan 1: Senin (1 Jam) – Konsep &amp; Intuisi</strong></a></li>
-  <li><a href="#pertemuan-2-rabu-2-jam-lab-komputasi-aplikasi" id="toc-pertemuan-2-rabu-2-jam-lab-komputasi-aplikasi" class="nav-link" data-scroll-target="#pertemuan-2-rabu-2-jam-lab-komputasi-aplikasi"><span class="header-section-number">2.1.2</span> <strong>Pertemuan 2: Rabu (2 Jam) – Lab Komputasi &amp; Aplikasi</strong></a></li>
-  </ul></li>
-  <li><a href="#materi-kuliah-konsep-aplikasi-komputasi" id="toc-materi-kuliah-konsep-aplikasi-komputasi" class="nav-link" data-scroll-target="#materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">2.2</span> <strong>Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</strong></a></li>
-  <li><a href="#tugas-kelompok-github-classroom" id="toc-tugas-kelompok-github-classroom" class="nav-link" data-scroll-target="#tugas-kelompok-github-classroom"><span class="header-section-number">2.3</span> <strong>Tugas Kelompok (GitHub Classroom)</strong></a></li>
-  <li><a href="#soal-solusi-dari-sumber-desain-kurikulum" id="toc-soal-solusi-dari-sumber-desain-kurikulum" class="nav-link" data-scroll-target="#soal-solusi-dari-sumber-desain-kurikulum"><span class="header-section-number">2.4</span> <strong>15 Soal &amp; Solusi (Dari Sumber “Desain Kurikulum…”)</strong></a>
-  <ul class="collapse">
-  <li><a href="#a.-pertanyaan-konseptual" id="toc-a.-pertanyaan-konseptual" class="nav-link" data-scroll-target="#a.-pertanyaan-konseptual"><span class="header-section-number">2.4.1</span> <strong>A. Pertanyaan Konseptual</strong></a></li>
-  <li><a href="#b.-pertanyaan-aplikatif" id="toc-b.-pertanyaan-aplikatif" class="nav-link" data-scroll-target="#b.-pertanyaan-aplikatif"><span class="header-section-number">2.4.2</span> <strong>B. Pertanyaan Aplikatif</strong></a></li>
-  <li><a href="#c.-pertanyaan-komputasional" id="toc-c.-pertanyaan-komputasional" class="nav-link" data-scroll-target="#c.-pertanyaan-komputasional"><span class="header-section-number">2.4.3</span> <strong>C. Pertanyaan Komputasional</strong></a></li>
-  </ul></li>
-  <li><a href="#try-first-lempar-koin-python" id="toc-try-first-lempar-koin-python" class="nav-link" data-scroll-target="#try-first-lempar-koin-python"><span class="header-section-number">2.5</span> Try First — Lempar koin (Python)</a></li>
-  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">2.6</span> 1. Konsep Pengetahuan</a></li>
-  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">2.7</span> 2. Tipikal Problem</a></li>
-  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">2.8</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
-  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">2.9</span> 4. Eksplorasi Komputasi (Python)</a></li>
+  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link active" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">2.1</span> 1. Konsep Pengetahuan</a></li>
+  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">2.2</span> 2. Tipikal Problem</a></li>
+  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">2.3</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
+  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">2.4</span> 4. Eksplorasi Komputasi (Python)</a></li>
   </ul>
 </nav>
     </div>
@@ -490,7 +447,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Randomness: Acak itu bukan asal</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Minggu 01: Pola Pikir Probabilistik vs Deterministik</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 <p class="subtitle lead">Understanding Probabilistic Way of Thinking versus Deterministic Way of Thinking</p>
 </div>
 
@@ -514,344 +471,31 @@ window.Quarto = {
 <figcaption>“Bayangin kamu pegang stok toko. Kalau kamu bilang ‘permintaan pasti 100’, kamu terlihat rapi… sampai kenyataan menampar. Permintaan itu goyang—kadang 70, kadang 160. Nah, pertanyaan pentingnya: kamu mau terlihat yakin, atau mau benar? Probabilitas itu bukan bikin kita ragu—justru bikin kita <em>berani mengambil keputusan</em> dengan risiko yang dihitung. Hari ini kita latihan satu skill: membedakan dunia deterministik vs dunia nyata yang random. Dan keputusan kamu akan kita ukur: berapa peluang kehabisan stok kalau kamu nekat ‘pasti 100’?”</figcaption>
 </figure>
 </div>
-<p>Minggu 1: Fondasi Berpikir Probabilistik dalam Sistem Informasi</p>
-<section id="agenda-perkuliahan-minggu-1" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="agenda-perkuliahan-minggu-1"><span class="header-section-number">2.1</span> <strong>Agenda Perkuliahan Minggu 1</strong></h2>
-<p><strong>Tema:</strong> <em>“Breaking the Deterministic Mindset: Why Average is a Lie”</em></p>
-<section id="pertemuan-1-senin-1-jam-konsep-intuisi" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="pertemuan-1-senin-1-jam-konsep-intuisi"><span class="header-section-number">2.1.1</span> <strong>Pertemuan 1: Senin (1 Jam) – Konsep &amp; Intuisi</strong></h3>
-<p><em>Fokus: Mengubah pola pikir dari “pasti” (deterministik) menjadi “mungkin” (probabilistik) melalui studi kasus nyata.</em></p>
-<ul>
-<li><strong>00:00 – 00:10 | The Hook: “Kenapa Server Crash?”</strong>
-<ul>
-<li><strong>Aktivitas:</strong> Tampilkan grafik <em>server load</em> yang fluktuatif. Tanyakan: “Jika kapasitas server 100 request/detik dan rata-rata traffic hanya 80 request/detik, kenapa server tetap <em>down</em>?”</li>
-<li><strong>Poin Kunci:</strong> Rata-rata menipu. Variabilitas (lonjakan acak) adalah penyebab kegagalan sistem,.</li>
-</ul></li>
-<li><strong>00:10 – 00:30 | Konsep: Deterministik vs.&nbsp;Probabilistik</strong>
-<ul>
-<li><strong>Diskusi:</strong> Perbedaan <em>logic code</em> (IF-ELSE = deterministik) vs <em>user behavior</em> (Probabilistik).</li>
-<li><strong>Filosofi:</strong> Perkenalkan dua kubu: <em>Frequentist</em> (data historis/limit) vs <em>Bayesian</em> (keyakinan/updating belief). Gunakan visual dari “Peta Pengetahuan”.</li>
-</ul></li>
-<li><strong>00:30 – 00:50 | Demo: Simulasi Hukum Bilangan Besar (LLN)</strong>
-<ul>
-<li><strong>Live Python (Dosen):</strong> Simulasikan pelemparan koin 10 vs 10.000 kali. Tunjukkan bahwa “kestabilan” (probabilitas 0.5) baru muncul saat <span class="math inline">\(n\)</span> besar. Ketidakpastian tinggi terjadi di sampel kecil (Hukum Bilangan Besar).</li>
-</ul></li>
-<li><strong>00:50 – 01:00 | Pembentukan “Pods” &amp; Misi Mingguan</strong>
-<ul>
-<li>Bagi kelas menjadi kelompok (Pods) <span class="citation" data-cites="5">(<a href="#ref-5" role="doc-biblioref"><strong>5?</strong></a>)</span> orang.</li>
-<li>Jelaskan misi GitHub Classroom: “Membangun Simulator Risiko Stok/Server”.</li>
-</ul></li>
-</ul>
-</section>
-<section id="pertemuan-2-rabu-2-jam-lab-komputasi-aplikasi" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="pertemuan-2-rabu-2-jam-lab-komputasi-aplikasi"><span class="header-section-number">2.1.2</span> <strong>Pertemuan 2: Rabu (2 Jam) – Lab Komputasi &amp; Aplikasi</strong></h3>
-<p><em>Fokus: Hands-on Python untuk membuktikan intuisi Senin.</em></p>
-<ul>
-<li><strong>00:00 – 00:15 | Setup Lingkungan</strong>
-<ul>
-<li>Review singkat: Jupyter Notebook, Library <code>random</code> vs <code>numpy</code>. Pentingnya <code>random.seed()</code> untuk reproduktifitas.</li>
-</ul></li>
-<li><strong>00:15 – 00:45 | Guided Lab: Simulasi Monte Carlo Sederhana</strong>
-<ul>
-<li>Mahasiswa menulis kode untuk mensimulasikan “Waktu Tunggu Login”.</li>
-<li><strong>Tugas:</strong> Generate 1.000 data acak, hitung rata-rata, bandingkan dengan rata-rata teoretis.</li>
-</ul></li>
-<li><strong>00:45 – 01:30 | Pod Challenge: “The CTO Dilemma”</strong>
-<ul>
-<li><strong>Skenario:</strong> Anda adalah CTO. Traffic rata-rata 100 user. Biaya server mahal, biaya <em>user lost</em> (server penuh) juga mahal.</li>
-<li><strong>Misi:</strong>
-<ol type="1">
-<li>Simulasikan traffic harian (gunakan distribusi acak).</li>
-<li>Bandingkan strategi: “Kapasitas pas-pasan (100)” vs “Kapasitas berlebih (120)”.</li>
-<li>Hitung total kerugian masing-masing strategi.</li>
-</ol></li>
-</ul></li>
-<li><strong>01:30 – 01:50 | Share &amp; Interpretasi</strong>
-<ul>
-<li>Perwakilan Pods menunjukkan grafik mereka.</li>
-<li><strong>Format Jawaban:</strong> Klaim <span class="math inline">\(\rightarrow\)</span> Bukti (Plot) <span class="math inline">\(\rightarrow\)</span> Keputusan.</li>
-</ul></li>
-<li><strong>01:50 – 02:00 | Exit Ticket</strong>
-<ul>
-<li>Satu pertanyaan di form: “Sebutkan satu contoh kejadian deterministik dan satu kejadian probabilistik di aplikasi Gojek/Tokopedia.”.</li>
-</ul></li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="materi-kuliah-konsep-aplikasi-komputasi" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">2.2</span> <strong>Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</strong></h2>
-<p><strong>1. Konsep Dasar</strong> * <strong>Deterministik vs Stokastik:</strong> Deterministik adalah sebab-akibat pasti (Input A <span class="math inline">\(\to\)</span> Output B), contoh: <code>1 + 1 = 2</code>. Stokastik mengandung elemen acak, contoh: Waktu kedatangan paket data di router. * <strong>Ruang Sampel (<span class="math inline">\(\Omega\)</span>):</strong> Himpunan seluruh kemungkinan hasil. Dalam <em>load testing</em>, <span class="math inline">\(\Omega\)</span> bisa berupa {Sukses, Timeout, Error 500}. * <strong>Hukum Bilangan Besar (LLN):</strong> Jaminan matematis bahwa rata-rata sampel empiris akan mendekati rata-rata teoretis seiring bertambahnya jumlah percobaan.</p>
-<p><strong>2. Aplikasi Sistem Informasi</strong> * <strong>Reliabilitas Infrastruktur:</strong> Menghitung risiko kegagalan. Kegagalan dua server cadangan tidak selalu independen (misal: mati listrik satu gedung mematikan keduanya). * <strong>Kualitas Layanan (QoS):</strong> Probabilitas digunakan untuk menentukan bandwidth minimum agar <em>video streaming</em> tidak <em>buffering</em> bagi 99% user.</p>
-<p><strong>3. Komputasi (Python)</strong> * <strong>Generasi Angka Acak:</strong> Menggunakan <code>numpy.random</code> untuk memodelkan ketidakpastian. * <strong>Simulasi Monte Carlo:</strong> Metode komputasi untuk menaksir probabilitas dengan melakukan ribuan percobaan acak.</p>
-<hr>
-</section>
-<section id="tugas-kelompok-github-classroom" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="tugas-kelompok-github-classroom"><span class="header-section-number">2.3</span> <strong>Tugas Kelompok (GitHub Classroom)</strong></h2>
-<p><strong>Judul:</strong> <em>Week 1 Mission: Simulating Reliability &amp; Risk</em></p>
-<p><strong>Deskripsi:</strong> Mahasiswa diberikan <em>starter notebook</em> yang berisi skenario sistem <em>Disaster Recovery</em>. Mereka harus melengkapi kode untuk mensimulasikan kegagalan server dan menjawab pertanyaan bisnis.</p>
-<p><strong>Soal Python:</strong> 1. Buat fungsi <code>simulate_server_uptime(days, prob_failure)</code> yang mengembalikan status server (Up/Down) selama n-hari. 2. Simulasikan dua server (Server A dan B) yang bekerja paralel. Sistem Down hanya jika <strong>keduanya</strong> Down. 3. Bandingkan: Berapa hari sistem Down jika menggunakan 1 server vs 2 server? 4. <strong>Analisis:</strong> Jika biaya server ke-2 adalah $100/hari dan biaya sistem Down adalah $5000/hari, apakah <em>worth it</em> menyewa server ke-2? (Jawab dengan grafik profit/loss).</p>
-<p><strong>Submission:</strong> Push <code>.ipynb</code> ke repo GitHub Classroom. Penilaian otomatis via GitHub Actions untuk kelengkapan kode, penilaian manual untuk analisis keputusan.</p>
-<hr>
-</section>
-<section id="soal-solusi-dari-sumber-desain-kurikulum" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="soal-solusi-dari-sumber-desain-kurikulum"><span class="header-section-number">2.4</span> <strong>15 Soal &amp; Solusi (Dari Sumber “Desain Kurikulum…”)</strong></h2>
-<p>Berikut adalah 15 soal yang diambil dari Bank Soal Mingguan (Minggu 01) dalam dokumen “Desain Kurikulum Statistika Generasi Z”-, beserta solusinya.</p>
-<section id="a.-pertanyaan-konseptual" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="a.-pertanyaan-konseptual"><span class="header-section-number">2.4.1</span> <strong>A. Pertanyaan Konseptual</strong></h3>
-<p><strong>1. Soal:</strong> Jelaskan perbedaan mendasar antara fenomena deterministik (seperti operasi penjumlahan di CPU) dan fenomena probabilistik (seperti waktu kedatangan paket di router). * <strong>Solusi:</strong> Fenomena deterministik selalu menghasilkan output yang sama untuk input dan kondisi awal yang sama (kepastian mutlak). Fenomena probabilistik memiliki variasi inheren di mana input yang sama bisa menghasilkan output berbeda, sehingga hanya bisa diprediksi pola atau peluangnya, bukan hasil pastinya.</p>
-<p><strong>2. Soal:</strong> Mengapa pendekatan <em>Frequentist</em> memerlukan asumsi pengulangan eksperimen dalam kondisi yang identik? * <strong>Solusi:</strong> Karena pendekatan Frequentist mendefinisikan probabilitas sebagai limit dari frekuensi relatif (<span class="math inline">\(n/N\)</span>) saat jumlah percobaan (<span class="math inline">\(N\)</span>) mendekati tak hingga. Tanpa pengulangan kondisi identik, frekuensi relatif tidak akan konvergen ke nilai yang bermakna.</p>
-<p><strong>3. Soal:</strong> Definisikan ruang sampel dalam konteks pengujian beban (<em>load testing</em>) sebuah situs web e-commerce. * <strong>Solusi:</strong> Ruang sampel adalah himpunan semua kemungkinan status respons server terhadap satu <em>request</em>. Contoh: <span class="math inline">\(\Omega = \{ \text{HTTP 200 OK}, \text{HTTP 404 Not Found}, \text{HTTP 500 Server Error}, \text{Timeout} \}\)</span>.</p>
-<p><strong>4. Soal:</strong> Apa yang dimaksud dengan interpretasi probabilitas subjektif (Bayesian) dan bagaimana relevansinya dalam pengambilan keputusan manajerial? * <strong>Solusi:</strong> Probabilitas subjektif adalah ukuran “derajat keyakinan” seseorang berdasarkan informasi yang tersedia saat ini (bukan frekuensi fisik). Ini relevan bagi manajer untuk mengambil keputusan pada kejadian yang tidak berulang (misal: “Peluang sukses peluncuran produk baru”) di mana data historis mungkin tidak ada.</p>
-<p><strong>5. Soal:</strong> Jelaskan peran hukum bilangan besar (Law of Large Numbers) dalam validasi simulasi sistem. * <strong>Solusi:</strong> LLN menjamin bahwa hasil simulasi rata-rata (empiris) akan mendekati nilai ekspektasi teoretis sistem jika simulasi dijalankan cukup lama/banyak. Ini memvalidasi bahwa hasil simulasi komputer merepresentasikan perilaku sistem yang sebenarnya.</p>
-</section>
-<section id="b.-pertanyaan-aplikatif" class="level3" data-number="2.4.2">
-<h3 data-number="2.4.2" class="anchored" data-anchor-id="b.-pertanyaan-aplikatif"><span class="header-section-number">2.4.2</span> <strong>B. Pertanyaan Aplikatif</strong></h3>
-<p><strong>6. Soal:</strong> Sebuah sistem Disaster Recovery Center (DRC) memiliki dua server cadangan. Jika probabilitas satu server gagal adalah 0,05, jelaskan mengapa kegagalan keduanya tidak selalu 0,0025 dalam kondisi nyata. * <strong>Solusi:</strong> Angka 0,0025 (<span class="math inline">\(0,05 \times 0,05\)</span>) hanya berlaku jika kegagalan kedua server <strong>independen</strong>. Dalam dunia nyata, sering terjadi <em>Common Cause Failure</em> (misal: pemadaman listrik satu gedung, banjir, atau <em>bug</em> software yang sama) yang membuat keduanya gagal bersamaan, sehingga probabilitasnya &gt; 0,0025.</p>
-<p><strong>7. Soal:</strong> Analisis bagaimana fluktuasi jumlah pengguna aktif di platform media sosial dapat dimodelkan sebagai proses stokastik. * <strong>Solusi:</strong> Jumlah pengguna tidak konstan tetapi berubah terhadap waktu secara acak. Ini dapat dimodelkan sebagai proses stokastik (misalnya Proses Poisson untuk kedatangan pengguna baru) di mana variabel acak <span class="math inline">\(X(t)\)</span> mewakili jumlah pengguna pada waktu <span class="math inline">\(t\)</span>.</p>
-<p><strong>8. Soal:</strong> Gunakan konsep probabilitas untuk mengevaluasi risiko kehilangan data pada media penyimpanan RAID 0 dibandingkan RAID 1. * <strong>Solusi:</strong> RAID 0 (Striping) gagal jika <strong>salah satu</strong> disk gagal (Sistem Seri, risiko tinggi). RAID 1 (Mirroring) gagal hanya jika <strong>semua</strong> disk gagal (Sistem Paralel, risiko rendah/redundansi). Probabilitas kehilangan data RAID 0 &gt; RAID 1.</p>
-<p><strong>9. Soal:</strong> Jika sebuah algoritma enkripsi memiliki probabilitas tabrakan (<em>collision</em>) <span class="math inline">\(10^{-15}\)</span>, sejauh mana tingkat kepercayaan pengembang pada integritas data? * <strong>Solusi:</strong> Tingkat kepercayaan sangat tinggi (hampir absolut). Dalam skala probabilistik, <span class="math inline">\(10^{-15}\)</span> dianggap sebagai kejadian yang secara praktis mustahil terjadi dalam operasional normal, memberikan jaminan integritas data yang kuat (“Probabilistic Guarantee”).</p>
-<p><strong>10. Soal:</strong> Bagaimana probabilitas digunakan dalam menentukan kapasitas bandwidth minimum untuk menjamin kualitas layanan (QoS) video streaming? * <strong>Solusi:</strong> Provider tidak menyediakan bandwidth untuk <em>peak</em> teoritis semua user (mahal), melainkan menggunakan probabilitas untuk menjamin (misalnya) 99.9% waktu, bandwidth cukup. Ini dihitung menggunakan distribusi beban user agar probabilitas <em>congestion</em> &lt; 0.1%.</p>
-</section>
-<section id="c.-pertanyaan-komputasional" class="level3" data-number="2.4.3">
-<h3 data-number="2.4.3" class="anchored" data-anchor-id="c.-pertanyaan-komputasional"><span class="header-section-number">2.4.3</span> <strong>C. Pertanyaan Komputasional</strong></h3>
-<p><strong>11. Soal:</strong> Tulis skrip Python untuk mensimulasikan 10.000 percobaan pelemparan koin tidak adil (<span class="math inline">\(p=0,6\)</span>) dan plot konvergensi frekuensi relatifnya. * <strong>Solusi:</strong> ```python import numpy as np import matplotlib.pyplot as plt</p>
-<pre><code>n_trials = 10000
-p_head = 0.6
-# Simulasi: 1 = Head, 0 = Tail
-flips = np.random.choice(, size=n_trials, p=[1-p_head, p_head])
-# Hitung rata-rata kumulatif
-cumulative_avg = np.cumsum(flips) / np.arange(1, n_trials + 1)
-
-plt.plot(cumulative_avg)
-plt.axhline(p_head, color='r', linestyle='--') # Garis teoretis
-plt.xlabel("Jumlah Lemparan"); plt.ylabel("Frekuensi Relatif Head")
-plt.show()
-```</code></pre>
-<p><strong>12. Soal:</strong> Gunakan pustaka <code>random</code> untuk menghasilkan 1.000 sampel waktu tunggu login dan hitung nilai rata-ratanya. * <strong>Solusi:</strong> <code>python     import random     # Asumsi: Waktu tunggu 0-5 detik     wait_times = [random.uniform(0, 5) for _ in range(1000)]     average_time = sum(wait_times) / len(wait_times)     print(f"Rata-rata waktu tunggu: {average_time:.4f} detik")</code></p>
-<p><strong>13. Soal:</strong> Buatlah simulasi Monte Carlo untuk menghitung luas area di bawah kurva fungsi acak sederhana yang merepresentasikan beban kerja server. * <strong>Solusi:</strong> <code>python     import numpy as np     # Contoh fungsi beban: y = x^2 di interval     n_points = 10000     x = np.random.uniform(0, 1, n_points)     y = np.random.uniform(0, 1, n_points)     # Titik di bawah kurva y = x^2     under_curve = y &lt; x**2     area = np.mean(under_curve) * 1 # Luas kotak total 1x1     print(f"Estimasi Luas Area: {area}")</code></p>
-<p><strong>14. Soal:</strong> Implementasikan fungsi Python yang menghasilkan seluruh kemungkinan kombinasi dari 4-bit biner dan hitung probabilitas munculnya tepat dua angka ‘1’. * <strong>Solusi:</strong> <code>python     import itertools     # Ruang Sampel     outcomes = list(itertools.product(, repeat=4))     # Kejadian A: Tepat dua angka '1'     event_A = [bits for bits in outcomes if sum(bits) == 2]     prob_A = len(event_A) / len(outcomes)     print(f"Probabilitas: {prob_A} (Seharusnya 6/16 = 0.375)")</code></p>
-<p><strong>15. Soal:</strong> Gunakan numpy untuk mensimulasikan distribusi umur pakai 500 hard disk berdasarkan data kegagalan historis. * <strong>Solusi:</strong> <code>python     import numpy as np     import matplotlib.pyplot as plt     # Asumsi: Umur pakai berdistribusi Eksponensial (MTTF = 5 tahun)     mttf = 5     lifetimes = np.random.exponential(scale=mttf, size=500)     plt.hist(lifetimes, bins=20)     plt.title("Simulasi Umur Pakai Hard Disk")     plt.show()</code></p>
-</section>
-</section>
-<section id="try-first-lempar-koin-python" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="try-first-lempar-koin-python"><span class="header-section-number">2.5</span> Try First — Lempar koin (Python)</h2>
-<div id="d41760b7" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Lihat kode</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>[random.choice([<span class="st">"H"</span>,<span class="st">"T"</span>]) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>['T',
- 'H',
- 'H',
- 'H',
- 'H',
- 'H',
- 'T',
- 'T',
- 'H',
- 'T',
- 'H',
- 'H',
- 'H',
- 'T',
- 'H',
- 'T',
- 'H',
- 'T',
- 'H',
- 'T']</code></pre>
-</div>
-</div>
-<p>Menggunakan numpy Lempar satu Koin 10 kali</p>
-<div id="6fdbf420" class="cell" data-execution_count="2">
-<details class="code-fold">
-<summary>Lihat kode</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>lempar_koin <span class="op">=</span> np.random.choice([<span class="st">"Depan"</span>,<span class="st">"Belakang"</span>], size<span class="op">=</span><span class="dv">10</span>,p<span class="op">=</span> [<span class="fl">0.1</span>,<span class="fl">0.9</span>])</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lempar_koin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>['Belakang' 'Belakang' 'Belakang' 'Belakang' 'Belakang' 'Belakang'
- 'Belakang' 'Belakang' 'Depan' 'Belakang']</code></pre>
-</div>
-</div>
-<p>Hitung Jumlah Depan dan Belakang</p>
-<div id="e06f1470" class="cell" data-execution_count="3">
-<details class="code-fold">
-<summary>Lihat kode</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>hasil<span class="op">=</span><span class="bu">list</span>(lempar_koin)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>hitung_Depan <span class="op">=</span> hasil.count(<span class="st">"Depan"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>hitung_Belakang <span class="op">=</span> hasil.count(<span class="st">"Belakang"</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Deoan dan Belakang:"</span>,hitung_Depan, hitung_Belakang)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Deoan dan Belakang: 1 9</code></pre>
-</div>
-</div>
-<p>Lempar dua koin sepuluh kali</p>
-<div id="d8ad56e2" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>Lihat kode</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>lempar_koin <span class="op">=</span> np.random.choice([<span class="st">"Depan"</span>,<span class="st">"Belakang"</span>], size<span class="op">=</span>(<span class="dv">2</span>,<span class="dv">10</span>),p<span class="op">=</span> [<span class="fl">0.9</span>,<span class="fl">0.1</span>])</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lempar_koin)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>hasil<span class="op">=</span><span class="bu">list</span>(lempar_koin[<span class="dv">0</span>])</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>hitung_Depan <span class="op">=</span> hasil.count(<span class="st">"Depan"</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>hitung_Belakang <span class="op">=</span> hasil.count(<span class="st">"Belakang"</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Depan dan Belakang:"</span>,hitung_Depan, hitung_Belakang)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>hasil<span class="op">=</span><span class="bu">list</span>(lempar_koin[<span class="dv">1</span>])</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>hitung_Depan <span class="op">=</span> hasil.count(<span class="st">"Depan"</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>hitung_Belakang <span class="op">=</span> hasil.count(<span class="st">"Belakang"</span>)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Depan dan Belakang:"</span>,hitung_Depan, hitung_Belakang)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[['Depan' 'Depan' 'Belakang' 'Belakang' 'Depan' 'Depan' 'Depan' 'Depan'
-  'Belakang' 'Depan']
- ['Depan' 'Depan' 'Depan' 'Depan' 'Depan' 'Depan' 'Depan' 'Depan' 'Depan'
-  'Depan']]
-Depan dan Belakang: 7 3
-Depan dan Belakang: 10 0</code></pre>
-</div>
-</div>
-<p>Lempar dadu</p>
-<div id="0df21a6e" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>Lihat kode</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dadu<span class="op">=</span>[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>distribusi<span class="op">=</span>[<span class="dv">1</span><span class="op">/</span><span class="dv">6</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">6</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">6</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">6</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">6</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">6</span>]</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>lempar_dadu<span class="op">=</span>np.random.choice(dadu,size<span class="op">=</span>N, p<span class="op">=</span>distribusi)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lempar_dadu)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[5 2 4 3 5 5 1 6 1 1 2 3 3 5 6 2 4 5 4 6 1 2 5 6 6 1 5 1 1 6 6 4 1 1 3 4 2
- 5 6 5 5 5 1 4 6 5 6 2 3 4 5 4 2 3 2 1 3 1 5 6 2 4 6 5 6 1 1 2 3 2 1 1 2 6
- 4 3 3 5 2 1 4 4 4 5 3 6 6 1 6 2 4 3 6 2 2 4 3 2 1 6]</code></pre>
-</div>
-</div>
-<p>memplot random sequen</p>
-<div id="93229eaf" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Lihat kode</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate data using NumPy</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a line plot using Matplotlib</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>plt.bar(np.arange(N), lempar_dadu, label<span class="op">=</span><span class="st">'count'</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Line Plot'</span>)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'X-axis'</span>)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Y-axis'</span>)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="01-Pola_Pikir_Probabilistik_vs_Deterministik_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>menghitung frekuensi kemunculan</p>
-<div id="e2338f31" class="cell" data-execution_count="7">
-<details class="code-fold">
-<summary>Lihat kode</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Menghitung nilai unik dan frekuensinya</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>values, counts <span class="op">=</span> np.unique(lempar_dadu, return_counts<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Menampilkan hasil</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Nilai Unik:"</span>, values)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Frekuensi:"</span>, counts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Nilai Unik: [1 2 3 4 5 6]
-Frekuensi: [19 17 13 15 17 19]</code></pre>
-</div>
-</div>
-<p>menghitung jumlah dari lemparan 10 dadu</p>
-<div id="cd97089c" class="cell" data-execution_count="8">
-<details class="code-fold">
-<summary>Lihat kode</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>N<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10000</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>lempar_dadu<span class="op">=</span>np.random.choice(dadu,N, distribusi)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>jumlah <span class="op">=</span> np.<span class="bu">sum</span>(lempar_dadu,axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># print(jumlah)</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Menghitung nilai unik dan frekuensinya</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>values, counts <span class="op">=</span> np.unique(np.array(jumlah), return_counts<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Menampilkan hasil</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Nilai Unik:"</span>, values)</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Frekuensi:"</span>, counts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Nilai Unik: [14 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38
- 39 40 41 42 43 44 45 46 47 48 49 50 51 52]
-Frekuensi: [  1   1   2   4  10  15  22  39  59 100 146 185 246 328 381 534 575 622
- 679 709 731 731 653 636 550 480 394 349 264 181 140  95  47  43  20  15
-   7   6]</code></pre>
-</div>
-</div>
-<p>matplotlib</p>
-<div id="2a4e2431" class="cell" data-execution_count="9">
-<details class="code-fold">
-<summary>Lihat kode</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate data using NumPy</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>) <span class="co"># 100 evenly spaced points between 0 and 10</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(<span class="dv">0</span>)              <span class="co"># Compute sine values for x</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a line plot using Matplotlib</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>plt.bar(values, counts, label<span class="op">=</span><span class="st">'count'</span>)</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Line Plot of sin(x)'</span>)</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'X-axis'</span>)</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Y-axis'</span>)</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="01-Pola_Pikir_Probabilistik_vs_Deterministik_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="konsep-pengetahuan" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">2.6</span> 1. Konsep Pengetahuan</h2>
+<section id="konsep-pengetahuan" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">2.1</span> 1. Konsep Pengetahuan</h2>
 <p>Memahami bahwa dalam dunia nyata, fenomena seringkali mengandung ketidakpastian (randomness) dan tidak dapat diprediksi dengan kepastian mutlak (deterministik), sehingga memerlukan kerangka kerja matematika untuk mengukur ketidakpastian tersebut.</p>
 </section>
-<section id="tipikal-problem" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">2.7</span> 2. Tipikal Problem</h2>
+<section id="tipikal-problem" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">2.2</span> 2. Tipikal Problem</h2>
 <p>Sebuah toko ingin menentukan stok barang. Pendekatan deterministik mengasumsikan permintaan konstan (misal: pasti 100 unit), sedangkan realitanya permintaan berfluktuasi secara acak.</p>
 </section>
-<section id="solusi-pengambilan-keputusan" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">2.8</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
+<section id="solusi-pengambilan-keputusan" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">2.3</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
 <p>Menggunakan model probabilistik untuk menghitung peluang terjadinya berbagai tingkat permintaan, sehingga manajer dapat menentukan level safety stock yang optimal untuk meminimalkan risiko kekurangan stok tanpa menimbun barang berlebihan.</p>
 </section>
-<section id="eksplorasi-komputasi-python" class="level2" data-number="2.9">
-<h2 data-number="2.9" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">2.9</span> 4. Eksplorasi Komputasi (Python)</h2>
+<section id="eksplorasi-komputasi-python" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">2.4</span> 4. Eksplorasi Komputasi (Python)</h2>
 <p><em>Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.</em></p>
-<div id="c5f05e90" class="cell" data-execution_count="10">
+<div id="05c6a9ad" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Lihat kode</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 01!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 01!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Siap untuk komputasi Minggu 01!</code></pre>
@@ -1345,38 +989,34 @@ Frekuensi: [  1   1   2   4  10  15  22  39  59 100 146 185 246 328 381 534 575 
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minggu 01: Pola Pikir Probabilistik vs Deterministik"</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Understanding Probabilistic Way of Thinking versus Deterministic Way of Thinking"</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="al">![“Bayangin kamu pegang stok toko. Kalau kamu bilang ‘permintaan pasti 100’, kamu terlihat rapi… sampai kenyataan menampar. Permintaan itu goyang—kadang 70, kadang 160. Nah, pertanyaan pentingnya: kamu mau terlihat yakin, atau mau benar? Probabilitas itu bukan bikin kita ragu—justru bikin kita *berani mengambil keputusan* dengan risiko yang dihitung. Hari ini kita latihan satu skill: membedakan dunia deterministik vs dunia nyata yang random. Dan keputusan kamu akan kita ukur: berapa peluang kehabisan stok kalau kamu nekat ‘pasti 100’?”](../The_Decision_Engineer.png/image1.png)</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../agenda/w01.qmd &gt;}}</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../hands_on_py/01-randomness.qmd &gt;}}</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>Memahami bahwa dalam dunia nyata, fenomena seringkali mengandung ketidakpastian (randomness) dan tidak dapat diprediksi dengan kepastian mutlak (deterministik), sehingga memerlukan kerangka kerja matematika untuk mengukur ketidakpastian tersebut.</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>Sebuah toko ingin menentukan stok barang. Pendekatan deterministik mengasumsikan permintaan konstan (misal: pasti 100 unit), sedangkan realitanya permintaan berfluktuasi secara acak.</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>Menggunakan model probabilistik untuk menghitung peluang terjadinya berbagai tingkat permintaan, sehingga manajer dapat menentukan level safety stock yang optimal untuk meminimalkan risiko kekurangan stok tanpa menimbun barang berlebihan.</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 01!"</span>)</span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minggu 01: Pola Pikir Probabilistik vs Deterministik"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Understanding Probabilistic Way of Thinking versus Deterministic Way of Thinking"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="al">![“Bayangin kamu pegang stok toko. Kalau kamu bilang ‘permintaan pasti 100’, kamu terlihat rapi… sampai kenyataan menampar. Permintaan itu goyang—kadang 70, kadang 160. Nah, pertanyaan pentingnya: kamu mau terlihat yakin, atau mau benar? Probabilitas itu bukan bikin kita ragu—justru bikin kita *berani mengambil keputusan* dengan risiko yang dihitung. Hari ini kita latihan satu skill: membedakan dunia deterministik vs dunia nyata yang random. Dan keputusan kamu akan kita ukur: berapa peluang kehabisan stok kalau kamu nekat ‘pasti 100’?”](../The_Decision_Engineer.png/image1.png)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>Memahami bahwa dalam dunia nyata, fenomena seringkali mengandung ketidakpastian (randomness) dan tidak dapat diprediksi dengan kepastian mutlak (deterministik), sehingga memerlukan kerangka kerja matematika untuk mengukur ketidakpastian tersebut.</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>Sebuah toko ingin menentukan stok barang. Pendekatan deterministik mengasumsikan permintaan konstan (misal: pasti 100 unit), sedangkan realitanya permintaan berfluktuasi secara acak.</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>Menggunakan model probabilistik untuk menghitung peluang terjadinya berbagai tingkat permintaan, sehingga manajer dapat menentukan level safety stock yang optimal untuk meminimalkan risiko kekurangan stok tanpa menimbun barang berlebihan.</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 01!"</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

@@ -22,9 +22,9 @@
   {
     "objectID": "chapters/01-Pola_Pikir_Probabilistik_vs_Deterministik.html",
     "href": "chapters/01-Pola_Pikir_Probabilistik_vs_Deterministik.html",
-    "title": "Randomness: Acak itu bukan asal",
+    "title": "2  Minggu 01: Pola Pikir Probabilistik vs Deterministik",
     "section": "",
-    "text": "2.1 Agenda Perkuliahan Minggu 1\nMinggu 1: Fondasi Berpikir Probabilistik dalam Sistem Informasi\nTema: “Breaking the Deterministic Mindset: Why Average is a Lie”",
+    "text": "2.1 1. Konsep Pengetahuan\nMemahami bahwa dalam dunia nyata, fenomena seringkali mengandung ketidakpastian (randomness) dan tidak dapat diprediksi dengan kepastian mutlak (deterministik), sehingga memerlukan kerangka kerja matematika untuk mengukur ketidakpastian tersebut.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Minggu 01: Pola Pikir Probabilistik vs Deterministik</span>"
     ]
@@ -92,9 +92,9 @@
   {
     "objectID": "chapters/01-Pola_Pikir_Probabilistik_vs_Deterministik.html#tipikal-problem",
     "href": "chapters/01-Pola_Pikir_Probabilistik_vs_Deterministik.html#tipikal-problem",
-    "title": "Randomness: Acak itu bukan asal",
-    "section": "2.7 2. Tipikal Problem",
-    "text": "2.7 2. Tipikal Problem\nSebuah toko ingin menentukan stok barang. Pendekatan deterministik mengasumsikan permintaan konstan (misal: pasti 100 unit), sedangkan realitanya permintaan berfluktuasi secara acak.",
+    "title": "2  Minggu 01: Pola Pikir Probabilistik vs Deterministik",
+    "section": "2.2 2. Tipikal Problem",
+    "text": "2.2 2. Tipikal Problem\nSebuah toko ingin menentukan stok barang. Pendekatan deterministik mengasumsikan permintaan konstan (misal: pasti 100 unit), sedangkan realitanya permintaan berfluktuasi secara acak.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Minggu 01: Pola Pikir Probabilistik vs Deterministik</span>"
     ]
@@ -102,9 +102,9 @@
   {
     "objectID": "chapters/01-Pola_Pikir_Probabilistik_vs_Deterministik.html#solusi-pengambilan-keputusan",
     "href": "chapters/01-Pola_Pikir_Probabilistik_vs_Deterministik.html#solusi-pengambilan-keputusan",
-    "title": "Randomness: Acak itu bukan asal",
-    "section": "2.8 3. Solusi & Pengambilan Keputusan",
-    "text": "2.8 3. Solusi & Pengambilan Keputusan\nMenggunakan model probabilistik untuk menghitung peluang terjadinya berbagai tingkat permintaan, sehingga manajer dapat menentukan level safety stock yang optimal untuk meminimalkan risiko kekurangan stok tanpa menimbun barang berlebihan.",
+    "title": "2  Minggu 01: Pola Pikir Probabilistik vs Deterministik",
+    "section": "2.3 3. Solusi & Pengambilan Keputusan",
+    "text": "2.3 3. Solusi & Pengambilan Keputusan\nMenggunakan model probabilistik untuk menghitung peluang terjadinya berbagai tingkat permintaan, sehingga manajer dapat menentukan level safety stock yang optimal untuk meminimalkan risiko kekurangan stok tanpa menimbun barang berlebihan.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Minggu 01: Pola Pikir Probabilistik vs Deterministik</span>"
     ]
@@ -112,9 +112,9 @@
   {
     "objectID": "chapters/01-Pola_Pikir_Probabilistik_vs_Deterministik.html#eksplorasi-komputasi-python",
     "href": "chapters/01-Pola_Pikir_Probabilistik_vs_Deterministik.html#eksplorasi-komputasi-python",
-    "title": "Randomness: Acak itu bukan asal",
-    "section": "2.9 4. Eksplorasi Komputasi (Python)",
-    "text": "2.9 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 01!\")\n\n\nSiap untuk komputasi Minggu 01!",
+    "title": "2  Minggu 01: Pola Pikir Probabilistik vs Deterministik",
+    "section": "2.4 4. Eksplorasi Komputasi (Python)",
+    "text": "2.4 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 01!\")\n\n\nSiap untuk komputasi Minggu 01!",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Minggu 01: Pola Pikir Probabilistik vs Deterministik</span>"
     ]
@@ -122,9 +122,9 @@
   {
     "objectID": "chapters/02-Kerangka_Probabilitas_dan_Statistik.html",
     "href": "chapters/02-Kerangka_Probabilitas_dan_Statistik.html",
-    "title": "Ruang Sampel & Kejadian",
+    "title": "3  Minggu 02: Kerangka Probabilitas dan Statistik",
     "section": "",
-    "text": "3.1 Agenda Perkuliahan Minggu 2\nMinggu 2: Kerangka Probabilitas dan Operasi Kejadian**\nTema Misi: “Mapping the Glitch: From Chaos to Logical Sets”",
+    "text": "3.1 1. Konsep Pengetahuan\nRuang sampel (S) sebagai himpunan semua hasil yang mungkin, kejadian (E) sebagai himpunan bagian dari ruang sampel, dan aksioma probabilitas (nilai peluang antara 0 dan 1, total peluang semesta = 1).",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Minggu 02: Kerangka Probabilitas dan Statistik</span>"
     ]
@@ -182,9 +182,9 @@
   {
     "objectID": "chapters/02-Kerangka_Probabilitas_dan_Statistik.html#tipikal-problem",
     "href": "chapters/02-Kerangka_Probabilitas_dan_Statistik.html#tipikal-problem",
-    "title": "Ruang Sampel & Kejadian",
-    "section": "3.6 2. Tipikal Problem",
-    "text": "3.6 2. Tipikal Problem\nDalam pengiriman data digital, kita ingin mengetahui peluang terjadinya kesalahan bit. Jika dikirim 3 bit, apa ruang sampelnya dan berapa peluang setidaknya satu bit salah?",
+    "title": "3  Minggu 02: Kerangka Probabilitas dan Statistik",
+    "section": "3.2 2. Tipikal Problem",
+    "text": "3.2 2. Tipikal Problem\nDalam pengiriman data digital, kita ingin mengetahui peluang terjadinya kesalahan bit. Jika dikirim 3 bit, apa ruang sampelnya dan berapa peluang setidaknya satu bit salah?",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Minggu 02: Kerangka Probabilitas dan Statistik</span>"
     ]
@@ -192,9 +192,9 @@
   {
     "objectID": "chapters/02-Kerangka_Probabilitas_dan_Statistik.html#solusi-pengambilan-keputusan",
     "href": "chapters/02-Kerangka_Probabilitas_dan_Statistik.html#solusi-pengambilan-keputusan",
-    "title": "Ruang Sampel & Kejadian",
-    "section": "3.7 3. Solusi & Pengambilan Keputusan",
-    "text": "3.7 3. Solusi & Pengambilan Keputusan\nMendaftar ruang sampel S = {000, 001, …, 111}. Jika kejadian E adalah ‘setidaknya satu error’, kita hitung jumlah elemen di E dibagi total elemen di S untuk mendapatkan probabilitasnya, yang digunakan untuk menentukan kualitas saluran komunikasi.",
+    "title": "3  Minggu 02: Kerangka Probabilitas dan Statistik",
+    "section": "3.3 3. Solusi & Pengambilan Keputusan",
+    "text": "3.3 3. Solusi & Pengambilan Keputusan\nMendaftar ruang sampel S = {000, 001, …, 111}. Jika kejadian E adalah ‘setidaknya satu error’, kita hitung jumlah elemen di E dibagi total elemen di S untuk mendapatkan probabilitasnya, yang digunakan untuk menentukan kualitas saluran komunikasi.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Minggu 02: Kerangka Probabilitas dan Statistik</span>"
     ]
@@ -202,9 +202,9 @@
   {
     "objectID": "chapters/02-Kerangka_Probabilitas_dan_Statistik.html#eksplorasi-komputasi-python",
     "href": "chapters/02-Kerangka_Probabilitas_dan_Statistik.html#eksplorasi-komputasi-python",
-    "title": "Ruang Sampel & Kejadian",
-    "section": "3.8 4. Eksplorasi Komputasi (Python)",
-    "text": "3.8 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 02!\")\n\n\nSiap untuk komputasi Minggu 02!",
+    "title": "3  Minggu 02: Kerangka Probabilitas dan Statistik",
+    "section": "3.4 4. Eksplorasi Komputasi (Python)",
+    "text": "3.4 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 02!\")\n\n\nSiap untuk komputasi Minggu 02!",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Minggu 02: Kerangka Probabilitas dan Statistik</span>"
     ]
@@ -212,9 +212,9 @@
   {
     "objectID": "chapters/03-Studi_Kasus_Aplikasi_Teknik.html",
     "href": "chapters/03-Studi_Kasus_Aplikasi_Teknik.html",
-    "title": "Aturan Probabilitas",
+    "title": "4  Minggu 03: Studi Kasus Aplikasi Teknik",
     "section": "",
-    "text": "4.1 Agenda Perkuliahan Minggu 3\nWeek 03: Reliabilitas Infrastruktur IT (Teori & Simulasi SRE)\nTopik: Studi Kasus Infrastruktur - Reliabilitas dan Resiliensi Tema Misi: “Architecting for Failure: How to Build Systems That (Almost) Never Die”",
+    "text": "4.1 1. Konsep Pengetahuan\nKeandalan sistem (reliability), sistem seri vs paralel. Dalam sistem paralel, sistem bekerja jika setidaknya satu komponen bekerja, sedangkan seri membutuhkan semua komponen bekerja.",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Minggu 03: Studi Kasus Aplikasi Teknik</span>"
     ]
@@ -272,9 +272,9 @@
   {
     "objectID": "chapters/03-Studi_Kasus_Aplikasi_Teknik.html#tipikal-problem",
     "href": "chapters/03-Studi_Kasus_Aplikasi_Teknik.html#tipikal-problem",
-    "title": "Aturan Probabilitas",
-    "section": "4.6 2. Tipikal Problem",
-    "text": "4.6 2. Tipikal Problem\nSebuah pusat data memiliki dua generator listrik. Apakah lebih baik menyusunnya secara seri atau paralel untuk menjamin ketersediaan daya?",
+    "title": "4  Minggu 03: Studi Kasus Aplikasi Teknik",
+    "section": "4.2 2. Tipikal Problem",
+    "text": "4.2 2. Tipikal Problem\nSebuah pusat data memiliki dua generator listrik. Apakah lebih baik menyusunnya secara seri atau paralel untuk menjamin ketersediaan daya?",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Minggu 03: Studi Kasus Aplikasi Teknik</span>"
     ]
@@ -282,9 +282,9 @@
   {
     "objectID": "chapters/03-Studi_Kasus_Aplikasi_Teknik.html#solusi-pengambilan-keputusan",
     "href": "chapters/03-Studi_Kasus_Aplikasi_Teknik.html#solusi-pengambilan-keputusan",
-    "title": "Aturan Probabilitas",
-    "section": "4.7 3. Solusi & Pengambilan Keputusan",
-    "text": "4.7 3. Solusi & Pengambilan Keputusan\nMenghitung probabilitas kegagalan sistem. Pada desain paralel, peluang kegagalan total adalah hasil kali peluang kegagalan masing-masing unit (yang jauh lebih kecil). Keputusan optimalnya adalah menggunakan konfigurasi paralel untuk meningkatkan reliabilitas sistem secara drastis.",
+    "title": "4  Minggu 03: Studi Kasus Aplikasi Teknik",
+    "section": "4.3 3. Solusi & Pengambilan Keputusan",
+    "text": "4.3 3. Solusi & Pengambilan Keputusan\nMenghitung probabilitas kegagalan sistem. Pada desain paralel, peluang kegagalan total adalah hasil kali peluang kegagalan masing-masing unit (yang jauh lebih kecil). Keputusan optimalnya adalah menggunakan konfigurasi paralel untuk meningkatkan reliabilitas sistem secara drastis.",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Minggu 03: Studi Kasus Aplikasi Teknik</span>"
     ]
@@ -292,9 +292,9 @@
   {
     "objectID": "chapters/03-Studi_Kasus_Aplikasi_Teknik.html#eksplorasi-komputasi-python",
     "href": "chapters/03-Studi_Kasus_Aplikasi_Teknik.html#eksplorasi-komputasi-python",
-    "title": "Aturan Probabilitas",
-    "section": "4.8 4. Eksplorasi Komputasi (Python)",
-    "text": "4.8 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 03!\")\n\n\nSiap untuk komputasi Minggu 03!",
+    "title": "4  Minggu 03: Studi Kasus Aplikasi Teknik",
+    "section": "4.4 4. Eksplorasi Komputasi (Python)",
+    "text": "4.4 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 03!\")\n\n\nSiap untuk komputasi Minggu 03!",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Minggu 03: Studi Kasus Aplikasi Teknik</span>"
     ]
@@ -304,7 +304,7 @@
     "href": "chapters/04-Teorema_Probabilitas_dan_Bayes.html",
     "title": "5  Minggu 04: Teorema Probabilitas dan Bayes",
     "section": "",
-    "text": "5.1 Python First\nTeorema Bayes dan Porbabilitas Kondisional",
+    "text": "5.1 1. Konsep Pengetahuan\nProbabilitas bersyarat P(A|B), aturan perkalian, independensi, dan Teorema Bayes untuk memperbarui keyakinan berdasarkan bukti baru.",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Minggu 04: Teorema Probabilitas dan Bayes</span>"
     ]
@@ -373,8 +373,8 @@
     "objectID": "chapters/04-Teorema_Probabilitas_dan_Bayes.html#tipikal-problem",
     "href": "chapters/04-Teorema_Probabilitas_dan_Bayes.html#tipikal-problem",
     "title": "5  Minggu 04: Teorema Probabilitas dan Bayes",
-    "section": "6.6 2. Tipikal Problem",
-    "text": "6.6 2. Tipikal Problem\nSebuah sistem pemantauan mendeteksi kerusakan mesin (alarm berbunyi). Diketahui akurasi alarm 90%, tetapi peluang mesin rusak sebenarnya sangat kecil (jarang terjadi). Apakah mesin benar-benar rusak jika alarm berbunyi?",
+    "section": "5.2 2. Tipikal Problem",
+    "text": "5.2 2. Tipikal Problem\nSebuah sistem pemantauan mendeteksi kerusakan mesin (alarm berbunyi). Diketahui akurasi alarm 90%, tetapi peluang mesin rusak sebenarnya sangat kecil (jarang terjadi). Apakah mesin benar-benar rusak jika alarm berbunyi?",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Minggu 04: Teorema Probabilitas dan Bayes</span>"
     ]
@@ -383,8 +383,8 @@
     "objectID": "chapters/04-Teorema_Probabilitas_dan_Bayes.html#solusi-pengambilan-keputusan",
     "href": "chapters/04-Teorema_Probabilitas_dan_Bayes.html#solusi-pengambilan-keputusan",
     "title": "5  Minggu 04: Teorema Probabilitas dan Bayes",
-    "section": "6.7 3. Solusi & Pengambilan Keputusan",
-    "text": "6.7 3. Solusi & Pengambilan Keputusan\nMenggunakan Teorema Bayes untuk menghitung Posterior Probability P(Rusak|Alarm). Seringkali hasilnya menunjukkan peluang kerusakan masih rendah (false alarm). Solusinya adalah melakukan verifikasi manual sebelum menghentikan produksi yang mahal.",
+    "section": "5.3 3. Solusi & Pengambilan Keputusan",
+    "text": "5.3 3. Solusi & Pengambilan Keputusan\nMenggunakan Teorema Bayes untuk menghitung Posterior Probability P(Rusak|Alarm). Seringkali hasilnya menunjukkan peluang kerusakan masih rendah (false alarm). Solusinya adalah melakukan verifikasi manual sebelum menghentikan produksi yang mahal.",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Minggu 04: Teorema Probabilitas dan Bayes</span>"
     ]
@@ -393,8 +393,8 @@
     "objectID": "chapters/04-Teorema_Probabilitas_dan_Bayes.html#eksplorasi-komputasi-python",
     "href": "chapters/04-Teorema_Probabilitas_dan_Bayes.html#eksplorasi-komputasi-python",
     "title": "5  Minggu 04: Teorema Probabilitas dan Bayes",
-    "section": "6.8 4. Eksplorasi Komputasi (Python)",
-    "text": "6.8 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 04!\")\n\n\nSiap untuk komputasi Minggu 04!",
+    "section": "5.4 4. Eksplorasi Komputasi (Python)",
+    "text": "5.4 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 04!\")\n\n\nSiap untuk komputasi Minggu 04!",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Minggu 04: Teorema Probabilitas dan Bayes</span>"
     ]
@@ -404,7 +404,7 @@
     "href": "chapters/05-Variabel_Acak.html",
     "title": "6  Minggu 05: Variabel Acak",
     "section": "",
-    "text": "6.1 Agenda Perkuliahan Minggu 5\nWeek 05: Variabel Acak, Ekspektasi, dan Variansi\nTema Misi: “The Gambler’s Fallacy: Mastering Risk and Reward”",
+    "text": "6.1 1. Konsep Pengetahuan\nPemetaan hasil eksperimen ke nilai numerik (variabel acak), Nilai Harapan (E[X]) sebagai rata-rata jangka panjang, dan Variansi sebagai ukuran sebaran.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Minggu 05: Variabel Acak</span>"
     ]
@@ -463,8 +463,8 @@
     "objectID": "chapters/05-Variabel_Acak.html#tipikal-problem",
     "href": "chapters/05-Variabel_Acak.html#tipikal-problem",
     "title": "6  Minggu 05: Variabel Acak",
-    "section": "6.6 2. Tipikal Problem",
-    "text": "6.6 2. Tipikal Problem\nSeorang investor memiliki dua opsi investasi dengan profil risiko berbeda. Opsi A memberikan hasil pasti, Opsi B memberikan hasil tinggi tapi berisiko rugi.",
+    "section": "6.2 2. Tipikal Problem",
+    "text": "6.2 2. Tipikal Problem\nSeorang investor memiliki dua opsi investasi dengan profil risiko berbeda. Opsi A memberikan hasil pasti, Opsi B memberikan hasil tinggi tapi berisiko rugi.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Minggu 05: Variabel Acak</span>"
     ]
@@ -473,8 +473,8 @@
     "objectID": "chapters/05-Variabel_Acak.html#solusi-pengambilan-keputusan",
     "href": "chapters/05-Variabel_Acak.html#solusi-pengambilan-keputusan",
     "title": "6  Minggu 05: Variabel Acak",
-    "section": "6.7 3. Solusi & Pengambilan Keputusan",
-    "text": "6.7 3. Solusi & Pengambilan Keputusan\nMenghitung E[X] (expected return) dan Variansi (risiko) dari kedua opsi. Keputusan diambil dengan memilih E[X] tertinggi yang masih berada dalam toleransi risiko (variansi) investor tersebut.",
+    "section": "6.3 3. Solusi & Pengambilan Keputusan",
+    "text": "6.3 3. Solusi & Pengambilan Keputusan\nMenghitung E[X] (expected return) dan Variansi (risiko) dari kedua opsi. Keputusan diambil dengan memilih E[X] tertinggi yang masih berada dalam toleransi risiko (variansi) investor tersebut.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Minggu 05: Variabel Acak</span>"
     ]
@@ -483,8 +483,8 @@
     "objectID": "chapters/05-Variabel_Acak.html#eksplorasi-komputasi-python",
     "href": "chapters/05-Variabel_Acak.html#eksplorasi-komputasi-python",
     "title": "6  Minggu 05: Variabel Acak",
-    "section": "6.8 4. Eksplorasi Komputasi (Python)",
-    "text": "6.8 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 05!\")\n\n\nSiap untuk komputasi Minggu 05!",
+    "section": "6.4 4. Eksplorasi Komputasi (Python)",
+    "text": "6.4 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 05!\")\n\n\nSiap untuk komputasi Minggu 05!",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Minggu 05: Variabel Acak</span>"
     ]
@@ -494,7 +494,7 @@
     "href": "chapters/06-Variabel_Acak_Diskrit.html",
     "title": "7  Minggu 06: Variabel Acak Diskrit",
     "section": "",
-    "text": "7.1 Agenda Perkuliahan Minggu 6\nWeek 06: Distribusi Probabilitas Diskrit (Binomial & Poisson)\n“Simulation First, Math Later” menghubungkan teori “kering” dengan aplikasi nyata seperti Gacha Games, Server Traffic, dan Cybersecurity.\nTopik: Distribusi Binomial & Poisson Tema Misi: “The Digital Pulse: Counting Clicks, Bugs, and Attacks”",
+    "text": "7.1 1. Konsep Pengetahuan\nDistribusi Binomial untuk jumlah sukses dalam n percobaan, Distribusi Poisson untuk jumlah kejadian dalam interval waktu/ruang tertentu.",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Minggu 06: Variabel Acak Diskrit</span>"
     ]
@@ -553,8 +553,8 @@
     "objectID": "chapters/06-Variabel_Acak_Diskrit.html#tipikal-problem",
     "href": "chapters/06-Variabel_Acak_Diskrit.html#tipikal-problem",
     "title": "7  Minggu 06: Variabel Acak Diskrit",
-    "section": "7.6 2. Tipikal Problem",
-    "text": "7.6 2. Tipikal Problem\nSebuah pabrik ingin menjamin kualitas produk. Diketahui rata-rata cacat adalah 1%. Berapa peluang menemukan tepat 2 barang cacat dalam sampel 100 unit?",
+    "section": "7.2 2. Tipikal Problem",
+    "text": "7.2 2. Tipikal Problem\nSebuah pabrik ingin menjamin kualitas produk. Diketahui rata-rata cacat adalah 1%. Berapa peluang menemukan tepat 2 barang cacat dalam sampel 100 unit?",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Minggu 06: Variabel Acak Diskrit</span>"
     ]
@@ -563,8 +563,8 @@
     "objectID": "chapters/06-Variabel_Acak_Diskrit.html#solusi-pengambilan-keputusan",
     "href": "chapters/06-Variabel_Acak_Diskrit.html#solusi-pengambilan-keputusan",
     "title": "7  Minggu 06: Variabel Acak Diskrit",
-    "section": "7.7 3. Solusi & Pengambilan Keputusan",
-    "text": "7.7 3. Solusi & Pengambilan Keputusan\nMenggunakan rumus distribusi Binomial (atau aproksimasi Poisson jika n besar dan p kecil). Jika peluang cacat melebihi ambang batas toleransi, manajer memutuskan untuk menghentikan lini produksi untuk inspeksi.",
+    "section": "7.3 3. Solusi & Pengambilan Keputusan",
+    "text": "7.3 3. Solusi & Pengambilan Keputusan\nMenggunakan rumus distribusi Binomial (atau aproksimasi Poisson jika n besar dan p kecil). Jika peluang cacat melebihi ambang batas toleransi, manajer memutuskan untuk menghentikan lini produksi untuk inspeksi.",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Minggu 06: Variabel Acak Diskrit</span>"
     ]
@@ -573,8 +573,8 @@
     "objectID": "chapters/06-Variabel_Acak_Diskrit.html#eksplorasi-komputasi-python",
     "href": "chapters/06-Variabel_Acak_Diskrit.html#eksplorasi-komputasi-python",
     "title": "7  Minggu 06: Variabel Acak Diskrit",
-    "section": "7.8 4. Eksplorasi Komputasi (Python)",
-    "text": "7.8 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 06!\")\n\n\nSiap untuk komputasi Minggu 06!",
+    "section": "7.4 4. Eksplorasi Komputasi (Python)",
+    "text": "7.4 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 06!\")\n\n\nSiap untuk komputasi Minggu 06!",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Minggu 06: Variabel Acak Diskrit</span>"
     ]
@@ -584,7 +584,7 @@
     "href": "chapters/07-Variabel_Acak_Kontinu.html",
     "title": "8  Minggu 07: Variabel Acak Kontinu",
     "section": "",
-    "text": "8.1 Agenda Perkuliahan Minggu 7\nWeek 07: Distribusi Kontinu: Kurva Normal dan Eksponensial dalam Rekayasa\nTema Misi: “Predicting the Unpredictable: From Bell Curves to Waiting Games”",
+    "text": "8.1 1. Konsep Pengetahuan\nDistribusi Normal (kurva lonceng) untuk data pengukuran alami, Distribusi Eksponensial untuk waktu tunggu antar kejadian.",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Minggu 07: Variabel Acak Kontinu</span>"
     ]
@@ -643,8 +643,8 @@
     "objectID": "chapters/07-Variabel_Acak_Kontinu.html#tipikal-problem",
     "href": "chapters/07-Variabel_Acak_Kontinu.html#tipikal-problem",
     "title": "8  Minggu 07: Variabel Acak Kontinu",
-    "section": "8.6 2. Tipikal Problem",
-    "text": "8.6 2. Tipikal Problem\nMenentukan garansi produk lampu. Diketahui masa hidup lampu berdistribusi Normal dengan rata-rata 900 jam dan standar deviasi 50 jam.",
+    "section": "8.2 2. Tipikal Problem",
+    "text": "8.2 2. Tipikal Problem\nMenentukan garansi produk lampu. Diketahui masa hidup lampu berdistribusi Normal dengan rata-rata 900 jam dan standar deviasi 50 jam.",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Minggu 07: Variabel Acak Kontinu</span>"
     ]
@@ -653,8 +653,8 @@
     "objectID": "chapters/07-Variabel_Acak_Kontinu.html#solusi-pengambilan-keputusan",
     "href": "chapters/07-Variabel_Acak_Kontinu.html#solusi-pengambilan-keputusan",
     "title": "8  Minggu 07: Variabel Acak Kontinu",
-    "section": "8.7 3. Solusi & Pengambilan Keputusan",
-    "text": "8.7 3. Solusi & Pengambilan Keputusan\nMenghitung peluang lampu mati sebelum waktu tertentu (misal P(X &lt; 700)). Perusahaan menetapkan masa garansi di titik di mana hanya sebagian kecil (misal 1%) lampu yang akan rusak, untuk meminimalkan biaya penggantian klaim garansi.",
+    "section": "8.3 3. Solusi & Pengambilan Keputusan",
+    "text": "8.3 3. Solusi & Pengambilan Keputusan\nMenghitung peluang lampu mati sebelum waktu tertentu (misal P(X &lt; 700)). Perusahaan menetapkan masa garansi di titik di mana hanya sebagian kecil (misal 1%) lampu yang akan rusak, untuk meminimalkan biaya penggantian klaim garansi.",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Minggu 07: Variabel Acak Kontinu</span>"
     ]
@@ -663,8 +663,8 @@
     "objectID": "chapters/07-Variabel_Acak_Kontinu.html#eksplorasi-komputasi-python",
     "href": "chapters/07-Variabel_Acak_Kontinu.html#eksplorasi-komputasi-python",
     "title": "8  Minggu 07: Variabel Acak Kontinu",
-    "section": "8.8 4. Eksplorasi Komputasi (Python)",
-    "text": "8.8 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 07!\")\n\n\nSiap untuk komputasi Minggu 07!",
+    "section": "8.4 4. Eksplorasi Komputasi (Python)",
+    "text": "8.4 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 07!\")\n\n\nSiap untuk komputasi Minggu 07!",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Minggu 07: Variabel Acak Kontinu</span>"
     ]
@@ -674,7 +674,7 @@
     "href": "chapters/08-Ujian_Tengah_Semester.html",
     "title": "9  Minggu 08: Ujian Tengah Semester",
     "section": "",
-    "text": "9.1 Agenda Perkuliahan Minggu 08\nWeek 08: Pengujian Hipotesis Statistik\nTopik: Pengujian Hipotesis Statistik (Hypothesis Testing) Tema Misi: “Myth Busters: Is It Real or Just Random Noise?”",
+    "text": "9.1 1. Konsep Pengetahuan\nEvaluasi materi minggu 1-7.",
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Minggu 08: Ujian Tengah Semester</span>"
     ]
@@ -733,8 +733,8 @@
     "objectID": "chapters/08-Ujian_Tengah_Semester.html#tipikal-problem",
     "href": "chapters/08-Ujian_Tengah_Semester.html#tipikal-problem",
     "title": "9  Minggu 08: Ujian Tengah Semester",
-    "section": "9.6 2. Tipikal Problem",
-    "text": "9.6 2. Tipikal Problem\nUjian tertulis dan komputasi.",
+    "section": "9.2 2. Tipikal Problem",
+    "text": "9.2 2. Tipikal Problem\nUjian tertulis dan komputasi.",
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Minggu 08: Ujian Tengah Semester</span>"
     ]
@@ -743,8 +743,8 @@
     "objectID": "chapters/08-Ujian_Tengah_Semester.html#solusi-pengambilan-keputusan",
     "href": "chapters/08-Ujian_Tengah_Semester.html#solusi-pengambilan-keputusan",
     "title": "9  Minggu 08: Ujian Tengah Semester",
-    "section": "9.7 3. Solusi & Pengambilan Keputusan",
-    "text": "9.7 3. Solusi & Pengambilan Keputusan\nMengerjakan soal evaluasi dengan pendekatan probabilitas dan statistik.",
+    "section": "9.3 3. Solusi & Pengambilan Keputusan",
+    "text": "9.3 3. Solusi & Pengambilan Keputusan\nMengerjakan soal evaluasi dengan pendekatan probabilitas dan statistik.",
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Minggu 08: Ujian Tengah Semester</span>"
     ]
@@ -753,8 +753,8 @@
     "objectID": "chapters/08-Ujian_Tengah_Semester.html#eksplorasi-komputasi-python",
     "href": "chapters/08-Ujian_Tengah_Semester.html#eksplorasi-komputasi-python",
     "title": "9  Minggu 08: Ujian Tengah Semester",
-    "section": "9.8 4. Eksplorasi Komputasi (Python)",
-    "text": "9.8 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 08!\")\n\n\nSiap untuk komputasi Minggu 08!",
+    "section": "9.4 4. Eksplorasi Komputasi (Python)",
+    "text": "9.4 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 08!\")\n\n\nSiap untuk komputasi Minggu 08!",
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Minggu 08: Ujian Tengah Semester</span>"
     ]
@@ -764,7 +764,7 @@
     "href": "chapters/09-Fungsi_Variabel_Acak.html",
     "title": "10  Minggu 09: Fungsi Variabel Acak",
     "section": "",
-    "text": "10.1 Agenda Perkuliahan Minggu 9\nWeek 09: Fungsi Variabel Acak dan Distribusi Bivariat\nTopik: Fungsi Variabel Acak & Distribusi Bivariat Tema Misi: “Metamorphosis of Data: How Input Noise Becomes Output Risk”",
+    "text": "10.1 1. Konsep Pengetahuan\nMenentukan distribusi probabilitas dari variabel baru Y yang merupakan fungsi dari variabel acak X (misal Y = g(X)).",
     "crumbs": [
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Minggu 09: Fungsi Variabel Acak</span>"
     ]
@@ -823,8 +823,8 @@
     "objectID": "chapters/09-Fungsi_Variabel_Acak.html#tipikal-problem",
     "href": "chapters/09-Fungsi_Variabel_Acak.html#tipikal-problem",
     "title": "10  Minggu 09: Fungsi Variabel Acak",
-    "section": "10.6 2. Tipikal Problem",
-    "text": "10.6 2. Tipikal Problem\nDiketahui distribusi kesalahan pengukuran arus listrik (X). Bagaimana distribusi kesalahan daya listrik (P), jika P = I^2 * R?",
+    "section": "10.2 2. Tipikal Problem",
+    "text": "10.2 2. Tipikal Problem\nDiketahui distribusi kesalahan pengukuran arus listrik (X). Bagaimana distribusi kesalahan daya listrik (P), jika P = I^2 * R?",
     "crumbs": [
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Minggu 09: Fungsi Variabel Acak</span>"
     ]
@@ -833,8 +833,8 @@
     "objectID": "chapters/09-Fungsi_Variabel_Acak.html#solusi-pengambilan-keputusan",
     "href": "chapters/09-Fungsi_Variabel_Acak.html#solusi-pengambilan-keputusan",
     "title": "10  Minggu 09: Fungsi Variabel Acak",
-    "section": "10.7 3. Solusi & Pengambilan Keputusan",
-    "text": "10.7 3. Solusi & Pengambilan Keputusan\nMenggunakan metode transformasi atau fungsi pembangkit momen untuk menurunkan PDF dari P. Ini penting bagi insinyur untuk menentukan batas toleransi keamanan komponen agar tidak terbakar akibat fluktuasi daya.",
+    "section": "10.3 3. Solusi & Pengambilan Keputusan",
+    "text": "10.3 3. Solusi & Pengambilan Keputusan\nMenggunakan metode transformasi atau fungsi pembangkit momen untuk menurunkan PDF dari P. Ini penting bagi insinyur untuk menentukan batas toleransi keamanan komponen agar tidak terbakar akibat fluktuasi daya.",
     "crumbs": [
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Minggu 09: Fungsi Variabel Acak</span>"
     ]
@@ -843,8 +843,8 @@
     "objectID": "chapters/09-Fungsi_Variabel_Acak.html#eksplorasi-komputasi-python",
     "href": "chapters/09-Fungsi_Variabel_Acak.html#eksplorasi-komputasi-python",
     "title": "10  Minggu 09: Fungsi Variabel Acak",
-    "section": "10.8 4. Eksplorasi Komputasi (Python)",
-    "text": "10.8 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 09!\")\n\n\nSiap untuk komputasi Minggu 09!",
+    "section": "10.4 4. Eksplorasi Komputasi (Python)",
+    "text": "10.4 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 09!\")\n\n\nSiap untuk komputasi Minggu 09!",
     "crumbs": [
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Minggu 09: Fungsi Variabel Acak</span>"
     ]
@@ -854,7 +854,7 @@
     "href": "chapters/10-Distribusi_Sampling_dan_Teorema_Limit_Pusat.html",
     "title": "11  Minggu 10: Distribusi Sampling dan Teorema Limit Pusat",
     "section": "",
-    "text": "11.1 Agenda Perkuliahan Minggu 10\nWeek 10: Distribusi Sampling dan Teorema Limit Pusat\nTopik: Distribusi Sampling & Teorema Limit Pusat (CLT) Tema Misi: “Order from Chaos: The Ultimate Statistical Cheat Code”",
+    "text": "11.1 1. Konsep Pengetahuan\nDistribusi dari rata-rata sampel akan mendekati Normal jika ukuran sampel besar (n &gt;= 30), terlepas dari distribusi populasinya.",
     "crumbs": [
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Minggu 10: Distribusi Sampling dan Teorema Limit Pusat</span>"
     ]
@@ -913,8 +913,8 @@
     "objectID": "chapters/10-Distribusi_Sampling_dan_Teorema_Limit_Pusat.html#tipikal-problem",
     "href": "chapters/10-Distribusi_Sampling_dan_Teorema_Limit_Pusat.html#tipikal-problem",
     "title": "11  Minggu 10: Distribusi Sampling dan Teorema Limit Pusat",
-    "section": "11.6 2. Tipikal Problem",
-    "text": "11.6 2. Tipikal Problem\nSebuah lift memiliki kapasitas beban maksimum. Jika berat badan rata-rata penumpang adalah variabel acak, berapa peluang 20 orang penumpang melebihi kapasitas lift?",
+    "section": "11.2 2. Tipikal Problem",
+    "text": "11.2 2. Tipikal Problem\nSebuah lift memiliki kapasitas beban maksimum. Jika berat badan rata-rata penumpang adalah variabel acak, berapa peluang 20 orang penumpang melebihi kapasitas lift?",
     "crumbs": [
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Minggu 10: Distribusi Sampling dan Teorema Limit Pusat</span>"
     ]
@@ -923,8 +923,8 @@
     "objectID": "chapters/10-Distribusi_Sampling_dan_Teorema_Limit_Pusat.html#solusi-pengambilan-keputusan",
     "href": "chapters/10-Distribusi_Sampling_dan_Teorema_Limit_Pusat.html#solusi-pengambilan-keputusan",
     "title": "11  Minggu 10: Distribusi Sampling dan Teorema Limit Pusat",
-    "section": "11.7 3. Solusi & Pengambilan Keputusan",
-    "text": "11.7 3. Solusi & Pengambilan Keputusan\nMenggunakan CLT untuk memodelkan total berat penumpang sebagai distribusi Normal. Insinyur menggunakan ini untuk menetapkan batas aman jumlah penumpang agar peluang kelebihan beban mendekati nol.",
+    "section": "11.3 3. Solusi & Pengambilan Keputusan",
+    "text": "11.3 3. Solusi & Pengambilan Keputusan\nMenggunakan CLT untuk memodelkan total berat penumpang sebagai distribusi Normal. Insinyur menggunakan ini untuk menetapkan batas aman jumlah penumpang agar peluang kelebihan beban mendekati nol.",
     "crumbs": [
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Minggu 10: Distribusi Sampling dan Teorema Limit Pusat</span>"
     ]
@@ -933,8 +933,8 @@
     "objectID": "chapters/10-Distribusi_Sampling_dan_Teorema_Limit_Pusat.html#eksplorasi-komputasi-python",
     "href": "chapters/10-Distribusi_Sampling_dan_Teorema_Limit_Pusat.html#eksplorasi-komputasi-python",
     "title": "11  Minggu 10: Distribusi Sampling dan Teorema Limit Pusat",
-    "section": "11.8 4. Eksplorasi Komputasi (Python)",
-    "text": "11.8 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 10!\")\n\n\nSiap untuk komputasi Minggu 10!",
+    "section": "11.4 4. Eksplorasi Komputasi (Python)",
+    "text": "11.4 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 10!\")\n\n\nSiap untuk komputasi Minggu 10!",
     "crumbs": [
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Minggu 10: Distribusi Sampling dan Teorema Limit Pusat</span>"
     ]
@@ -944,7 +944,7 @@
     "href": "chapters/11-Estimasi.html",
     "title": "12  Minggu 11: Estimasi",
     "section": "",
-    "text": "12.1 Agenda Perkuliahan Minggu 11\nWeek 11: Estimasi Statistik dan Interval Kepercayaan\nTopik: Estimasi Parameter & Interval Kepercayaan Tema Misi: “The Confidence Game: Don’t Just Guess, Estimate!”",
+    "text": "12.1 1. Konsep Pengetahuan\nEstimasi titik (point estimate) dan Estimasi Interval (Confidence Interval) untuk memperkirakan parameter populasi (rata-rata atau proporsi).",
     "crumbs": [
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Minggu 11: Estimasi</span>"
     ]
@@ -1003,8 +1003,8 @@
     "objectID": "chapters/11-Estimasi.html#tipikal-problem",
     "href": "chapters/11-Estimasi.html#tipikal-problem",
     "title": "12  Minggu 11: Estimasi",
-    "section": "12.6 2. Tipikal Problem",
-    "text": "12.6 2. Tipikal Problem\nBerdasarkan survei sampel terhadap 100 chip komputer, ditemukan rata-rata kecepatan pemrosesan tertentu. Berapa rata-rata kecepatan sebenarnya dari seluruh produksi pabrik?",
+    "section": "12.2 2. Tipikal Problem",
+    "text": "12.2 2. Tipikal Problem\nBerdasarkan survei sampel terhadap 100 chip komputer, ditemukan rata-rata kecepatan pemrosesan tertentu. Berapa rata-rata kecepatan sebenarnya dari seluruh produksi pabrik?",
     "crumbs": [
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Minggu 11: Estimasi</span>"
     ]
@@ -1013,8 +1013,8 @@
     "objectID": "chapters/11-Estimasi.html#solusi-pengambilan-keputusan",
     "href": "chapters/11-Estimasi.html#solusi-pengambilan-keputusan",
     "title": "12  Minggu 11: Estimasi",
-    "section": "12.7 3. Solusi & Pengambilan Keputusan",
-    "text": "12.7 3. Solusi & Pengambilan Keputusan\nMembangun Confidence Interval (misal 95% CI). Pabrik dapat mengklaim spesifikasi produk dengan keyakinan statistik yang dapat dipertanggungjawabkan kepada konsumen.",
+    "section": "12.3 3. Solusi & Pengambilan Keputusan",
+    "text": "12.3 3. Solusi & Pengambilan Keputusan\nMembangun Confidence Interval (misal 95% CI). Pabrik dapat mengklaim spesifikasi produk dengan keyakinan statistik yang dapat dipertanggungjawabkan kepada konsumen.",
     "crumbs": [
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Minggu 11: Estimasi</span>"
     ]
@@ -1023,8 +1023,8 @@
     "objectID": "chapters/11-Estimasi.html#eksplorasi-komputasi-python",
     "href": "chapters/11-Estimasi.html#eksplorasi-komputasi-python",
     "title": "12  Minggu 11: Estimasi",
-    "section": "12.8 4. Eksplorasi Komputasi (Python)",
-    "text": "12.8 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 11!\")\n\n\nSiap untuk komputasi Minggu 11!",
+    "section": "12.4 4. Eksplorasi Komputasi (Python)",
+    "text": "12.4 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 11!\")\n\n\nSiap untuk komputasi Minggu 11!",
     "crumbs": [
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Minggu 11: Estimasi</span>"
     ]
@@ -1034,7 +1034,7 @@
     "href": "chapters/12-Pengujian_Hipotesis.html",
     "title": "13  Minggu 12: Pengujian Hipotesis",
     "section": "",
-    "text": "13.1 Agenda Perkuliahan Minggu 12\nWeek 12: Pengujian Hipotesis Statistik dan A/B Testing\nTopik: Prosedur Uji Hipotesis, P-value, & Jenis Galat (Error Types) Tema Misi: “Launch or Rollback? The Data-Driven Judge”",
+    "text": "13.1 1. Konsep Pengetahuan\nMenentukan H0 dan H1, menghitung statistik uji, P-value, serta memahami Galat Tipe I (False Positive) dan Tipe II (False Negative).",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Minggu 12: Pengujian Hipotesis</span>"
     ]
@@ -1093,8 +1093,8 @@
     "objectID": "chapters/12-Pengujian_Hipotesis.html#tipikal-problem",
     "href": "chapters/12-Pengujian_Hipotesis.html#tipikal-problem",
     "title": "13  Minggu 12: Pengujian Hipotesis",
-    "section": "13.6 2. Tipikal Problem",
-    "text": "13.6 2. Tipikal Problem\nSebuah obat baru diklaim lebih efektif menyembuhkan penyakit dibandingkan obat lama. Apakah klaim ini valid atau hanya kebetulan?",
+    "section": "13.2 2. Tipikal Problem",
+    "text": "13.2 2. Tipikal Problem\nSebuah obat baru diklaim lebih efektif menyembuhkan penyakit dibandingkan obat lama. Apakah klaim ini valid atau hanya kebetulan?",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Minggu 12: Pengujian Hipotesis</span>"
     ]
@@ -1103,8 +1103,8 @@
     "objectID": "chapters/12-Pengujian_Hipotesis.html#solusi-pengambilan-keputusan",
     "href": "chapters/12-Pengujian_Hipotesis.html#solusi-pengambilan-keputusan",
     "title": "13  Minggu 12: Pengujian Hipotesis",
-    "section": "13.7 3. Solusi & Pengambilan Keputusan",
-    "text": "13.7 3. Solusi & Pengambilan Keputusan\nMelakukan uji hipotesis (misal t-test). Jika P-value &lt; alpha (0.05), tolak H0. Keputusannya adalah memproduksi obat baru tersebut karena terbukti secara signifikan lebih baik secara statistik.",
+    "section": "13.3 3. Solusi & Pengambilan Keputusan",
+    "text": "13.3 3. Solusi & Pengambilan Keputusan\nMelakukan uji hipotesis (misal t-test). Jika P-value &lt; alpha (0.05), tolak H0. Keputusannya adalah memproduksi obat baru tersebut karena terbukti secara signifikan lebih baik secara statistik.",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Minggu 12: Pengujian Hipotesis</span>"
     ]
@@ -1113,8 +1113,8 @@
     "objectID": "chapters/12-Pengujian_Hipotesis.html#eksplorasi-komputasi-python",
     "href": "chapters/12-Pengujian_Hipotesis.html#eksplorasi-komputasi-python",
     "title": "13  Minggu 12: Pengujian Hipotesis",
-    "section": "13.8 4. Eksplorasi Komputasi (Python)",
-    "text": "13.8 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 12!\")\n\n\nSiap untuk komputasi Minggu 12!",
+    "section": "13.4 4. Eksplorasi Komputasi (Python)",
+    "text": "13.4 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 12!\")\n\n\nSiap untuk komputasi Minggu 12!",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Minggu 12: Pengujian Hipotesis</span>"
     ]
@@ -1124,7 +1124,7 @@
     "href": "chapters/13-Regresi.html",
     "title": "14  Minggu 13: Regresi",
     "section": "",
-    "text": "14.1 Agenda Perkuliahan Minggu 13\nWeek 13: Regresi Linear Sederhana dan Korelasi\nTopik: Regresi Linear Sederhana & Korelasi Tema Misi: “Predicting the Future: From Data Points to Crystal Balls”",
+    "text": "14.1 1. Konsep Pengetahuan\nMemodelkan hubungan linear antara variabel independen (x) dan dependen (y) dengan metode kuadrat terkecil (y = b0 + b1x).",
     "crumbs": [
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Minggu 13: Regresi</span>"
     ]
@@ -1183,8 +1183,8 @@
     "objectID": "chapters/13-Regresi.html#tipikal-problem",
     "href": "chapters/13-Regresi.html#tipikal-problem",
     "title": "14  Minggu 13: Regresi",
-    "section": "14.6 2. Tipikal Problem",
-    "text": "14.6 2. Tipikal Problem\nMemprediksi konsumsi daya listrik berdasarkan suhu lingkungan.",
+    "section": "14.2 2. Tipikal Problem",
+    "text": "14.2 2. Tipikal Problem\nMemprediksi konsumsi daya listrik berdasarkan suhu lingkungan.",
     "crumbs": [
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Minggu 13: Regresi</span>"
     ]
@@ -1193,8 +1193,8 @@
     "objectID": "chapters/13-Regresi.html#solusi-pengambilan-keputusan",
     "href": "chapters/13-Regresi.html#solusi-pengambilan-keputusan",
     "title": "14  Minggu 13: Regresi",
-    "section": "14.7 3. Solusi & Pengambilan Keputusan",
-    "text": "14.7 3. Solusi & Pengambilan Keputusan\nMengumpulkan data historis, membuat model regresi linear. Model ini digunakan operator pembangkit listrik untuk merencanakan berapa banyak bahan bakar yang harus disiapkan besok berdasarkan ramalan cuaca (suhu).",
+    "section": "14.3 3. Solusi & Pengambilan Keputusan",
+    "text": "14.3 3. Solusi & Pengambilan Keputusan\nMengumpulkan data historis, membuat model regresi linear. Model ini digunakan operator pembangkit listrik untuk merencanakan berapa banyak bahan bakar yang harus disiapkan besok berdasarkan ramalan cuaca (suhu).",
     "crumbs": [
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Minggu 13: Regresi</span>"
     ]
@@ -1203,8 +1203,8 @@
     "objectID": "chapters/13-Regresi.html#eksplorasi-komputasi-python",
     "href": "chapters/13-Regresi.html#eksplorasi-komputasi-python",
     "title": "14  Minggu 13: Regresi",
-    "section": "14.8 4. Eksplorasi Komputasi (Python)",
-    "text": "14.8 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 13!\")\n\n\nSiap untuk komputasi Minggu 13!",
+    "section": "14.4 4. Eksplorasi Komputasi (Python)",
+    "text": "14.4 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 13!\")\n\n\nSiap untuk komputasi Minggu 13!",
     "crumbs": [
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Minggu 13: Regresi</span>"
     ]
@@ -1214,7 +1214,7 @@
     "href": "chapters/14-Studi_Kasus_Lanjutan.html",
     "title": "15  Minggu 14-15: Studi Kasus Lanjutan",
     "section": "",
-    "text": "15.1 Agenda Perkuliahan Minggu 14\nWeek 14: Aplikasi Statistika Lanjutan (A/B Testing, Anomaly Detection)\nTopik: Aplikasi Lanjutan (A/B Testing, Deteksi Anomali, & Evaluasi Model) Tema Misi: “The Data Detective: Finding Signals in the Noise”",
+    "text": "15.1 1. Konsep Pengetahuan\nPenerapan integratif dari estimasi, uji hipotesis, dan regresi pada masalah dunia nyata yang kompleks, seperti Robust Parameter Design atau deteksi sinyal.",
     "crumbs": [
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>Minggu 14-15: Studi Kasus Lanjutan</span>"
     ]
@@ -1273,8 +1273,8 @@
     "objectID": "chapters/14-Studi_Kasus_Lanjutan.html#tipikal-problem",
     "href": "chapters/14-Studi_Kasus_Lanjutan.html#tipikal-problem",
     "title": "15  Minggu 14-15: Studi Kasus Lanjutan",
-    "section": "15.6 2. Tipikal Problem",
-    "text": "15.6 2. Tipikal Problem\nMengoptimalkan parameter proses manufaktur agar tahan terhadap variasi lingkungan (noise) atau mendeteksi sinyal radar di tengah noise.",
+    "section": "15.2 2. Tipikal Problem",
+    "text": "15.2 2. Tipikal Problem\nMengoptimalkan parameter proses manufaktur agar tahan terhadap variasi lingkungan (noise) atau mendeteksi sinyal radar di tengah noise.",
     "crumbs": [
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>Minggu 14-15: Studi Kasus Lanjutan</span>"
     ]
@@ -1283,8 +1283,8 @@
     "objectID": "chapters/14-Studi_Kasus_Lanjutan.html#solusi-pengambilan-keputusan",
     "href": "chapters/14-Studi_Kasus_Lanjutan.html#solusi-pengambilan-keputusan",
     "title": "15  Minggu 14-15: Studi Kasus Lanjutan",
-    "section": "15.7 3. Solusi & Pengambilan Keputusan",
-    "text": "15.7 3. Solusi & Pengambilan Keputusan\nMenggunakan desain eksperimen (DOE) dan analisis statistik untuk memilih parameter ‘kontrol’ yang meminimalkan variansi output (membuat produk robust/tangguh), sehingga menekan biaya cacat produksi.",
+    "section": "15.3 3. Solusi & Pengambilan Keputusan",
+    "text": "15.3 3. Solusi & Pengambilan Keputusan\nMenggunakan desain eksperimen (DOE) dan analisis statistik untuk memilih parameter ‘kontrol’ yang meminimalkan variansi output (membuat produk robust/tangguh), sehingga menekan biaya cacat produksi.",
     "crumbs": [
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>Minggu 14-15: Studi Kasus Lanjutan</span>"
     ]
@@ -1293,8 +1293,8 @@
     "objectID": "chapters/14-Studi_Kasus_Lanjutan.html#eksplorasi-komputasi-python",
     "href": "chapters/14-Studi_Kasus_Lanjutan.html#eksplorasi-komputasi-python",
     "title": "15  Minggu 14-15: Studi Kasus Lanjutan",
-    "section": "15.8 4. Eksplorasi Komputasi (Python)",
-    "text": "15.8 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 14-15!\")\n\n\nSiap untuk komputasi Minggu 14-15!",
+    "section": "15.4 4. Eksplorasi Komputasi (Python)",
+    "text": "15.4 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 14-15!\")\n\n\nSiap untuk komputasi Minggu 14-15!",
     "crumbs": [
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>Minggu 14-15: Studi Kasus Lanjutan</span>"
     ]
@@ -1304,7 +1304,7 @@
     "href": "chapters/15-Studi_Kasus_Lanjutan.html",
     "title": "16  Minggu 14-15: Studi Kasus Lanjutan",
     "section": "",
-    "text": "16.1 Agenda Perkuliahan Minggu 15\nWeek 15: Simulasi Monte Carlo dan Teori Keputusan Strategis\nTopik: Studi Kasus Integratif (Monte Carlo, Decision Theory, & Risk Management) Tema Misi: “Dr. Strange Strategy: Winning in 14,000,605 Futures”",
+    "text": "16.1 1. Konsep Pengetahuan\nPenerapan integratif dari estimasi, uji hipotesis, dan regresi pada masalah dunia nyata yang kompleks, seperti Robust Parameter Design atau deteksi sinyal.",
     "crumbs": [
       "<span class='chapter-number'>16</span>  <span class='chapter-title'>Minggu 14-15: Studi Kasus Lanjutan</span>"
     ]
@@ -1363,8 +1363,8 @@
     "objectID": "chapters/15-Studi_Kasus_Lanjutan.html#tipikal-problem",
     "href": "chapters/15-Studi_Kasus_Lanjutan.html#tipikal-problem",
     "title": "16  Minggu 14-15: Studi Kasus Lanjutan",
-    "section": "16.6 2. Tipikal Problem",
-    "text": "16.6 2. Tipikal Problem\nMengoptimalkan parameter proses manufaktur agar tahan terhadap variasi lingkungan (noise) atau mendeteksi sinyal radar di tengah noise.",
+    "section": "16.2 2. Tipikal Problem",
+    "text": "16.2 2. Tipikal Problem\nMengoptimalkan parameter proses manufaktur agar tahan terhadap variasi lingkungan (noise) atau mendeteksi sinyal radar di tengah noise.",
     "crumbs": [
       "<span class='chapter-number'>16</span>  <span class='chapter-title'>Minggu 14-15: Studi Kasus Lanjutan</span>"
     ]
@@ -1373,8 +1373,8 @@
     "objectID": "chapters/15-Studi_Kasus_Lanjutan.html#solusi-pengambilan-keputusan",
     "href": "chapters/15-Studi_Kasus_Lanjutan.html#solusi-pengambilan-keputusan",
     "title": "16  Minggu 14-15: Studi Kasus Lanjutan",
-    "section": "16.7 3. Solusi & Pengambilan Keputusan",
-    "text": "16.7 3. Solusi & Pengambilan Keputusan\nMenggunakan desain eksperimen (DOE) dan analisis statistik untuk memilih parameter ‘kontrol’ yang meminimalkan variansi output (membuat produk robust/tangguh), sehingga menekan biaya cacat produksi.",
+    "section": "16.3 3. Solusi & Pengambilan Keputusan",
+    "text": "16.3 3. Solusi & Pengambilan Keputusan\nMenggunakan desain eksperimen (DOE) dan analisis statistik untuk memilih parameter ‘kontrol’ yang meminimalkan variansi output (membuat produk robust/tangguh), sehingga menekan biaya cacat produksi.",
     "crumbs": [
       "<span class='chapter-number'>16</span>  <span class='chapter-title'>Minggu 14-15: Studi Kasus Lanjutan</span>"
     ]
@@ -1383,8 +1383,8 @@
     "objectID": "chapters/15-Studi_Kasus_Lanjutan.html#eksplorasi-komputasi-python",
     "href": "chapters/15-Studi_Kasus_Lanjutan.html#eksplorasi-komputasi-python",
     "title": "16  Minggu 14-15: Studi Kasus Lanjutan",
-    "section": "16.8 4. Eksplorasi Komputasi (Python)",
-    "text": "16.8 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 14-15!\")\n\n\nSiap untuk komputasi Minggu 14-15!",
+    "section": "16.4 4. Eksplorasi Komputasi (Python)",
+    "text": "16.4 4. Eksplorasi Komputasi (Python)\nGunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.\n\n\nLihat kode\n# Tulis kode Python Anda di sini\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nprint(\"Siap untuk komputasi Minggu 14-15!\")\n\n\nSiap untuk komputasi Minggu 14-15!",
     "crumbs": [
       "<span class='chapter-number'>16</span>  <span class='chapter-title'>Minggu 14-15: Studi Kasus Lanjutan</span>"
     ]

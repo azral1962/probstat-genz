@@ -1,0 +1,6 @@
+---
+title: "Bab 01: Pola Pikir Probabilistik vs Deterministik"
+subtitle: "Understanding Probabilistic Way of Thinking versus Deterministic Way of Thinking"
+---
+
+![“Bayangin kamu pegang stok toko. Kalau kamu bilang ‘permintaan pasti 100’, kamu terlihat rapi… sampai kenyataan menampar. Permintaan itu goyang—kadang 70, kadang 160. Nah, pertanyaan pentingnya: kamu mau terlihat yakin, atau mau benar? Probabilitas itu bukan bikin kita ragu—justru bikin kita *berani mengambil keputusan* dengan risiko yang dihitung. Hari ini kita latihan satu skill: membedakan dunia deterministik vs dunia nyata yang random. Dan keputusan kamu akan kita ukur: berapa peluang kehabisan stok kalau kamu nekat ‘pasti 100’?”](../The_Decision_Engineer.png/image1.png)

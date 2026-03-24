@@ -23,7 +23,12 @@ $$
 X=(70, 171, 20, L) 
 $$
 
-Bila mencari P(A) itu sukar, lama, atau mahal, sedangkan mencari P(B) lebh b=mudah, cepat, atau murah, bisakah kita meghitung berdaseran \$P(A\|B)\$ Kita tahu dari Bayes
+Bila mencari P(A) itu sukar, lama, atau mahal, sedangkan mencari P(B) lebh b=mudah, cepat, atau murah, bisakah kita meghitung berdaseran $P(A|B)$? Tentu bisa saja. tapi karens kualitas deteksi ternyata sangast ditentukna pleh  $P(B|A)$ karena
+$$
+P(A|B) = P(B|A) \frac{P(A)}{P(B)}
+$$
+
+Kita tahu dari Bayes
 
 **Naive Bayes Classifier** adalah algoritma klasifikasi probabilistik yang didasarkan pada **Teorema Bayes**. Algoritma ini disebut "Naive" (naif) karena ia mengasumsikan bahwa setiap fitur (variabel penjelas) berkontribusi secara independen terhadap probabilitas kelas target, meskipun di dunia nyata variabel-variabel tersebut mungkin saling berkaitan.
 

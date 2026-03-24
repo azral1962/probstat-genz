@@ -113,35 +113,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -463,28 +434,10 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#agenda-perkuliahan-minggu-12" id="toc-agenda-perkuliahan-minggu-12" class="nav-link active" data-scroll-target="#agenda-perkuliahan-minggu-12"><span class="header-section-number">13.1</span> Agenda Perkuliahan Minggu 12</a>
-  <ul class="collapse">
-  <li><a href="#pertemuan-1-senin-1-jam---the-courtroom-drama" id="toc-pertemuan-1-senin-1-jam---the-courtroom-drama" class="nav-link" data-scroll-target="#pertemuan-1-senin-1-jam---the-courtroom-drama"><span class="header-section-number">13.1.1</span> Pertemuan 1: Senin (1 Jam) - The Courtroom Drama</a></li>
-  <li><a href="#pertemuan-2-rabu-2-jam---ab-testing-lab" id="toc-pertemuan-2-rabu-2-jam---ab-testing-lab" class="nav-link" data-scroll-target="#pertemuan-2-rabu-2-jam---ab-testing-lab"><span class="header-section-number">13.1.2</span> Pertemuan 2: Rabu (2 Jam) - A/B Testing Lab</a></li>
-  </ul></li>
-  <li><a href="#materi-kuliah-konsep-aplikasi-komputasi" id="toc-materi-kuliah-konsep-aplikasi-komputasi" class="nav-link" data-scroll-target="#materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">13.2</span> Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</a>
-  <ul class="collapse">
-  <li><a href="#konsep-dasar" id="toc-konsep-dasar" class="nav-link" data-scroll-target="#konsep-dasar"><span class="header-section-number">13.2.1</span> 1. Konsep Dasar</a></li>
-  <li><a href="#aplikasi-sistem-informasi" id="toc-aplikasi-sistem-informasi" class="nav-link" data-scroll-target="#aplikasi-sistem-informasi"><span class="header-section-number">13.2.2</span> 2. Aplikasi Sistem Informasi</a></li>
-  <li><a href="#komputasi-python" id="toc-komputasi-python" class="nav-link" data-scroll-target="#komputasi-python"><span class="header-section-number">13.2.3</span> 3. Komputasi (Python)</a></li>
-  </ul></li>
-  <li><a href="#tugas-kelompok-github-classroom" id="toc-tugas-kelompok-github-classroom" class="nav-link" data-scroll-target="#tugas-kelompok-github-classroom"><span class="header-section-number">13.3</span> Tugas Kelompok (GitHub Classroom)</a></li>
-  <li><a href="#soal-solusi" id="toc-soal-solusi" class="nav-link" data-scroll-target="#soal-solusi"><span class="header-section-number">13.4</span> 15 Soal &amp; Solusi</a>
-  <ul class="collapse">
-  <li><a href="#a.-pertanyaan-konseptual" id="toc-a.-pertanyaan-konseptual" class="nav-link" data-scroll-target="#a.-pertanyaan-konseptual"><span class="header-section-number">13.4.1</span> A. Pertanyaan Konseptual</a></li>
-  <li><a href="#b.-pertanyaan-aplikatif" id="toc-b.-pertanyaan-aplikatif" class="nav-link" data-scroll-target="#b.-pertanyaan-aplikatif"><span class="header-section-number">13.4.2</span> B. Pertanyaan Aplikatif</a></li>
-  <li><a href="#c.-pertanyaan-komputasional" id="toc-c.-pertanyaan-komputasional" class="nav-link" data-scroll-target="#c.-pertanyaan-komputasional"><span class="header-section-number">13.4.3</span> C. Pertanyaan Komputasional</a></li>
-  </ul></li>
-  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">13.5</span> 1. Konsep Pengetahuan</a></li>
-  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">13.6</span> 2. Tipikal Problem</a></li>
-  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">13.7</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
-  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">13.8</span> 4. Eksplorasi Komputasi (Python)</a></li>
+  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link active" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">13.1</span> 1. Konsep Pengetahuan</a></li>
+  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">13.2</span> 2. Tipikal Problem</a></li>
+  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">13.3</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
+  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">13.4</span> 4. Eksplorasi Komputasi (Python)</a></li>
   </ul>
 </nav>
     </div>
@@ -518,280 +471,31 @@ window.Quarto = {
 <figcaption>“Ada obat baru. Klaimnya lebih efektif. Pertanyaannya: ini nyata atau kebetulan? Uji hipotesis itu ‘pengadilan statistik’: ada H0, ada H1, ada aturan keputusan, dan ada risiko salah vonis (Type I/II). Hari ini kamu belajar prosedur uji, membaca p-value, dan yang paling penting: menghubungkan angka dengan konsekuensi. Karena salah keputusan di sini bukan cuma salah nilai—bisa salah arah kebijakan.”</figcaption>
 </figure>
 </div>
-<p>Week 12: Pengujian Hipotesis Statistik dan A/B Testing</p>
-<section id="agenda-perkuliahan-minggu-12" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="agenda-perkuliahan-minggu-12"><span class="header-section-number">13.1</span> Agenda Perkuliahan Minggu 12</h2>
-<p><strong>Topik:</strong> Prosedur Uji Hipotesis, P-value, &amp; Jenis Galat (Error Types) <strong>Tema Misi:</strong> “Launch or Rollback? The Data-Driven Judge”</p>
-<section id="pertemuan-1-senin-1-jam---the-courtroom-drama" class="level3" data-number="13.1.1">
-<h3 data-number="13.1.1" class="anchored" data-anchor-id="pertemuan-1-senin-1-jam---the-courtroom-drama"><span class="header-section-number">13.1.1</span> Pertemuan 1: Senin (1 Jam) - The Courtroom Drama</h3>
-<p><strong>Fokus:</strong> Membangun intuisi tentang mekanisme pengambilan keputusan biner (Ya/Tidak) di bawah ketidakpastian menggunakan analogi hukum.</p>
-<ul>
-<li><strong>00:00 - 00:10 | The Hook: “Kasus Obat Ajaib vs Fitur Baru”</strong>
-<ul>
-<li>Skenario: “Manajer Produk bilang fitur ‘Dark Mode’ menaikkan user engagement 5%. Tapi data menunjukkan kenaikan cuma 0.2%. Apakah itu nyata atau cuma kebetulan?”</li>
-<li>Analogi: Sidang Pengadilan.
-<ul>
-<li>Terdakwa: Fitur Baru.</li>
-<li>Praduga Tak Bersalah (<span class="math inline">\(H_0\)</span>): Fitur tidak berefek (Status Quo).</li>
-<li>Jaksa Penuntut (<span class="math inline">\(H_1\)</span>): Fitur berefek signifikan.</li>
-<li>Bukti: Data Sampel.</li>
-</ul></li>
-<li>Poin: Kita tidak pernah membuktikan <span class="math inline">\(H_0\)</span> benar. Kita hanya gagal menolaknya jika bukti lemah.</li>
-</ul></li>
-<li><strong>00:10 - 00:30 | Konsep: P-value &amp; Ambang Batas (<span class="math inline">\(\alpha\)</span>)</strong>
-<ul>
-<li>Definisi Gen Z: P-value adalah “skor kebetulan”.</li>
-<li>Visualisasi: Tunjukkan kurva lonceng. Area ekor (tail) adalah zona “mustahil”. Jika data jatuh di sana (P-value &lt; 0.05), kita kaget dan menolak <span class="math inline">\(H_0\)</span>.</li>
-<li>Signifikansi (<span class="math inline">\(\alpha\)</span>): Batas toleransi risiko (biasanya 5%).</li>
-</ul></li>
-<li><strong>00:30 - 00:50 | Deep Dive: Matriks Kebingungan (Error Types)</strong>
-<ul>
-<li>Galat Tipe I (<span class="math inline">\(\alpha\)</span>): Menghukum orang tidak bersalah (False Positive). Di IT: Merilis fitur yang sebenarnya jelek/biasa saja.</li>
-<li>Galat Tipe II (<span class="math inline">\(\beta\)</span>): Membebaskan penjahat (False Negative). Di IT: Membuang ide fitur bagus karena datanya kurang.</li>
-</ul></li>
-<li><strong>00:50 - 01:00 | Pod Formation &amp; Mission Brief</strong>
-<ul>
-<li>Misi GitHub: “The A/B Test Analyst”. Mahasiswa akan menganalisis hasil eksperimen UI/UX untuk memutuskan peluncuran fitur.</li>
-</ul></li>
-</ul>
-</section>
-<section id="pertemuan-2-rabu-2-jam---ab-testing-lab" class="level3" data-number="13.1.2">
-<h3 data-number="13.1.2" class="anchored" data-anchor-id="pertemuan-2-rabu-2-jam---ab-testing-lab"><span class="header-section-number">13.1.2</span> Pertemuan 2: Rabu (2 Jam) - A/B Testing Lab</h3>
-<p><strong>Fokus:</strong> Menggunakan Python untuk melakukan uji-t (t-test) dan simulasi kekuatan uji (power).</p>
-<ul>
-<li><strong>00:00 - 00:20 | Micro-Lecture: Memilih Senjata (Uji Statistik)</strong>
-<ul>
-<li>Z-test: Jika tahu populasi (jarang dipakai).</li>
-<li>T-test: Senjata standar anak IT (sampel kecil/sedang, populasi tak diketahui).</li>
-<li>Python Tool: <code>scipy.stats.ttest_ind</code> (untuk membandingkan dua grup A/B).</li>
-</ul></li>
-<li><strong>00:20 - 01:10 | Pod Challenge: “Conversion Rate War”</strong>
-<ul>
-<li>Skenario: E-commerce membandingkan tombol “Beli” warna Merah (A) vs Hijau (B).</li>
-<li>Data: Dua array berisi 0 (nggak beli) dan 1 (beli).</li>
-<li>Tugas (Python):
-<ol type="1">
-<li>Rumuskan hipotesis <span class="math inline">\(H_0 (A=B)\)</span> dan <span class="math inline">\(H_1 (A \neq B)\)</span>.</li>
-<li>Jalankan t-test (atau Z-test proporsi).</li>
-<li>Dapatkan P-value. Ambil keputusan: Tolak atau Terima <span class="math inline">\(H_0\)</span>?</li>
-<li>Critical Thinking: Jika P-value = 0.049 (nyaris tidak signifikan), apakah kita berani rilis? (Diskusi tentang signifikansi statistik vs bisnis).</li>
-</ol></li>
-</ul></li>
-<li><strong>01:10 - 01:40 | Simulasi: “The Power of Data”</strong>
-<ul>
-<li>Masalah: Kenapa kita sering gagal mendeteksi fitur bagus? (Galat Tipe II).</li>
-<li>Simulasi: Ulangi eksperimen dengan sampel n=10 vs n=1000. Tunjukkan bagaimana sampel besar meningkatkan Power (1-<span class="math inline">\(\beta\)</span>) untuk menolak <span class="math inline">\(H_0\)</span> yang salah.</li>
-</ul></li>
-<li><strong>01:40 - 01:50 | Showcase &amp; Keputusan</strong>
-<ul>
-<li>Presentasi singkat: “Launch” atau “Rollback” berdasarkan data.</li>
-</ul></li>
-<li><strong>01:50 - 02:00 | Exit Ticket</strong>
-<ul>
-<li>Pertanyaan: “Apa bedanya signifikansi statistik dengan signifikansi praktis (bisnis)?”</li>
-</ul></li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="materi-kuliah-konsep-aplikasi-komputasi" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">13.2</span> Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</h2>
-<section id="konsep-dasar" class="level3" data-number="13.2.1">
-<h3 data-number="13.2.1" class="anchored" data-anchor-id="konsep-dasar"><span class="header-section-number">13.2.1</span> 1. Konsep Dasar</h3>
-<ul>
-<li><strong>Hipotesis Nol (<span class="math inline">\(H_0\)</span>):</strong> Pernyataan bahwa tidak ada perbedaan atau efek. Ini adalah asumsi awal yang ingin kita tantang (misal: <span class="math inline">\(\mu_A=\mu_B\)</span>).</li>
-<li><strong>Hipotesis Alternatif (<span class="math inline">\(H_1\)</span>):</strong> Pernyataan yang ingin dibuktikan kebenarannya (misal: <span class="math inline">\(\mu_A \neq \mu_B\)</span>).</li>
-<li><strong>P-value:</strong> Probabilitas mendapatkan data sampel seperti yang diamati (atau lebih ekstrim), dengan asumsi <span class="math inline">\(H_0\)</span> benar. P-value kecil <span class="math inline">\(\to\)</span> Bukti kuat melawan <span class="math inline">\(H_0\)</span>.</li>
-<li><strong>Signifikansi (<span class="math inline">\(\alpha\)</span>):</strong> Peluang maksimal melakukan Galat Tipe I (biasanya 0.05).</li>
-<li><strong>Jenis Galat:</strong>
-<ul>
-<li>Tipe I: Menolak <span class="math inline">\(H_0\)</span> padahal <span class="math inline">\(H_0\)</span> benar (False Positive).</li>
-<li>Tipe II: Gagal menolak <span class="math inline">\(H_0\)</span> padahal <span class="math inline">\(H_1\)</span> benar (False Negative).</li>
-</ul></li>
-</ul>
-</section>
-<section id="aplikasi-sistem-informasi" class="level3" data-number="13.2.2">
-<h3 data-number="13.2.2" class="anchored" data-anchor-id="aplikasi-sistem-informasi"><span class="header-section-number">13.2.2</span> 2. Aplikasi Sistem Informasi</h3>
-<ul>
-<li><strong>A/B Testing:</strong> Membandingkan metrik (konversi, latency, retention) antara versi kontrol dan eksperimen. Jika perbedaan signifikan (P &lt; 0.05), fitur baru dirilis.</li>
-<li><strong>Performance Benchmarking:</strong> Membuktikan apakah server baru lebih cepat secara signifikan dibanding server lama, bukan sekadar kebetulan fluktuasi trafik.</li>
-<li><strong>Deteksi Anomali:</strong> Menguji hipotesis apakah lonjakan trafik saat ini berasal dari distribusi normal trafik harian. Jika P-value sangat kecil, itu dianggap serangan (DDoS).</li>
-</ul>
-</section>
-<section id="komputasi-python" class="level3" data-number="13.2.3">
-<h3 data-number="13.2.3" class="anchored" data-anchor-id="komputasi-python"><span class="header-section-number">13.2.3</span> 3. Komputasi (Python)</h3>
-<ul>
-<li><strong>Library:</strong> <code>scipy.stats</code> dan <code>statsmodels</code>.</li>
-<li><strong>Fungsi Kunci:</strong>
-<ul>
-<li><code>ttest_1samp</code>: Uji satu sampel terhadap konstanta.</li>
-<li><code>ttest_ind</code>: Uji dua sampel independen (A/B testing).</li>
-<li><code>proportions_ztest</code>: Uji proporsi (misal CTR).</li>
-</ul></li>
-<li><strong>Alur:</strong> Load Data <span class="math inline">\(\to\)</span> Hitung Statistik T <span class="math inline">\(\to\)</span> Hitung P-value <span class="math inline">\(\to\)</span> Bandingkan dengan alpha <span class="math inline">\(\to\)</span> Keputusan.</li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="tugas-kelompok-github-classroom" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="tugas-kelompok-github-classroom"><span class="header-section-number">13.3</span> Tugas Kelompok (GitHub Classroom)</h2>
-<p><strong>Judul:</strong> Week 12 Mission: The Hypothesis Detective</p>
-<p><strong>Deskripsi:</strong> Mahasiswa diberikan data log performa dari dua algoritma pencarian (Search A dan Search B). Mereka harus menentukan secara statistik mana yang lebih cepat dan apakah perbedaannya signifikan.</p>
-<p><strong>Set Soal (Notebook):</strong> 1. <strong>Formulasi (20 poin):</strong> Tuliskan <span class="math inline">\(H_0\)</span> dan <span class="math inline">\(H_1\)</span> untuk kasus ini. Jelaskan apa konsekuensi Galat Tipe I (biaya ganti algoritma sia-sia) dalam konteks bisnis ini. 2. <strong>Uji Normalitas (20 poin):</strong> Sebelum t-test, cek apakah data berdistribusi normal (visual histogram atau Shapiro-Wilk test). Jika tidak, apa yang harus dilakukan? (Jawab: CLT menyelamatkan jika sampel besar). 3. <strong>Eksekusi T-test (30 poin):</strong> Gunakan <code>scipy.stats.ttest_ind</code> untuk membandingkan rata-rata waktu pencarian. Tampilkan T-statistic dan P-value. 4. <strong>Analisis Power (30 poin):</strong> Gunakan <code>statsmodels.stats.power</code> untuk menghitung: dengan ukuran sampel saat ini, seberapa kecil perbedaan waktu (effect size) yang bisa kita deteksi dengan peluang 80%?</p>
-<hr>
-</section>
-<section id="soal-solusi" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="soal-solusi"><span class="header-section-number">13.4</span> 15 Soal &amp; Solusi</h2>
-<section id="a.-pertanyaan-konseptual" class="level3" data-number="13.4.1">
-<h3 data-number="13.4.1" class="anchored" data-anchor-id="a.-pertanyaan-konseptual"><span class="header-section-number">13.4.1</span> A. Pertanyaan Konseptual</h3>
-<ol type="1">
-<li><strong>Soal:</strong> Jelaskan perbedaan filosofis antara hipotesis nol (<span class="math inline">\(H_0\)</span>) dan hipotesis alternatif (<span class="math inline">\(H_1\)</span>).
-<ul>
-<li><strong>Solusi:</strong> <span class="math inline">\(H_0\)</span> adalah pernyataan “status quo” atau tidak ada efek/perbedaan, yang diasumsikan benar sampai ada bukti kuat yang membantahnya (sikap skeptis). <span class="math inline">\(H_1\)</span> adalah klaim baru atau efek yang ingin dibuktikan oleh peneliti. Kita hanya bisa “menolak <span class="math inline">\(H_0\)</span>” (mendukung <span class="math inline">\(H_1\)</span>) atau “gagal menolak <span class="math inline">\(H_0\)</span>” (tidak cukup bukti), tidak pernah membuktikan <span class="math inline">\(H_0\)</span> benar.</li>
-</ul></li>
-<li><strong>Soal:</strong> Apa yang dimaksud dengan tingkat signifikansi (<span class="math inline">\(\alpha\)</span>) dan hubungannya dengan Galat Tipe I?
-<ul>
-<li><strong>Solusi:</strong> Tingkat signifikansi <span class="math inline">\(\alpha\)</span> (misal 0.05) adalah probabilitas maksimum yang kita izinkan untuk melakukan Galat Tipe I. Galat Tipe I adalah kesalahan menolak <span class="math inline">\(H_0\)</span> padahal <span class="math inline">\(H_0\)</span> benar (False Positive). Jadi, <span class="math inline">\(\alpha\)</span> adalah batas toleransi kita terhadap risiko “salah tuduh”.</li>
-</ul></li>
-<li><strong>Soal:</strong> Jelaskan konsep p-value dan bagaimana ia digunakan sebagai dasar penolakan <span class="math inline">\(H_0\)</span>.
-<ul>
-<li><strong>Solusi:</strong> P-value adalah probabilitas mendapatkan data statistik seperti yang diamati (atau lebih ekstrim) jika hipotesis nol benar. Jika p-value &lt; <span class="math inline">\(\alpha\)</span> (sangat kecil), artinya data tersebut sangat tidak mungkin terjadi karena kebetulan saja, sehingga kita menolak <span class="math inline">\(H_0\)</span>.</li>
-</ul></li>
-<li><strong>Soal:</strong> Apa itu Galat Tipe II (<span class="math inline">\(\beta\)</span>) dan bagaimana hubungannya dengan kekuatan uji (power of test)?
-<ul>
-<li><strong>Solusi:</strong> Galat Tipe II (<span class="math inline">\(\beta\)</span>) adalah kesalahan gagal menolak <span class="math inline">\(H_0\)</span> padahal <span class="math inline">\(H_1\)</span> benar (False Negative / gagal mendeteksi efek). Kekuatan uji (Power) adalah <span class="math inline">\(1 - \beta\)</span>, yaitu probabilitas tes berhasil mendeteksi efek/perbedaan jika hal itu benar-benar ada.</li>
-</ul></li>
-<li><strong>Soal:</strong> Mengapa pengujian satu arah (one-tailed) terkadang lebih kuat daripada pengujian dua arah (two-tailed)?
-<ul>
-<li><strong>Solusi:</strong> Karena pada uji satu arah, seluruh wilayah kritis (<span class="math inline">\(\alpha\)</span>) dikonsentrasikan di satu sisi distribusi. Ini membuat nilai kritis lebih mudah dicapai (lebih sensitif mendeteksi perubahan ke arah tertentu), asalkan kita yakin perubahan ke arah sebaliknya tidak relevan atau mustahil.</li>
-</ul></li>
-</ol>
-</section>
-<section id="b.-pertanyaan-aplikatif" class="level3" data-number="13.4.2">
-<h3 data-number="13.4.2" class="anchored" data-anchor-id="b.-pertanyaan-aplikatif"><span class="header-section-number">13.4.2</span> B. Pertanyaan Aplikatif</h3>
-<ol start="6" type="1">
-<li><strong>Soal:</strong> Sebuah ISP mengklaim kecepatan rata-rata mereka adalah 100 Mbps. Dari sampel 50 user, didapat rata-rata 95 Mbps. Ujilah klaim ISP tersebut dengan <span class="math inline">\(\alpha=0.05\)</span>.
-<ul>
-<li><strong>Solusi:</strong>
-<ul>
-<li><span class="math inline">\(H_0: \mu=100, H_1: \mu \neq 100\)</span>.</li>
-<li>Hitung t-statistik. Jika P-value &lt; 0.05, tolak <span class="math inline">\(H_0\)</span> (klaim ISP bohong). Jika &gt; 0.05, klaim diterima (perbedaan 5 Mbps dianggap variasi sampel wajar).</li>
-</ul></li>
-</ul></li>
-<li><strong>Soal:</strong> Perusahaan startup mengklaim fitur baru mereka meningkatkan durasi sesi user. Lakukan uji hipotesis untuk membandingkan rata-rata durasi sebelum dan sesudah fitur dirilis.
-<ul>
-<li><strong>Solusi:</strong> Gunakan Paired T-test (Uji t berpasangan) karena subjeknya sama (sebelum vs sesudah). <span class="math inline">\(H_0: \mu_{diff} \le 0, H_1: \mu_{diff} &gt; 0\)</span> (One-tailed). Jika P-value &lt; <span class="math inline">\(\alpha\)</span>, fitur terbukti efektif.</li>
-</ul></li>
-<li><strong>Soal:</strong> Analisis apakah proporsi kegagalan transaksi di sistem pembayaran baru lebih kecil daripada sistem lama dengan tingkat signifikansi 1%.
-<ul>
-<li><strong>Solusi:</strong> Gunakan Z-test proporsi dua sampel.
-<ul>
-<li><span class="math inline">\(H_0: p_{baru} \ge p_{lama}\)</span>. <span class="math inline">\(H_1: p_{baru} &lt; p_{lama}\)</span> (Sistem baru lebih baik/error lebih kecil).</li>
-<li>Bandingkan P-value dengan <span class="math inline">\(\alpha=0.01\)</span>.</li>
-</ul></li>
-</ul></li>
-<li><strong>Soal:</strong> Uji apakah rata-rata penggunaan data mahasiswa STI berbeda secara signifikan dari rata-rata mahasiswa program studi lain.
-<ul>
-<li><strong>Solusi:</strong> Gunakan Independent Two-Sample T-test. <span class="math inline">\(H_0: \mu_{STI} = \mu_{Lain}\)</span>. <span class="math inline">\(H_1: \mu_{STI} \neq \mu_{Lain}\)</span> (Two-tailed).</li>
-</ul></li>
-<li><strong>Soal:</strong> Gunakan uji hipotesis untuk memvalidasi apakah sebuah koin adil atau berat sebelah berdasarkan 100 lemparan.
-<ul>
-<li><strong>Solusi:</strong> Uji proporsi satu sampel.
-<ul>
-<li><span class="math inline">\(H_0: p=0.5\)</span> (Adil).</li>
-<li><span class="math inline">\(H_1: p \neq 0.5\)</span> (Berat sebelah).</li>
-<li>Jika hasil (misal 60 Heads) menghasilkan P-value &lt; 0.05, koin dianggap curang.</li>
-</ul></li>
-</ul></li>
-</ol>
-</section>
-<section id="c.-pertanyaan-komputasional" class="level3" data-number="13.4.3">
-<h3 data-number="13.4.3" class="anchored" data-anchor-id="c.-pertanyaan-komputasional"><span class="header-section-number">13.4.3</span> C. Pertanyaan Komputasional</h3>
-<ol start="11" type="1">
-<li><strong>Soal:</strong> Tulis skrip Python untuk menghitung nilai t-statistik dan p-value secara manual untuk uji satu sampel.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np  </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats  </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [<span class="dv">50</span>, <span class="dv">52</span>, <span class="dv">51</span>, <span class="dv">49</span>, <span class="dv">48</span>] <span class="co"># data sampel  </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>mu_0 <span class="op">=</span> <span class="dv">50</span>    <span class="co"># hipotesis nol  </span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">len</span>(data)  </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>t_stat <span class="op">=</span> (np.mean(data) <span class="op">-</span> mu_0) <span class="op">/</span> (np.std(data, ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> np.sqrt(n))  </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>p_val <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> stats.t.cdf(<span class="bu">abs</span>(t_stat), df<span class="op">=</span>n<span class="op">-</span><span class="dv">1</span>)) <span class="co"># Two-tailed  </span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t_stat, p_val)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Gunakan scipy.stats.ttest_ind untuk melakukan uji t dua sampel independen pada dataset performa server.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats  </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>server_A <span class="op">=</span> [<span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>]  </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>server_B <span class="op">=</span> [<span class="dv">9</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>, <span class="dv">16</span>]  </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>stat, pval <span class="op">=</span> stats.ttest_ind(server_A, server_B)  </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"P-value: </span><span class="sc">{</span>pval<span class="sc">}</span><span class="ss">"</span>)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Visualisasikan daerah penolakan pada kurva distribusi Normal untuk uji dua arah.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt  </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np  </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm  </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1000</span>)  </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> norm.pdf(x)  </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y)  </span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.fill_between(x, <span class="dv">0</span>, y, where<span class="op">=</span>(x <span class="op">&gt;</span> <span class="fl">1.96</span>) <span class="op">|</span> (x <span class="op">&lt;</span> <span class="op">-</span><span class="fl">1.96</span>), color<span class="op">=</span><span class="st">'red'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)  </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Daerah Penolakan (Alpha 0.05)"</span>)  </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.show()  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Buat simulasi untuk menghitung probabilitas Galat Tipe I dengan melakukan pengujian berulang pada data yang ditarik dari populasi yang sama.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulasi A/A Test (H0 benar)  </span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>false_positives <span class="op">=</span> <span class="dv">0</span>  </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):  </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>)  </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>) <span class="co"># Populasi sama  </span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>_, p <span class="op">=</span> stats.ttest_ind(a, b)  </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> p <span class="op">&lt;</span> <span class="fl">0.05</span>: false_positives <span class="op">+=</span> <span class="dv">1</span>  </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Type I Error Rate: </span><span class="sc">{</span>false_positives<span class="op">/</span><span class="dv">1000</span><span class="sc">}</span><span class="ss">"</span>) <span class="co"># Harusnya ~0.05  </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Implementasikan uji proporsi dua sampel menggunakan pustaka statsmodels.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.stats.proportion <span class="im">import</span> proportions_ztest  </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Misal: Grup A 30/100 sukses, Grup B 45/100 sukses  </span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> np.array([<span class="dv">30</span>, <span class="dv">45</span>])  </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>nobs <span class="op">=</span> np.array([<span class="dv">100</span>, <span class="dv">100</span>])  </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>stat, pval <span class="op">=</span> proportions_ztest(count, nobs)  </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"P-value: </span><span class="sc">{</span>pval<span class="sc">}</span><span class="ss">"</span>)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-</ol>
-</section>
-</section>
-<section id="konsep-pengetahuan" class="level2" data-number="13.5">
-<h2 data-number="13.5" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">13.5</span> 1. Konsep Pengetahuan</h2>
+<section id="konsep-pengetahuan" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">13.1</span> 1. Konsep Pengetahuan</h2>
 <p>Menentukan H0 dan H1, menghitung statistik uji, P-value, serta memahami Galat Tipe I (False Positive) dan Tipe II (False Negative).</p>
 </section>
-<section id="tipikal-problem" class="level2" data-number="13.6">
-<h2 data-number="13.6" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">13.6</span> 2. Tipikal Problem</h2>
+<section id="tipikal-problem" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">13.2</span> 2. Tipikal Problem</h2>
 <p>Sebuah obat baru diklaim lebih efektif menyembuhkan penyakit dibandingkan obat lama. Apakah klaim ini valid atau hanya kebetulan?</p>
 </section>
-<section id="solusi-pengambilan-keputusan" class="level2" data-number="13.7">
-<h2 data-number="13.7" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">13.7</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
+<section id="solusi-pengambilan-keputusan" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">13.3</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
 <p>Melakukan uji hipotesis (misal t-test). Jika P-value &lt; alpha (0.05), tolak H0. Keputusannya adalah memproduksi obat baru tersebut karena terbukti secara signifikan lebih baik secara statistik.</p>
 </section>
-<section id="eksplorasi-komputasi-python" class="level2" data-number="13.8">
-<h2 data-number="13.8" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">13.8</span> 4. Eksplorasi Komputasi (Python)</h2>
+<section id="eksplorasi-komputasi-python" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">13.4</span> 4. Eksplorasi Komputasi (Python)</h2>
 <p><em>Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.</em></p>
-<div id="f4e56de5" class="cell" data-execution_count="1">
+<div id="eea492c3" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Lihat kode</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 12!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 12!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Siap untuk komputasi Minggu 12!</code></pre>
@@ -1285,37 +989,36 @@ window.Quarto = {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minggu 12: Pengujian Hipotesis"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Hypothesis Testing Procedure, Error Types"</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="al">![“Ada obat baru. Klaimnya lebih efektif. Pertanyaannya: ini nyata atau kebetulan? Uji hipotesis itu ‘pengadilan statistik’: ada H0, ada H1, ada aturan keputusan, dan ada risiko salah vonis (Type I/II). Hari ini kamu belajar prosedur uji, membaca p-value, dan yang paling penting: menghubungkan angka dengan konsekuensi. Karena salah keputusan di sini bukan cuma salah nilai—bisa salah arah kebijakan.”](../The_Decision_Engineer.png/image12.png)</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../agenda/w12.qmd &gt;}}</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>Menentukan H0 dan H1, menghitung statistik uji, P-value, serta memahami Galat Tipe I (False Positive) dan Tipe II (False Negative).</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>Sebuah obat baru diklaim lebih efektif menyembuhkan penyakit dibandingkan obat lama. Apakah klaim ini valid atau hanya kebetulan?</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>Melakukan uji hipotesis (misal t-test). Jika P-value &lt; alpha (0.05), tolak H0. Keputusannya adalah memproduksi obat baru tersebut karena terbukti secara signifikan lebih baik secara statistik.</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 12!"</span>)</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minggu 12: Pengujian Hipotesis"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Hypothesis Testing Procedure, Error Types"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="al">![“Ada obat baru. Klaimnya lebih efektif. Pertanyaannya: ini nyata atau kebetulan? Uji hipotesis itu ‘pengadilan statistik’: ada H0, ada H1, ada aturan keputusan, dan ada risiko salah vonis (Type I/II). Hari ini kamu belajar prosedur uji, membaca p-value, dan yang paling penting: menghubungkan angka dengan konsekuensi. Karena salah keputusan di sini bukan cuma salah nilai—bisa salah arah kebijakan.”](../The_Decision_Engineer.png/image12.png)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>Menentukan H0 dan H1, menghitung statistik uji, P-value, serta memahami Galat Tipe I (False Positive) dan Tipe II (False Negative).</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>Sebuah obat baru diklaim lebih efektif menyembuhkan penyakit dibandingkan obat lama. Apakah klaim ini valid atau hanya kebetulan?</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>Melakukan uji hipotesis (misal t-test). Jika P-value &lt; alpha (0.05), tolak H0. Keputusannya adalah memproduksi obat baru tersebut karena terbukti secara signifikan lebih baik secara statistik.</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 12!"</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

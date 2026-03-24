@@ -113,35 +113,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -463,28 +434,10 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#agenda-perkuliahan-minggu-6" id="toc-agenda-perkuliahan-minggu-6" class="nav-link active" data-scroll-target="#agenda-perkuliahan-minggu-6"><span class="header-section-number">7.1</span> <strong>Agenda Perkuliahan Minggu 6</strong></a>
-  <ul class="collapse">
-  <li><a href="#pertemuan-1-senin-1-jam-the-intuition-the-rare-event" id="toc-pertemuan-1-senin-1-jam-the-intuition-the-rare-event" class="nav-link" data-scroll-target="#pertemuan-1-senin-1-jam-the-intuition-the-rare-event"><span class="header-section-number">7.1.1</span> <strong>Pertemuan 1: Senin (1 Jam) – <em>The Intuition &amp; The Rare Event</em></strong></a></li>
-  <li><a href="#pertemuan-2-rabu-2-jam-simulation-lab" id="toc-pertemuan-2-rabu-2-jam-simulation-lab" class="nav-link" data-scroll-target="#pertemuan-2-rabu-2-jam-simulation-lab"><span class="header-section-number">7.1.2</span> <strong>Pertemuan 2: Rabu (2 Jam) – <em>Simulation Lab</em></strong></a></li>
-  </ul></li>
-  <li><a href="#materi-kuliah-konsep-aplikasi-komputasi" id="toc-materi-kuliah-konsep-aplikasi-komputasi" class="nav-link" data-scroll-target="#materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">7.2</span> <strong>Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</strong></a>
-  <ul class="collapse">
-  <li><a href="#konsep-dasar" id="toc-konsep-dasar" class="nav-link" data-scroll-target="#konsep-dasar"><span class="header-section-number">7.2.1</span> <strong>1. Konsep Dasar</strong></a></li>
-  <li><a href="#aplikasi-sistem-informasi" id="toc-aplikasi-sistem-informasi" class="nav-link" data-scroll-target="#aplikasi-sistem-informasi"><span class="header-section-number">7.2.2</span> <strong>2. Aplikasi Sistem Informasi</strong></a></li>
-  <li><a href="#komputasi-python" id="toc-komputasi-python" class="nav-link" data-scroll-target="#komputasi-python"><span class="header-section-number">7.2.3</span> <strong>3. Komputasi (Python)</strong></a></li>
-  </ul></li>
-  <li><a href="#tugas-kelompok-github-classroom" id="toc-tugas-kelompok-github-classroom" class="nav-link" data-scroll-target="#tugas-kelompok-github-classroom"><span class="header-section-number">7.3</span> <strong>Tugas Kelompok (GitHub Classroom)</strong></a></li>
-  <li><a href="#soal-solusi-sumber-desain-kurikulum" id="toc-soal-solusi-sumber-desain-kurikulum" class="nav-link" data-scroll-target="#soal-solusi-sumber-desain-kurikulum"><span class="header-section-number">7.4</span> <strong>15 Soal &amp; Solusi (Sumber: “Desain Kurikulum…”)</strong></a>
-  <ul class="collapse">
-  <li><a href="#a.-pertanyaan-konseptual" id="toc-a.-pertanyaan-konseptual" class="nav-link" data-scroll-target="#a.-pertanyaan-konseptual"><span class="header-section-number">7.4.1</span> <strong>A. Pertanyaan Konseptual</strong></a></li>
-  <li><a href="#b.-pertanyaan-aplikatif" id="toc-b.-pertanyaan-aplikatif" class="nav-link" data-scroll-target="#b.-pertanyaan-aplikatif"><span class="header-section-number">7.4.2</span> <strong>B. Pertanyaan Aplikatif</strong></a></li>
-  <li><a href="#c.-pertanyaan-komputasional" id="toc-c.-pertanyaan-komputasional" class="nav-link" data-scroll-target="#c.-pertanyaan-komputasional"><span class="header-section-number">7.4.3</span> <strong>C. Pertanyaan Komputasional</strong></a></li>
-  </ul></li>
-  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">7.5</span> 1. Konsep Pengetahuan</a></li>
-  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">7.6</span> 2. Tipikal Problem</a></li>
-  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">7.7</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
-  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">7.8</span> 4. Eksplorasi Komputasi (Python)</a></li>
+  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link active" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">7.1</span> 1. Konsep Pengetahuan</a></li>
+  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">7.2</span> 2. Tipikal Problem</a></li>
+  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">7.3</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
+  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">7.4</span> 4. Eksplorasi Komputasi (Python)</a></li>
   </ul>
 </nav>
     </div>
@@ -518,172 +471,22 @@ window.Quarto = {
 <figcaption>“Pabrik bilang cacat 1%. Kamu ambil 100 unit. Pertanyaan kecil tapi tajam: peluang tepat 2 cacat berapa? Ini momen kamu belajar memilih model yang tepat: Binomial untuk ‘n percobaan’, Poisson untuk ‘kejadian jarang’. Engineer yang bagus bukan yang hafal rumus banyak—tapi yang <em>tahu kapan pakai yang mana</em>. Hari ini kamu latihan dua model, lalu bikin keputusan QC: lanjut produksi atau stop inspeksi?”</figcaption>
 </figure>
 </div>
-<p>Week 06: Distribusi Probabilitas Diskrit (Binomial &amp; Poisson)</p>
-<p><strong>“Simulation First, Math Later”</strong> menghubungkan teori “kering” dengan aplikasi nyata seperti <em>Gacha Games</em>, <em>Server Traffic</em>, dan <em>Cybersecurity</em>.</p>
-<hr>
-<section id="agenda-perkuliahan-minggu-6" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="agenda-perkuliahan-minggu-6"><span class="header-section-number">7.1</span> <strong>Agenda Perkuliahan Minggu 6</strong></h2>
-<p><strong>Topik:</strong> Distribusi Binomial &amp; Poisson <strong>Tema Misi:</strong> <em>“The Digital Pulse: Counting Clicks, Bugs, and Attacks”</em></p>
-<section id="pertemuan-1-senin-1-jam-the-intuition-the-rare-event" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="pertemuan-1-senin-1-jam-the-intuition-the-rare-event"><span class="header-section-number">7.1.1</span> <strong>Pertemuan 1: Senin (1 Jam) – <em>The Intuition &amp; The Rare Event</em></strong></h3>
-<p><em>Fokus: Memahami pola “sukses/gagal” berulang dan fenomena “kejadian langka” melalui simulasi visual.</em></p>
-<ul>
-<li><strong>00:00 – 00:10 | The Hook: “Gacha Rates &amp; Server Bursts”</strong>
-<ul>
-<li><strong>Aktivitas:</strong> Tampilkan simulator “Gacha” (atau Loot Box).</li>
-<li><strong>Pertanyaan:</strong> “Jika <em>drop rate</em> item langka adalah 1% (<span class="math inline">\(p=0.01\)</span>) dan kamu melakukan 100 kali <em>pull</em> (<span class="math inline">\(n=100\)</span>), apakah kamu <strong>dijamin</strong> dapat 1 item? Atau bisa 0? Atau 5?”</li>
-<li><strong>Poin:</strong> Probabilitas bukan jaminan pasti, tapi distribusi kemungkinan. Ini adalah <strong>Binomial</strong>.</li>
-</ul></li>
-<li><strong>00:10 – 00:30 | Live Coding: “Visualizing Luck”</strong>
-<ul>
-<li><strong>Dosen (Python Demo):</strong>
-<ul>
-<li>Gunakan <code>numpy.random.binomial(n=100, p=0.01, size=1000)</code>.</li>
-<li>Plot histogram hasilnya.</li>
-<li><strong>Visualisasi:</strong> Tunjukkan bahwa meskipun rata-rata dapat 1, banyak yang dapat 0 (sial) atau dapat 3 (hoki).</li>
-</ul></li>
-<li><strong>Transisi:</strong> Apa yang terjadi jika <span class="math inline">\(n\)</span> (jumlah percobaan) menjadi tak hingga (waktu terus berjalan) dan <span class="math inline">\(p\)</span> sangat kecil? Kita masuk ke <strong>Poisson</strong> (distribusi kejadian langka/trafik).</li>
-</ul></li>
-<li><strong>00:30 – 00:50 | Konsep: Binomial vs Poisson</strong>
-<ul>
-<li><strong>Binomial:</strong> Diskrit, jumlah percobaan (<span class="math inline">\(n\)</span>) tetap (misal: 10 paket data dikirim, berapa yang rusak?).</li>
-<li><strong>Poisson:</strong> Diskrit, interval waktu/ruang, <span class="math inline">\(n\)</span> tidak diketahui tapi rata-rata (<span class="math inline">\(\lambda\)</span>) diketahui (misal: berapa serangan DDoS per jam?).</li>
-</ul></li>
-<li><strong>00:50 – 01:00 | Pod Formation &amp; Mission Brief</strong>
-<ul>
-<li><strong>Misi GitHub:</strong> <em>“The Traffic Controller”</em>. Mahasiswa akan mensimulasikan trafik jaringan untuk mendeteksi anomali.</li>
-</ul></li>
-</ul>
-</section>
-<section id="pertemuan-2-rabu-2-jam-simulation-lab" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="pertemuan-2-rabu-2-jam-simulation-lab"><span class="header-section-number">7.1.2</span> <strong>Pertemuan 2: Rabu (2 Jam) – <em>Simulation Lab</em></strong></h3>
-<p><em>Fokus: Menggunakan Python untuk menghitung risiko kegagalan sistem dan kapasitas server.</em></p>
-<ul>
-<li><strong>00:00 – 00:20 | Micro-Lecture: Kapan Binomial <span class="math inline">\(\approx\)</span> Poisson?</strong>
-<ul>
-<li><strong>Hukum Kejadian Jarang:</strong> Tunjukkan lewat kode bahwa jika <span class="math inline">\(n\)</span> besar (1000) dan <span class="math inline">\(p\)</span> kecil (0.001), grafik Binomial dan Poisson (<span class="math inline">\(\lambda = n \cdot p\)</span>) akan berimpit. Ini memudahkan perhitungan di sistem <em>real-time</em>.</li>
-</ul></li>
-<li><strong>00:20 – 01:10 | Pod Challenge: “Capacity &amp; Anomaly”</strong>
-<ul>
-<li><strong>Skenario:</strong> Anda admin server. Rata-rata <em>request</em> per detik adalah <span class="math inline">\(\lambda = 50\)</span>. Kapasitas server 70 req/detik.</li>
-<li><strong>Tugas (Python):</strong>
-<ol type="1">
-<li>Hitung peluang server <em>crash</em> (request &gt; 70) menggunakan <code>scipy.stats.poisson</code>.</li>
-<li><strong>Simulasi:</strong> Generate trafik selama 24 jam (86400 detik). Berapa detik server akan <em>down</em>?</li>
-<li><strong>Deteksi Serangan:</strong> Jika tiba-tiba masuk 100 request, hitung probabilitasnya. Jika <span class="math inline">\(P(X \ge 100)\)</span> sangat kecil (misal &lt; 0.0001), sistem harus otomatis memblokir IP (anggap serangan).</li>
-</ol></li>
-</ul></li>
-<li><strong>01:10 – 01:40 | Studi Kasus: Bug Hunter</strong>
-<ul>
-<li><strong>Masalah:</strong> Probabilitas 1 baris kode punya bug = 0.001. Ada 1000 baris kode.</li>
-<li><strong>Hitungan:</strong> Berapa peluang software “Clean” (0 bug)? Bandingkan hitungan <code>binom</code> vs <code>poisson</code>.</li>
-</ul></li>
-<li><strong>01:40 – 01:50 | Showcase &amp; Keputusan</strong>
-<ul>
-<li>Pods mempresentasikan: “Berapa kapasitas server cadangan yang harus dibeli agar peluang crash &lt; 1%?”</li>
-</ul></li>
-<li><strong>01:50 – 02:00 | Exit Ticket</strong>
-<ul>
-<li>Pertanyaan: “Berikan satu contoh kejadian di sekitarmu yang mengikuti distribusi Poisson.” (Jawab: Chat masuk per jam, motor lewat per menit).</li>
-</ul></li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="materi-kuliah-konsep-aplikasi-komputasi" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">7.2</span> <strong>Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</strong></h2>
-<section id="konsep-dasar" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="konsep-dasar"><span class="header-section-number">7.2.1</span> <strong>1. Konsep Dasar</strong></h3>
-<ul>
-<li><strong>Distribusi Bernoulli:</strong> Unit dasar. 1 percobaan, Sukses (<span class="math inline">\(p\)</span>) atau Gagal (<span class="math inline">\(1-p\)</span>).</li>
-<li><strong>Distribusi Binomial (<span class="math inline">\(n, p\)</span>):</strong> Jumlah sukses <span class="math inline">\(k\)</span> dalam <span class="math inline">\(n\)</span> percobaan Bernoulli yang saling independen.
-<ul>
-<li>Rumus: <span class="math inline">\(P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}\)</span>.</li>
-</ul></li>
-<li><strong>Distribusi Poisson (<span class="math inline">\(\lambda\)</span>):</strong> Jumlah kejadian dalam interval waktu/ruang tertentu.
-<ul>
-<li>Rumus: <span class="math inline">\(P(X=k) = \frac{e^{-\lambda} \lambda^k}{k!}\)</span>.</li>
-<li><strong>Hukum Kejadian Jarang:</strong> Poisson adalah limit dari Binomial saat <span class="math inline">\(n \to \infty\)</span> dan <span class="math inline">\(p \to 0\)</span>.</li>
-</ul></li>
-</ul>
-</section>
-<section id="aplikasi-sistem-informasi" class="level3" data-number="7.2.2">
-<h3 data-number="7.2.2" class="anchored" data-anchor-id="aplikasi-sistem-informasi"><span class="header-section-number">7.2.2</span> <strong>2. Aplikasi Sistem Informasi</strong></h3>
-<ul>
-<li><strong>Reliabilitas Komunikasi:</strong> Menghitung peluang paket data rusak (Bit Error Rate). Jika dikirim 1000 bit dan <span class="math inline">\(p_{error}=10^{-3}\)</span>, peluang paket diterima sempurna bisa dihitung dengan Binomial/Poisson.</li>
-<li><strong>Antrian Server:</strong> Memodelkan kedatangan <em>user</em> ke website. Jika rata-rata 10 user/menit (<span class="math inline">\(\lambda=10\)</span>), kita bisa menghitung peluang tiba-tiba datang 20 user (lonjakan beban).</li>
-<li><strong>Cybersecurity:</strong> Deteksi anomali. Jika jumlah login gagal per menit biasanya <span class="math inline">\(\lambda=0.5\)</span>, dan tiba-tiba ada 10 login gagal, probabilitas kejadian ini sangat rendah menurut Poisson, sehingga diklasifikasikan sebagai <em>Brute Force Attack</em>.</li>
-</ul>
-</section>
-<section id="komputasi-python" class="level3" data-number="7.2.3">
-<h3 data-number="7.2.3" class="anchored" data-anchor-id="komputasi-python"><span class="header-section-number">7.2.3</span> <strong>3. Komputasi (Python)</strong></h3>
-<ul>
-<li><strong>Library:</strong> <code>scipy.stats</code> (modul <code>binom</code> dan <code>poisson</code>).</li>
-<li><strong>Fungsi Kunci:</strong>
-<ul>
-<li><code>binom.pmf(k, n, p)</code>: Peluang tepat <span class="math inline">\(k\)</span> sukses.</li>
-<li><code>poisson.cdf(k, mu)</code>: Peluang kumulatif ( <span class="math inline">\(\le k\)</span> kejadian). Berguna untuk menghitung “Peluang server <em>tidak</em> overload”.</li>
-<li><code>numpy.random.poisson(lam, size)</code>: Simulasi data dummy trafik.</li>
-</ul></li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="tugas-kelompok-github-classroom" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="tugas-kelompok-github-classroom"><span class="header-section-number">7.3</span> <strong>Tugas Kelompok (GitHub Classroom)</strong></h2>
-<p><strong>Judul:</strong> <em>Week 6: The Network Guardian</em></p>
-<p><strong>Deskripsi:</strong> Mahasiswa diberikan log data simulasi jaringan. Mereka harus memodelkan pola trafik normal dan membuat skrip otomatis untuk mendeteksi anomali.</p>
-<p><strong>Set Soal (Notebook):</strong> 1. <strong>Modeling (30 poin):</strong> * Analisis data historis: Hitung rata-rata request/detik (<span class="math inline">\(\lambda\)</span>). * Visualisasikan histogram data vs kurva teoritis Poisson(<span class="math inline">\(\lambda\)</span>). Apakah cocok? 2. <strong>Capacity Planning (30 poin):</strong> * Perusahaan ingin menjamin 99.9% waktu server aman. * Cari nilai <span class="math inline">\(C\)</span> (kapasitas) sedemikian rupa sehingga <span class="math inline">\(P(X \le C) \ge 0.999\)</span>. 3. <strong>Anomaly Detection (40 poin):</strong> * Buat fungsi <code>is_anomaly(current_requests)</code>. * Jika probabilitas kejadian tersebut <span class="math inline">\(&lt; 0.05\%\)</span> berdasarkan distribusi Poisson, kembalikan <code>True</code>. * Uji fungsi tersebut pada dataset serangan (dataset kedua).</p>
-<hr>
-</section>
-<section id="soal-solusi-sumber-desain-kurikulum" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="soal-solusi-sumber-desain-kurikulum"><span class="header-section-number">7.4</span> <strong>15 Soal &amp; Solusi (Sumber: “Desain Kurikulum…”)</strong></h2>
-<p>Berikut adalah 15 soal yang diambil dari referensi <em>Desain Kurikulum Statistika Generasi Z</em> (Bagian Minggu 06)–.</p>
-<section id="a.-pertanyaan-konseptual" class="level3" data-number="7.4.1">
-<h3 data-number="7.4.1" class="anchored" data-anchor-id="a.-pertanyaan-konseptual"><span class="header-section-number">7.4.1</span> <strong>A. Pertanyaan Konseptual</strong></h3>
-<p><strong>1. Soal:</strong> Apa syarat-syarat utama agar sebuah eksperimen dapat dimodelkan dengan distribusi Binomial?</p>
-{{<pause>}}
-<ul>
-<li><strong>Solusi:</strong> Eksperimen terdiri dari <span class="math inline">\(n\)</span> percobaan identik, setiap percobaan hanya memiliki dua hasil (sukses/gagal), probabilitas sukses <span class="math inline">\(p\)</span> konstan untuk setiap percobaan, dan setiap percobaan saling independen.</li>
-</ul>
-<p></p><div style="page-break-after: always;"></div> <strong>2. Soal:</strong> Mengapa distribusi Poisson sering disebut sebagai distribusi untuk kejadian langka? * <strong>Solusi:</strong> Karena Poisson sering diturunkan dari distribusi Binomial di mana jumlah percobaan <span class="math inline">\(n\)</span> sangat besar (menuju tak hingga) namun probabilitas sukses <span class="math inline">\(p\)</span> sangat kecil (menuju nol), sehingga kejadian “sukses” relatif jarang terjadi dibanding total kemungkinan.<p></p>
-<p><strong>3. Soal:</strong> Jelaskan hubungan antara distribusi Binomial dan distribusi Bernoulli. * <strong>Solusi:</strong> Distribusi Bernoulli adalah kasus khusus dari distribusi Binomial dengan jumlah percobaan <span class="math inline">\(n=1\)</span>. Distribusi Binomial adalah penjumlahan dari <span class="math inline">\(n\)</span> variabel acak Bernoulli yang independen dan identik.</p>
-<p><strong>4. Soal:</strong> Dalam kondisi apa distribusi Poisson dapat digunakan sebagai pendekatan untuk distribusi Binomial? * <strong>Solusi:</strong> Ketika jumlah percobaan <span class="math inline">\(n\)</span> sangat besar (<span class="math inline">\(n \ge 30\)</span> atau <span class="math inline">\(n \to \infty\)</span>) dan probabilitas sukses <span class="math inline">\(p\)</span> sangat kecil (<span class="math inline">\(p \le 0.05\)</span> atau <span class="math inline">\(p \to 0\)</span>), serta rata-rata <span class="math inline">\(np\)</span> tetap konstan sebagai <span class="math inline">\(\lambda\)</span>.</p>
-<p><strong>5. Soal:</strong> Apa makna parameter <span class="math inline">\(\lambda\)</span> dalam distribusi Poisson dalam konteks lalu lintas paket data? * <strong>Solusi:</strong> Parameter <span class="math inline">\(\lambda\)</span> merepresentasikan rata-rata jumlah paket data yang tiba atau diproses per satuan waktu (misalnya: paket per detik) atau per satuan ruang.</p>
-</pause></section>
-<section id="b.-pertanyaan-aplikatif" class="level3" data-number="7.4.2">
-<h3 data-number="7.4.2" class="anchored" data-anchor-id="b.-pertanyaan-aplikatif"><span class="header-section-number">7.4.2</span> <strong>B. Pertanyaan Aplikatif</strong></h3>
-<p><strong>6. Soal:</strong> Sebuah sistem mengirimkan 10 paket data. Jika probabilitas satu paket rusak adalah 0,1, berapa probabilitas tepat 2 paket rusak? * <strong>Solusi:</strong> Gunakan Binomial(<span class="math inline">\(n=10, p=0.1\)</span>). <span class="math inline">\(P(X=2) = \binom{10}{2} (0.1)^2 (0.9)^8 = 45 \cdot 0.01 \cdot 0.430 = 0.1937\)</span>.</p>
-<p><strong>7. Soal:</strong> Rata-rata serangan siber yang terdeteksi pada firewall adalah 2 per jam. Berapa probabilitas tidak ada serangan dalam satu jam ke depan? * <strong>Solusi:</strong> Gunakan Poisson(<span class="math inline">\(\lambda=2\)</span>). <span class="math inline">\(P(X=0) = \frac{e^{-2} 2^0}{0!} = e^{-2} \approx 0.1353\)</span>.</p>
-<p><strong>8. Soal:</strong> Dalam pengujian software, probabilitas menemukan bug pada satu baris kode adalah 0,001. Jika ada 1.000 baris kode, gunakan pendekatan Poisson untuk menghitung probabilitas ada tepat 1 bug. * <strong>Solusi:</strong> <span class="math inline">\(\lambda = n \cdot p = 1000 \cdot 0.001 = 1\)</span>. <span class="math inline">\(P(X=1) = \frac{e^{-1} 1^1}{1!} = e^{-1} \approx 0.3679\)</span>.</p>
-<p><strong>9. Soal:</strong> Sebuah database melayani rata-rata 50 query per detik. Hitung probabilitas server menerima lebih dari 60 query dalam satu detik tertentu. * <strong>Solusi:</strong> Gunakan Poisson(<span class="math inline">\(\lambda=50\)</span>). Kita cari <span class="math inline">\(P(X &gt; 60) = 1 - P(X \le 60)\)</span>. Ini biasanya dihitung menggunakan tabel atau komputer (<code>1 - poisson.cdf(60, 50)</code>), hasilnya sekitar 0.072 (7.2%).</p>
-<p><strong>10. Soal:</strong> Analisis probabilitas jumlah user yang mengklik iklan dalam 100 impresi jika <em>click-through rate</em> (CTR) adalah 2%. * <strong>Solusi:</strong> Ini model Binomial(<span class="math inline">\(n=100, p=0.02\)</span>). Kita bisa menghitung peluang untuk berbagai jumlah klik (0, 1, 2, dst) untuk memprediksi performa iklan. Rata-rata klik yang diharapkan adalah <span class="math inline">\(E[X] = 100 \cdot 0.02 = 2\)</span> klik.</p>
-</section>
-<section id="c.-pertanyaan-komputasional" class="level3" data-number="7.4.3">
-<h3 data-number="7.4.3" class="anchored" data-anchor-id="c.-pertanyaan-komputasional"><span class="header-section-number">7.4.3</span> <strong>C. Pertanyaan Komputasional</strong></h3>
-<p><strong>11. Soal:</strong> Gunakan <code>scipy.stats.binom.pmf</code> untuk memplot probabilitas jumlah sukses dari 0 hingga 20 dalam eksperimen dengan <span class="math inline">\(n=20\)</span> dan <span class="math inline">\(p=0.5\)</span>. * <strong>Solusi:</strong> <code>python     from scipy.stats import binom     import matplotlib.pyplot as plt     x = range(21)     plt.bar(x, binom.pmf(x, 20, 0.5))     plt.show()</code></p>
-<p><strong>12. Soal:</strong> Tulis program Python yang membandingkan hasil perhitungan distribusi Binomial dan pendekatan Poisson untuk <span class="math inline">\(n=100\)</span> dan <span class="math inline">\(p=0.01\)</span>. * <strong>Solusi:</strong> <code>python     from scipy.stats import binom, poisson     n, p = 100, 0.01     mu = n * p     print(f"Binom P(X=2): {binom.pmf(2, n, p)}")     print(f"Poisson P(X=2): {poisson.pmf(2, mu)}")</code></p>
-<p><strong>13. Soal:</strong> Simulasikan proses kedatangan Poisson dengan membangkitkan bilangan acak dan hitung jumlah kejadian dalam interval waktu tertentu. * <strong>Solusi:</strong> <code>python     import numpy as np     # Simulasi 1000 jam, rata-rata 5 event/jam     simulasi = np.random.poisson(lam=5, size=1000)     print(f"Rata-rata simulasi: {np.mean(simulasi)}")</code></p>
-<p><strong>14. Soal:</strong> Visualisasikan perubahan bentuk distribusi Binomial saat parameter <span class="math inline">\(p\)</span> bervariasi dari 0,1 hingga 0,9. * <strong>Solusi:</strong> <code>python     n = 20     for p in [0.1, 0.5, 0.9]:         plt.plot(binom.pmf(range(n+1), n, p), label=f'p={p}')     plt.legend(); plt.show()</code></p>
-<p><strong>15. Soal:</strong> Implementasikan fungsi untuk menghitung probabilitas kumulatif Binomial tanpa menggunakan pustaka eksternal. * <strong>Solusi:</strong> <code>python     def fact(n): return 1 if n&lt;=1 else n*fact(n-1)     def comb(n, k): return fact(n) // (fact(k) * fact(n-k))     def binom_cdf(k, n, p):         return sum(comb(n, i) * (p**i) * ((1-p)**(n-i)) for i in range(k+1))</code></p>
-</section>
-</section>
-<section id="konsep-pengetahuan" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">7.5</span> 1. Konsep Pengetahuan</h2>
+<section id="konsep-pengetahuan" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">7.1</span> 1. Konsep Pengetahuan</h2>
 <p>Distribusi Binomial untuk jumlah sukses dalam n percobaan, Distribusi Poisson untuk jumlah kejadian dalam interval waktu/ruang tertentu.</p>
 </section>
-<section id="tipikal-problem" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">7.6</span> 2. Tipikal Problem</h2>
+<section id="tipikal-problem" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">7.2</span> 2. Tipikal Problem</h2>
 <p>Sebuah pabrik ingin menjamin kualitas produk. Diketahui rata-rata cacat adalah 1%. Berapa peluang menemukan tepat 2 barang cacat dalam sampel 100 unit?</p>
 </section>
-<section id="solusi-pengambilan-keputusan" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">7.7</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
+<section id="solusi-pengambilan-keputusan" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">7.3</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
 <p>Menggunakan rumus distribusi Binomial (atau aproksimasi Poisson jika n besar dan p kecil). Jika peluang cacat melebihi ambang batas toleransi, manajer memutuskan untuk menghentikan lini produksi untuk inspeksi.</p>
 </section>
-<section id="eksplorasi-komputasi-python" class="level2" data-number="7.8">
-<h2 data-number="7.8" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">7.8</span> 4. Eksplorasi Komputasi (Python)</h2>
+<section id="eksplorasi-komputasi-python" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">7.4</span> 4. Eksplorasi Komputasi (Python)</h2>
 <p><em>Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.</em></p>
-<div id="c0ca777a" class="cell" data-execution_count="1">
+<div id="19f2b079" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Lihat kode</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
@@ -1194,29 +997,28 @@ window.Quarto = {
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="al">![“Pabrik bilang cacat 1%. Kamu ambil 100 unit. Pertanyaan kecil tapi tajam: peluang tepat 2 cacat berapa? Ini momen kamu belajar memilih model yang tepat: Binomial untuk ‘n percobaan’, Poisson untuk ‘kejadian jarang’. Engineer yang bagus bukan yang hafal rumus banyak—tapi yang *tahu kapan pakai yang mana*. Hari ini kamu latihan dua model, lalu bikin keputusan QC: lanjut produksi atau stop inspeksi?”](../The_Decision_Engineer.png/image6.png)</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../agenda/w06.qmd &gt;}}</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>Distribusi Binomial untuk jumlah sukses dalam n percobaan, Distribusi Poisson untuk jumlah kejadian dalam interval waktu/ruang tertentu.</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>Sebuah pabrik ingin menjamin kualitas produk. Diketahui rata-rata cacat adalah 1%. Berapa peluang menemukan tepat 2 barang cacat dalam sampel 100 unit?</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>Menggunakan rumus distribusi Binomial (atau aproksimasi Poisson jika n besar dan p kecil). Jika peluang cacat melebihi ambang batas toleransi, manajer memutuskan untuk menghentikan lini produksi untuk inspeksi.</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 06!"</span>)</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>Distribusi Binomial untuk jumlah sukses dalam n percobaan, Distribusi Poisson untuk jumlah kejadian dalam interval waktu/ruang tertentu.</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>Sebuah pabrik ingin menjamin kualitas produk. Diketahui rata-rata cacat adalah 1%. Berapa peluang menemukan tepat 2 barang cacat dalam sampel 100 unit?</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>Menggunakan rumus distribusi Binomial (atau aproksimasi Poisson jika n besar dan p kecil). Jika peluang cacat melebihi ambang batas toleransi, manajer memutuskan untuk menghentikan lini produksi untuk inspeksi.</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 06!"</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

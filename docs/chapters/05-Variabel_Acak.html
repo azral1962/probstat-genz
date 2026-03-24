@@ -113,35 +113,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -463,28 +434,10 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#agenda-perkuliahan-minggu-5" id="toc-agenda-perkuliahan-minggu-5" class="nav-link active" data-scroll-target="#agenda-perkuliahan-minggu-5"><span class="header-section-number">6.1</span> Agenda Perkuliahan Minggu 5</a>
-  <ul class="collapse">
-  <li><a href="#pertemuan-1-senin-1-jam---the-concept-the-trap" id="toc-pertemuan-1-senin-1-jam---the-concept-the-trap" class="nav-link" data-scroll-target="#pertemuan-1-senin-1-jam---the-concept-the-trap"><span class="header-section-number">6.1.1</span> Pertemuan 1: Senin (1 Jam) - The Concept &amp; The Trap</a></li>
-  <li><a href="#pertemuan-2-rabu-2-jam---simulation-lab" id="toc-pertemuan-2-rabu-2-jam---simulation-lab" class="nav-link" data-scroll-target="#pertemuan-2-rabu-2-jam---simulation-lab"><span class="header-section-number">6.1.2</span> Pertemuan 2: Rabu (2 Jam) - Simulation Lab</a></li>
-  </ul></li>
-  <li><a href="#materi-kuliah-konsep-aplikasi-komputasi" id="toc-materi-kuliah-konsep-aplikasi-komputasi" class="nav-link" data-scroll-target="#materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">6.2</span> Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</a>
-  <ul class="collapse">
-  <li><a href="#konsep-dasar" id="toc-konsep-dasar" class="nav-link" data-scroll-target="#konsep-dasar"><span class="header-section-number">6.2.1</span> 1. Konsep Dasar</a></li>
-  <li><a href="#aplikasi-sistem-informasi" id="toc-aplikasi-sistem-informasi" class="nav-link" data-scroll-target="#aplikasi-sistem-informasi"><span class="header-section-number">6.2.2</span> 2. Aplikasi Sistem Informasi</a></li>
-  <li><a href="#komputasi-python" id="toc-komputasi-python" class="nav-link" data-scroll-target="#komputasi-python"><span class="header-section-number">6.2.3</span> 3. Komputasi (Python)</a></li>
-  </ul></li>
-  <li><a href="#tugas-kelompok-github-classroom" id="toc-tugas-kelompok-github-classroom" class="nav-link" data-scroll-target="#tugas-kelompok-github-classroom"><span class="header-section-number">6.3</span> Tugas Kelompok (GitHub Classroom)</a></li>
-  <li><a href="#soal-solusi" id="toc-soal-solusi" class="nav-link" data-scroll-target="#soal-solusi"><span class="header-section-number">6.4</span> 15 Soal &amp; Solusi</a>
-  <ul class="collapse">
-  <li><a href="#a.-pertanyaan-konseptual" id="toc-a.-pertanyaan-konseptual" class="nav-link" data-scroll-target="#a.-pertanyaan-konseptual"><span class="header-section-number">6.4.1</span> A. Pertanyaan Konseptual</a></li>
-  <li><a href="#b.-pertanyaan-aplikatif" id="toc-b.-pertanyaan-aplikatif" class="nav-link" data-scroll-target="#b.-pertanyaan-aplikatif"><span class="header-section-number">6.4.2</span> B. Pertanyaan Aplikatif</a></li>
-  <li><a href="#c.-pertanyaan-komputasional" id="toc-c.-pertanyaan-komputasional" class="nav-link" data-scroll-target="#c.-pertanyaan-komputasional"><span class="header-section-number">6.4.3</span> C. Pertanyaan Komputasional</a></li>
-  </ul></li>
-  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">6.5</span> 1. Konsep Pengetahuan</a></li>
-  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">6.6</span> 2. Tipikal Problem</a></li>
-  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">6.7</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
-  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">6.8</span> 4. Eksplorasi Komputasi (Python)</a></li>
+  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link active" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">6.1</span> 1. Konsep Pengetahuan</a></li>
+  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">6.2</span> 2. Tipikal Problem</a></li>
+  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">6.3</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
+  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">6.4</span> 4. Eksplorasi Komputasi (Python)</a></li>
   </ul>
 </nav>
     </div>
@@ -518,246 +471,31 @@ window.Quarto = {
 <figcaption>“Kamu dikasih dua opsi investasi: A stabil, B bisa tinggi tapi bisa jeblok. Pertanyaannya: keputusan yang ‘dewasa’ itu bukan cuma lihat rata-rata—tapi lihat risiko. Variabel acak itu cara kita memetakan dunia random jadi angka. Ekspektasi itu ‘rata-rata jangka panjang’, variansi itu ‘seberapa liar’. Hari ini kamu mulai bicara seperti engineer: bukan ‘feeling’, tapi ‘E dan Var’. Dan kamu akan bikin keputusan yang bisa dipertanggungjawabkan.”</figcaption>
 </figure>
 </div>
-<p>Week 05: Variabel Acak, Ekspektasi, dan Variansi</p>
-<section id="agenda-perkuliahan-minggu-5" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="agenda-perkuliahan-minggu-5"><span class="header-section-number">6.1</span> Agenda Perkuliahan Minggu 5</h2>
-<p><strong>Tema Misi:</strong> “The Gambler’s Fallacy: Mastering Risk and Reward”</p>
-<section id="pertemuan-1-senin-1-jam---the-concept-the-trap" class="level3" data-number="6.1.1">
-<h3 data-number="6.1.1" class="anchored" data-anchor-id="pertemuan-1-senin-1-jam---the-concept-the-trap"><span class="header-section-number">6.1.1</span> Pertemuan 1: Senin (1 Jam) - The Concept &amp; The Trap</h3>
-<p><strong>Fokus:</strong> Mengubah “Kejadian” menjadi “Angka” (Variabel Acak) dan memahami arti “Nilai Harapan” sebagai pusat massa data.</p>
-<ul>
-<li><strong>00:00 - 00:10 | The Hook: “Gacha &amp; Loot Boxes”</strong>
-<ul>
-<li>Aktivitas: Tampilkan peluang drop rate item langka di game populer (misal: Genshin Impact atau Mobile Legends).</li>
-<li>Pertanyaan: “Item A harganya 1000 Diamond, tapi bisa didapat lewat Gacha seharga 100 Diamond dengan peluang 5%. Mana yang lebih ‘cuan’ secara matematis?”</li>
-<li>Konsep: Perkenalkan Variabel Acak (<span class="math inline">\(X\)</span>) sebagai pemetaan dari Item (Event) ke Nilai Uang (Number).</li>
-</ul></li>
-<li><strong>00:10 - 00:30 | Live Coding: “The Law of Averages”</strong>
-<ul>
-<li>Dosen (Python Demo): Simulasikan taruhan Gacha tersebut 10.000 kali.</li>
-<li>Visualisasi: Plot rata-rata kumulatif kemenangan. Tunjukkan garis konvergensi menuju Ekspektasi (<span class="math inline">\(E[X]\)</span>).</li>
-<li>Poin Kunci: <span class="math inline">\(E[X]\)</span> bukan nilai yang akan Anda dapatkan sekali main, tapi rata-rata jika Anda main selamanya.</li>
-</ul></li>
-<li><strong>00:30 - 00:50 | Deep Dive: Variansi = Risiko</strong>
-<ul>
-<li>Skenario: Dua server. Server A ping-nya stabil 50ms. Server B ping-nya rata-rata 50ms tapi sering spike ke 200ms. Rata-rata sama, tapi pengalaman beda.</li>
-<li>Definisikan Variansi (<span class="math inline">\(Var(X)\)</span>): Ukuran “keganasan” fluktuasi data. Bagi insinyur IT, variansi adalah musuh (risiko/ketidakstabilan).</li>
-</ul></li>
-<li><strong>00:50 - 01:00 | Pod Formation &amp; Mission Brief</strong>
-<ul>
-<li>Misi GitHub: “The Casino House Edge”. Mahasiswa harus merancang permainan judi digital yang menjamin bandar (mereka) untung dalam jangka panjang, tapi tetap menarik bagi pemain.</li>
-</ul></li>
-</ul>
-</section>
-<section id="pertemuan-2-rabu-2-jam---simulation-lab" class="level3" data-number="6.1.2">
-<h3 data-number="6.1.2" class="anchored" data-anchor-id="pertemuan-2-rabu-2-jam---simulation-lab"><span class="header-section-number">6.1.2</span> Pertemuan 2: Rabu (2 Jam) - Simulation Lab</h3>
-<p><strong>Fokus:</strong> Menggunakan Python untuk menghitung risiko investasi/bisnis dan membuktikan sifat momen.</p>
-<ul>
-<li><strong>00:00 - 00:20 | Setup &amp; Micro-Lecture: PDF vs CDF</strong>
-<ul>
-<li>Visual: Gunakan matplotlib step-plot untuk menggambar PMF (Probabilitas per titik) dan CDF (Probabilitas kumulatif).</li>
-<li>Konsep: CDF tidak pernah turun. Ini seperti “loading bar” probabilitas.</li>
-</ul></li>
-<li><strong>00:20 - 01:00 | Pod Challenge: “Risk-Return Tradeoff”</strong>
-<ul>
-<li>Skenario: Anda manajer investasi IT. Ada 2 proyek:
-<ul>
-<li>Proyek A (Stabil): Untung $10k (90%), Rugi $1k (10%).</li>
-<li>Proyek B (Volatil): Untung $50k (30%), Rugi $10k (70%).</li>
-</ul></li>
-<li>Tugas (Python):
-<ol type="1">
-<li>Hitung <span class="math inline">\(E[X]\)</span> dan <span class="math inline">\(Var(X)\)</span> kedua proyek.</li>
-<li>Simulasikan 100 kali jalan. Berapa kali Proyek B bangkrut?</li>
-<li>Visualisasikan histogram hasil akhir.</li>
-</ol></li>
-</ul></li>
-<li><strong>01:00 - 01:40 | Studi Kasus: “Expected Latency”</strong>
-<ul>
-<li>Menghitung expected cost dari retry logic. Jika login gagal (<span class="math inline">\(p=0.2\)</span>), user mencoba lagi. Berapa rata-rata jumlah percobaan? (Pengantar distribusi Geometrik).</li>
-</ul></li>
-<li><strong>01:40 - 01:50 | Code Review &amp; Debat</strong>
-<ul>
-<li>“Apakah <span class="math inline">\(E[X]\)</span> tinggi selalu lebih baik?” (Jawab: Tidak jika Variansinya membahayakan kelangsungan hidup perusahaan).</li>
-</ul></li>
-<li><strong>01:50 - 02:00 | Exit Ticket</strong>
-<ul>
-<li>Pertanyaan: “Jelaskan dengan bahasa manusia, apa bedanya <span class="math inline">\(E[X]\)</span> dan rata-rata sampel (<span class="math inline">\(\bar{x}\)</span>)?”</li>
-</ul></li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="materi-kuliah-konsep-aplikasi-komputasi" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">6.2</span> Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</h2>
-<section id="konsep-dasar" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="konsep-dasar"><span class="header-section-number">6.2.1</span> 1. Konsep Dasar</h3>
-<ul>
-<li><strong>Variabel Acak (<span class="math inline">\(X\)</span>):</strong> Fungsi yang memetakan hasil ruang sampel (<span class="math inline">\(\Omega\)</span>) ke bilangan riil (<span class="math inline">\(\mathbb{R}\)</span>). Contoh: <span class="math inline">\(X\)</span> = jumlah paket error.</li>
-<li><strong>Ekspektasi (<span class="math inline">\(E[X]\)</span>):</strong> Pusat massa distribusi.
-<ul>
-<li>Rumus Diskrit: <span class="math inline">\(E[X] = \sum x \cdot P(X=x)\)</span>.</li>
-<li>Sifat Linear: <span class="math inline">\(E[aX + b] = aE[X] + b\)</span>. (Berguna untuk konversi unit, misal dari Detik ke Milidetik).</li>
-</ul></li>
-<li><strong>Variansi (<span class="math inline">\(Var(X)\)</span>):</strong> Ukuran penyebaran data dari rata-ratanya (Momen ke-2).
-<ul>
-<li>Rumus: <span class="math inline">\(Var(X) = E[(X - \mu)^2] = E[X^2] - (E[X])^2\)</span>.</li>
-<li>Sifat: <span class="math inline">\(Var(aX+b) = a^2 Var(X)\)</span>. Konstanta <span class="math inline">\(b\)</span> tidak mempengaruhi sebaran.</li>
-</ul></li>
-</ul>
-</section>
-<section id="aplikasi-sistem-informasi" class="level3" data-number="6.2.2">
-<h3 data-number="6.2.2" class="anchored" data-anchor-id="aplikasi-sistem-informasi"><span class="header-section-number">6.2.2</span> 2. Aplikasi Sistem Informasi</h3>
-<ul>
-<li><strong>Capacity Planning:</strong> Menggunakan <span class="math inline">\(E[X]\)</span> traffic untuk beli server dasar, dan <span class="math inline">\(Var(X)\)</span> untuk menentukan buffer kapasitas (Auto-scaling margin).</li>
-<li><strong>Analisis Risiko:</strong> Dalam keamanan siber, Risiko = Dampak <span class="math inline">\(\times\)</span> Probabilitas (<span class="math inline">\(E[\text{Loss}]\)</span>).</li>
-<li><strong>Algoritma Game:</strong> Menyeimbangkan loot box agar tidak terlalu pelit (pemain kabur) atau terlalu murah (dev bangkrut).</li>
-</ul>
-</section>
-<section id="komputasi-python" class="level3" data-number="6.2.3">
-<h3 data-number="6.2.3" class="anchored" data-anchor-id="komputasi-python"><span class="header-section-number">6.2.3</span> 3. Komputasi (Python)</h3>
-<ul>
-<li><strong>Numpy:</strong> Menggunakan <code>np.mean()</code> dan <code>np.var()</code> untuk data sampel.</li>
-<li><strong>Custom Functions:</strong> Implementasi rumus ekspektasi dengan <code>sum(x * p for x, p in zip(values, probs))</code>.</li>
-<li><strong>Scipy Stats:</strong> Menggunakan <code>rv_discrete</code> untuk membuat objek variabel acak kustom dan menghitung momennya secara otomatis.</li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="tugas-kelompok-github-classroom" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="tugas-kelompok-github-classroom"><span class="header-section-number">6.3</span> Tugas Kelompok (GitHub Classroom)</h2>
-<p><strong>Judul:</strong> Week 5: The Digital Casino - Designing Probability for Profit</p>
-<p><strong>Deskripsi:</strong> Mahasiswa bertindak sebagai Game Designer. Mereka harus merancang sistem reward (Variabel Acak) untuk event game baru.</p>
-<p><strong>Set Soal (Notebook):</strong> 1. <strong>Design Distribution:</strong> - Tentukan 3 jenis hadiah (Common, Rare, Epic) dengan nilai poin tertentu. - Tentukan probabilitas masing-masing (<span class="math inline">\(P_{common}, P_{rare}, P_{epic}\)</span>) sehingga totalnya 1. 2. <strong>Theoretical Calculation:</strong> - Hitung Ekspektasi poin per tarikan (<span class="math inline">\(E[X]\)</span>). - Hitung Variansi poin (<span class="math inline">\(Var(X)\)</span>). - Jika biaya main = 100 poin, apakah pemain untung atau rugi secara rata-rata? 3. <strong>Simulation Verification:</strong> - Simulasikan 10.000 kali tarikan menggunakan <code>numpy.random.choice</code>. - Bandingkan rata-rata simulasi dengan <span class="math inline">\(E[X]\)</span> teoretis. Plot grafik konvergensinya (Hukum Bilangan Besar). 4. <strong>Business Logic:</strong> - Manajemen minta agar kasino untung minimal 10% dari setiap tiket. Ubah probabilitas atau nilai hadiah untuk mencapai target ini tanpa membuat game jadi membosankan (Variansi jangan 0).</p>
-<hr>
-</section>
-<section id="soal-solusi" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="soal-solusi"><span class="header-section-number">6.4</span> 15 Soal &amp; Solusi</h2>
-<section id="a.-pertanyaan-konseptual" class="level3" data-number="6.4.1">
-<h3 data-number="6.4.1" class="anchored" data-anchor-id="a.-pertanyaan-konseptual"><span class="header-section-number">6.4.1</span> A. Pertanyaan Konseptual</h3>
-<ol type="1">
-<li><strong>Soal:</strong> Apa perbedaan mendasar antara variabel acak diskrit dan kontinu dalam hal cara menghitung probabilitas di satu titik?
-<ul>
-<li><strong>Solusi:</strong> Untuk variabel acak diskrit, probabilitas di satu titik <span class="math inline">\(P(X=x)\)</span> adalah nilai dari Probability Mass Function (PMF) dan bisa bernilai positif. Untuk variabel acak kontinu, probabilitas di satu titik tunggal <span class="math inline">\(P(X=x)\)</span> selalu sama dengan 0; probabilitas hanya didefinisikan dalam interval (luas area di bawah kurva PDF).</li>
-</ul></li>
-<li><strong>Soal:</strong> Mengapa nilai harapan (<span class="math inline">\(E[X]\)</span>) sering disebut sebagai pusat massa dari distribusi probabilitas?
-<ul>
-<li><strong>Solusi:</strong> Secara matematis, rumus ekspektasi <span class="math inline">\(E[X] = \sum x p(x)\)</span> identik dengan rumus titik berat dalam fisika, di mana <span class="math inline">\(x\)</span> adalah posisi dan <span class="math inline">\(p(x)\)</span> adalah massa di titik tersebut. Jika kita menyeimbangkan histogram distribusi pada sebuah titik tumpu, titik tersebut adalah <span class="math inline">\(E[X]\)</span>.</li>
-</ul></li>
-<li><strong>Soal:</strong> Jelaskan hubungan antara variansi dan risiko dalam konteks investasi infrastruktur IT.
-<ul>
-<li><strong>Solusi:</strong> Variansi mengukur seberapa jauh hasil aktual bisa menyimpang dari rata-rata (ekspektasi). Dalam IT, variansi tinggi berarti ketidakpastian tinggi (misal: latensi yang kadang cepat sekali, kadang lambat sekali). Investasi dengan variansi tinggi dianggap “berisiko” karena sulit diprediksi dan membutuhkan mitigasi (buffer) yang lebih besar.</li>
-</ul></li>
-<li><strong>Soal:</strong> Apa yang dimaksud dengan fungsi distribusi kumulatif (CDF) dan mengapa nilainya tidak pernah turun?
-<ul>
-<li><strong>Solusi:</strong> CDF, <span class="math inline">\(F(x) = P(X \le x)\)</span>, menyatakan peluang variabel acak bernilai kurang dari atau sama dengan <span class="math inline">\(x\)</span>. Nilainya tidak pernah turun (monoton naik) karena probabilitas adalah non-negatif; saat kita menggeser <span class="math inline">\(x\)</span> ke kanan, kita hanya bisa menambah (atau tetap), tidak mungkin mengurangi akumulasi peluang yang sudah didapat.</li>
-</ul></li>
-<li><strong>Soal:</strong> Deskripsikan makna fisik dari momen kedua (variansi) terhadap penyebaran data dari nilai rata-ratanya.
-<ul>
-<li><strong>Solusi:</strong> Momen kedua di sekitar mean, <span class="math inline">\(E[(X-\mu)^2]\)</span>, mengukur rata-rata kuadrat jarak data ke pusatnya. Fisiknya mirip dengan “momen inersia”: semakin besar variansi, semakin “berat” ekor distribusi atau semakin tersebar datanya dari pusat, menunjukkan fluktuasi yang besar.</li>
-</ul></li>
-</ol>
-</section>
-<section id="b.-pertanyaan-aplikatif" class="level3" data-number="6.4.2">
-<h3 data-number="6.4.2" class="anchored" data-anchor-id="b.-pertanyaan-aplikatif"><span class="header-section-number">6.4.2</span> B. Pertanyaan Aplikatif</h3>
-<ol start="6" type="1">
-<li><strong>Soal:</strong> Sebuah game online memberikan hadiah Rp 10.000 dengan probabilitas 0,1 dan Rp 0 dengan probabilitas 0,9. Berapakah biaya pendaftaran maksimum yang adil secara statistik?
-<ul>
-<li><strong>Solusi:</strong> Biaya adil (fair price) sama dengan nilai harapan kemenangan. <span class="math inline">\(E[X] = (10.000 \times 0,1) + (0 \times 0,9) = 1.000\)</span>. Jadi, biaya pendaftaran maksimum agar permainan adil adalah Rp 1.000.</li>
-</ul></li>
-<li><strong>Soal:</strong> Analisis variansi waktu respons database untuk menentukan kestabilan layanan bagi pengguna.
-<ul>
-<li><strong>Solusi:</strong> Rata-rata waktu respons (mean) yang rendah itu baik, tapi tidak cukup. Jika variansi tinggi, pengguna akan merasakan pengalaman yang tidak konsisten (“kadang cepat, kadang lag”). Layanan yang stabil harus memiliki variansi (atau standar deviasi) yang kecil agar performa dapat diprediksi (sesuai SLA).</li>
-</ul></li>
-<li><strong>Soal:</strong> Jika sebuah server memiliki kapasitas 100 unit, dan beban kerja harian adalah variabel acak X dengan <span class="math inline">\(\mu=80\)</span> dan <span class="math inline">\(\sigma=10\)</span>, seberapa sering server akan mengalami overload?
-<ul>
-<li><strong>Solusi:</strong> Overload terjadi jika <span class="math inline">\(X &gt; 100\)</span>. Menggunakan pendekatan Skor-Z: <span class="math inline">\(Z=(100-80)/10=2\)</span>. Dari tabel normal standar, <span class="math inline">\(P(Z &gt; 2) \approx 0.0228\)</span> atau sekitar 2.28%. Server akan overload sekitar 2-3 kali per 100 hari.</li>
-</ul></li>
-<li><strong>Soal:</strong> Gunakan konsep ekspektasi untuk menghitung rata-rata jumlah percobaan login yang dilakukan user sebelum berhasil, jika probabilitas berhasil tiap kali adalah <span class="math inline">\(p\)</span>.
-<ul>
-<li><strong>Solusi:</strong> Ini adalah Variabel Acak Geometrik. Nilai harapannya adalah <span class="math inline">\(E[X] = 1/p\)</span>. Jika peluang berhasil login <span class="math inline">\(p=0.5\)</span>, maka rata-rata butuh <span class="math inline">\(1/0.5=2\)</span> kali percobaan.</li>
-</ul></li>
-<li><strong>Soal:</strong> Analisis profitabilitas proyek software menggunakan variabel acak untuk estimasi pendapatan dan biaya.
-<ul>
-<li><strong>Solusi:</strong> Profit <span class="math inline">\(P = \text{Pendapatan}(R) - \text{Biaya}(C)\)</span>. Karena <span class="math inline">\(R\)</span> dan <span class="math inline">\(C\)</span> acak, <span class="math inline">\(P\)</span> juga variabel acak. <span class="math inline">\(E[P] = E[R] - E[C]\)</span>. Proyek layak jika <span class="math inline">\(E[P] &gt; 0\)</span> dan <span class="math inline">\(Var(P)=Var(R)+Var(C)\)</span> (asumsi independen) berada dalam batas toleransi risiko perusahaan.</li>
-</ul></li>
-</ol>
-</section>
-<section id="c.-pertanyaan-komputasional" class="level3" data-number="6.4.3">
-<h3 data-number="6.4.3" class="anchored" data-anchor-id="c.-pertanyaan-komputasional"><span class="header-section-number">6.4.3</span> C. Pertanyaan Komputasional</h3>
-<ol start="11" type="1">
-<li><strong>Soal:</strong> Tulis skrip Python untuk menghitung mean dan variansi dari distribusi probabilitas diskrit yang diberikan dalam bentuk dictionary.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dist <span class="op">=</span> {<span class="dv">1</span>: <span class="fl">0.2</span>, <span class="dv">2</span>: <span class="fl">0.5</span>, <span class="dv">3</span>: <span class="fl">0.3</span>} <span class="co"># Value: Prob  </span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mean <span class="op">=</span> <span class="bu">sum</span>(x <span class="op">*</span> p <span class="cf">for</span> x, p <span class="kw">in</span> dist.items())  </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>variance <span class="op">=</span> <span class="bu">sum</span>((x <span class="op">-</span> mean)<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> p <span class="cf">for</span> x, p <span class="kw">in</span> dist.items())  </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean: </span><span class="sc">{</span>mean<span class="sc">}</span><span class="ss">, Variance: </span><span class="sc">{</span>variance<span class="sc">}</span><span class="ss">"</span>)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Gunakan <code>scipy.stats</code> untuk menghasilkan 1.000 sampel dari variabel acak kustom dan bandingkan rata-rata sampelnya dengan nilai harapan teoretis.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> rv_discrete  </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>xk <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>]<span class="op">;</span> pk <span class="op">=</span> [<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.3</span>]  </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>cust_dist <span class="op">=</span> rv_discrete(name<span class="op">=</span><span class="st">'cust'</span>, values<span class="op">=</span>(xk, pk))  </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> cust_dist.rvs(size<span class="op">=</span><span class="dv">1000</span>)  </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Sample Mean: </span><span class="sc">{</span>samples<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">, Theory Mean: </span><span class="sc">{</span>cust_dist<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">"</span>)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Plot fungsi massa probabilitas (PMF) dan CDF dari sebuah variabel acak diskrit menggunakan step plot di matplotlib.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt  </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np  </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>]<span class="op">;</span> p <span class="op">=</span> [<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.3</span>]  </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>cdf <span class="op">=</span> np.cumsum(p)  </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plt.step(x, cdf, where<span class="op">=</span><span class="st">'post'</span>, label<span class="op">=</span><span class="st">'CDF'</span>)  </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.bar(x, p, label<span class="op">=</span><span class="st">'PMF'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)  </span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.legend()<span class="op">;</span> plt.show()  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Implementasikan fungsi untuk menghitung variansi menggunakan rumus <span class="math inline">\(E[X^2] - (E[X])^2\)</span>.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_variance(values, probs):  </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ex <span class="op">=</span> <span class="bu">sum</span>(v <span class="op">*</span> p <span class="cf">for</span> v, p <span class="kw">in</span> <span class="bu">zip</span>(values, probs))  </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>ex2 <span class="op">=</span> <span class="bu">sum</span>((v<span class="op">**</span><span class="dv">2</span>) <span class="op">*</span> p <span class="cf">for</span> v, p <span class="kw">in</span> <span class="bu">zip</span>(values, probs))  </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> ex2 <span class="op">-</span> ex<span class="op">**</span><span class="dv">2</span>  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Buat simulasi pelemparan dadu 10.000 kali dan tunjukkan secara visual bagaimana rata-rata kumulatifnya konvergen ke 3,5.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np<span class="op">;</span> <span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt  </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>rolls <span class="op">=</span> np.random.randint(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">10000</span>)  </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>avgs <span class="op">=</span> np.cumsum(rolls) <span class="op">/</span> np.arange(<span class="dv">1</span>, <span class="dv">10001</span>)  </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.plot(avgs)<span class="op">;</span> plt.axhline(<span class="fl">3.5</span>, color<span class="op">=</span><span class="st">'r'</span>)<span class="op">;</span> plt.show()  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-</ol>
-</section>
-</section>
-<section id="konsep-pengetahuan" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">6.5</span> 1. Konsep Pengetahuan</h2>
+<section id="konsep-pengetahuan" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">6.1</span> 1. Konsep Pengetahuan</h2>
 <p>Pemetaan hasil eksperimen ke nilai numerik (variabel acak), Nilai Harapan (E[X]) sebagai rata-rata jangka panjang, dan Variansi sebagai ukuran sebaran.</p>
 </section>
-<section id="tipikal-problem" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">6.6</span> 2. Tipikal Problem</h2>
+<section id="tipikal-problem" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">6.2</span> 2. Tipikal Problem</h2>
 <p>Seorang investor memiliki dua opsi investasi dengan profil risiko berbeda. Opsi A memberikan hasil pasti, Opsi B memberikan hasil tinggi tapi berisiko rugi.</p>
 </section>
-<section id="solusi-pengambilan-keputusan" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">6.7</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
+<section id="solusi-pengambilan-keputusan" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">6.3</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
 <p>Menghitung E[X] (expected return) dan Variansi (risiko) dari kedua opsi. Keputusan diambil dengan memilih E[X] tertinggi yang masih berada dalam toleransi risiko (variansi) investor tersebut.</p>
 </section>
-<section id="eksplorasi-komputasi-python" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">6.8</span> 4. Eksplorasi Komputasi (Python)</h2>
+<section id="eksplorasi-komputasi-python" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">6.4</span> 4. Eksplorasi Komputasi (Python)</h2>
 <p><em>Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.</em></p>
-<div id="2f674635" class="cell" data-execution_count="1">
+<div id="12644d70" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Lihat kode</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 05!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 05!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Siap untuk komputasi Minggu 05!</code></pre>
@@ -1251,37 +989,36 @@ window.Quarto = {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minggu 05: Variabel Acak"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Random Variable Definition, Probability Function, Expectation, Variance"</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="al">![“Kamu dikasih dua opsi investasi: A stabil, B bisa tinggi tapi bisa jeblok. Pertanyaannya: keputusan yang ‘dewasa’ itu bukan cuma lihat rata-rata—tapi lihat risiko. Variabel acak itu cara kita memetakan dunia random jadi angka. Ekspektasi itu ‘rata-rata jangka panjang’, variansi itu ‘seberapa liar’. Hari ini kamu mulai bicara seperti engineer: bukan ‘feeling’, tapi ‘E dan Var’. Dan kamu akan bikin keputusan yang bisa dipertanggungjawabkan.”](../The_Decision_Engineer.png/image5.png)</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../agenda/w05.qmd &gt;}}</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>Pemetaan hasil eksperimen ke nilai numerik (variabel acak), Nilai Harapan (E<span class="co">[</span><span class="ot">X</span><span class="co">]</span>) sebagai rata-rata jangka panjang, dan Variansi sebagai ukuran sebaran.</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>Seorang investor memiliki dua opsi investasi dengan profil risiko berbeda. Opsi A memberikan hasil pasti, Opsi B memberikan hasil tinggi tapi berisiko rugi.</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>Menghitung E<span class="co">[</span><span class="ot">X</span><span class="co">]</span> (expected return) dan Variansi (risiko) dari kedua opsi. Keputusan diambil dengan memilih E<span class="co">[</span><span class="ot">X</span><span class="co">]</span> tertinggi yang masih berada dalam toleransi risiko (variansi) investor tersebut.</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 05!"</span>)</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minggu 05: Variabel Acak"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Random Variable Definition, Probability Function, Expectation, Variance"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="al">![“Kamu dikasih dua opsi investasi: A stabil, B bisa tinggi tapi bisa jeblok. Pertanyaannya: keputusan yang ‘dewasa’ itu bukan cuma lihat rata-rata—tapi lihat risiko. Variabel acak itu cara kita memetakan dunia random jadi angka. Ekspektasi itu ‘rata-rata jangka panjang’, variansi itu ‘seberapa liar’. Hari ini kamu mulai bicara seperti engineer: bukan ‘feeling’, tapi ‘E dan Var’. Dan kamu akan bikin keputusan yang bisa dipertanggungjawabkan.”](../The_Decision_Engineer.png/image5.png)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>Pemetaan hasil eksperimen ke nilai numerik (variabel acak), Nilai Harapan (E<span class="co">[</span><span class="ot">X</span><span class="co">]</span>) sebagai rata-rata jangka panjang, dan Variansi sebagai ukuran sebaran.</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>Seorang investor memiliki dua opsi investasi dengan profil risiko berbeda. Opsi A memberikan hasil pasti, Opsi B memberikan hasil tinggi tapi berisiko rugi.</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>Menghitung E<span class="co">[</span><span class="ot">X</span><span class="co">]</span> (expected return) dan Variansi (risiko) dari kedua opsi. Keputusan diambil dengan memilih E<span class="co">[</span><span class="ot">X</span><span class="co">]</span> tertinggi yang masih berada dalam toleransi risiko (variansi) investor tersebut.</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 05!"</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

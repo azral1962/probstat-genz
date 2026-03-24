@@ -113,35 +113,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -463,28 +434,10 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#agenda-perkuliahan-minggu-9" id="toc-agenda-perkuliahan-minggu-9" class="nav-link active" data-scroll-target="#agenda-perkuliahan-minggu-9"><span class="header-section-number">10.1</span> Agenda Perkuliahan Minggu 9</a>
-  <ul class="collapse">
-  <li><a href="#pertemuan-1-senin-1-jam---the-intuition-the-warp" id="toc-pertemuan-1-senin-1-jam---the-intuition-the-warp" class="nav-link" data-scroll-target="#pertemuan-1-senin-1-jam---the-intuition-the-warp"><span class="header-section-number">10.1.1</span> Pertemuan 1: Senin (1 Jam) - The Intuition &amp; The Warp</a></li>
-  <li><a href="#pertemuan-2-rabu-2-jam---transformation-lab" id="toc-pertemuan-2-rabu-2-jam---transformation-lab" class="nav-link" data-scroll-target="#pertemuan-2-rabu-2-jam---transformation-lab"><span class="header-section-number">10.1.2</span> Pertemuan 2: Rabu (2 Jam) - Transformation Lab</a></li>
-  </ul></li>
-  <li><a href="#materi-kuliah-konsep-aplikasi-komputasi" id="toc-materi-kuliah-konsep-aplikasi-komputasi" class="nav-link" data-scroll-target="#materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">10.2</span> Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</a>
-  <ul class="collapse">
-  <li><a href="#konsep-dasar" id="toc-konsep-dasar" class="nav-link" data-scroll-target="#konsep-dasar"><span class="header-section-number">10.2.1</span> 1. Konsep Dasar</a></li>
-  <li><a href="#aplikasi-sistem-informasi" id="toc-aplikasi-sistem-informasi" class="nav-link" data-scroll-target="#aplikasi-sistem-informasi"><span class="header-section-number">10.2.2</span> 2. Aplikasi Sistem Informasi</a></li>
-  <li><a href="#komputasi-python" id="toc-komputasi-python" class="nav-link" data-scroll-target="#komputasi-python"><span class="header-section-number">10.2.3</span> 3. Komputasi (Python)</a></li>
-  </ul></li>
-  <li><a href="#tugas-kelompok-github-classroom" id="toc-tugas-kelompok-github-classroom" class="nav-link" data-scroll-target="#tugas-kelompok-github-classroom"><span class="header-section-number">10.3</span> Tugas Kelompok (GitHub Classroom)</a></li>
-  <li><a href="#soal-solusi" id="toc-soal-solusi" class="nav-link" data-scroll-target="#soal-solusi"><span class="header-section-number">10.4</span> 15 Soal &amp; Solusi</a>
-  <ul class="collapse">
-  <li><a href="#a.-pertanyaan-konseptual" id="toc-a.-pertanyaan-konseptual" class="nav-link" data-scroll-target="#a.-pertanyaan-konseptual"><span class="header-section-number">10.4.1</span> A. Pertanyaan Konseptual</a></li>
-  <li><a href="#b.-pertanyaan-aplikatif" id="toc-b.-pertanyaan-aplikatif" class="nav-link" data-scroll-target="#b.-pertanyaan-aplikatif"><span class="header-section-number">10.4.2</span> B. Pertanyaan Aplikatif</a></li>
-  <li><a href="#c.-pertanyaan-komputasional" id="toc-c.-pertanyaan-komputasional" class="nav-link" data-scroll-target="#c.-pertanyaan-komputasional"><span class="header-section-number">10.4.3</span> C. Pertanyaan Komputasional</a></li>
-  </ul></li>
-  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">10.5</span> 1. Konsep Pengetahuan</a></li>
-  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">10.6</span> 2. Tipikal Problem</a></li>
-  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">10.7</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
-  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">10.8</span> 4. Eksplorasi Komputasi (Python)</a></li>
+  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link active" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">10.1</span> 1. Konsep Pengetahuan</a></li>
+  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">10.2</span> 2. Tipikal Problem</a></li>
+  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">10.3</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
+  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">10.4</span> 4. Eksplorasi Komputasi (Python)</a></li>
   </ul>
 </nav>
     </div>
@@ -518,240 +471,31 @@ window.Quarto = {
 <figcaption>“Kesalahan ukur arus itu kecil. Tapi daya listrik P = I²R. Kuadrat itu pengganda masalah. Jadi, kalau I random, P jadi random dengan karakter berbeda. Hari ini kamu belajar trik penting: kalau Y = g(X), bagaimana distribusi Y? Ini skill yang sering dipakai untuk batas toleransi keamanan komponen. Kita mau jawab: seberapa sering P melewati batas berbahaya? Ini statistik yang langsung nyambung ke keselamatan.”</figcaption>
 </figure>
 </div>
-<p>Week 09: Fungsi Variabel Acak dan Distribusi Bivariat</p>
-<section id="agenda-perkuliahan-minggu-9" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="agenda-perkuliahan-minggu-9"><span class="header-section-number">10.1</span> Agenda Perkuliahan Minggu 9</h2>
-<p><strong>Topik:</strong> Fungsi Variabel Acak &amp; Distribusi Bivariat <strong>Tema Misi:</strong> “Metamorphosis of Data: How Input Noise Becomes Output Risk”</p>
-<section id="pertemuan-1-senin-1-jam---the-intuition-the-warp" class="level3" data-number="10.1.1">
-<h3 data-number="10.1.1" class="anchored" data-anchor-id="pertemuan-1-senin-1-jam---the-intuition-the-warp"><span class="header-section-number">10.1.1</span> Pertemuan 1: Senin (1 Jam) - The Intuition &amp; The Warp</h3>
-<p><strong>Fokus:</strong> Memahami bagaimana fungsi matematika mengubah bentuk distribusi data (Transformasi) dan hubungan antar dua variabel.</p>
-<ul>
-<li><strong>00:00 - 00:10 | The Hook: “The Flaw of Averages 2.0”</strong>
-<ul>
-<li>Masalah: “Jika arus listrik (I) rata-rata 10 Ampere (Normal), apakah Daya (<span class="math inline">\(P=I^2R\)</span>) juga berdistribusi Normal?”</li>
-<li>Visual: Tunjukkan animasi input kurva lonceng yang melewati fungsi kuadrat, menghasilkan output yang “miring” (skewed).</li>
-<li>Poin: Fungsi non-linear “memelintir” distribusi. Menggunakan rata-rata input saja untuk menghitung rata-rata output seringkali salah (<span class="math inline">\(E[X^2] \neq (E[X])^2\)</span>).</li>
-</ul></li>
-<li><strong>00:10 - 00:30 | Live Demo: “Joint Distribution &amp; Correlation”</strong>
-<ul>
-<li>Dosen (Python): Generate dua variabel acak (misal: Server Load vs Latency).</li>
-<li>Visualisasi: Gunakan <code>seaborn.jointplot</code> untuk menampilkan Joint PDF (peta kontur) dan Marginal PDF (histogram di pinggir).</li>
-<li>Konsep: Independen vs Berkorelasi. Tunjukkan bagaimana awan data menjadi “gepeng” saat korelasi tinggi.</li>
-</ul></li>
-<li><strong>00:30 - 00:50 | Konsep: Transformasi Variabel</strong>
-<ul>
-<li>Metode CDF: <span class="math inline">\(F_Y(y)=P(g(X) \le y)\)</span>.</li>
-<li>Propagasi Ketidakpastian (Intro): Bagaimana noise pada sensor suhu merambat menjadi error pada prediksi cuaca.</li>
-</ul></li>
-<li><strong>00:50 - 01:00 | Pod Formation &amp; Mission Brief</strong>
-<ul>
-<li>Misi GitHub: “The Uncertainty Architect”. Mahasiswa harus memodelkan risiko sistem yang bergantung pada dua input acak yang saling berkorelasi.</li>
-</ul></li>
-</ul>
-</section>
-<section id="pertemuan-2-rabu-2-jam---transformation-lab" class="level3" data-number="10.1.2">
-<h3 data-number="10.1.2" class="anchored" data-anchor-id="pertemuan-2-rabu-2-jam---transformation-lab"><span class="header-section-number">10.1.2</span> Pertemuan 2: Rabu (2 Jam) - Transformation Lab</h3>
-<p><strong>Fokus:</strong> Simulasi Monte Carlo untuk menyelesaikan transformasi kompleks dan analisis Bivariat.</p>
-<ul>
-<li><strong>00:00 - 00:20 | Micro-Lecture: Sum of Random Variables</strong>
-<ul>
-<li>Masalah: Total waktu proses = Waktu Download (X) + Waktu Render (Y).</li>
-<li>Konsep: Konvolusi (secara teori) vs Penjumlahan Vektor (secara komputasi). Jika X,Y Normal, X+Y Normal. Tapi jika X,Y Uniform? (Segitiga).</li>
-</ul></li>
-<li><strong>00:20 - 01:10 | Pod Challenge: “Predicting Server Load”</strong>
-<ul>
-<li>Skenario: Beban server dipengaruhi oleh User Count (X) dan Transaction Size (Y).</li>
-<li>Model: Beban Total <span class="math inline">\(Z = aX + bY + cXY\)</span>.</li>
-<li>Tugas (Python):
-<ol type="1">
-<li>Generate X dan Y (asumsikan berkorelasi positif, gunakan <code>numpy.random.multivariate_normal</code>).</li>
-<li>Hitung Z untuk setiap titik data.</li>
-<li>Plot distribusi Z. Apakah masih Normal?</li>
-<li>Hitung peluang <span class="math inline">\(Z &gt;\)</span> Kapasitas Kritis (Overload Probability).</li>
-</ol></li>
-</ul></li>
-<li><strong>01:10 - 01:40 | Studi Kasus: Transformasi Skor ML (Logits to Probability)</strong>
-<ul>
-<li>Membahas Aplikasi 11: Bagaimana mengubah raw score dari model regresi linear (<span class="math inline">\(-\infty, \infty\)</span>) menjadi probabilitas (0,1) menggunakan fungsi Sigmoid. Analisis dampaknya terhadap threshold keputusan.</li>
-</ul></li>
-<li><strong>01:40 - 01:50 | Showcase</strong>
-<ul>
-<li>Pods mempresentasikan grafik Joint Plot mereka dan strategi mitigasi risiko overload.</li>
-</ul></li>
-<li><strong>01:50 - 02:00 | Exit Ticket</strong>
-<ul>
-<li>Pertanyaan: “Jika X dan Y independen, apa yang terjadi dengan Kovariansinya? Apakah sebaliknya berlaku?”</li>
-</ul></li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="materi-kuliah-konsep-aplikasi-komputasi" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">10.2</span> Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</h2>
-<section id="konsep-dasar" class="level3" data-number="10.2.1">
-<h3 data-number="10.2.1" class="anchored" data-anchor-id="konsep-dasar"><span class="header-section-number">10.2.1</span> 1. Konsep Dasar</h3>
-<ul>
-<li><strong>Variabel Acak Bivariat:</strong> Pasangan (X,Y) dengan Joint PDF <span class="math inline">\(f(x,y)\)</span>. Peluang dihitung sebagai volume di bawah permukaan <span class="math inline">\(f(x,y)\)</span>.</li>
-<li><strong>Marginal PDF:</strong> Distribusi X sendirian, didapat dengan “membuang” (mengintegralkan) Y. <span class="math display">\[ f_X(x) = \int_{-\infty}^{\infty} f(x,y)dy \]</span></li>
-<li><strong>Independensi:</strong> X dan Y independen jika dan hanya jika <span class="math inline">\(f(x,y) = f_X(x) \cdot f_Y(y)\)</span>.</li>
-<li><strong>Transformasi Variabel (Y=g(X)):</strong> Jika <span class="math inline">\(y=g(x)\)</span> monoton, PDF baru dapat dicari dengan: <span class="math display">\[ f_Y(y) = f_X(g^{-1}(y)) \left| \frac{d}{dy}g^{-1}(y) \right| \]</span> Namun, pendekatan simulasi (Monte Carlo) lebih disukai di IT untuk fungsi kompleks.</li>
-</ul>
-</section>
-<section id="aplikasi-sistem-informasi" class="level3" data-number="10.2.2">
-<h3 data-number="10.2.2" class="anchored" data-anchor-id="aplikasi-sistem-informasi"><span class="header-section-number">10.2.2</span> 2. Aplikasi Sistem Informasi</h3>
-<ul>
-<li><strong>Propagasi Error (FOSM):</strong> Mengestimasi variansi output model (Y) berdasarkan variansi input (X). Misal: Prediksi bandwidth (Y) berdasarkan jumlah user (X) yang estimasinya punya error.</li>
-<li><strong>Load Balancing:</strong> Menganalisis distribusi beban gabungan pada dua server. Jika beban server A tinggi, apakah beban server B cenderung tinggi juga? (Korelasi positif buruk untuk redundansi).</li>
-<li><strong>Machine Learning:</strong> Transformasi fitur (misal: Log-transform pada data skewed seperti income atau latency) agar lebih mendekati Normal sebelum dilatih.</li>
-</ul>
-</section>
-<section id="komputasi-python" class="level3" data-number="10.2.3">
-<h3 data-number="10.2.3" class="anchored" data-anchor-id="komputasi-python"><span class="header-section-number">10.2.3</span> 3. Komputasi (Python)</h3>
-<ul>
-<li><strong>Multivariate Normal:</strong> <code>np.random.multivariate_normal(mean, cov, size)</code> untuk membangkitkan data berkorelasi.</li>
-<li><strong>Correlation Matrix:</strong> <code>np.corrcoef(x, y)</code> atau <code>df.corr()</code>.</li>
-<li><strong>Visualisasi:</strong> <code>seaborn.jointplot(kind='kde')</code> atau <code>kind='hex'</code> untuk melihat densitas gabungan.</li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="tugas-kelompok-github-classroom" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="tugas-kelompok-github-classroom"><span class="header-section-number">10.3</span> Tugas Kelompok (GitHub Classroom)</h2>
-<p><strong>Judul:</strong> Week 9 Mission: The Risk Propagator</p>
-<p><strong>Deskripsi:</strong> Mahasiswa menganalisis risiko finansial cloud computing. Biaya total bulanan bergantung pada Storage Used (GB) dan Compute Hours (CPU), di mana keduanya adalah variabel acak yang tidak pasti dan berkorelasi.</p>
-<p><strong>Set Soal (Notebook):</strong> 1. <strong>Data Generation (25 poin):</strong> - Buat 10.000 sampel data bivariat (S,C) dimana S (Storage) dan C (Compute) memiliki korelasi <span class="math inline">\(\rho=0.7\)</span>. - Tampilkan Joint Plot untuk membuktikan korelasi. 2. <strong>Transformation (25 poin):</strong> - Fungsi Biaya: <span class="math inline">\(Cost = 0.1 \times S + 0.5 \times C + 0.01 \times (S \times C)\)</span> (Termasuk biaya transfer data interaksi <span class="math inline">\(S \times C\)</span>). - Hitung array Cost dan plot histogramnya. 3. <strong>Analytical Check (20 poin):</strong> - Hitung Mean dan Variansi dari Cost secara empiris. - Bandingkan dengan properti ekspektasi: <span class="math inline">\(E[S+C] = E[S] + E[C]\)</span>. Apakah <span class="math inline">\(E[S \times C] = E[S] \times E[C]\)</span>? (Hint: Ingat korelasi). 4. <strong>Decision Making (30 poin):</strong> - Tentukan Budget bulanan agar peluang Overbudget <span class="math inline">\(\le 5\%\)</span>. - Apa yang terjadi dengan risiko Overbudget jika kita berhasil membuat S dan C menjadi independen (<span class="math inline">\(\rho=0\)</span>)? Simulasikan dan jelaskan.</p>
-<hr>
-</section>
-<section id="soal-solusi" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="soal-solusi"><span class="header-section-number">10.4</span> 15 Soal &amp; Solusi</h2>
-<section id="a.-pertanyaan-konseptual" class="level3" data-number="10.4.1">
-<h3 data-number="10.4.1" class="anchored" data-anchor-id="a.-pertanyaan-konseptual"><span class="header-section-number">10.4.1</span> A. Pertanyaan Konseptual</h3>
-<ol type="1">
-<li><strong>Soal:</strong> Apa yang dimaksud dengan fungsi padat probabilitas gabungan (joint PDF) dan bagaimana cara mendapatkan PDF marginal darinya?
-<ul>
-<li><strong>Solusi:</strong> Joint PDF <span class="math inline">\(f(x,y)\)</span> mendeskripsikan peluang densitas bahwa variabel acak X bernilai x DAN Y bernilai y secara bersamaan. PDF marginal (misal <span class="math inline">\(f_X(x)\)</span>) didapatkan dengan “menjumlahkan” (mengintegralkan) peluang gabungan terhadap seluruh kemungkinan nilai variabel lainnya (Y). Rumusnya: <span class="math inline">\(f_X(x) = \int_{-\infty}^{\infty} f(x,y)dy\)</span>.</li>
-</ul></li>
-<li><strong>Soal:</strong> Jelaskan konsep independensi antara dua variabel acak dalam konteks fungsi probabilitas gabungan.
-<ul>
-<li><strong>Solusi:</strong> Dua variabel acak X dan Y dikatakan independen jika dan hanya jika fungsi densitas gabungan mereka dapat difaktorkan menjadi perkalian fungsi densitas marginal masing-masing untuk setiap x dan y. Secara matematis: <span class="math inline">\(f(x,y) = f_X(x) \cdot f_Y(y)\)</span>.</li>
-</ul></li>
-<li><strong>Soal:</strong> Apa perbedaan antara kovariansi dan korelasi dalam mengukur hubungan antara dua variabel?
-<ul>
-<li><strong>Solusi:</strong> Kovariansi mengukur arah hubungan linear (positif/negatif) tetapi nilainya bergantung pada satuan data (misal: meter vs cm). Korelasi (Pearson) adalah versi kovariansi yang dinormalisasi (dibagi standar deviasi masing-masing), sehingga nilainya selalu antara -1 hingga +1 dan bebas dimensi, menunjukkan kekuatan dan arah hubungan linear.</li>
-</ul></li>
-<li><strong>Soal:</strong> Bagaimana teknik transformasi variabel digunakan untuk menemukan distribusi dari <span class="math inline">\(Y=X^2\)</span>?
-<ul>
-<li><strong>Solusi:</strong> Jika X adalah variabel acak dengan PDF <span class="math inline">\(f_X(x)\)</span>, distribusi <span class="math inline">\(Y=X^2\)</span> tidak bisa langsung didapat dengan mengkuadratkan PDF. Kita harus menggunakan metode perubahan variabel yang melibatkan turunan fungsi invers (Jacobian). Untuk <span class="math inline">\(Y=X^2\)</span>, kita perlu memperhitungkan bahwa dua nilai X (+x dan -x) memetakan ke satu nilai Y.</li>
-</ul></li>
-<li><strong>Soal:</strong> Jelaskan konsep ekspektasi kondisional <span class="math inline">\(E[Y|X]\)</span> dan kegunaannya dalam prediksi sederhana.
-<ul>
-<li><strong>Solusi:</strong> <span class="math inline">\(E[Y|X=x]\)</span> adalah rata-rata nilai Y ketika kita tahu bahwa X bernilai x. Ini adalah dasar dari regresi dan prediksi. Dalam konteks prediksi, <span class="math inline">\(E[Y|X]\)</span> adalah “tebakan terbaik” (prediktor yang meminimalkan MSE) untuk nilai Y jika informasi X tersedia.</li>
-</ul></li>
-</ol>
-</section>
-<section id="b.-pertanyaan-aplikatif" class="level3" data-number="10.4.2">
-<h3 data-number="10.4.2" class="anchored" data-anchor-id="b.-pertanyaan-aplikatif"><span class="header-section-number">10.4.2</span> B. Pertanyaan Aplikatif</h3>
-<ol start="6" type="1">
-<li><strong>Soal:</strong> Analisis hubungan antara latensi jaringan (X) dan ukuran paket (Y) pada server cloud.
-<ul>
-<li><strong>Solusi:</strong> Kita memodelkan (X,Y) sebagai distribusi bivariat. Biasanya terdapat korelasi positif: paket yang lebih besar (Y tinggi) cenderung menyebabkan latensi lebih tinggi (X tinggi) karena waktu transmisi dan pemrosesan. Analisis Joint PDF membantu mendeteksi anomali, misal paket kecil tapi latensi tinggi (indikasi congestion).</li>
-</ul></li>
-<li><strong>Soal:</strong> Jika X dan Y adalah waktu proses di dua server independen, tentukan distribusi dari waktu total <span class="math inline">\(T=X+Y\)</span>.
-<ul>
-<li><strong>Solusi:</strong> Karena independen, PDF dari jumlah <span class="math inline">\(T=X+Y\)</span> adalah konvolusi dari PDF X dan PDF Y: <span class="math inline">\(f_T(t) = \int f_X(x)f_Y(t-x)dx\)</span>. Jika keduanya Normal, T juga Normal.</li>
-</ul></li>
-<li><strong>Soal:</strong> Hitung korelasi antara jumlah jam belajar mahasiswa STI dan nilai ujian akhir mereka berdasarkan data sampel.
-<ul>
-<li><strong>Solusi:</strong> Gunakan rumus korelasi sampel Pearson: <span class="math inline">\(r = \frac{\sum(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum(x_i-\bar{x})^2 \sum(y_i-\bar{y})^2}}\)</span>. Nilai mendekati +1 menunjukkan hubungan linear positif kuat.</li>
-</ul></li>
-<li><strong>Soal:</strong> Tentukan probabilitas gabungan bahwa sebuah request database memakan waktu <span class="math inline">\(&lt; 10\)</span> ms DAN ukuran hasilnya <span class="math inline">\(&gt; 1\)</span> MB.
-<ul>
-<li><strong>Solusi:</strong> Kita perlu mengintegralkan Joint PDF <span class="math inline">\(f(t,s)\)</span> pada daerah <span class="math inline">\(0 &lt; t &lt; 10\)</span> dan <span class="math inline">\(s &gt; 1\)</span>. <span class="math inline">\(P(\text{Cepat &amp; Besar}) = \int_{1}^{\infty} \int_{0}^{10} f(t,s) \, dt \, ds\)</span>.</li>
-</ul></li>
-<li><strong>Soal:</strong> Evaluasi efektivitas algoritma load balancing dengan menganalisis distribusi bivariat beban pada dua node server.
-<ul>
-<li><strong>Solusi:</strong> Idealnya, beban pada Node A dan Node B harus memiliki korelasi negatif atau nol jika balancer bekerja sempurna membagi beban. Jika korelasinya positif tinggi (keduanya naik/turun bersamaan), berarti sistem rentan terhadap lonjakan trafik global (common mode failure) dan balancer mungkin hanya membagi rata, bukan menyeimbangkan secara dinamis.</li>
-</ul></li>
-</ol>
-</section>
-<section id="c.-pertanyaan-komputasional" class="level3" data-number="10.4.3">
-<h3 data-number="10.4.3" class="anchored" data-anchor-id="c.-pertanyaan-komputasional"><span class="header-section-number">10.4.3</span> C. Pertanyaan Komputasional</h3>
-<ol start="11" type="1">
-<li><strong>Soal:</strong> Gunakan numpy untuk menghitung matriks kovariansi dan matriks korelasi dari dataset bivariat.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np  </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.array([[<span class="dv">9</span>, <span class="dv">10</span>], [<span class="dv">11</span>, <span class="dv">12</span>], [<span class="dv">13</span>, <span class="dv">14</span>]]) <span class="co"># Kolom X, Kolom Y  </span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>cov_matrix <span class="op">=</span> np.cov(data, rowvar<span class="op">=</span><span class="va">False</span>)  </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>corr_matrix <span class="op">=</span> np.corrcoef(data, rowvar<span class="op">=</span><span class="va">False</span>)  </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Cov:</span><span class="ch">\n</span><span class="st">"</span>, cov_matrix)  </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Corr:</span><span class="ch">\n</span><span class="st">"</span>, corr_matrix)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Visualisasikan distribusi gabungan dua variabel acak menggunakan jointplot dari pustaka seaborn.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns, pandas <span class="im">as</span> pd, numpy <span class="im">as</span> np  </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame({<span class="st">'X'</span>: np.random.randn(<span class="dv">100</span>), <span class="st">'Y'</span>: np.random.randn(<span class="dv">100</span>)})  </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>sns.jointplot(data<span class="op">=</span>data, x<span class="op">=</span><span class="st">'X'</span>, y<span class="op">=</span><span class="st">'Y'</span>, kind<span class="op">=</span><span class="st">'kde'</span>)  </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Menampilkan kontur densitas  </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Implementasikan fungsi untuk menghitung PDF marginal secara numerik dari tabel probabilitas gabungan diskrit.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np  </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabel P(X,Y): Baris=X, Kolom=Y  </span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>joint_prob <span class="op">=</span> np.array([[<span class="fl">0.1</span>, <span class="fl">0.2</span>], [<span class="fl">0.3</span>, <span class="fl">0.4</span>]])  </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>marginal_X <span class="op">=</span> np.<span class="bu">sum</span>(joint_prob, axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># Jumlahkan per baris  </span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"P(X):"</span>, marginal_X) <span class="co"># Output: [0.3, 0.7]  </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Simulasikan distribusi dari jumlah dua variabel acak Uniform yang independen dan tunjukkan konvergensinya ke bentuk segitiga.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt  </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10000</span>)  </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10000</span>)  </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> x <span class="op">+</span> y  </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>plt.hist(z, bins<span class="op">=</span><span class="dv">30</span>, density<span class="op">=</span><span class="va">True</span>)  </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Sum of 2 Uniforms = Triangle"</span>)  </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.show()  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Tulis skrip untuk melakukan transformasi variabel acak menggunakan metode invers transformasi CDF.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contoh: Transformasi Uniform(0,1) ke Eksponensial(lambda=1)  </span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># F(x) = 1 - e^-x  =&gt;  x = -ln(1-u)  </span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1000</span>)  </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>x_exp <span class="op">=</span> <span class="op">-</span>np.log(<span class="dv">1</span> <span class="op">-</span> u)  </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.hist(x_exp, bins<span class="op">=</span><span class="dv">20</span>)<span class="op">;</span> plt.show()  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-</ol>
-</section>
-</section>
-<section id="konsep-pengetahuan" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">10.5</span> 1. Konsep Pengetahuan</h2>
+<section id="konsep-pengetahuan" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">10.1</span> 1. Konsep Pengetahuan</h2>
 <p>Menentukan distribusi probabilitas dari variabel baru Y yang merupakan fungsi dari variabel acak X (misal Y = g(X)).</p>
 </section>
-<section id="tipikal-problem" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">10.6</span> 2. Tipikal Problem</h2>
+<section id="tipikal-problem" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">10.2</span> 2. Tipikal Problem</h2>
 <p>Diketahui distribusi kesalahan pengukuran arus listrik (X). Bagaimana distribusi kesalahan daya listrik (P), jika P = I^2 * R?</p>
 </section>
-<section id="solusi-pengambilan-keputusan" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">10.7</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
+<section id="solusi-pengambilan-keputusan" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">10.3</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
 <p>Menggunakan metode transformasi atau fungsi pembangkit momen untuk menurunkan PDF dari P. Ini penting bagi insinyur untuk menentukan batas toleransi keamanan komponen agar tidak terbakar akibat fluktuasi daya.</p>
 </section>
-<section id="eksplorasi-komputasi-python" class="level2" data-number="10.8">
-<h2 data-number="10.8" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">10.8</span> 4. Eksplorasi Komputasi (Python)</h2>
+<section id="eksplorasi-komputasi-python" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">10.4</span> 4. Eksplorasi Komputasi (Python)</h2>
 <p><em>Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.</em></p>
-<div id="6efb5099" class="cell" data-execution_count="1">
+<div id="2dee0321" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Lihat kode</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 09!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 09!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Siap untuk komputasi Minggu 09!</code></pre>
@@ -1245,38 +989,37 @@ window.Quarto = {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minggu 09: Fungsi Variabel Acak"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Function of Random Variables, PDF of new random variable"</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="al">![“Kesalahan ukur arus itu kecil. Tapi daya listrik P = I²R. Kuadrat itu pengganda masalah. Jadi, kalau I random, P jadi random dengan karakter berbeda. Hari ini kamu belajar trik penting: kalau Y = g(X), bagaimana distribusi Y? Ini skill yang sering dipakai untuk batas toleransi keamanan komponen. Kita mau jawab: seberapa sering P melewati batas berbahaya? Ini statistik yang langsung nyambung ke keselamatan.”](../The_Decision_Engineer.png/image9.png)</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../agenda/w09.qmd &gt;}}</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>Menentukan distribusi probabilitas dari variabel baru Y yang merupakan fungsi dari variabel acak X (misal Y = g(X)).</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>Diketahui distribusi kesalahan pengukuran arus listrik (X). Bagaimana distribusi kesalahan daya listrik (P), jika P = I^2 * R?</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>Menggunakan metode transformasi atau fungsi pembangkit momen untuk menurunkan PDF dari P. Ini penting bagi insinyur untuk menentukan batas toleransi keamanan komponen agar tidak terbakar akibat fluktuasi daya.</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 09!"</span>)</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minggu 09: Fungsi Variabel Acak"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Function of Random Variables, PDF of new random variable"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="al">![“Kesalahan ukur arus itu kecil. Tapi daya listrik P = I²R. Kuadrat itu pengganda masalah. Jadi, kalau I random, P jadi random dengan karakter berbeda. Hari ini kamu belajar trik penting: kalau Y = g(X), bagaimana distribusi Y? Ini skill yang sering dipakai untuk batas toleransi keamanan komponen. Kita mau jawab: seberapa sering P melewati batas berbahaya? Ini statistik yang langsung nyambung ke keselamatan.”](../The_Decision_Engineer.png/image9.png)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>Menentukan distribusi probabilitas dari variabel baru Y yang merupakan fungsi dari variabel acak X (misal Y = g(X)).</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>Diketahui distribusi kesalahan pengukuran arus listrik (X). Bagaimana distribusi kesalahan daya listrik (P), jika P = I^2 * R?</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>Menggunakan metode transformasi atau fungsi pembangkit momen untuk menurunkan PDF dari P. Ini penting bagi insinyur untuk menentukan batas toleransi keamanan komponen agar tidak terbakar akibat fluktuasi daya.</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 09!"</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

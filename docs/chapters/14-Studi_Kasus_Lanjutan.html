@@ -113,35 +113,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -463,28 +434,10 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#agenda-perkuliahan-minggu-14" id="toc-agenda-perkuliahan-minggu-14" class="nav-link active" data-scroll-target="#agenda-perkuliahan-minggu-14"><span class="header-section-number">15.1</span> Agenda Perkuliahan Minggu 14</a>
-  <ul class="collapse">
-  <li><a href="#pertemuan-1-senin-1-jam---the-strategy" id="toc-pertemuan-1-senin-1-jam---the-strategy" class="nav-link" data-scroll-target="#pertemuan-1-senin-1-jam---the-strategy"><span class="header-section-number">15.1.1</span> Pertemuan 1: Senin (1 Jam) - The Strategy</a></li>
-  <li><a href="#pertemuan-2-rabu-2-jam---integration-lab" id="toc-pertemuan-2-rabu-2-jam---integration-lab" class="nav-link" data-scroll-target="#pertemuan-2-rabu-2-jam---integration-lab"><span class="header-section-number">15.1.2</span> Pertemuan 2: Rabu (2 Jam) - Integration Lab</a></li>
-  </ul></li>
-  <li><a href="#materi-kuliah-konsep-aplikasi-komputasi" id="toc-materi-kuliah-konsep-aplikasi-komputasi" class="nav-link" data-scroll-target="#materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">15.2</span> Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</a>
-  <ul class="collapse">
-  <li><a href="#konsep-dasar" id="toc-konsep-dasar" class="nav-link" data-scroll-target="#konsep-dasar"><span class="header-section-number">15.2.1</span> 1. Konsep Dasar</a></li>
-  <li><a href="#aplikasi-sistem-informasi" id="toc-aplikasi-sistem-informasi" class="nav-link" data-scroll-target="#aplikasi-sistem-informasi"><span class="header-section-number">15.2.2</span> 2. Aplikasi Sistem Informasi</a></li>
-  <li><a href="#komputasi-python" id="toc-komputasi-python" class="nav-link" data-scroll-target="#komputasi-python"><span class="header-section-number">15.2.3</span> 3. Komputasi (Python)</a></li>
-  </ul></li>
-  <li><a href="#tugas-kelompok-github-classroom" id="toc-tugas-kelompok-github-classroom" class="nav-link" data-scroll-target="#tugas-kelompok-github-classroom"><span class="header-section-number">15.3</span> Tugas Kelompok (GitHub Classroom)</a></li>
-  <li><a href="#soal-solusi" id="toc-soal-solusi" class="nav-link" data-scroll-target="#soal-solusi"><span class="header-section-number">15.4</span> 15 Soal &amp; Solusi</a>
-  <ul class="collapse">
-  <li><a href="#a.-pertanyaan-konseptual" id="toc-a.-pertanyaan-konseptual" class="nav-link" data-scroll-target="#a.-pertanyaan-konseptual"><span class="header-section-number">15.4.1</span> A. Pertanyaan Konseptual</a></li>
-  <li><a href="#b.-pertanyaan-aplikatif" id="toc-b.-pertanyaan-aplikatif" class="nav-link" data-scroll-target="#b.-pertanyaan-aplikatif"><span class="header-section-number">15.4.2</span> B. Pertanyaan Aplikatif</a></li>
-  <li><a href="#c.-pertanyaan-komputasional" id="toc-c.-pertanyaan-komputasional" class="nav-link" data-scroll-target="#c.-pertanyaan-komputasional"><span class="header-section-number">15.4.3</span> C. Pertanyaan Komputasional</a></li>
-  </ul></li>
-  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">15.5</span> 1. Konsep Pengetahuan</a></li>
-  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">15.6</span> 2. Tipikal Problem</a></li>
-  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">15.7</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
-  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">15.8</span> 4. Eksplorasi Komputasi (Python)</a></li>
+  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link active" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">15.1</span> 1. Konsep Pengetahuan</a></li>
+  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">15.2</span> 2. Tipikal Problem</a></li>
+  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">15.3</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
+  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">15.4</span> 4. Eksplorasi Komputasi (Python)</a></li>
   </ul>
 </nav>
     </div>
@@ -518,259 +471,31 @@ window.Quarto = {
 <figcaption>“Di dunia nyata selalu ada noise: lingkungan berubah, sensor drift, proses manufaktur goyang. Produk bagus bukan yang sempurna di lab, tapi yang <em>robust</em> di lapangan. Minggu ini kamu menggabungkan semua: estimasi, uji, regresi—dipakai untuk masalah kompleks seperti desain parameter robust atau deteksi sinyal di tengah noise. Kamu tidak cuma menghitung; kamu merancang eksperimen dan memilih parameter kontrol yang menekan variansi output. Ini level ‘engineer beneran’.”</figcaption>
 </figure>
 </div>
-<p>Week 14: Aplikasi Statistika Lanjutan (A/B Testing, Anomaly Detection)</p>
-<section id="agenda-perkuliahan-minggu-14" class="level2" data-number="15.1">
-<h2 data-number="15.1" class="anchored" data-anchor-id="agenda-perkuliahan-minggu-14"><span class="header-section-number">15.1</span> Agenda Perkuliahan Minggu 14</h2>
-<p><strong>Topik:</strong> Aplikasi Lanjutan (A/B Testing, Deteksi Anomali, &amp; Evaluasi Model) <strong>Tema Misi:</strong> “The Data Detective: Finding Signals in the Noise”</p>
-<section id="pertemuan-1-senin-1-jam---the-strategy" class="level3" data-number="15.1.1">
-<h3 data-number="15.1.1" class="anchored" data-anchor-id="pertemuan-1-senin-1-jam---the-strategy"><span class="header-section-number">15.1.1</span> Pertemuan 1: Senin (1 Jam) - The Strategy</h3>
-<p><strong>Fokus:</strong> Memahami bagaimana raksasa teknologi (Google, Netflix, Gojek) menggunakan statistik untuk mengambil keputusan otomatis.</p>
-<ul>
-<li><strong>00:00 - 00:10 | The Hook: “The $300 Million Button”</strong>
-<ul>
-<li>Kisah: Ceritakan bagaimana perubahan warna tombol di Bing atau Amazon menghasilkan kenaikan revenue jutaan dolar.</li>
-<li>Pertanyaan: “Bagaimana mereka tahu itu bukan kebetulan? Apakah mereka hanya menebak?”</li>
-<li>Konsep: Pengantar A/B Testing sebagai standar emas pengambilan keputusan produk digital.</li>
-</ul></li>
-<li><strong>00:10 - 00:30 | Bedah Kasus: Deteksi Anomali (Security)</strong>
-<ul>
-<li>Visual: Tampilkan grafik traffic server yang normal, lalu tiba-tiba ada lonjakan (spike).</li>
-<li>Diskusi: “Kapan sebuah lonjakan disebut serangan DDoS dan kapan disebut ‘viral marketing’? Bagaimana membedakannya secara matematis?”</li>
-<li>Konsep: Menggunakan Skor-Z dan distribusi probabilitas untuk menentukan threshold alarm.</li>
-</ul></li>
-<li><strong>00:30 - 00:50 | Deep Dive: Metrik Evaluasi (Bukan Sekadar Akurasi)</strong>
-<ul>
-<li>Masalah: “Model deteksi kanker akurasinya 99%, tapi dia menebak semua orang ‘sehat’. Berguna?”</li>
-<li>Konsep: Precision vs.&nbsp;Recall dan F1-Score. Pentingnya memahami imbalanced data dalam sistem informasi.</li>
-</ul></li>
-<li><strong>00:50 - 01:00 | Pod Formation &amp; Mission Brief</strong>
-<ul>
-<li>Misi GitHub: “The DevOps Guardian”. Mahasiswa akan menganalisis log server untuk mendeteksi serangan dan mengevaluasi eksperimen fitur baru.</li>
-</ul></li>
-</ul>
-</section>
-<section id="pertemuan-2-rabu-2-jam---integration-lab" class="level3" data-number="15.1.2">
-<h3 data-number="15.1.2" class="anchored" data-anchor-id="pertemuan-2-rabu-2-jam---integration-lab"><span class="header-section-number">15.1.2</span> Pertemuan 2: Rabu (2 Jam) - Integration Lab</h3>
-<p><strong>Fokus:</strong> Menggunakan Python untuk simulasi end-to-end: dari data mentah -&gt; analisis statistik -&gt; keputusan bisnis.</p>
-<ul>
-<li><strong>00:00 - 00:20 | Micro-Lecture: Multiple Testing Problem</strong>
-<ul>
-<li>Masalah: “Jika kamu melakukan A/B test pada 100 tombol berbeda, kemungkinan besar 5 tombol akan terlihat ‘signifikan’ secara kebetulan (jika <span class="math inline">\(\alpha=0.05\)</span>).”</li>
-<li>Solusi: Hati-hati dengan P-hacking. Fokus pada hipotesis yang kuat sebelum coding.</li>
-</ul></li>
-<li><strong>00:20 - 01:10 | Pod Challenge: “A/B Testing &amp; Anomaly Hunt”</strong>
-<ul>
-<li>Dataset: <code>server_logs.csv</code> (berisi timestamp, cpu_usage, response_time, group_variant).</li>
-<li>Tugas (Python):
-<ol type="1">
-<li>A/B Test: Bandingkan <code>response_time</code> antara Grup A (Algoritma Lama) dan Grup B (Algoritma Baru). Apakah B lebih cepat secara signifikan? (Pakai T-test).</li>
-<li>Anomaly Detection: Cari jam-jam di mana <code>cpu_usage</code> menyimpang &gt; 3 standar deviasi dari rata-rata (Z-score &gt; 3).</li>
-<li>Visualisasi: Plot time-series dengan garis merah di titik-titik anomali.</li>
-</ol></li>
-</ul></li>
-<li><strong>01:10 - 01:40 | Studi Kasus: “To Block or Not to Block?”</strong>
-<ul>
-<li>Skenario: Sistem mendeteksi anomali.
-<ul>
-<li>Jika diblokir (padahal user asli) <span class="math inline">\(\to\)</span> Komplain (Cost: High).</li>
-<li>Jika dibiarkan (padahal hacker) <span class="math inline">\(\to\)</span> Data Breach (Cost: Ultra High).</li>
-</ul></li>
-<li>Diskusi: Menentukan threshold keputusan berdasarkan Expected Loss (Materi Minggu 13).</li>
-</ul></li>
-<li><strong>01:40 - 01:50 | Showcase &amp; Debat</strong>
-<ul>
-<li>Pods mempresentasikan temuan anomali mereka. “Apakah serangan terjadi pada jam 2 pagi atau jam 2 siang?”</li>
-</ul></li>
-<li><strong>01:50 - 02:00 | Exit Ticket</strong>
-<ul>
-<li>Pertanyaan: “Mengapa akurasi tinggi bisa menipu dalam deteksi anomali?” (Jawab: Karena kelas anomali sangat jarang/minoritas).</li>
-</ul></li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="materi-kuliah-konsep-aplikasi-komputasi" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">15.2</span> Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</h2>
-<section id="konsep-dasar" class="level3" data-number="15.2.1">
-<h3 data-number="15.2.1" class="anchored" data-anchor-id="konsep-dasar"><span class="header-section-number">15.2.1</span> 1. Konsep Dasar</h3>
-<ul>
-<li><strong>A/B Testing:</strong> Implementasi praktis dari Uji Hipotesis Dua Sampel (Independent T-test). Membagi traffic user ke versi Kontrol (A) dan Eksperimen (B) untuk mengukur dampak perubahan fitur.</li>
-<li><strong>Deteksi Anomali (Outlier Detection)::</strong> Mengidentifikasi data yang menyimpang jauh dari pola normal. Menggunakan konsep Skor-Z (<span class="math inline">\(z = \frac{x-\mu}{\sigma}\)</span>) atau Interquartile Range (IQR).</li>
-<li><strong>Evaluasi Klasifikasi:</strong>
-<ul>
-<li><strong>Presisi:</strong> Dari semua yang ditebak positif, berapa yang benar? (TP/(TP+FP)).</li>
-<li><strong>Recall:</strong> Dari semua kejadian positif asli, berapa yang ditemukan? (TP/(TP+FN)).</li>
-</ul></li>
-</ul>
-</section>
-<section id="aplikasi-sistem-informasi" class="level3" data-number="15.2.2">
-<h3 data-number="15.2.2" class="anchored" data-anchor-id="aplikasi-sistem-informasi"><span class="header-section-number">15.2.2</span> 2. Aplikasi Sistem Informasi</h3>
-<ul>
-<li><strong>Keamanan Siber:</strong> Mendeteksi serangan DDoS atau intrusi jaringan dengan memantau lonjakan trafik yang memiliki probabilitas kejadian sangat kecil di bawah kondisi normal.</li>
-<li><strong>Optimasi UI/UX:</strong> Memutuskan apakah font baru meningkatkan waktu baca pengguna. Keputusan didasarkan pada P-value dan Confidence Interval dari data eksperimen.</li>
-<li><strong>Monitoring Kesehatan Sistem:</strong> Predictive Maintenance. Jika suhu server mulai menunjukkan tren naik (regresi) atau variansi tinggi, sistem mengirim peringatan sebelum server meledak.</li>
-</ul>
-</section>
-<section id="komputasi-python" class="level3" data-number="15.2.3">
-<h3 data-number="15.2.3" class="anchored" data-anchor-id="komputasi-python"><span class="header-section-number">15.2.3</span> 3. Komputasi (Python)</h3>
-<ul>
-<li><strong>A/B Testing:</strong> <code>scipy.stats.ttest_ind</code> untuk uji beda rata-rata, <code>statsmodels.stats.proportion</code> untuk uji beda konversi (proporsi).</li>
-<li><strong>Z-Score:</strong> <code>scipy.stats.zscore</code> atau manual <code>(df - df.mean()) / df.std()</code>.</li>
-<li><strong>Metrik:</strong> <code>sklearn.metrics.classification_report</code> untuk menghitung Presisi, Recall, dan F1 secara otomatis.</li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="tugas-kelompok-github-classroom" class="level2" data-number="15.3">
-<h2 data-number="15.3" class="anchored" data-anchor-id="tugas-kelompok-github-classroom"><span class="header-section-number">15.3</span> Tugas Kelompok (GitHub Classroom)</h2>
-<p><strong>Judul:</strong> Week 14 Mission: The System Guardian - Data-Driven Defense</p>
-<p><strong>Deskripsi:</strong> Anda adalah Site Reliability Engineer (SRE). Sistem baru saja mengalami insiden dan manajemen ingin tahu penyebabnya serta apakah fitur “Auto-Scaler” baru bekerja efektif.</p>
-<p><strong>Set Soal (Notebook):</strong> 1. <strong>Incident Forensics (30 poin):</strong> - Load data <code>system_metrics.csv</code>. - Hitung rata-rata dan standar deviasi CPU Usage pada jam kerja normal. - Identifikasi timestamp di mana CPU Usage &gt; <span class="math inline">\(\mu + 3\sigma\)</span>. Tandai sebagai “Potential Attack”. 2. <strong>Feature Evaluation (30 poin):</strong> - Data memuat kolom <code>scaler_version</code> (‘v1’ vs ‘v2’). - Lakukan A/B Testing: Apakah rata-rata latency pada ‘v2’ lebih rendah secara signifikan dibanding ‘v1’? (Gunakan <span class="math inline">\(\alpha=0.05\)</span>). - Visualisasikan distribusi latency kedua versi dengan <code>seaborn.kdeplot</code> (lihat bagian ekor/tail). 3. <strong>Model Metrics (20 poin):</strong> - Diberikan hasil prediksi deteksi serangan (array <code>y_true</code> dan <code>y_pred</code>). - Hitung Confusion Matrix, Precision, dan Recall. - Jelaskan: Untuk kasus keamanan bank, mana yang lebih penting dimaksimalkan, Precision atau Recall? 4. <strong>Reporting (20 poin):</strong> - Tulis Executive Summary (maks 5 kalimat): Apakah v2 harus di-deploy? Apakah serangan terdeteksi?</p>
-<hr>
-</section>
-<section id="soal-solusi" class="level2" data-number="15.4">
-<h2 data-number="15.4" class="anchored" data-anchor-id="soal-solusi"><span class="header-section-number">15.4</span> 15 Soal &amp; Solusi</h2>
-<section id="a.-pertanyaan-konseptual" class="level3" data-number="15.4.1">
-<h3 data-number="15.4.1" class="anchored" data-anchor-id="a.-pertanyaan-konseptual"><span class="header-section-number">15.4.1</span> A. Pertanyaan Konseptual</h3>
-<ol type="1">
-<li><strong>Soal:</strong> Bagaimana statistika membantu dalam optimasi algoritma pencarian di web?
-<ul>
-<li><strong>Solusi:</strong> Statistika (khususnya A/B testing dan regresi) digunakan untuk mengevaluasi apakah perubahan pada algoritma ranking meningkatkan relevansi hasil (misal: click-through rate). Probabilitas juga digunakan dalam model bahasa (seperti n-gram) untuk memprediksi kata kunci pencarian.</li>
-</ul></li>
-<li><strong>Soal:</strong> Jelaskan peran probabilitas dalam menjaga keamanan protokol kriptografi.
-<ul>
-<li><strong>Solusi:</strong> Keamanan kriptografi bergantung pada probabilitas yang sangat kecil (negligible probability) bagi penyerang untuk menebak kunci privat atau menemukan collision pada fungsi hash secara acak. Konsep entropi (ketidakpastian) digunakan untuk mengukur kekuatan kunci.</li>
-</ul></li>
-<li><strong>Soal:</strong> Apa yang dimaksud dengan pengujian A/B dalam pengembangan antarmuka pengguna (UI)?
-<ul>
-<li><strong>Solusi:</strong> Pengujian A/B adalah eksperimen terkontrol di mana dua varian UI (A dan B) ditunjukkan kepada dua kelompok pengguna secara acak. Analisis statistik (uji hipotesis) kemudian digunakan untuk menentukan varian mana yang memberikan performa lebih baik berdasarkan metrik tertentu (misal: konversi).</li>
-</ul></li>
-<li><strong>Soal:</strong> Bagaimana konsep statistika deskriptif digunakan dalam memonitor kesehatan sistem (system health monitoring)?
-<ul>
-<li><strong>Solusi:</strong> Metrik deskriptif seperti rata-rata (mean), persentil (misal p99 latency), dan standar deviasi digunakan untuk menetapkan baseline performa normal. Penyimpangan dari nilai-nilai ini (anomali) menjadi sinyal peringatan dini adanya masalah sistem.</li>
-</ul></li>
-<li><strong>Soal:</strong> Diskusi: Mengapa pemahaman statistik krusial bagi seorang data scientist di era AI?
-<ul>
-<li><strong>Solusi:</strong> AI dan Machine Learning pada dasarnya adalah inferensi statistik otomatis. Pemahaman statistik diperlukan untuk memahami cara kerja model, validasi hasil (menghindari overfitting), mengukur ketidakpastian prediksi, dan menghindari bias dalam data atau algoritma.</li>
-</ul></li>
-</ol>
-</section>
-<section id="b.-pertanyaan-aplikatif" class="level3" data-number="15.4.2">
-<h3 data-number="15.4.2" class="anchored" data-anchor-id="b.-pertanyaan-aplikatif"><span class="header-section-number">15.4.2</span> B. Pertanyaan Aplikatif</h3>
-<ol start="6" type="1">
-<li><strong>Soal:</strong> Rancanglah sebuah eksperimen pengujian A/B untuk membandingkan dua desain tombol “Checkout” pada aplikasi e-commerce.
-<ul>
-<li><strong>Solusi:</strong>
-<ol type="1">
-<li>Tentukan metrik keberhasilan: Conversion Rate (Klik/Total View).</li>
-<li>Bagi trafik user 50:50 secara acak ke Desain A dan Desain B.</li>
-<li>Kumpulkan data sampel hingga mencapai power statistik yang cukup.</li>
-<li>Lakukan uji beda proporsi (Z-test) dengan <span class="math inline">\(\alpha=0.05\)</span>.</li>
-<li>Jika <span class="math inline">\(P &lt; 0.05\)</span>, implementasikan desain pemenang.</li>
-</ol></li>
-</ul></li>
-<li><strong>Soal:</strong> Gunakan deteksi anomali berbasis skor-Z untuk mengidentifikasi trafik jaringan yang mencurigakan (potensi serangan DDoS).
-<ul>
-<li><strong>Solusi:</strong> Hitung rata-rata (<span class="math inline">\(\mu\)</span>) dan standar deviasi (<span class="math inline">\(\sigma\)</span>) trafik harian. Hitung skor-Z untuk trafik saat ini: <span class="math inline">\(Z=(X-\mu)/\sigma\)</span>. Jika <span class="math inline">\(|Z| &gt; 3\)</span> (di luar 3 sigma), tandai sebagai anomali/potensi DDoS.</li>
-</ul></li>
-<li><strong>Soal:</strong> Analisis sentimen pengguna aplikasi menggunakan distribusi multinomial untuk kategori positif, netral, dan negatif.
-<ul>
-<li><strong>Solusi:</strong> Modelkan jumlah ulasan untuk setiap kategori (Positif, Netral, Negatif) sebagai vektor acak yang mengikuti distribusi Multinomial dengan parameter probabilitas (<span class="math inline">\(p_1, p_2, p_3\)</span>). Lakukan estimasi parameter ini dari data sampel ulasan untuk memahami sentimen populasi.</li>
-</ul></li>
-<li><strong>Soal:</strong> Evaluasi performa model klasifikasi gambar menggunakan metrik akurasi, presisi, dan recall berbasis tabel kontingensi.
-<ul>
-<li><strong>Solusi:</strong> Buat Confusion Matrix (TP, TN, FP, FN). Hitung:
-<ul>
-<li>Akurasi = (TP+TN)/Total.</li>
-<li>Presisi = TP/(TP+FP) (Relevansi prediksi positif).</li>
-<li>Recall = TP/(TP+FN) (Sensitivitas deteksi).</li>
-</ul></li>
-</ul></li>
-<li><strong>Soal:</strong> Gunakan rantai Markov sederhana untuk memprediksi perilaku navigasi user di sebuah website.
-<ul>
-<li><strong>Solusi:</strong> Definisikan states (misal: Home, Produk, Cart, Checkout, Exit). Hitung matriks probabilitas transisi <span class="math inline">\(P_{ij}\)</span> (peluang pindah dari halaman i ke j) berdasarkan data historis log server. Gunakan matriks ini untuk memprediksi peluang user mencapai halaman “Checkout” dari “Home”.</li>
-</ul></li>
-</ol>
-</section>
-<section id="c.-pertanyaan-komputasional" class="level3" data-number="15.4.3">
-<h3 data-number="15.4.3" class="anchored" data-anchor-id="c.-pertanyaan-komputasional"><span class="header-section-number">15.4.3</span> C. Pertanyaan Komputasional</h3>
-<ol start="11" type="1">
-<li><strong>Soal:</strong> Implementasikan skrip Python untuk melakukan pengujian A/B (uji t dua sampel) pada dataset log klik user.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats  </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Data durasi sesi (detik)  </span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>group_a <span class="op">=</span> [<span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">7</span>, <span class="dv">10</span>]  </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>group_b <span class="op">=</span> [<span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">14</span>]  </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>t_stat, p_val <span class="op">=</span> stats.ttest_ind(group_a, group_b)  </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"P-value: </span><span class="sc">{</span>p_val<span class="sc">}</span><span class="ss">"</span>) <span class="co"># Jika &lt; 0.05, beda signifikan  </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Buatlah sistem peringatan dini sederhana yang mendeteksi lonjakan penggunaan CPU di atas 3 standar deviasi dari rata-rata.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np  </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data_cpu <span class="op">=</span> np.array([<span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">14</span>, <span class="dv">13</span>, <span class="dv">50</span>, <span class="dv">15</span>, <span class="dv">12</span>]) <span class="co"># 50 adalah anomali  </span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mean, std <span class="op">=</span> np.mean(data_cpu), np.std(data_cpu)  </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>threshold <span class="op">=</span> mean <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> std  </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>alarms <span class="op">=</span> data_cpu[data_cpu <span class="op">&gt;</span> threshold]  </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Alarm pada nilai: </span><span class="sc">{</span>alarms<span class="sc">}</span><span class="ss">"</span>)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Gunakan pustaka pandas untuk melakukan analisis korelasi pada dataset besar berisi metrik performa sistem informasi.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd  </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'system_metrics.csv'</span>)  </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="op">=</span> df.corr()  </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(correlation_matrix[<span class="st">'latency'</span>]) <span class="co"># Cek faktor yang paling ngaruh ke latency  </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Tulis program untuk menghitung metrik evaluasi model (F1-score) berdasarkan input jumlah True Positive, False Positive, dan False Negative.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_f1(tp, fp, fn):  </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>precision <span class="op">=</span> tp <span class="op">/</span> (tp <span class="op">+</span> fp)  </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>recall <span class="op">=</span> tp <span class="op">/</span> (tp <span class="op">+</span> fn)  </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (precision <span class="op">*</span> recall) <span class="op">/</span> (precision <span class="op">+</span> recall)  </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> f1  </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(calculate_f1(<span class="dv">80</span>, <span class="dv">20</span>, <span class="dv">10</span>))  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Visualisasikan distribusi “tail” dari latensi aplikasi untuk memahami performa pada persentil ke-99 (P99).
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt  </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np  </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>latency <span class="op">=</span> np.random.exponential(scale<span class="op">=</span><span class="dv">100</span>, size<span class="op">=</span><span class="dv">1000</span>) <span class="co"># Data simulasi  </span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.hist(latency, bins<span class="op">=</span><span class="dv">50</span>, density<span class="op">=</span><span class="va">True</span>)  </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.axvline(np.percentile(latency, <span class="dv">99</span>), color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'P99'</span>)  </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.legend()<span class="op">;</span> plt.show()  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-</ol>
-</section>
-</section>
-<section id="konsep-pengetahuan" class="level2" data-number="15.5">
-<h2 data-number="15.5" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">15.5</span> 1. Konsep Pengetahuan</h2>
+<section id="konsep-pengetahuan" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">15.1</span> 1. Konsep Pengetahuan</h2>
 <p>Penerapan integratif dari estimasi, uji hipotesis, dan regresi pada masalah dunia nyata yang kompleks, seperti Robust Parameter Design atau deteksi sinyal.</p>
 </section>
-<section id="tipikal-problem" class="level2" data-number="15.6">
-<h2 data-number="15.6" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">15.6</span> 2. Tipikal Problem</h2>
+<section id="tipikal-problem" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">15.2</span> 2. Tipikal Problem</h2>
 <p>Mengoptimalkan parameter proses manufaktur agar tahan terhadap variasi lingkungan (noise) atau mendeteksi sinyal radar di tengah noise.</p>
 </section>
-<section id="solusi-pengambilan-keputusan" class="level2" data-number="15.7">
-<h2 data-number="15.7" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">15.7</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
+<section id="solusi-pengambilan-keputusan" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">15.3</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
 <p>Menggunakan desain eksperimen (DOE) dan analisis statistik untuk memilih parameter ‘kontrol’ yang meminimalkan variansi output (membuat produk robust/tangguh), sehingga menekan biaya cacat produksi.</p>
 </section>
-<section id="eksplorasi-komputasi-python" class="level2" data-number="15.8">
-<h2 data-number="15.8" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">15.8</span> 4. Eksplorasi Komputasi (Python)</h2>
+<section id="eksplorasi-komputasi-python" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">15.4</span> 4. Eksplorasi Komputasi (Python)</h2>
 <p><em>Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.</em></p>
-<div id="e111659e" class="cell" data-execution_count="1">
+<div id="0cf7e867" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Lihat kode</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 14-15!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 14-15!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Siap untuk komputasi Minggu 14-15!</code></pre>
@@ -1264,37 +989,37 @@ window.Quarto = {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minggu 14-15: Studi Kasus Lanjutan"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Advanced Case Studies (Application in Computing/Electrical Engineering)"</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="al">![“Di dunia nyata selalu ada noise: lingkungan berubah, sensor drift, proses manufaktur goyang. Produk bagus bukan yang sempurna di lab, tapi yang *robust* di lapangan. Minggu ini kamu menggabungkan semua: estimasi, uji, regresi—dipakai untuk masalah kompleks seperti desain parameter robust atau deteksi sinyal di tengah noise. Kamu tidak cuma menghitung; kamu merancang eksperimen dan memilih parameter kontrol yang menekan variansi output. Ini level ‘engineer beneran’.”](../The_Decision_Engineer.png/image14.png)</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../agenda/w14.qmd &gt;}}</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>Penerapan integratif dari estimasi, uji hipotesis, dan regresi pada masalah dunia nyata yang kompleks, seperti Robust Parameter Design atau deteksi sinyal.</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>Mengoptimalkan parameter proses manufaktur agar tahan terhadap variasi lingkungan (noise) atau mendeteksi sinyal radar di tengah noise.</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>Menggunakan desain eksperimen (DOE) dan analisis statistik untuk memilih parameter 'kontrol' yang meminimalkan variansi output (membuat produk robust/tangguh), sehingga menekan biaya cacat produksi.</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 14-15!"</span>)</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minggu 14-15: Studi Kasus Lanjutan"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Advanced Case Studies (Application in Computing/Electrical Engineering)"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="al">![“Di dunia nyata selalu ada noise: lingkungan berubah, sensor drift, proses manufaktur goyang. Produk bagus bukan yang sempurna di lab, tapi yang *robust* di lapangan. Minggu ini kamu menggabungkan semua: estimasi, uji, regresi—dipakai untuk masalah kompleks seperti desain parameter robust atau deteksi sinyal di tengah noise. Kamu tidak cuma menghitung; kamu merancang eksperimen dan memilih parameter kontrol yang menekan variansi output. Ini level ‘engineer beneran’.”](../The_Decision_Engineer.png/image14.png)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>Penerapan integratif dari estimasi, uji hipotesis, dan regresi pada masalah dunia nyata yang kompleks, seperti Robust Parameter Design atau deteksi sinyal.</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>Mengoptimalkan parameter proses manufaktur agar tahan terhadap variasi lingkungan (noise) atau mendeteksi sinyal radar di tengah noise.</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>Menggunakan desain eksperimen (DOE) dan analisis statistik untuk memilih parameter 'kontrol' yang meminimalkan variansi output (membuat produk robust/tangguh), sehingga menekan biaya cacat produksi.</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 14-15!"</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

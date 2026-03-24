@@ -113,35 +113,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -463,28 +434,10 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#agenda-perkuliahan-minggu-7" id="toc-agenda-perkuliahan-minggu-7" class="nav-link active" data-scroll-target="#agenda-perkuliahan-minggu-7"><span class="header-section-number">8.1</span> Agenda Perkuliahan Minggu 7</a>
-  <ul class="collapse">
-  <li><a href="#pertemuan-1-senin-1-jam---the-intuition-the-bell-curve" id="toc-pertemuan-1-senin-1-jam---the-intuition-the-bell-curve" class="nav-link" data-scroll-target="#pertemuan-1-senin-1-jam---the-intuition-the-bell-curve"><span class="header-section-number">8.1.1</span> Pertemuan 1: Senin (1 Jam) - The Intuition &amp; The Bell Curve</a></li>
-  <li><a href="#pertemuan-2-rabu-2-jam---simulation-lab" id="toc-pertemuan-2-rabu-2-jam---simulation-lab" class="nav-link" data-scroll-target="#pertemuan-2-rabu-2-jam---simulation-lab"><span class="header-section-number">8.1.2</span> Pertemuan 2: Rabu (2 Jam) - Simulation Lab</a></li>
-  </ul></li>
-  <li><a href="#materi-kuliah-konsep-aplikasi-komputasi" id="toc-materi-kuliah-konsep-aplikasi-komputasi" class="nav-link" data-scroll-target="#materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">8.2</span> Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</a>
-  <ul class="collapse">
-  <li><a href="#konsep-dasar" id="toc-konsep-dasar" class="nav-link" data-scroll-target="#konsep-dasar"><span class="header-section-number">8.2.1</span> 1. Konsep Dasar</a></li>
-  <li><a href="#aplikasi-sistem-informasi" id="toc-aplikasi-sistem-informasi" class="nav-link" data-scroll-target="#aplikasi-sistem-informasi"><span class="header-section-number">8.2.2</span> 2. Aplikasi Sistem Informasi</a></li>
-  <li><a href="#komputasi-python" id="toc-komputasi-python" class="nav-link" data-scroll-target="#komputasi-python"><span class="header-section-number">8.2.3</span> 3. Komputasi (Python)</a></li>
-  </ul></li>
-  <li><a href="#tugas-kelompok-github-classroom" id="toc-tugas-kelompok-github-classroom" class="nav-link" data-scroll-target="#tugas-kelompok-github-classroom"><span class="header-section-number">8.3</span> Tugas Kelompok (GitHub Classroom)</a></li>
-  <li><a href="#soal-solusi" id="toc-soal-solusi" class="nav-link" data-scroll-target="#soal-solusi"><span class="header-section-number">8.4</span> 15 Soal &amp; Solusi</a>
-  <ul class="collapse">
-  <li><a href="#a.-pertanyaan-konseptual" id="toc-a.-pertanyaan-konseptual" class="nav-link" data-scroll-target="#a.-pertanyaan-konseptual"><span class="header-section-number">8.4.1</span> A. Pertanyaan Konseptual</a></li>
-  <li><a href="#b.-pertanyaan-aplikatif" id="toc-b.-pertanyaan-aplikatif" class="nav-link" data-scroll-target="#b.-pertanyaan-aplikatif"><span class="header-section-number">8.4.2</span> B. Pertanyaan Aplikatif</a></li>
-  <li><a href="#c.-pertanyaan-komputasional" id="toc-c.-pertanyaan-komputasional" class="nav-link" data-scroll-target="#c.-pertanyaan-komputasional"><span class="header-section-number">8.4.3</span> C. Pertanyaan Komputasional</a></li>
-  </ul></li>
-  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">8.5</span> 1. Konsep Pengetahuan</a></li>
-  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">8.6</span> 2. Tipikal Problem</a></li>
-  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">8.7</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
-  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">8.8</span> 4. Eksplorasi Komputasi (Python)</a></li>
+  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link active" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">8.1</span> 1. Konsep Pengetahuan</a></li>
+  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">8.2</span> 2. Tipikal Problem</a></li>
+  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">8.3</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
+  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">8.4</span> 4. Eksplorasi Komputasi (Python)</a></li>
   </ul>
 </nav>
     </div>
@@ -518,260 +471,31 @@ window.Quarto = {
 <figcaption>“Lampu rata-rata hidup 900 jam, simpangan 50 jam. Kamu mau kasih garansi 700 jam, 800 jam, atau 900 jam? Ini bukan sekadar ‘baik hati’—ini strategi biaya klaim. Normal sering muncul di data pengukuran; eksponensial sering muncul di waktu tunggu. Hari ini kamu belajar menghitung peluang rusak sebelum waktu T, lalu menentukan T yang masuk akal untuk target klaim. Kamu akan melihat: statistik bisa jadi alat desain produk.”</figcaption>
 </figure>
 </div>
-<p>Week 07: Distribusi Kontinu: Kurva Normal dan Eksponensial dalam Rekayasa</p>
-<section id="agenda-perkuliahan-minggu-7" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="agenda-perkuliahan-minggu-7"><span class="header-section-number">8.1</span> Agenda Perkuliahan Minggu 7</h2>
-<p><strong>Tema Misi:</strong> “Predicting the Unpredictable: From Bell Curves to Waiting Games”</p>
-<section id="pertemuan-1-senin-1-jam---the-intuition-the-bell-curve" class="level3" data-number="8.1.1">
-<h3 data-number="8.1.1" class="anchored" data-anchor-id="pertemuan-1-senin-1-jam---the-intuition-the-bell-curve"><span class="header-section-number">8.1.1</span> Pertemuan 1: Senin (1 Jam) - The Intuition &amp; The Bell Curve</h3>
-<p><strong>Fokus:</strong> Memahami mengapa Distribusi Normal adalah “raja” distribusi dan kapan menggunakan Eksponensial untuk waktu.</p>
-<ul>
-<li><strong>00:00 - 00:10 | The Hook: “Misteri Tinggi Badan &amp; Error GPS”</strong>
-<ul>
-<li>Aktivitas: Tampilkan histogram data tinggi badan 10.000 orang (atau data error GPS). Bentuknya selalu lonceng simetris.</li>
-<li>Pertanyaan: “Kenapa fenomena yang tampak acak ini selalu membentuk pola yang sama? Kenapa tidak kotak atau segitiga?”</li>
-<li>Konsep: Perkenalkan Distribusi Normal (Gaussian) sebagai hasil akumulasi banyak faktor kecil (prekursor Teorema Limit Pusat).</li>
-</ul></li>
-<li><strong>00:10 - 00:30 | Live Coding: “Normal is Everywhere”</strong>
-<ul>
-<li>Dosen (Python Demo):
-<ol type="1">
-<li>Generate data acak <code>numpy.random.normal</code>.</li>
-<li>Tunjukkan aturan empiris: 68% data ada di <span class="math inline">\(\mu \pm \sigma\)</span>, 95% di <span class="math inline">\(\mu \pm 2\sigma\)</span>.</li>
-<li>Visualisasi: Plot kurva lonceng dengan seaborn dan arsir area probabilitas.</li>
-</ol></li>
-</ul></li>
-<li><strong>00:30 - 00:50 | Deep Dive: Menunggu Bus (Eksponensial)</strong>
-<ul>
-<li>Skenario: “Kamu menunggu bus. Sudah 10 menit berlalu. Apakah peluang bus datang 5 menit lagi jadi lebih besar?”</li>
-<li>Konsep: Perkenalkan Distribusi Eksponensial dan sifat <em>Memoryless</em>. Jika bus datang secara acak (Poisson), waktu tunggunya tidak peduli masa lalu.</li>
-</ul></li>
-<li><strong>00:50 - 01:00 | Pod Formation &amp; Mission Brief</strong>
-<ul>
-<li>Misi GitHub: “The Warranty Game”. Mahasiswa harus menentukan masa garansi produk agar perusahaan tidak rugi bandar.</li>
-</ul></li>
-</ul>
-</section>
-<section id="pertemuan-2-rabu-2-jam---simulation-lab" class="level3" data-number="8.1.2">
-<h3 data-number="8.1.2" class="anchored" data-anchor-id="pertemuan-2-rabu-2-jam---simulation-lab"><span class="header-section-number">8.1.2</span> Pertemuan 2: Rabu (2 Jam) - Simulation Lab</h3>
-<p><strong>Fokus:</strong> Menggunakan Python untuk analisis reliabilitas produk dan menghitung probabilitas ‘ekor’ (<em>tail events</em>).</p>
-<ul>
-<li><strong>00:00 - 00:20 | Setup &amp; Micro-Lecture: PDF vs Probabilitas</strong>
-<ul>
-<li>Konsep: Ingatkan bahwa untuk kontinu, <span class="math inline">\(P(X=x)=0\)</span>. Probabilitas adalah Luas Area (<span class="math inline">\(P(a &lt; X &lt; b)\)</span>).</li>
-<li>Python Tool: <code>scipy.stats.norm.cdf</code> (Cumulative Distribution Function) adalah teman terbaik kita.</li>
-</ul></li>
-<li><strong>00:20 - 01:10 | Pod Challenge: “Product Reliability Engineer”</strong>
-<ul>
-<li>Skenario: Anda Insinyur Kualitas di pabrik SSD (Solid State Drive).</li>
-<li>Data: Umur SSD berdistribusi Normal (<span class="math inline">\(\mu=5\)</span> tahun, <span class="math inline">\(\sigma=1\)</span> tahun).</li>
-<li>Tugas (Python):
-<ol type="1">
-<li>Hitung berapa persen SSD yang rusak sebelum 3 tahun.</li>
-<li>Tentukan masa garansi (dalam tahun) agar klaim garansi maksimal hanya 1% dari total produksi (Cari <span class="math inline">\(x\)</span> dimana <span class="math inline">\(P(X &lt; x) = 0.01\)</span>).</li>
-<li>Simulasi: Generate 10.000 umur SSD, hitung biaya penggantian jika garansi diset 3 tahun vs 2 tahun.</li>
-</ol></li>
-</ul></li>
-<li><strong>01:10 - 01:40 | Studi Kasus: “Latency &amp; SLA”</strong>
-<ul>
-<li>Analisis performa server. Jika latency rata-rata 200ms (<span class="math inline">\(\sigma=50\)</span>ms), berapa peluang request timeout (&gt;350ms)? (Aplikasi Z-score).</li>
-</ul></li>
-<li><strong>01:40 - 01:50 | Share &amp; Interpretasi</strong>
-<ul>
-<li>Pods mempresentasikan keputusan garansi mereka.</li>
-</ul></li>
-<li><strong>01:50 - 02:00 | Exit Ticket</strong>
-<ul>
-<li>Pertanyaan: “Sebutkan satu kejadian di dunia nyata yang kira-kira mengikuti distribusi Normal dan satu yang Eksponensial.”</li>
-</ul></li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="materi-kuliah-konsep-aplikasi-komputasi" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">8.2</span> Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</h2>
-<section id="konsep-dasar" class="level3" data-number="8.2.1">
-<h3 data-number="8.2.1" class="anchored" data-anchor-id="konsep-dasar"><span class="header-section-number">8.2.1</span> 1. Konsep Dasar</h3>
-<ul>
-<li><strong>Distribusi Normal (Gaussian):</strong> Distribusi paling penting, berbentuk lonceng simetris. Ditentukan oleh dua parameter: Mean (<span class="math inline">\(\mu\)</span>) menentukan pusat, Standar Deviasi (<span class="math inline">\(\sigma\)</span>) menentukan lebar/sebaran.
-<ul>
-<li><strong>Standard Normal (Z):</strong> Distribusi normal dengan <span class="math inline">\(\mu=0, \sigma=1\)</span>.</li>
-</ul></li>
-<li><strong>Distribusi Eksponensial:</strong> Memodelkan waktu tunggu antar kejadian dalam proses Poisson. Parameter <span class="math inline">\(\lambda\)</span> (laju kejadian).
-<ul>
-<li><strong>Sifat Memoryless:</strong> <span class="math inline">\(P(X &gt; t+s | X &gt; t) = P(X &gt; s)\)</span>. Sejarah tidak mempengaruhi masa depan.</li>
-</ul></li>
-<li><strong>Probabilitas Kontinu:</strong> Peluang pada satu titik spesifik adalah nol. Peluang dihitung sebagai integral dari fungsi kepadatan peluang (PDF).</li>
-</ul>
-</section>
-<section id="aplikasi-sistem-informasi" class="level3" data-number="8.2.2">
-<h3 data-number="8.2.2" class="anchored" data-anchor-id="aplikasi-sistem-informasi"><span class="header-section-number">8.2.2</span> 2. Aplikasi Sistem Informasi</h3>
-<ul>
-<li><strong>SLA (Service Level Agreement):</strong> Menjamin bahwa “99% request akan selesai dalam &lt; 300ms”. Ini menggunakan perhitungan ekor distribusi Normal/Log-Normal.</li>
-<li><strong>MTTF (Mean Time To Failure):</strong> Memodelkan umur komponen perangkat keras (hard disk, server) menggunakan distribusi Eksponensial untuk perencanaan maintenance.</li>
-<li><strong>Anomaly Detection:</strong> Menggunakan skor-Z. Jika data poin memiliki <span class="math inline">\(|Z| &gt; 3\)</span> (jauh dari rata-rata), itu dicurigai sebagai anomali atau serangan siber.</li>
-</ul>
-</section>
-<section id="komputasi-python" class="level3" data-number="8.2.3">
-<h3 data-number="8.2.3" class="anchored" data-anchor-id="komputasi-python"><span class="header-section-number">8.2.3</span> 3. Komputasi (Python)</h3>
-<ul>
-<li><strong>Scipy Stats:</strong>
-<ul>
-<li><code>norm.pdf(x, loc, scale)</code>: Tinggi kurva.</li>
-<li><code>norm.cdf(x, loc, scale)</code>: Luas area di kiri <span class="math inline">\(x\)</span> (Probabilitas kumulatif).</li>
-<li><code>norm.ppf(q, loc, scale)</code>: Kebalikan CDF (Mencari nilai <span class="math inline">\(x\)</span> dari persentase).</li>
-</ul></li>
-<li><strong>Visualisasi:</strong> Menggunakan <code>seaborn.kdeplot</code> untuk melihat apakah data empiris mendekati bentuk lonceng.</li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="tugas-kelompok-github-classroom" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="tugas-kelompok-github-classroom"><span class="header-section-number">8.3</span> Tugas Kelompok (GitHub Classroom)</h2>
-<p><strong>Judul:</strong> Week 7: The Guarantee Gambler - Optimizing Warranty Risks</p>
-<p><strong>Deskripsi:</strong> Mahasiswa berperan sebagai tim Analis Risiko untuk peluncuran Smart Lamp baru. Mereka harus menyeimbangkan antara daya tarik marketing (garansi lama) dan risiko kebangkrutan (klaim garansi meledak).</p>
-<p><strong>Set Soal (Notebook):</strong> 1. <strong>Analisis Normal (30 poin):</strong> - Diketahui umur lampu <span class="math inline">\(N(\mu=10.000 \text{ jam}, \sigma=1.000 \text{ jam})\)</span>. - Hitung probabilitas lampu mati sebelum 8.000 jam. - Cari “titik aman” jam ke berapa sehingga 95% lampu masih hidup. 2. <strong>Analisis Eksponensial (30 poin):</strong> - Modul Wi-Fi pada lampu memiliki laju kegagalan <span class="math inline">\(\lambda=0.00005\)</span> per jam. - Hitung probabilitas modul ini bertahan lebih dari 20.000 jam. - Buktikan sifat <em>memoryless</em> dengan simulasi: Bandingkan peluang bertahan 1000 jam lagi untuk modul baru vs modul yang sudah nyala 5000 jam. 3. <strong>Keputusan Bisnis (40 poin):</strong> - Biaya produksi = $5. Harga jual = $15. Biaya ganti rugi garansi = $10 (rugi total). - Simulasikan profit total untuk 10.000 unit dengan opsi Garansi A (9.000 jam) vs Garansi B (8.000 jam). - Buat rekomendasi: Mana yang memberikan profit bersih terbesar?</p>
-<hr>
-</section>
-<section id="soal-solusi" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="soal-solusi"><span class="header-section-number">8.4</span> 15 Soal &amp; Solusi</h2>
-<section id="a.-pertanyaan-konseptual" class="level3" data-number="8.4.1">
-<h3 data-number="8.4.1" class="anchored" data-anchor-id="a.-pertanyaan-konseptual"><span class="header-section-number">8.4.1</span> A. Pertanyaan Konseptual</h3>
-<ol type="1">
-<li><strong>Soal:</strong> Mengapa probabilitas <span class="math inline">\(P(X=x)\)</span> pada distribusi kontinu selalu bernilai nol?
-<ul>
-<li><strong>Solusi:</strong> Karena pada distribusi kontinu, probabilitas didefinisikan sebagai luas area di bawah kurva PDF. Untuk satu titik tunggal (garis vertikal), lebarnya adalah nol, sehingga luas areanya (integral dari <span class="math inline">\(x\)</span> ke <span class="math inline">\(x\)</span>) adalah nol. Probabilitas hanya bermakna dalam interval <span class="math inline">\(P(a &lt; X &lt; b)\)</span>.</li>
-</ul></li>
-<li><strong>Soal:</strong> Jelaskan makna fisis dari parameter <span class="math inline">\(\mu\)</span> dan <span class="math inline">\(\sigma\)</span> pada kurva lonceng distribusi Normal.
-<ul>
-<li><strong>Solusi:</strong>
-<ul>
-<li><span class="math inline">\(\mu\)</span> (Mean): Menunjukkan lokasi pusat atau puncak dari kurva lonceng (nilai yang paling mungkin muncul).</li>
-<li><span class="math inline">\(\sigma\)</span> (Standar Deviasi): Menunjukkan seberapa lebar atau gemuk kurva tersebut. <span class="math inline">\(\sigma\)</span> besar berarti kurva landai (data menyebar), <span class="math inline">\(\sigma\)</span> kecil berarti kurva lancip (data terpusat di sekitar mean).</li>
-</ul></li>
-</ul></li>
-<li><strong>Soal:</strong> Apa itu skor-Z dan mengapa kita perlu menstandarisasi variabel acak Normal?
-<ul>
-<li><strong>Solusi:</strong> Skor-Z (<span class="math inline">\(z=(x-\mu)/\sigma\)</span>) mengukur berapa standar deviasi suatu nilai data berada dari rata-ratanya. Kita menstandarisasi variabel ke Normal Standar (<span class="math inline">\(Z \sim N(0,1)\)</span>) agar bisa membandingkan data dari distribusi yang berbeda (misal: membandingkan nilai ujian Matematika dan Fisika) dan menggunakan tabel probabilitas standar.</li>
-</ul></li>
-<li><strong>Soal:</strong> Jelaskan sifat memoryless (tidak memiliki memori) pada distribusi Eksponensial dalam konteks kegagalan komponen.
-<ul>
-<li><strong>Solusi:</strong> Sifat memoryless berarti peluang komponen akan rusak dalam <span class="math inline">\(t\)</span> jam ke depan tidak dipengaruhi oleh sudah berapa lama komponen itu bekerja. Komponen bekas (yang masih berfungsi) dianggap memiliki reliabilitas yang sama dengan komponen baru. <span class="math inline">\(P(X &gt; t+s | X &gt; s) = P(X &gt; t)\)</span>.</li>
-</ul></li>
-<li><strong>Soal:</strong> Bagaimana hubungan antara distribusi Normal dan Teorema Limit Pusat secara intuitif?
-<ul>
-<li><strong>Solusi:</strong> Teorema Limit Pusat (CLT) menyatakan bahwa jika kita menjumlahkan banyak variabel acak independen (apa pun distribusi aslinya), hasil penjumlahannya akan cenderung berdistribusi Normal. Ini menjelaskan mengapa distribusi Normal muncul di mana-mana di alam (seperti tinggi badan), karena fenomena tersebut adalah hasil akumulasi dari banyak faktor genetik dan lingkungan yang kecil-kecil.</li>
-</ul></li>
-</ol>
-</section>
-<section id="b.-pertanyaan-aplikatif" class="level3" data-number="8.4.2">
-<h3 data-number="8.4.2" class="anchored" data-anchor-id="b.-pertanyaan-aplikatif"><span class="header-section-number">8.4.2</span> B. Pertanyaan Aplikatif</h3>
-<ol start="6" type="1">
-<li><strong>Soal:</strong> Waktu respons server berdistribusi Normal dengan mean 200ms dan standar deviasi 50ms. Berapa persen respons yang memakan waktu lebih dari 300ms?
-<ul>
-<li><strong>Solusi:</strong> Hitung skor-Z: <span class="math inline">\(Z=(300-200)/50=2\)</span>. Cari peluang <span class="math inline">\(P(Z &gt; 2)\)</span>. Dari tabel/rumus, <span class="math inline">\(P(Z &lt; 2) \approx 0.9772\)</span>. Maka <span class="math inline">\(P(X &gt; 300) = 1 - 0.9772 = 0.0228\)</span> atau 2.28%.</li>
-</ul></li>
-<li><strong>Soal:</strong> Umur pakai sebuah baterai laptop berdistribusi Eksponensial dengan rata-rata 5 tahun. Berapa probabilitas baterai bertahan lebih dari 8 tahun?
-<ul>
-<li><strong>Solusi:</strong> Rata-rata (<span class="math inline">\(\mu\)</span>) = <span class="math inline">\(1/\lambda=5 \rightarrow \lambda=0.2\)</span>. Fungsi reliabilitas (survival): <span class="math inline">\(P(X &gt; x) = e^{-\lambda x}\)</span>. <span class="math inline">\(P(X &gt; 8) = e^{-0.2 \times 8} = e^{-1.6} \approx 0.2019\)</span> atau 20.19%.</li>
-</ul></li>
-<li><strong>Soal:</strong> Skor ujian masuk sebuah universitas berdistribusi Normal dengan rata-rata 500 dan simpangan baku 100. Jika diambil 10% terbaik, berapakah skor minimumnya?
-<ul>
-<li><strong>Solusi:</strong> Kita mencari nilai <span class="math inline">\(x\)</span> dimana <span class="math inline">\(P(X &gt; x) = 0.10\)</span>, atau <span class="math inline">\(P(X &lt; x) = 0.90\)</span>. Dari tabel Z invers, nilai Z untuk area 0.90 adalah <span class="math inline">\(\approx 1.28\)</span>. <span class="math inline">\(x = \mu + Z\sigma = 500 + (1.28 \times 100) = 628\)</span>. Skor minimum 628.</li>
-</ul></li>
-<li><strong>Soal:</strong> Analisis lebar pita (bandwidth) yang digunakan oleh user di mana penggunaan rata-rata adalah 10 Mbps dengan distribusi Normal.
-<ul>
-<li><strong>Solusi:</strong> Karena bandwidth tidak bisa negatif, distribusi Normal murni mungkin kurang tepat jika <span class="math inline">\(\sigma\)</span> besar (karena ekor kiri bisa masuk area negatif). Namun, sebagai pendekatan, kita bisa menghitung peluang penggunaan melebihi kapasitas tertentu (misal 15 Mbps) untuk capacity planning.</li>
-</ul></li>
-<li><strong>Soal:</strong> Gunakan distribusi Eksponensial untuk memodelkan waktu antar-kedatangan (inter-arrival time) permintaan ke server web.
-<ul>
-<li><strong>Solusi:</strong> Jika server menerima rata-rata 5 request per detik (<span class="math inline">\(\lambda=5\)</span>), maka waktu antar-kedatangan mengikuti Exp(5). Rata-rata waktu tunggu antar request adalah <span class="math inline">\(1/5=0.2\)</span> detik. Probabilitas menunggu lebih dari 1 detik sangat kecil: <span class="math inline">\(e^{-5(1)} = 0.0067\)</span>.</li>
-</ul></li>
-</ol>
-</section>
-<section id="c.-pertanyaan-komputasional" class="level3" data-number="8.4.3">
-<h3 data-number="8.4.3" class="anchored" data-anchor-id="c.-pertanyaan-komputasional"><span class="header-section-number">8.4.3</span> C. Pertanyaan Komputasional</h3>
-<ol start="11" type="1">
-<li><strong>Soal:</strong> Gunakan <code>scipy.stats.norm.cdf</code> untuk menghitung probabilitas di antara dua nilai pada distribusi Normal.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm  </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mu, sigma <span class="op">=</span> <span class="dv">100</span>, <span class="dv">15</span>  </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># P(85 &lt; X &lt; 115)  </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>prob <span class="op">=</span> norm.cdf(<span class="dv">115</span>, mu, sigma) <span class="op">-</span> norm.cdf(<span class="dv">85</span>, mu, sigma)  </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Probabilitas: </span><span class="sc">{</span>prob<span class="sc">:.4f}</span><span class="ss">"</span>)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Tulis skrip Python untuk menghasilkan plot distribusi Normal Standar dan arsirlah area di bawah kurva untuk <span class="math inline">\(P(-1 &lt; Z &lt; 1)\)</span>.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np<span class="op">;</span> <span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt  </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm  </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)  </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>plt.plot(x, norm.pdf(x))  </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>x_fill <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">100</span>)  </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.fill_between(x_fill, norm.pdf(x_fill), alpha<span class="op">=</span><span class="fl">0.5</span>)  </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>plt.show()  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Implementasikan fungsi untuk menghitung skor-Z dari sekumpulan data numerik menggunakan numpy.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np  </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_z_scores(data):  </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> (data <span class="op">-</span> np.mean(data)) <span class="op">/</span> np.std(data)  </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]  </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(calculate_z_scores(data))  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Buat simulasi untuk membuktikan sifat memoryless dari distribusi Eksponensial dengan membangkitkan data acak.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> expon  </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> expon.rvs(scale<span class="op">=</span><span class="dv">10</span>, size<span class="op">=</span><span class="dv">10000</span>) <span class="co"># Mean=10  </span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Peluang X &gt; 15  </span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>p_tot <span class="op">=</span> <span class="bu">len</span>(data[data <span class="op">&gt;</span> <span class="dv">15</span>]) <span class="op">/</span> <span class="bu">len</span>(data)  </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Peluang X &gt; 15 GIVEN X &gt; 5 (sisa 10)  </span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>subset <span class="op">=</span> data[data <span class="op">&gt;</span> <span class="dv">5</span>]  </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>p_cond <span class="op">=</span> <span class="bu">len</span>(subset[subset <span class="op">&gt;</span> <span class="dv">15</span>]) <span class="op">/</span> <span class="bu">len</span>(subset)  </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Bandingkan dengan P(X &gt; 10)  </span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>p_ref <span class="op">=</span> <span class="bu">len</span>(data[data <span class="op">&gt;</span> <span class="dv">10</span>]) <span class="op">/</span> <span class="bu">len</span>(data)  </span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"P(X&gt;10): </span><span class="sc">{</span>p_ref<span class="sc">:.3f}</span><span class="ss">, P(X&gt;15|X&gt;5): </span><span class="sc">{</span>p_cond<span class="sc">:.3f}</span><span class="ss">"</span>)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><strong>Soal:</strong> Visualisasikan bagaimana perubahan <span class="math inline">\(\sigma\)</span> mempengaruhi “keruncingan” kurva Normal menggunakan matplotlib.
-<ul>
-<li><strong>Solusi:</strong></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">200</span>)  </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plt.plot(x, norm.pdf(x, <span class="dv">0</span>, <span class="dv">1</span>), label<span class="op">=</span><span class="st">'Sigma=1'</span>)  </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.plot(x, norm.pdf(x, <span class="dv">0</span>, <span class="fl">0.5</span>), label<span class="op">=</span><span class="st">'Sigma=0.5 (Lancip)'</span>)  </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.plot(x, norm.pdf(x, <span class="dv">0</span>, <span class="dv">2</span>), label<span class="op">=</span><span class="st">'Sigma=2 (Landai)'</span>)  </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.legend()<span class="op">;</span> plt.show()  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-</ol>
-</section>
-</section>
-<section id="konsep-pengetahuan" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">8.5</span> 1. Konsep Pengetahuan</h2>
+<section id="konsep-pengetahuan" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">8.1</span> 1. Konsep Pengetahuan</h2>
 <p>Distribusi Normal (kurva lonceng) untuk data pengukuran alami, Distribusi Eksponensial untuk waktu tunggu antar kejadian.</p>
 </section>
-<section id="tipikal-problem" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">8.6</span> 2. Tipikal Problem</h2>
+<section id="tipikal-problem" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">8.2</span> 2. Tipikal Problem</h2>
 <p>Menentukan garansi produk lampu. Diketahui masa hidup lampu berdistribusi Normal dengan rata-rata 900 jam dan standar deviasi 50 jam.</p>
 </section>
-<section id="solusi-pengambilan-keputusan" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">8.7</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
+<section id="solusi-pengambilan-keputusan" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">8.3</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
 <p>Menghitung peluang lampu mati sebelum waktu tertentu (misal P(X &lt; 700)). Perusahaan menetapkan masa garansi di titik di mana hanya sebagian kecil (misal 1%) lampu yang akan rusak, untuk meminimalkan biaya penggantian klaim garansi.</p>
 </section>
-<section id="eksplorasi-komputasi-python" class="level2" data-number="8.8">
-<h2 data-number="8.8" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">8.8</span> 4. Eksplorasi Komputasi (Python)</h2>
+<section id="eksplorasi-komputasi-python" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">8.4</span> 4. Eksplorasi Komputasi (Python)</h2>
 <p><em>Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.</em></p>
-<div id="ab21cce3" class="cell" data-execution_count="1">
+<div id="d8943c90" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Lihat kode</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 07!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 07!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Siap untuk komputasi Minggu 07!</code></pre>
@@ -1265,36 +989,35 @@ window.Quarto = {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minggu 07: Variabel Acak Kontinu"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Normal Distribution, Exponential Distribution"</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="al">![“Lampu rata-rata hidup 900 jam, simpangan 50 jam. Kamu mau kasih garansi 700 jam, 800 jam, atau 900 jam? Ini bukan sekadar ‘baik hati’—ini strategi biaya klaim. Normal sering muncul di data pengukuran; eksponensial sering muncul di waktu tunggu. Hari ini kamu belajar menghitung peluang rusak sebelum waktu T, lalu menentukan T yang masuk akal untuk target klaim. Kamu akan melihat: statistik bisa jadi alat desain produk.”](../The_Decision_Engineer.png/image7.png)</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../agenda/w07.qmd &gt;}}</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>Distribusi Normal (kurva lonceng) untuk data pengukuran alami, Distribusi Eksponensial untuk waktu tunggu antar kejadian.</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>Menentukan garansi produk lampu. Diketahui masa hidup lampu berdistribusi Normal dengan rata-rata 900 jam dan standar deviasi 50 jam.</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>Menghitung peluang lampu mati sebelum waktu tertentu (misal P(X &lt; 700)). Perusahaan menetapkan masa garansi di titik di mana hanya sebagian kecil (misal 1%) lampu yang akan rusak, untuk meminimalkan biaya penggantian klaim garansi.</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 07!"</span>)</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minggu 07: Variabel Acak Kontinu"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Normal Distribution, Exponential Distribution"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="al">![“Lampu rata-rata hidup 900 jam, simpangan 50 jam. Kamu mau kasih garansi 700 jam, 800 jam, atau 900 jam? Ini bukan sekadar ‘baik hati’—ini strategi biaya klaim. Normal sering muncul di data pengukuran; eksponensial sering muncul di waktu tunggu. Hari ini kamu belajar menghitung peluang rusak sebelum waktu T, lalu menentukan T yang masuk akal untuk target klaim. Kamu akan melihat: statistik bisa jadi alat desain produk.”](../The_Decision_Engineer.png/image7.png)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>Distribusi Normal (kurva lonceng) untuk data pengukuran alami, Distribusi Eksponensial untuk waktu tunggu antar kejadian.</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>Menentukan garansi produk lampu. Diketahui masa hidup lampu berdistribusi Normal dengan rata-rata 900 jam dan standar deviasi 50 jam.</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>Menghitung peluang lampu mati sebelum waktu tertentu (misal P(X &lt; 700)). Perusahaan menetapkan masa garansi di titik di mana hanya sebagian kecil (misal 1%) lampu yang akan rusak, untuk meminimalkan biaya penggantian klaim garansi.</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 07!"</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
