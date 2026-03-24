@@ -1,0 +1,11 @@
+<<<<<<< HEAD
+# Pengantar {.unnumbered}
+g
+  
+=======
+# Preface {.unnumbered}
+
+This is a Quarto book.
+
+To learn more about Quarto books visit <https://quarto.org/docs/books>. 
+>>>>>>> 4aedb5174ad8a1e320cb44bdf5944ec088c940d6
