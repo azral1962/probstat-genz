@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.35">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>chapter07</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="chapter07_files/libs/clipboard/clipboard.min.js"></script>
+<script src="chapter07_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="chapter07_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="chapter07_files/libs/quarto-html/popper.min.js"></script>
+<script src="chapter07_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="chapter07_files/libs/quarto-html/anchor.min.js"></script>
+<link href="chapter07_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="chapter07_files/libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="chapter07_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="chapter07_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="chapter07_files/libs/bootstrap/bootstrap-efbb37e9afcc02144ebbc7afd12a776f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<p>[# Random Variable Kontinu</p>
+<section id="kita-beri-garansi-berapa-lama" class="level2">
+<h2 class="anchored" data-anchor-id="kita-beri-garansi-berapa-lama">Kita Beri Garansi Berapa Lama?</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./The_Decision_Engineer.png/image7.png" class="img-fluid figure-img"></p>
+<figcaption>“Lampu rata-rata hidup 900 jam, simpangan 50 jam. Kamu mau kasih garansi 700 jam, 800 jam, atau 900 jam? Ini bukan sekadar ‘baik hati’—ini strategi biaya klaim. Normal sering muncul di data pengukuran; eksponensial sering muncul di waktu tunggu. Hari ini kamu belajar menghitung peluang rusak sebelum waktu T, lalu menentukan T yang masuk akal untuk target klaim. Kamu akan melihat: statistik bisa jadi alat desain produk.”</figcaption>
+</figure>
+</div>
+</section>
+<section id="live-coding-normal-is-everywhere" class="level2">
+<h2 class="anchored" data-anchor-id="live-coding-normal-is-everywhere">Live Coding: “Normal is Everywhere”</h2>
+<p>Misalnya suatu pabrik bisa menghasilkan 10000 lampu pertahun yang bisa bekerja rata-rata 900 jam, meskipun dalam kenyataanya individual lampu bisa mati bervariasi setelah suatu angka jam positif yang random. Seberapa besar varians ini diukur oleh besaran deviasi, misalnya 50 jam yang berarti variance 2500 jam^2</p>
+<p>Suatu variable random bisa memiliki <em>probability density function</em> (pdf) berbentuk lonceng, dengan dua parameter <span class="math inline">\(\mu\)</span> dan <span class="math inline">\(\sigma\)</span>.</p>
+<div id="95a721ff" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Instantiate a default random number generator</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Untuk distribusi normal standar, lokasi titik tengah = 0 dan deviasi standar = 1.</p>
+<div id="df8d7bd8" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a single random number from the standard normal distribution (mean=0, std=1)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sample_scalar <span class="op">=</span> rng.normal()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"1. Single sample: </span><span class="sc">{</span>sample_scalar<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1. Single sample: -0.5873393207418891</code></pre>
+</div>
+</div>
+<p>Dalam kasus kita lokasi titik tengah = 900 dan deviasi standar = 50. Kita ukur waktu hidup 5 buah lampu, maka berapa jam hidup sampai lampu ini mati?</p>
+<div id="39b3b34e" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> <span class="dv">900</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a 1D array of 5 numbers with mean=900, standard deviation=50</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>samples_1d <span class="op">=</span> rng.normal(loc<span class="op">=</span>mu, scale<span class="op">=</span>sigma, size<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"2. 1D array: </span><span class="sc">{</span>samples_1d<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2. 1D array: [907.34094939 852.11807415 902.96759901 868.82813861 914.4012904 ]</code></pre>
+</div>
+</div>
+<p>Berbeda beda yaitu: np.float64(907.3409493906158)</p>
+<ol type="1">
+<li>Generate data acak <code>numpy.random.normal</code>.</li>
+<li>Tunjukkan aturan empiris: 68% data ada di <span class="math inline">\(\mu \pm \sigma\)</span>, 95% di <span class="math inline">\(\mu \pm 2\sigma\)</span>.</li>
+<li>Visualisasi: Plot kurva lonceng dengan seaborn dan arsir area probabilitas. kita coba untuk 10000</li>
+</ol>
+<div id="ce6a636a" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>N<span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> rng.normal(loc<span class="op">=</span>mu, scale<span class="op">=</span>sigma, size<span class="op">=</span>N)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>np.histogram(data, bins<span class="op">=</span><span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>(array([  17,  120,  537, 1522, 2584, 2625, 1683,  710,  177,   25]),
+ array([ 717.47692297,  753.27992597,  789.08292898,  824.88593198,
+         860.68893499,  896.49193799,  932.294941  ,  968.097944  ,
+        1003.90094701, 1039.70395001, 1075.50695302]))</code></pre>
+</div>
+</div>
+<p>Kita hitung berapa data antara 1. <span class="math inline">\(850&lt; X &lt; 950\)</span> 2. <span class="math inline">\(800&lt;  X &lt; 1000\)</span> 3. <span class="math inline">\(750 &lt; X &lt;1050\)</span></p>
+<div id="7c38308b" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>counter1<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>counter2<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>counter3<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> data:</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">&gt;=</span> <span class="dv">850</span> <span class="kw">and</span> n <span class="op">&lt;</span> <span class="dv">950</span>:</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        counter1 <span class="op">+=</span> <span class="dv">1</span>  </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> n <span class="op">&gt;=</span> <span class="dv">800</span> <span class="kw">and</span> n <span class="op">&lt;</span> <span class="dv">1000</span>:</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        counter2 <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> n <span class="op">&gt;=</span> <span class="dv">750</span> <span class="kw">and</span> n <span class="op">&lt;</span> <span class="dv">1050</span>:</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        counter3 <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(counter1<span class="op">/</span>N, (counter1<span class="op">+</span>counter2)<span class="op">/</span>N, (counter1<span class="op">+</span>counter2<span class="op">+</span>counter3)<span class="op">/</span>N)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.6754 0.9517 0.9975</code></pre>
+</div>
+</div>
+<div id="4ae70d69" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Menambahkan label dan judul</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.hist(data,bins<span class="op">=</span><span class="dv">10</span>, density<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Histogram Normal Distribution (NumPy)'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Value'</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Density'</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>plt.grid(axis<span class="op">=</span><span class="st">'y'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Menampilkan plot</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter07_files/figure-html/cell-7-output-1.png" width="606" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Jadi kita hendak beri garansi berapa jam kalau kita tahu berapa ongkos produksi (misalnya $5), berapa harga jual (misalnya $10), dan berapa biaya penggantian garansi (misalnya $7). Bila garansi terlalu rendah, produk ini kalah bersaing. Misalnya kita hendak memilih antara garansi 750 jam, 800 jam, dan Karena rata-rata 900 jam, dari 10000 yang diproduksi kita hitung berapa yang rusak, lalu kita hitung biaya serta pengaruh pada profit. Asumsi deviasi 50 atau 100.</p>
+<div id="37d95916" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameter</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>n_units <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> <span class="dv">900</span>      <span class="co"># mean umur lampu</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> <span class="dv">50</span>    <span class="co"># std dev</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>price <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>cost <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>warranty_cost <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>nrg <span class="op">=</span> np.random.default_rng()</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate umur lampu (random normal)</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># nrg.seed(42)  # agar reproducible</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>lifetimes <span class="op">=</span> nrg.normal(mu, sigma, n_units)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Fungsi hitung profit</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simulate_profit(lifetimes, warranty_limit):</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    profit_per_unit <span class="op">=</span> []</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> life <span class="kw">in</span> lifetimes:</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> life <span class="op">&lt;</span> warranty_limit:</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>            <span class="co"># kena klaim garansi</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>            profit <span class="op">=</span> price <span class="op">-</span> cost <span class="op">-</span> warranty_cost</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>            <span class="co"># tidak klaim</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>            profit <span class="op">=</span> price <span class="op">-</span> cost</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>        profit_per_unit.append(profit)</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    total_profit <span class="op">=</span> np.<span class="bu">sum</span>(profit_per_unit)</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total_profit</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulasi</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>profit_A <span class="op">=</span> simulate_profit(lifetimes, <span class="dv">850</span>)</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>profit_B <span class="op">=</span> simulate_profit(lifetimes, <span class="dv">800</span>)</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>profit_C <span class="op">=</span> simulate_profit(lifetimes, <span class="dv">750</span>)</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Output hasil</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== HASIL SIMULASI ==="</span>)</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Profit Garansi A (850 jam): $</span><span class="sc">{</span>profit_A<span class="sc">:,.2f}</span><span class="ss">"</span>)</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Profit Garansi B (800 jam): $</span><span class="sc">{</span>profit_B<span class="sc">:,.2f}</span><span class="ss">"</span>)</span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Profit Garansi C (700 jam): $</span><span class="sc">{</span>profit_C<span class="sc">:,.2f}</span><span class="ss">"</span>)</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Bandingkan</span></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> profit_A <span class="op">&gt;</span> profit_B <span class="kw">and</span> profit_A <span class="op">&gt;</span> profit_C:</span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Rekomendasi: Garansi A lebih menguntungkan"</span>)</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> profit_B <span class="op">&gt;</span> profit_C:</span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Rekomendasi: Garansi B lebih menguntungkan"</span>)</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>: </span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Rekomendasi: Garansi C lebih menguntungkan"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== HASIL SIMULASI ===
+Profit Garansi A (850 jam): $38,821.00
+Profit Garansi B (800 jam): $48,362.00
+Profit Garansi C (700 jam): $49,916.00
+Rekomendasi: Garansi C lebih menguntungkan</code></pre>
+</div>
+</div>
+<div id="139ba61b" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a 2x3 matrix with default parameters</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>samples_2d <span class="op">=</span> rng.normal(size<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"3. 2D array:</span><span class="ch">\n</span><span class="sc">{</span>samples_2d<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3. 2D array:
+[[-0.28299749  1.05362198 -1.50845011]
+ [-0.60691812  1.14735718  0.25234384]]</code></pre>
+</div>
+</div>
+<p>Masalah penentuan waktu garansi ini pada dasarnya adalah masalah optimasi risiko yang menggabungkan Nilai Harapan (<em>Expected Value</em>) dan Fungsi Distribusi Kumulatif (CDF) dari probabilitas kegagalan lampu.</p>
+<p><strong>1. Pemodelan Bisnis &amp; Keuntungan (Profit)</strong> Untuk menganalisis pengaruh garansi terhadap profit, kita memodelkannya dengan persamaan ekspektasi bisnis berikut:</p>
+<ul>
+<li><p><strong>Total Pendapatan:</strong> <span class="math inline">\(10.000 \text{ lampu} \times \$10 = \$100.000\)</span></p></li>
+<li><p><strong>Total Ongkos Produksi:</strong> <span class="math inline">\(10.000 \text{ lampu} \times \$5 = \$50.000\)</span></p></li>
+<li><p><strong>Profit Dasar (Tanpa Klaim):</strong> <span class="math inline">\(\$100.000 - \$50.000 = \$50.000\)</span></p></li>
+<li><p><strong>Biaya Klaim Garansi:</strong> <span class="math inline">\(\text{Jumlah lampu rusak} \times \$7\)</span> * <strong>Jumlah Lampu Rusak:</strong> <span class="math inline">\(10.000 \times P(X &lt; T_w)\)</span>, di mana <span class="math inline">\(P(X &lt; T_w)\)</span> adalah probabilitas (<em>Cumulative Distribution Function</em>/CDF) sebuah lampu mati sebelum waktu garansi <span class="math inline">\(T_w\)</span> habis.</p></li>
+</ul>
+</section>
+<section id="beda-pabrik-beda-karakter-lampu" class="level2">
+<h2 class="anchored" data-anchor-id="beda-pabrik-beda-karakter-lampu">Beda Pabrik, Beda Karakter Lampu</h2>
+<p>Asumsi beda teknologi menyebabkan beda distribusi probabilitas lifetime lampu, meskipun rata-rata dan deviasi nya sama.</p>
+<p><strong>2. Karakteristik Fungsi Distribusi Kumulatif (CDF)</strong> Untuk membandingkan probabilitas kegagalan <span class="math inline">\(P(X &lt; T_w)\)</span>, kita mengevaluasi 4 jenis distribusi:</p>
+<ul>
+<li><p><strong>Distribusi Normal:</strong> Menggunakan parameter mean <span class="math inline">\(\mu = 900\)</span> dan standar deviasi <span class="math inline">\(\sigma \in \{50, 100\}\)</span>. CDF dihitung menggunakan standarisasi <span class="math inline">\(Z = (X - \mu) / \sigma\)</span>.</p></li>
+<li><p><strong>Distribusi Seragam (Uniform):</strong> Karena variansi berdistribusi seragam adalah <span class="math inline">\(\frac{(b-a)^2}{12}\)</span>, kita dapat menentukan rentang umur lampu minimum <span class="math inline">\(a\)</span> dan maksimum <span class="math inline">\(b\)</span> berdasarkan <span class="math inline">\(\mu=900\)</span> dan <span class="math inline">\(\sigma \in \{50, 100\}\)</span>.</p></li>
+<li><p><strong>Distribusi Weibull:</strong> Sangat ideal dan umum digunakan untuk memodelkan laju kegagalan umur komponen (fungsi <em>hazard</em>/<em>survival</em>). Parameter <em>shape</em> (<span class="math inline">\(k\)</span>) dan <em>scale</em> (<span class="math inline">\(\lambda\)</span>) dapat dicari melalui persamaan non-linear yang dicocokkan dengan <span class="math inline">\(\mu\)</span> dan <span class="math inline">\(\sigma\)</span>.</p></li>
+<li><p><strong>Distribusi Eksponensial:</strong> Distribusi ini tidak memiliki memori (<em>memoryless</em>) dan variasinya selalu sama dengan rata-ratanya. Oleh karena itu, parameter <span class="math inline">\(\sigma = 50\)</span> atau <span class="math inline">\(100\)</span> diabaikan, dan perhitungan hanya murni bergantung pada laju kerusakan <span class="math inline">\(\lambda = 1/900\)</span>.</p></li>
+</ul>
+<p><strong>3. Solusi Skrip Python</strong> Berikut adalah desain <em>class</em> Python yang mensimulasikan dan mengembalikan <em>dictionary</em> untuk membandingkan jumlah kerusakan, biaya, dan profit dari penentuan garansi (misal 750 jam dan 800 jam) di keempat distribusi di atas.</p>
+<div id="a8f203d9" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> fsolve</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> gamma</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> WarrantyAnalyzer:</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, mu<span class="op">=</span><span class="dv">900</span>, N<span class="op">=</span><span class="dv">10000</span>, cost<span class="op">=</span><span class="dv">5</span>, price<span class="op">=</span><span class="dv">10</span>, replacement_cost<span class="op">=</span><span class="dv">7</span>):</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mu <span class="op">=</span> mu</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.N <span class="op">=</span> N</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.base_profit <span class="op">=</span> N <span class="op">*</span> (price <span class="op">-</span> cost)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.rep_cost <span class="op">=</span> replacement_cost</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _get_weibull_params(<span class="va">self</span>, sigma):</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co">        Mencari parameter Weibull (k=shape, lam=scale) </span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co">        berdasarkan mu (mean) dan sigma (standar deviasi).</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> equation(k):</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Variansi Weibull = lam^2 * [Gamma(1+2/k) - Gamma(1+1/k)^2]</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> (gamma(<span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span><span class="op">/</span>k) <span class="op">/</span> (gamma(<span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span><span class="op">/</span>k)<span class="op">**</span><span class="dv">2</span>)) <span class="op">-</span> <span class="dv">1</span> <span class="op">-</span> (sigma<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="va">self</span>.mu<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Mencari nilai shape (k) secara numerik</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>        k_opt <span class="op">=</span> fsolve(equation, <span class="fl">5.0</span>)</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Menghitung nilai scale (lam)</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>        lam_opt <span class="op">=</span> <span class="va">self</span>.mu <span class="op">/</span> gamma(<span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span><span class="op">/</span>k_opt)</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> k_opt, lam_opt</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> analyze(<span class="va">self</span>, warranty_hours, sigmas):</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="co">        Menghasilkan dictionary perbandingan profit berdasarkan </span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="co">        distribusi, waktu garansi, dan standar deviasi.</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>        results <span class="op">=</span> {}</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> w <span class="kw">in</span> warranty_hours:</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>            results[<span class="ss">f"Garansi_</span><span class="sc">{</span>w<span class="sc">}</span><span class="ss">_Jam"</span>] <span class="op">=</span> {}</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"===Garansi_</span><span class="sc">{</span>w<span class="sc">}</span><span class="ss">_Jam==="</span>)</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> sig <span class="kw">in</span> sigmas:</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f"**Sigma_</span><span class="sc">{</span>sig<span class="sc">}</span><span class="ss">**"</span>)</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>                <span class="co"># 1. Distribusi Normal CDF</span></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>                p_norm <span class="op">=</span> stats.norm.cdf(w, loc<span class="op">=</span><span class="va">self</span>.mu, scale<span class="op">=</span>sig)</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>                <span class="co"># 2. Distribusi Seragam (Uniform) CDF</span></span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Var = (b-a)^2 / 12 = sig^2  --&gt;  b-a = sig * sqrt(12)</span></span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>                a <span class="op">=</span> <span class="va">self</span>.mu <span class="op">-</span> np.sqrt(<span class="dv">3</span>) <span class="op">*</span> sig</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>                b <span class="op">=</span> <span class="va">self</span>.mu <span class="op">+</span> np.sqrt(<span class="dv">3</span>) <span class="op">*</span> sig</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>                p_uni <span class="op">=</span> stats.uniform.cdf(w, loc<span class="op">=</span>a, scale<span class="op">=</span>b<span class="op">-</span>a)</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>                <span class="co"># 3. Distribusi Weibull CDF</span></span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>                k, lam <span class="op">=</span> <span class="va">self</span>._get_weibull_params(sig)</span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>                p_weib <span class="op">=</span> stats.weibull_min.cdf(w, c<span class="op">=</span>k, scale<span class="op">=</span>lam)</span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>                <span class="co"># 4. Distribusi Eksponensial CDF (Hanya bergantung pada mu)</span></span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>                p_exp <span class="op">=</span> stats.expon.cdf(w, scale<span class="op">=</span><span class="va">self</span>.mu)</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>                dist_probs <span class="op">=</span> {</span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'Normal'</span>: p_norm,</span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'Uniform'</span>: p_uni,</span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'Weibull'</span>: p_weib,</span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'Eksponensial'</span>: p_exp</span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>                }</span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>                profit_comparison <span class="op">=</span> {}</span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> dist_name, p_fail <span class="kw">in</span> dist_probs.items():</span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Kalkulasi Bisnis</span></span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>                    n_fail <span class="op">=</span> <span class="va">self</span>.N <span class="op">*</span> p_fail</span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>                    total_warranty_cost <span class="op">=</span> n_fail <span class="op">*</span> <span class="va">self</span>.rep_cost</span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a>                    profit <span class="op">=</span> <span class="va">self</span>.base_profit <span class="op">-</span> total_warranty_cost</span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a>                    profit_comparison[dist_name] <span class="op">=</span> {</span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'Probabilitas_Mati'</span>: np.<span class="bu">round</span>(p_fail, <span class="dv">4</span>),</span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'Jumlah_Rusak'</span>: np.<span class="bu">round</span>(n_fail,<span class="dv">0</span>),</span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'Biaya_Garansi ($)'</span>: np.<span class="bu">round</span>(total_warranty_cost, <span class="dv">2</span>),</span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'Profit_Akhir ($)'</span>: np.<span class="bu">round</span>(profit, <span class="dv">2</span>)</span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a>                    }</span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f"Distribusi </span><span class="sc">{</span>dist_name<span class="sc">}</span><span class="ss">"</span>,<span class="ss">f"</span><span class="sc">{</span>profit_comparison<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a>                results[<span class="ss">f"Garansi_</span><span class="sc">{</span>w<span class="sc">}</span><span class="ss">_Jam"</span>][<span class="ss">f"Sigma_</span><span class="sc">{</span>sig<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> profit_comparison</span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> results</span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Eksekusi Simulasi ---</span></span>
+<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a>analyzer <span class="op">=</span> WarrantyAnalyzer(mu<span class="op">=</span><span class="dv">900</span>, N<span class="op">=</span><span class="dv">10000</span>, cost<span class="op">=</span><span class="dv">5</span>, price<span class="op">=</span><span class="dv">10</span>, replacement_cost<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a><span class="co"># Menguji garansi 750 jam dan 800 jam dengan asumsi deviasi 50 dan 100</span></span>
+<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a>hasil_analisis <span class="op">=</span> analyzer.analyze(warranty_hours<span class="op">=</span>[<span class="dv">850</span>, <span class="dv">800</span>, <span class="dv">750</span>], sigmas<span class="op">=</span>[<span class="dv">50</span>,<span class="dv">100</span>])</span>
+<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a><span class="co"># Cetak hasil (Format JSON agar mudah dibaca sebagai Dictionary)</span></span>
+<span id="cb15-87"><a href="#cb15-87" aria-hidden="true" tabindex="-1"></a><span class="co"># print(json.dumps(hasil_analisis, indent=4))</span></span>
+<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a><span class="co"># print(hasil_analisis)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>===Garansi_850_Jam===
+**Sigma_50**
+Distribusi Normal {'Normal': {'Probabilitas_Mati': np.float64(0.1587), 'Jumlah_Rusak': np.float64(1587.0), 'Biaya_Garansi ($)': np.float64(11105.87), 'Profit_Akhir ($)': np.float64(38894.13)}}
+Distribusi Uniform {'Normal': {'Probabilitas_Mati': np.float64(0.1587), 'Jumlah_Rusak': np.float64(1587.0), 'Biaya_Garansi ($)': np.float64(11105.87), 'Profit_Akhir ($)': np.float64(38894.13)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.2113), 'Jumlah_Rusak': np.float64(2113.0), 'Biaya_Garansi ($)': np.float64(14792.74), 'Profit_Akhir ($)': np.float64(35207.26)}}
+Distribusi Weibull {'Normal': {'Probabilitas_Mati': np.float64(0.1587), 'Jumlah_Rusak': np.float64(1587.0), 'Biaya_Garansi ($)': np.float64(11105.87), 'Profit_Akhir ($)': np.float64(38894.13)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.2113), 'Jumlah_Rusak': np.float64(2113.0), 'Biaya_Garansi ($)': np.float64(14792.74), 'Profit_Akhir ($)': np.float64(35207.26)}, 'Weibull': {'Probabilitas_Mati': array([0.1495]), 'Jumlah_Rusak': array([1495.]), 'Biaya_Garansi ($)': array([10461.84]), 'Profit_Akhir ($)': array([39538.16])}}
+Distribusi Eksponensial {'Normal': {'Probabilitas_Mati': np.float64(0.1587), 'Jumlah_Rusak': np.float64(1587.0), 'Biaya_Garansi ($)': np.float64(11105.87), 'Profit_Akhir ($)': np.float64(38894.13)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.2113), 'Jumlah_Rusak': np.float64(2113.0), 'Biaya_Garansi ($)': np.float64(14792.74), 'Profit_Akhir ($)': np.float64(35207.26)}, 'Weibull': {'Probabilitas_Mati': array([0.1495]), 'Jumlah_Rusak': array([1495.]), 'Biaya_Garansi ($)': array([10461.84]), 'Profit_Akhir ($)': array([39538.16])}, 'Eksponensial': {'Probabilitas_Mati': np.float64(0.6111), 'Jumlah_Rusak': np.float64(6111.0), 'Biaya_Garansi ($)': np.float64(42777.31), 'Profit_Akhir ($)': np.float64(7222.69)}}
+**Sigma_100**
+Distribusi Normal {'Normal': {'Probabilitas_Mati': np.float64(0.3085), 'Jumlah_Rusak': np.float64(3085.0), 'Biaya_Garansi ($)': np.float64(21597.63), 'Profit_Akhir ($)': np.float64(28402.37)}}
+Distribusi Uniform {'Normal': {'Probabilitas_Mati': np.float64(0.3085), 'Jumlah_Rusak': np.float64(3085.0), 'Biaya_Garansi ($)': np.float64(21597.63), 'Profit_Akhir ($)': np.float64(28402.37)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.3557), 'Jumlah_Rusak': np.float64(3557.0), 'Biaya_Garansi ($)': np.float64(24896.37), 'Profit_Akhir ($)': np.float64(25103.63)}}
+Distribusi Weibull {'Normal': {'Probabilitas_Mati': np.float64(0.3085), 'Jumlah_Rusak': np.float64(3085.0), 'Biaya_Garansi ($)': np.float64(21597.63), 'Profit_Akhir ($)': np.float64(28402.37)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.3557), 'Jumlah_Rusak': np.float64(3557.0), 'Biaya_Garansi ($)': np.float64(24896.37), 'Profit_Akhir ($)': np.float64(25103.63)}, 'Weibull': {'Probabilitas_Mati': array([0.2769]), 'Jumlah_Rusak': array([2769.]), 'Biaya_Garansi ($)': array([19380.52]), 'Profit_Akhir ($)': array([30619.48])}}
+Distribusi Eksponensial {'Normal': {'Probabilitas_Mati': np.float64(0.3085), 'Jumlah_Rusak': np.float64(3085.0), 'Biaya_Garansi ($)': np.float64(21597.63), 'Profit_Akhir ($)': np.float64(28402.37)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.3557), 'Jumlah_Rusak': np.float64(3557.0), 'Biaya_Garansi ($)': np.float64(24896.37), 'Profit_Akhir ($)': np.float64(25103.63)}, 'Weibull': {'Probabilitas_Mati': array([0.2769]), 'Jumlah_Rusak': array([2769.]), 'Biaya_Garansi ($)': array([19380.52]), 'Profit_Akhir ($)': array([30619.48])}, 'Eksponensial': {'Probabilitas_Mati': np.float64(0.6111), 'Jumlah_Rusak': np.float64(6111.0), 'Biaya_Garansi ($)': np.float64(42777.31), 'Profit_Akhir ($)': np.float64(7222.69)}}
+===Garansi_800_Jam===
+**Sigma_50**
+Distribusi Normal {'Normal': {'Probabilitas_Mati': np.float64(0.0228), 'Jumlah_Rusak': np.float64(228.0), 'Biaya_Garansi ($)': np.float64(1592.51), 'Profit_Akhir ($)': np.float64(48407.49)}}
+Distribusi Uniform {'Normal': {'Probabilitas_Mati': np.float64(0.0228), 'Jumlah_Rusak': np.float64(228.0), 'Biaya_Garansi ($)': np.float64(1592.51), 'Profit_Akhir ($)': np.float64(48407.49)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.0), 'Jumlah_Rusak': np.float64(0.0), 'Biaya_Garansi ($)': np.float64(0.0), 'Profit_Akhir ($)': np.float64(50000.0)}}
+Distribusi Weibull {'Normal': {'Probabilitas_Mati': np.float64(0.0228), 'Jumlah_Rusak': np.float64(228.0), 'Biaya_Garansi ($)': np.float64(1592.51), 'Profit_Akhir ($)': np.float64(48407.49)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.0), 'Jumlah_Rusak': np.float64(0.0), 'Biaya_Garansi ($)': np.float64(0.0), 'Profit_Akhir ($)': np.float64(50000.0)}, 'Weibull': {'Probabilitas_Mati': array([0.0408]), 'Jumlah_Rusak': array([408.]), 'Biaya_Garansi ($)': array([2856.4]), 'Profit_Akhir ($)': array([47143.6])}}
+Distribusi Eksponensial {'Normal': {'Probabilitas_Mati': np.float64(0.0228), 'Jumlah_Rusak': np.float64(228.0), 'Biaya_Garansi ($)': np.float64(1592.51), 'Profit_Akhir ($)': np.float64(48407.49)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.0), 'Jumlah_Rusak': np.float64(0.0), 'Biaya_Garansi ($)': np.float64(0.0), 'Profit_Akhir ($)': np.float64(50000.0)}, 'Weibull': {'Probabilitas_Mati': array([0.0408]), 'Jumlah_Rusak': array([408.]), 'Biaya_Garansi ($)': array([2856.4]), 'Profit_Akhir ($)': array([47143.6])}, 'Eksponensial': {'Probabilitas_Mati': np.float64(0.5889), 'Jumlah_Rusak': np.float64(5889.0), 'Biaya_Garansi ($)': np.float64(41222.14), 'Profit_Akhir ($)': np.float64(8777.86)}}
+**Sigma_100**
+Distribusi Normal {'Normal': {'Probabilitas_Mati': np.float64(0.1587), 'Jumlah_Rusak': np.float64(1587.0), 'Biaya_Garansi ($)': np.float64(11105.87), 'Profit_Akhir ($)': np.float64(38894.13)}}
+Distribusi Uniform {'Normal': {'Probabilitas_Mati': np.float64(0.1587), 'Jumlah_Rusak': np.float64(1587.0), 'Biaya_Garansi ($)': np.float64(11105.87), 'Profit_Akhir ($)': np.float64(38894.13)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.2113), 'Jumlah_Rusak': np.float64(2113.0), 'Biaya_Garansi ($)': np.float64(14792.74), 'Profit_Akhir ($)': np.float64(35207.26)}}
+Distribusi Weibull {'Normal': {'Probabilitas_Mati': np.float64(0.1587), 'Jumlah_Rusak': np.float64(1587.0), 'Biaya_Garansi ($)': np.float64(11105.87), 'Profit_Akhir ($)': np.float64(38894.13)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.2113), 'Jumlah_Rusak': np.float64(2113.0), 'Biaya_Garansi ($)': np.float64(14792.74), 'Profit_Akhir ($)': np.float64(35207.26)}, 'Weibull': {'Probabilitas_Mati': array([0.1543]), 'Jumlah_Rusak': array([1543.]), 'Biaya_Garansi ($)': array([10803.75]), 'Profit_Akhir ($)': array([39196.25])}}
+Distribusi Eksponensial {'Normal': {'Probabilitas_Mati': np.float64(0.1587), 'Jumlah_Rusak': np.float64(1587.0), 'Biaya_Garansi ($)': np.float64(11105.87), 'Profit_Akhir ($)': np.float64(38894.13)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.2113), 'Jumlah_Rusak': np.float64(2113.0), 'Biaya_Garansi ($)': np.float64(14792.74), 'Profit_Akhir ($)': np.float64(35207.26)}, 'Weibull': {'Probabilitas_Mati': array([0.1543]), 'Jumlah_Rusak': array([1543.]), 'Biaya_Garansi ($)': array([10803.75]), 'Profit_Akhir ($)': array([39196.25])}, 'Eksponensial': {'Probabilitas_Mati': np.float64(0.5889), 'Jumlah_Rusak': np.float64(5889.0), 'Biaya_Garansi ($)': np.float64(41222.14), 'Profit_Akhir ($)': np.float64(8777.86)}}
+===Garansi_750_Jam===
+**Sigma_50**
+Distribusi Normal {'Normal': {'Probabilitas_Mati': np.float64(0.0013), 'Jumlah_Rusak': np.float64(13.0), 'Biaya_Garansi ($)': np.float64(94.49), 'Profit_Akhir ($)': np.float64(49905.51)}}
+Distribusi Uniform {'Normal': {'Probabilitas_Mati': np.float64(0.0013), 'Jumlah_Rusak': np.float64(13.0), 'Biaya_Garansi ($)': np.float64(94.49), 'Profit_Akhir ($)': np.float64(49905.51)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.0), 'Jumlah_Rusak': np.float64(0.0), 'Biaya_Garansi ($)': np.float64(0.0), 'Profit_Akhir ($)': np.float64(50000.0)}}
+Distribusi Weibull {'Normal': {'Probabilitas_Mati': np.float64(0.0013), 'Jumlah_Rusak': np.float64(13.0), 'Biaya_Garansi ($)': np.float64(94.49), 'Profit_Akhir ($)': np.float64(49905.51)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.0), 'Jumlah_Rusak': np.float64(0.0), 'Biaya_Garansi ($)': np.float64(0.0), 'Profit_Akhir ($)': np.float64(50000.0)}, 'Weibull': {'Probabilitas_Mati': array([0.0098]), 'Jumlah_Rusak': array([98.]), 'Biaya_Garansi ($)': array([684.22]), 'Profit_Akhir ($)': array([49315.78])}}
+Distribusi Eksponensial {'Normal': {'Probabilitas_Mati': np.float64(0.0013), 'Jumlah_Rusak': np.float64(13.0), 'Biaya_Garansi ($)': np.float64(94.49), 'Profit_Akhir ($)': np.float64(49905.51)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.0), 'Jumlah_Rusak': np.float64(0.0), 'Biaya_Garansi ($)': np.float64(0.0), 'Profit_Akhir ($)': np.float64(50000.0)}, 'Weibull': {'Probabilitas_Mati': array([0.0098]), 'Jumlah_Rusak': array([98.]), 'Biaya_Garansi ($)': array([684.22]), 'Profit_Akhir ($)': array([49315.78])}, 'Eksponensial': {'Probabilitas_Mati': np.float64(0.5654), 'Jumlah_Rusak': np.float64(5654.0), 'Biaya_Garansi ($)': np.float64(39578.13), 'Profit_Akhir ($)': np.float64(10421.87)}}
+**Sigma_100**
+Distribusi Normal {'Normal': {'Probabilitas_Mati': np.float64(0.0668), 'Jumlah_Rusak': np.float64(668.0), 'Biaya_Garansi ($)': np.float64(4676.5), 'Profit_Akhir ($)': np.float64(45323.5)}}
+Distribusi Uniform {'Normal': {'Probabilitas_Mati': np.float64(0.0668), 'Jumlah_Rusak': np.float64(668.0), 'Biaya_Garansi ($)': np.float64(4676.5), 'Profit_Akhir ($)': np.float64(45323.5)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.067), 'Jumlah_Rusak': np.float64(670.0), 'Biaya_Garansi ($)': np.float64(4689.11), 'Profit_Akhir ($)': np.float64(45310.89)}}
+Distribusi Weibull {'Normal': {'Probabilitas_Mati': np.float64(0.0668), 'Jumlah_Rusak': np.float64(668.0), 'Biaya_Garansi ($)': np.float64(4676.5), 'Profit_Akhir ($)': np.float64(45323.5)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.067), 'Jumlah_Rusak': np.float64(670.0), 'Biaya_Garansi ($)': np.float64(4689.11), 'Profit_Akhir ($)': np.float64(45310.89)}, 'Weibull': {'Probabilitas_Mati': array([0.0797]), 'Jumlah_Rusak': array([797.]), 'Biaya_Garansi ($)': array([5580.53]), 'Profit_Akhir ($)': array([44419.47])}}
+Distribusi Eksponensial {'Normal': {'Probabilitas_Mati': np.float64(0.0668), 'Jumlah_Rusak': np.float64(668.0), 'Biaya_Garansi ($)': np.float64(4676.5), 'Profit_Akhir ($)': np.float64(45323.5)}, 'Uniform': {'Probabilitas_Mati': np.float64(0.067), 'Jumlah_Rusak': np.float64(670.0), 'Biaya_Garansi ($)': np.float64(4689.11), 'Profit_Akhir ($)': np.float64(45310.89)}, 'Weibull': {'Probabilitas_Mati': array([0.0797]), 'Jumlah_Rusak': array([797.]), 'Biaya_Garansi ($)': array([5580.53]), 'Profit_Akhir ($)': array([44419.47])}, 'Eksponensial': {'Probabilitas_Mati': np.float64(0.5654), 'Jumlah_Rusak': np.float64(5654.0), 'Biaya_Garansi ($)': np.float64(39578.13), 'Profit_Akhir ($)': np.float64(10421.87)}}</code></pre>
+</div>
+</div>
+<p><strong>Analisis Output Bisnis:</strong> Berdasarkan pendekatan probabilitas tersebut, ketika skrip dieksekusi, Anda akan menemukan bahwa pemilihan deviasi (<span class="math inline">\(\sigma\)</span>) dan waktu garansi sangat krusial: 1. <strong>Meningkatkan Garansi:</strong> Jika Anda menetapkan garansi 800 jam pada model <strong>Normal</strong> dengan <span class="math inline">\(\sigma=100\)</span>, jumlah lampu yang rusak secara signifikan lebih besar dibandingkan garansi 750 jam karena nilai 800 jam sudah sangat dekat dengan batas kiri kurva <em>bell-curve</em> nilai rata-rata (<span class="math inline">\(\mu = 900\)</span>). 2. <strong>Pemilihan Model:</strong> Model <strong>Eksponensial</strong> akan memprediksi tingkat kerusakan prematur (<em>infant mortality</em>) yang paling ekstrem (paling merugikan), karena laju kerusakannya dimulai sejak hari pertama. Sedangkan <strong>Weibull</strong> akan memberikan prediksi yang paling akurat dengan realita keausan pabrik (<em>wear-out</em>). Keputusan mengalokasikan garansi harus melihat estimasi profit pada metrik <em>Profit_Akhir</em> di model Weibull atau Normal.</p>
+<p>bila pasar produk diperebutkan oleh produsen di mana pangsa psar di tentuka oleh harga dan garansi secara proporsional: semakin murah harga semakin besar segmen, semakin tinggi garansi semakin besar segmen, usulkan model sederhana untuk memutuskan harga dan garansi</p>
+<p>Bisa. Model sederhananya adalah: <strong>pilih harga dan garansi yang memaksimalkan expected profit total</strong>, tetapi <strong>jumlah unit terjual</strong> dibuat bergantung pada <strong>daya tarik pasar</strong>, yang dipengaruhi oleh <strong>harga</strong> dan <strong>garansi</strong>.</p>
+<hr>
+</section>
+<section id="ide-dasar" class="level2">
+<h2 class="anchored" data-anchor-id="ide-dasar">1) Ide dasar</h2>
+<p>Sebelumnya profit total hanya:</p>
+<p><span class="math display">\[\text{Profit Total} = (\text{profit per unit}) \times (\text{jumlah unit terjual})\]</span></p>
+<p>Sekarang:</p>
+<ul>
+<li><strong>profit per unit</strong> dipengaruhi oleh harga, biaya produksi, dan biaya garansi</li>
+<li><strong>jumlah unit terjual / pangsa pasar</strong> dipengaruhi oleh harga dan garansi</li>
+</ul>
+<p>Jadi keputusan bisnisnya adalah memilih:</p>
+<p><span class="math display">\[(p,w)\]</span></p>
+<p>dengan:</p>
+<ul>
+<li><span class="math inline">\((p)\)</span> = harga jual</li>
+<li><span class="math inline">\((w)\)</span> = panjang garansi (jam)</li>
+</ul>
+<p>untuk memaksimalkan:</p>
+<p><span class="math display">\[\Pi(p,w)=Q(p,w)\cdot \pi(p,w)\]</span></p>
+<p>di mana:</p>
+<ul>
+<li><span class="math inline">\((Q(p,w))\)</span> = jumlah unit terjual</li>
+<li><span class="math inline">\((\pi(p,w))\)</span> = expected profit per unit</li>
+</ul>
+<hr>
+</section>
+<section id="expected-profit-per-unit" class="level2">
+<h2 class="anchored" data-anchor-id="expected-profit-per-unit">2) Expected profit per unit</h2>
+<p>Misalkan:</p>
+<ul>
+<li>biaya produksi = (c)</li>
+<li>biaya garansi per klaim = (g)</li>
+<li>umur produk acak (T)</li>
+</ul>
+<p>Kalau garansi adalah (w), maka peluang klaim:</p>
+<p><span class="math display">\[P(T&lt;w)=F(w)\]</span></p>
+<p>sehingga expected profit per unit:</p>
+<p><span class="math display">\[\pi(p,w)=p-c-g,F(w)\]</span></p>
+<section id="untuk-kasus-eksponensial" class="level3">
+<h3 class="anchored" data-anchor-id="untuk-kasus-eksponensial">Untuk kasus eksponensial</h3>
+<p>Jika (<span class="math inline">\(T\sim \text{Exp}(\lambda)\)</span>), maka:</p>
+<p><span class="math display">\[F(w)=1-e^{-\lambda w}\]</span></p>
+<p>jadi:</p>
+<p><span class="math display">\[\pi(p,w)=p-c-g(1-e^{-\lambda w})\]</span></p>
+<p>Untuk data Anda:</p>
+<ul>
+<li>(<span class="math inline">\(c=5\)</span>)$</li>
+<li>(<span class="math inline">\(g=10\)</span>)</li>
+<li>(<span class="math inline">\(\lambda=0.00005\)</span>$)</li>
+</ul>
+<p>maka:</p>
+<p><span class="math display">\[
+\pi(p,w)=p-5-10(1-e^{-0.00005w})
+\]</span></p>
+<p>atau bisa ditulis:</p>
+<p><span class="math display">\[
+\pi(p,w)=p-15+10e^{-0.00005w}
+\]</span></p>
+<p>Maknanya:</p>
+<ul>
+<li>harga naik () profit per unit naik</li>
+<li>garansi makin panjang () profit per unit turun, karena klaim naik</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="model-sederhana-pangsa-pasar" class="level2">
+<h2 class="anchored" data-anchor-id="model-sederhana-pangsa-pasar">3) Model sederhana pangsa pasar</h2>
+<p>Sekarang kita butuh model bahwa:</p>
+<ul>
+<li>makin <strong>murah</strong> () pangsa pasar makin besar</li>
+<li>makin <strong>lama garansi</strong> () pangsa pasar makin besar</li>
+</ul>
+<section id="versi-paling-sederhana-skor-daya-tarik-linear" class="level3">
+<h3 class="anchored" data-anchor-id="versi-paling-sederhana-skor-daya-tarik-linear">Versi paling sederhana: skor daya tarik linear</h3>
+<p>Misalkan pasar total berukuran (M), dan daya tarik produk kita:</p>
+<p><span class="math display">\[A(p,w)=\alpha\left(\frac{1}{p}\right)+\beta w\]</span></p>
+<p>dengan:</p>
+<ul>
+<li>(<span class="math inline">\(\alpha &gt;0\)</span>): sensitivitas terhadap harga</li>
+<li>(<span class="math inline">\(\beta &gt;0\)</span>): sensitivitas terhadap garansi</li>
+</ul>
+<p>Lalu pangsa pasar kita:</p>
+<p><span class="math display">\[
+s(p,w)=\frac{A(p,w)}{A(p,w)+A_{\text{kompetitor}}}
+\]</span></p>
+<p>sehingga jumlah unit terjual:</p>
+<p><span class="math display">\[
+Q(p,w)=M\cdot s(p,w)
+\]</span></p>
+<p>Maka objective function:</p>
+<p><span class="math display">\[
+\Pi(p,w)=M \cdot \frac{A(p,w)}{A(p,w)+A_{\text{kompetitor}}}\cdot \bigl(p-c-gF(w)\bigr)
+\]</span></p>
+<p>Ini sudah cukup untuk keputusan awal.</p>
+<hr>
+</section>
+</section>
+<section id="model-yang-lebih-rapi-utilitas-relatif" class="level2">
+<h2 class="anchored" data-anchor-id="model-yang-lebih-rapi-utilitas-relatif">4) Model yang lebih rapi: utilitas relatif</h2>
+<p>Biasanya lebih enak pakai model <strong>daya tarik relatif</strong>:</p>
+<p><span class="math display">\[
+A(p,w)=\exp(a-bp+dw)
+\]</span></p>
+<p>dengan:</p>
+<ul>
+<li>(<span class="math inline">\(b&gt;0\)</span>): harga makin tinggi, daya tarik turun</li>
+<li>(<span class="math inline">\(d&gt;0\)</span>): garansi makin tinggi, daya tarik naik</li>
+</ul>
+<p>Kalau ada (n) kompetitor, dan produk kita bersaing dengan mereka, pangsa pasar:</p>
+<p><span class="math display">\[
+s(p,w)=\frac{\exp(a-bp+dw)}{\sum_{j=1}^{n}\exp(a_j-b_jp_j+d_jw_j)}
+\]</span></p>
+<p>Jika karakteristik kompetitor dianggap tetap, penyebut bisa dipandang sebagai konstanta plus daya tarik kita.</p>
+<p>Lalu:</p>
+<p><span class="math display">\[
+Q(p,w)=M\cdot s(p,w)
+\]</span></p>
+<p>dan total expected profit:</p>
+<p><span class="math display">\[
+\Pi(p,w)=M\cdot s(p,w)\cdot (p-c-gF(w))
+\]</span></p>
+<p>Ini model yang lebih stabil daripada linear, karena:</p>
+<ul>
+<li>pangsa pasar otomatis antara 0 dan 1</li>
+<li>tidak jadi negatif</li>
+<li>cocok untuk kompetisi</li>
+</ul>
+<hr>
+</section>
+<section id="bentuk-model-keputusan-final" class="level2">
+<h2 class="anchored" data-anchor-id="bentuk-model-keputusan-final">5) Bentuk model keputusan final</h2>
+<p>Untuk kasus Wi-Fi eksponensial, model sederhana yang saya sarankan:</p>
+<p>$$ boxed{ (p,w) ========</p>
+<p>M {(a-bp+dw)+K} } $$</p>
+<p>dengan:</p>
+<ul>
+<li><ol start="13" type="A">
+<li>= ukuran pasar total</li>
+</ol></li>
+<li><ol start="11" type="A">
+<li>= total daya tarik kompetitor</li>
+</ol></li>
+<li><ol start="3" type="a">
+<li>= biaya produksi</li>
+</ol></li>
+<li><ol start="7" type="a">
+<li>= biaya klaim</li>
+</ol></li>
+<li><p>(<span class="math inline">\(\lambda\)</span>) = laju kegagalan</p></li>
+<li><ol start="2" type="a">
+<li>= sensitivitas harga</li>
+</ol></li>
+<li><ol start="4" type="a">
+<li>= sensitivitas garansi</li>
+</ol></li>
+</ul>
+<p>Keputusan optimal:</p>
+<p><span class="math display">\[
+(p^*,w^*)=\arg\max_{p,w}\Pi(p,w)
+\]</span></p>
+<hr>
+</section>
+<section id="intuisi-manajerial" class="level2">
+<h2 class="anchored" data-anchor-id="intuisi-manajerial">6) Intuisi manajerial</h2>
+<p>Ada trade-off:</p>
+<ul>
+<li><p><strong>Harga tinggi</strong></p>
+<ul>
+<li>profit per unit naik</li>
+<li>pangsa pasar turun</li>
+</ul></li>
+<li><p><strong>Harga rendah</strong></p>
+<ul>
+<li>pangsa pasar naik</li>
+<li>margin turun</li>
+</ul></li>
+<li><p><strong>Garansi panjang</strong></p>
+<ul>
+<li>pangsa pasar naik</li>
+<li>biaya garansi naik</li>
+</ul></li>
+<li><p><strong>Garansi pendek</strong></p>
+<ul>
+<li>biaya rendah</li>
+<li>daya tarik pasar turun</li>
+</ul></li>
+</ul>
+<p>Jadi keputusan optimal biasanya berada di <strong>titik tengah</strong>, bukan harga termurah atau garansi terpanjang.</p>
+<hr>
+</section>
+<section id="versi-sangat-sederhana-untuk-tugas-ujian" class="level2">
+<h2 class="anchored" data-anchor-id="versi-sangat-sederhana-untuk-tugas-ujian">7) Versi sangat sederhana untuk tugas / ujian</h2>
+<p>Kalau ingin model yang sangat mudah dijelaskan, bisa pakai:</p>
+<p><span class="math display">\[
+Q(p,w)=M\left(\alpha-\beta p+\gamma w\right)
+\]</span></p>
+<p>dengan (<span class="math inline">\(\beta,\gamma\&gt;0\)</span>), lalu dibatasi agar (<span class="math inline">\(Q(p,w)\ge 0\)</span>).</p>
+<p>Maka:</p>
+<p><span class="math display">\[
+\Pi(p,w)=M(\alpha-\beta p+\gamma w)\cdot (p-c-gF(w))
+\]</span></p>
+<p>Untuk eksponensial:</p>
+<p><span class="math display">\[
+\Pi(p,w)=M(\alpha-\beta p+\gamma w)\cdot \left[p-c-g(1-e^{-\lambda w})\right]
+\]</span></p>
+<p>Ini sangat sederhana dan mudah dihitung, walaupun kurang realistis dibanding model logit/eksponensial.</p>
+<hr>
+</section>
+<section id="rekomendasi-model-praktis" class="level2">
+<h2 class="anchored" data-anchor-id="rekomendasi-model-praktis">8) Rekomendasi model praktis</h2>
+<p>Untuk praktik, saya sarankan:</p>
+<ul>
+<li><p>pakai <strong>profit per unit ekspektasian</strong>: <span class="math inline">\(p-c-gF(w)\)</span></p></li>
+<li><p>pakai <strong>market share logit sederhana</strong>: <span class="math inline">\(s(p,w)=\frac{e^{-bp+dw}}{e^{-bp+dw}+K}\)</span></p></li>
+<li><p>maksimalkan: <span class="math inline">\(\Pi(p,w)=M,s(p,w),[p-c-gF(w)]\)</span></p></li>
+</ul>
+<p>Karena model ini:</p>
+<ul>
+<li>sederhana</li>
+<li>masuk akal</li>
+<li>mudah dikalibrasi dari data pasar</li>
+<li>mudah disimulasikan</li>
+</ul>
+<hr>
+</section>
+<section id="contoh-python-kecil" class="level2">
+<h2 class="anchored" data-anchor-id="contoh-python-kecil">9) Contoh Python kecil</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># parameter bisnis</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">100000</span>          <span class="co"># total market size</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="dv">5</span>               <span class="co"># production cost</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="dv">10</span>              <span class="co"># warranty claim cost</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> <span class="fl">0.00005</span>       <span class="co"># failure rate</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># parameter pasar</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="fl">0.25</span>            <span class="co"># price sensitivity</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="fl">0.00015</span>         <span class="co"># warranty sensitivity</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="fl">1.5</span>             <span class="co"># competitor attractiveness</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> claim_prob(w):</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">-</span> np.exp(<span class="op">-</span>lam <span class="op">*</span> w)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> profit_per_unit(p, w):</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> p <span class="op">-</span> c <span class="op">-</span> g <span class="op">*</span> claim_prob(w)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> market_share(p, w):</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> np.exp(<span class="op">-</span>b <span class="op">*</span> p <span class="op">+</span> d <span class="op">*</span> w)</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A <span class="op">/</span> (A <span class="op">+</span> K)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> total_profit(p, w):</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> M <span class="op">*</span> market_share(p, w) <span class="op">*</span> profit_per_unit(p, w)</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="co"># grid search sederhana</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> np.arange(<span class="dv">8</span>, <span class="dv">21</span>, <span class="fl">0.5</span>)</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>warranties <span class="op">=</span> np.arange(<span class="dv">2000</span>, <span class="dv">12001</span>, <span class="dv">500</span>)</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>best <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>best_profit <span class="op">=</span> <span class="op">-</span>np.inf</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p <span class="kw">in</span> prices:</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> w <span class="kw">in</span> warranties:</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>        prof <span class="op">=</span> total_profit(p, w)</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> prof <span class="op">&gt;</span> best_profit:</span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>            best_profit <span class="op">=</span> prof</span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>            best <span class="op">=</span> (p, w, prof, market_share(p, w), profit_per_unit(p, w))</span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best price ="</span>, best[<span class="dv">0</span>])</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best warranty ="</span>, best[<span class="dv">1</span>], <span class="st">"hours"</span>)</span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best total profit ="</span>, <span class="bu">round</span>(best[<span class="dv">2</span>], <span class="dv">2</span>))</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Market share ="</span>, <span class="bu">round</span>(best[<span class="dv">3</span>], <span class="dv">4</span>))</span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Profit per unit ="</span>, <span class="bu">round</span>(best[<span class="dv">4</span>], <span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="kesimpulan" class="level2">
+<h2 class="anchored" data-anchor-id="kesimpulan">10) Kesimpulan</h2>
+<p>Model sederhana yang baik adalah:</p>
+<p><span class="math display">\[
+\boxed{
+\text{Total Profit}=
+\text{Market Size}\times \text{Market Share}(p,w)\times \text{Expected Profit per Unit}(p,w)
+}
+\]</span></p>
+<p>dengan:</p>
+<p><span class="math display">\[
+\text{Expected Profit per Unit}(p,w)=p-c-gF(w)
+\]</span></p>
+<p>dan market share dibuat <strong>turun terhadap harga</strong> dan <strong>naik terhadap garansi</strong>, misalnya:</p>
+<p><span class="math display">\[
+\text{Market Share}(p,w)=\frac{e^{-bp+dw}}{e^{-bp+dw}+K}
+\]</span></p>
+<p>Lalu pilih (<span class="math inline">\((p,w)\)</span>) yang memaksimalkan fungsi itu.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

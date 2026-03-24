@@ -1,0 +1,14 @@
+title: Typst Bookly Format
+author: Quarto
+version: 0.1.0
+quarto-required: ">=1.9.18"
+contributes:
+  formats:
+    typst:
+      template-partials:
+        - typst-show.typ
+        - numbering.typ
+        - page.typ
+      filters:
+        - path: bookly.lua
+          at: post-quarto

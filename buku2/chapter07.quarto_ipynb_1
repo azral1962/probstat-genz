@@ -1,0 +1,152 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "7955cf65",
+   "metadata": {},
+   "source": [
+    "# Random Variable Kontinu\n",
+    "\n",
+    "## Kita Beri Garansi Berapa Lama?\n",
+    "![“Lampu rata-rata hidup 900 jam, simpangan 50 jam. Kamu mau kasih garansi 700 jam, 800 jam, atau 900 jam? Ini bukan sekadar ‘baik hati’—ini strategi biaya klaim. Normal sering muncul di data pengukuran; eksponensial sering muncul di waktu tunggu. Hari ini kamu belajar menghitung peluang rusak sebelum waktu T, lalu menentukan T yang masuk akal untuk target klaim. Kamu akan melihat: statistik bisa jadi alat desain produk.”](./The_Decision_Engineer.png/image7.png)\n",
+    "\n",
+    "## Live Coding: \"Normal is Everywhere\"**\n",
+    "Suatu variable random bisa memiliki *probability density function* (pdf) berbentuk lonceng, dengan dua parameter $\\mu$ dan $\\sigma$."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "b52a1043",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import matplotlib as plt\n",
+    "import numpy as np\n",
+    "\n",
+    "# Instantiate a default random number generator\n",
+    "rng = np.random.default_rng()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f6736fd4",
+   "metadata": {},
+   "source": [
+    "Untuk distribuasi normal dan standar, lokasi titik tengah = 0 dan deviasi standar = 1."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "767fe487",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "1. Single sample: 0.7716189897330815\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Generate a single random number from the standard normal distribution (mean=0, std=1)\n",
+    "sample_scalar = rng.normal()\n",
+    "print(f\"1. Single sample: {sample_scalar}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "34cdd60e",
+   "metadata": {},
+   "source": [
+    "Dalam kasus kita  lokasi titik tengah = 900 dan deviasi standar = 50. maka berapa jam lima lampu ini mati?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "afaca3c3",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mu = 900\n",
+    "sigma = 50\n",
+    "\n",
+    "# Generate a 1D array of 5 numbers with mean=900, standard deviation=50\n",
+    "samples_1d = rng.normal(loc=mu, scale=sigma, size=5)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c20a1309",
+   "metadata": {
+    "user_expressions": [
+     {
+      "expression": "print(f\"2. 1D array: {samples_1d}\")",
+      "result": {
+       "data": {
+        "text/plain": "None"
+       },
+       "metadata": {},
+       "status": "ok"
+      }
+     }
+    ]
+   },
+   "source": [
+    "Berbeda beda yaitu: `{python} print(f\"2. 1D array: {samples_1d}\")`\n",
+    "\n",
+    "\n",
+    "        1. Generate data acak `numpy.random.normal`.\n",
+    "        2. Tunjukkan aturan empiris: 68% data ada di $\\mu \\pm \\sigma$, 95% di $\\mu \\pm 2\\sigma$.\n",
+    "        3. Visualisasi: Plot kurva lonceng dengan seaborn dan arsir area probabilitas.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "6c82ac03",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "3. 2D array:\n",
+      "[[-0.03035205  0.20312193  0.57454638]\n",
+      " [-0.28370334  0.36693268  0.82743212]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Generate a 2x3 matrix with default parameters\n",
+    "samples_2d = rng.normal(size=(2, 3))\n",
+    "print(f\"3. 2D array:\\n{samples_2d}\")"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3",
+   "path": "C:\\Users\\armein\\AppData\\Local\\Programs\\Python\\Python313\\share\\jupyter\\kernels\\python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.13.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

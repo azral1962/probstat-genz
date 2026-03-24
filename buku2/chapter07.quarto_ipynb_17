@@ -1,0 +1,173 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# Random Variable Kontinu\n",
+        "\n",
+        "## Kita Beri Garansi Berapa Lama?\n",
+        "![“Lampu rata-rata hidup 900 jam, simpangan 50 jam. Kamu mau kasih garansi 700 jam, 800 jam, atau 900 jam? Ini bukan sekadar ‘baik hati’—ini strategi biaya klaim. Normal sering muncul di data pengukuran; eksponensial sering muncul di waktu tunggu. Hari ini kamu belajar menghitung peluang rusak sebelum waktu T, lalu menentukan T yang masuk akal untuk target klaim. Kamu akan melihat: statistik bisa jadi alat desain produk.”](./The_Decision_Engineer.png/image7.png)\n",
+        "\n",
+        "## Live Coding: \"Normal is Everywhere\"**\n",
+        "Suatu variable random bisa memiliki *probability density function* (pdf) berbentuk lonceng, dengan dua parameter $\\mu$ dan $\\sigma$."
+      ],
+      "id": "2ec806dc"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "import numpy as np\n",
+        "\n",
+        "# Instantiate a default random number generator\n",
+        "rng = np.random.default_rng()"
+      ],
+      "id": "f2d468d9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Untuk distribuasi normal dan standar, lokasi titik tengah = 0 dan deviasi standar = 1."
+      ],
+      "id": "f8baf7c8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Generate a single random number from the standard normal distribution (mean=0, std=1)\n",
+        "sample_scalar = rng.normal()\n",
+        "print(f\"1. Single sample: {sample_scalar}\")"
+      ],
+      "id": "883d9f4c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Dalam kasus kita  lokasi titik tengah = 900 dan deviasi standar = 50. maka berapa jam lima lampu ini mati?"
+      ],
+      "id": "a0aacd1e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "mu = 900\n",
+        "sigma = 50\n",
+        "\n",
+        "# Generate a 1D array of 5 numbers with mean=900, standard deviation=50\n",
+        "samples_1d = rng.normal(loc=mu, scale=sigma, size=5)\n",
+        "print(f\"2. 1D array: {samples_1d}\")"
+      ],
+      "id": "e038de16",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Berbeda beda yaitu: `{python} samples_1d[0]`\n",
+        "\n",
+        "\n",
+        "1. Generate data acak `numpy.random.normal`.\n",
+        "2. Tunjukkan aturan empiris: 68% data ada di $\\mu \\pm \\sigma$, 95% di $\\mu \\pm 2\\sigma$.\n",
+        "3. Visualisasi: Plot kurva lonceng dengan seaborn dan arsir area probabilitas. kita coba untuk 100"
+      ],
+      "id": "027b1f6f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "N= 1000\n",
+        "\n",
+        "data = rng.normal(loc=mu, scale=sigma, size=N)\n",
+        "np.histogram(data, bins=30, density=True)"
+      ],
+      "id": "960590bc",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Kita hitung berapa data antara\n",
+        "1. $850< X < 950$\n",
+        "2. $800<  X < 1000$\n",
+        "3. $750 < X <1050$"
+      ],
+      "id": "50bb3465"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "counter1=0\n",
+        "counter2=0\n",
+        "counter3=0\n",
+        "for n in data:\n",
+        "    if n >= 850 and n < 950:\n",
+        "        counter1 += 1  \n",
+        "    elif n >= 800 and n < 1000:\n",
+        "        counter2 += 1\n",
+        "    elif n >= 750 and n < 1050:\n",
+        "        counter3 += 1\n",
+        "``\n",
+        "print(counter1/N, counter2/N, counter3/N)"
+      ],
+      "id": "2d3d8817",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# 3. Menambahkan label dan judul\n",
+        "plt.hist(data,bins=30, density=True)\n",
+        "plt.title('Histogram Normal Distribution (NumPy)')\n",
+        "plt.xlabel('Value')\n",
+        "plt.ylabel('Density')\n",
+        "plt.grid(axis='y', alpha=0.5)\n",
+        "\n",
+        "# 4. Menampilkan plot\n",
+        "plt.show()"
+      ],
+      "id": "2145538f",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Generate a 2x3 matrix with default parameters\n",
+        "samples_2d = rng.normal(size=(2, 3))\n",
+        "print(f\"3. 2D array:\\n{samples_2d}\")"
+      ],
+      "id": "f9a5c496",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\github\\.venv\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

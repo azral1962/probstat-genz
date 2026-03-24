@@ -1,0 +1,195 @@
+Siap. Saya buat **template Quarto “Episode Mingguan”** + **skrip narasi ±90 detik** untuk Minggu 1–16, mengikuti topik di dokumen Anda. 
+
+---
+
+## 1) Template Quarto (dipakai ulang tiap minggu)
+
+Simpan sebagai `week-XX.qmd` (copy–paste, lalu isi bagian yang bertanda ✅).
+
+```yaml
+---
+title: "Week XX — ✅Judul Episode"
+subtitle: "✅Hook 1 kalimat (10 detik)"
+format:
+  html:
+    toc: true
+    number-sections: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Cold Open (10–15 detik)
+> ✅ Narasi hook + stakes (kenapa ini penting *hari ini*).
+
+## Kamu Pilih Mana? (Poll A/B)
+**A.** ✅ opsi A (cepat / intuitif / “asal yakin”)  
+**B.** ✅ opsi B (pakai model / bukti / lebih aman)  
+
+> ✅ Tuliskan *alasan 1 kalimat* (di kelas atau LMS/Teams poll).
+
+## Konsep Inti (5 menit)
+**Inti ide:** ✅ 3 bullet paling penting  
+**Rumus kunci:** ✅ 1–2 rumus  
+**Kesalahan umum:** ✅ 1 bias/keliru yang sering terjadi
+
+## Contoh Kerja (Worked Example)
+✅ 1 contoh numerik kecil, langkah demi langkah.
+
+## Practice (20–40 menit)
+1. ✅ Soal latihan 1 (mudah)
+2. ✅ Soal latihan 2 (sedang)
+3. ✅ Soal latihan 3 (aplikatif)
+
+## Perform — Mini Mission (Submit)
+**Output yang dikumpulkan (ringkas):**
+- ✅ Jawaban akhir (angka/kalimat)
+- ✅ 3 baris penjelasan “kenapa”
+- ✅ (Opsional) kode python kecil untuk verifikasi
+
+## Refleksi (60 detik)
+- “Hari ini saya berubah dari ____ menjadi ____ karena ____.”
+- “Hal yang masih membingungkan: ____.”
+```
+
+**Rubrik cepat (10 poin):** Poll (1) + Konsep (3) + Contoh (2) + Practice (2) + Mini Mission (2)
+
+---
+
+## 2) Paket Episode + Skrip Narasi ±90 detik per Minggu
+
+### Minggu 1 — Pola Pikir Probabilistik vs Deterministik 
+
+**Judul:** “Stop Pura-pura Pasti”
+**Poll A/B:** A: “stok 100 pasti cukup” vs B: “pakai peluang + safety stock”
+**Skrip 90 detik:**
+“Bayangin kamu pegang stok toko. Kalau kamu bilang ‘permintaan pasti 100’, kamu terlihat rapi… sampai kenyataan menampar. Permintaan itu goyang—kadang 70, kadang 160. Nah, pertanyaan pentingnya: kamu mau terlihat yakin, atau mau benar? Probabilitas itu bukan bikin kita ragu—justru bikin kita *berani mengambil keputusan* dengan risiko yang dihitung. Hari ini kita latihan satu skill: membedakan dunia deterministik vs dunia nyata yang random. Dan keputusan kamu akan kita ukur: berapa peluang kehabisan stok kalau kamu nekat ‘pasti 100’?”
+
+---
+
+### Minggu 2 — Eksperimen, Sample Space, Event, Aksioma 
+
+**Judul:** “Semesta Kemungkinan”
+**Poll A/B:** A: daftar semua kemungkinan (brute force) vs B: definisikan event + komplemen (lebih cerdas)
+**Skrip 90 detik:**
+“Kamu kirim 3 bit data. Kedengarannya kecil… tapi ada ‘semesta’ di belakangnya: semua kombinasi yang mungkin. Kalau kamu nggak mendefinisikan ruang sampel dan event dengan benar, kamu bakal salah hitung kualitas sistem komunikasi. Hari ini kita bikin cara pikir yang rapi: apa itu eksperimen, apa itu sample space, apa itu event, dan kenapa aksioma probabilitas itu ‘aturan main semesta’. Setelah ini, kamu bukan cuma bisa hitung peluang—kamu bisa *merancang* perhitungan peluang.”
+
+---
+
+### Minggu 3 — Framework Probabilistik untuk Aplikasi Engineering (Reliability) 
+
+**Judul:** “Data Center: Seri atau Paralel?”
+**Poll A/B:** A: seri (rapi, murah) vs B: paralel (andal)
+**Skrip 90 detik:**
+“Data center mati 3 menit bisa rugi besar. Kamu punya 2 generator—pasang seri atau paralel? Ini bukan selera desain; ini soal peluang gagal total. Kalau seri, satu komponen drop—habis. Kalau paralel, sistem masih hidup selama ada satu yang bertahan. Hari ini probabilitas berubah jadi ‘bahasa keputusan engineering’: kita hitung peluang kegagalan sistem dan memilih arsitektur yang paling masuk akal. Ending-nya bukan rumus—ending-nya rekomendasi desain.”
+
+---
+
+### Minggu 4 — Teorema Probabilitas, Conditional, Bayes 
+
+**Judul:** “Alarm 90% Kok Bisa Bohong?”
+**Poll A/B:** A: alarm bunyi = mesin rusak vs B: hitung posterior (Bayes)
+**Skrip 90 detik:**
+
+::: {#hook04}
+“Alarm akurat 90%. Alarm bunyi. Semua panik: ‘mesin rusak!’ Tapi… kalau kerusakan itu sangat jarang, alarm 90% bisa tetap sering bohong. Ini plot twist klasik: base rate. Bayes itu alat untuk ‘update keyakinan’ berdasarkan bukti, bukan berdasarkan panik. Hari ini kamu belajar beda ‘P(alarm | rusak)’ dan ‘P(rusak | alarm)’. Satu membuatmu terlihat pintar, satu menyelamatkan biaya shutdown.”
+:::
+---
+
+### Minggu 5 — Variabel Acak: Definisi, Fungsi Peluang, Ekspektasi, Variansi 
+
+**Judul:** “Risk vs Reward”
+**Poll A/B:** A: pilih return tertinggi vs B: return tinggi tapi risiko (variansi) terkendali
+**Skrip 90 detik:**
+“Kamu dikasih dua opsi investasi: A stabil, B bisa tinggi tapi bisa jeblok. Pertanyaannya: keputusan yang ‘dewasa’ itu bukan cuma lihat rata-rata—tapi lihat risiko. Variabel acak itu cara kita memetakan dunia random jadi angka. Ekspektasi itu ‘rata-rata jangka panjang’, variansi itu ‘seberapa liar’. Hari ini kamu mulai bicara seperti engineer: bukan ‘feeling’, tapi ‘E dan Var’. Dan kamu akan bikin keputusan yang bisa dipertanggungjawabkan.”
+
+---
+
+### Minggu 6 — Distribusi Diskrit: Binomial & Poisson 
+
+**Judul:** “Berapa Cacat dalam 100?”
+**Poll A/B:** A: pakai Binomial exact vs B: pakai Poisson approximation
+**Skrip 90 detik:**
+“Pabrik bilang cacat 1%. Kamu ambil 100 unit. Pertanyaan kecil tapi tajam: peluang tepat 2 cacat berapa? Ini momen kamu belajar memilih model yang tepat: Binomial untuk ‘n percobaan’, Poisson untuk ‘kejadian jarang’. Engineer yang bagus bukan yang hafal rumus banyak—tapi yang *tahu kapan pakai yang mana*. Hari ini kamu latihan dua model, lalu bikin keputusan QC: lanjut produksi atau stop inspeksi?”
+
+---
+
+### Minggu 7 — Distribusi Kontinu: Normal & Eksponensial 
+
+**Judul:** “Garansi: Janji atau Strategi?”
+**Poll A/B:** A: garansi panjang (branding) vs B: garansi optimal (klaim ≤ 1%)
+**Skrip 90 detik:**
+“Lampu rata-rata hidup 900 jam, simpangan 50 jam. Kamu mau kasih garansi 700 jam, 800 jam, atau 900 jam? Ini bukan sekadar ‘baik hati’—ini strategi biaya klaim. Normal sering muncul di data pengukuran; eksponensial sering muncul di waktu tunggu. Hari ini kamu belajar menghitung peluang rusak sebelum waktu T, lalu menentukan T yang masuk akal untuk target klaim. Kamu akan melihat: statistik bisa jadi alat desain produk.”
+
+---
+
+### Minggu 8 — UTS (Evaluasi Minggu 1–7) 
+
+**Judul:** “Boss Fight: Decision Engineer”
+**Skrip 60–90 detik:**
+“Hari ini bukan ujian hafalan. Ini ujian keputusan. Kamu akan diberi kasus seperti episode-episode sebelumnya: stok, reliability, alarm, risiko, cacat, garansi. Tugasmu: pilih model yang tepat, hitung, lalu jelaskan keputusan dengan kalimat yang tegas. Nilai tertinggi bukan dari rumus paling panjang, tapi dari reasoning paling bersih.”
+
+---
+
+### Minggu 9 — Fungsi Variabel Acak / Transformasi PDF 
+
+**Judul:** “Error Kecil, Efek Besar”
+**Poll A/B:** A: simulasi brute force vs B: transformasi distribusi
+**Skrip 90 detik:**
+“Kesalahan ukur arus itu kecil. Tapi daya listrik P = I²R. Kuadrat itu pengganda masalah. Jadi, kalau I random, P jadi random dengan karakter berbeda. Hari ini kamu belajar trik penting: kalau Y = g(X), bagaimana distribusi Y? Ini skill yang sering dipakai untuk batas toleransi keamanan komponen. Kita mau jawab: seberapa sering P melewati batas berbahaya? Ini statistik yang langsung nyambung ke keselamatan.”
+
+---
+
+### Minggu 10 — Sampling Distribution & CLT 
+
+**Judul:** “Lift 20 Orang: Aman Nggak?”
+**Poll A/B:** A: nebak pakai rata-rata vs B: CLT untuk total beban
+**Skrip 90 detik:**
+“Tulisan ‘maks 15 orang’ itu ngarang atau sains? Kalau berat orang random, total berat 20 orang juga random. CLT bilang: total/rata-rata sampel cenderung normal kalau n cukup besar. Jadi kita bisa hitung peluang overload. Hari ini kamu belajar ‘sains di balik aturan’: bukan sekadar angka, tapi probabilitas risiko. Output akhirnya: rekomendasi batas penumpang yang membuat risiko overload mendekati nol.”
+
+---
+
+### Minggu 11 — Estimation & Confidence Interval 
+
+**Judul:** “Berani Klaim Spek?”
+**Poll A/B:** A: sebut rata-rata sampel saja vs B: klaim dengan CI 95%
+**Skrip 90 detik:**
+“Kamu tes 100 chip. Rata-rata kecepatannya sekian. Tapi dunia nyata bertanya: ‘rata-rata produksi sebenarnya berapa?’ Kalau kamu hanya kasih satu angka, kamu seperti menebak. Confidence Interval itu cara berkata jujur: ‘kami yakin di rentang ini’. Hari ini kamu belajar bedanya point estimate dan interval estimate, lalu membuat kalimat klaim spesifikasi yang bisa dipertanggungjawabkan. Statistik = etika + sains.”
+
+---
+
+### Minggu 12 — Hypothesis Testing & Error Types 
+
+**Judul:** “Obat Baru: Beneran atau Kebetulan?”
+**Poll A/B:** A: percaya testimoni vs B: uji hipotesis (p-value + Type I/II)
+**Skrip 90 detik:**
+“Ada obat baru. Klaimnya lebih efektif. Pertanyaannya: ini nyata atau kebetulan? Uji hipotesis itu ‘pengadilan statistik’: ada H0, ada H1, ada aturan keputusan, dan ada risiko salah vonis (Type I/II). Hari ini kamu belajar prosedur uji, membaca p-value, dan yang paling penting: menghubungkan angka dengan konsekuensi. Karena salah keputusan di sini bukan cuma salah nilai—bisa salah arah kebijakan.”
+
+---
+
+### Minggu 13 — Regresi Linear & Korelasi 
+
+**Judul:** “Prediksi Konsumsi Listrik dari Suhu”
+**Poll A/B:** A: pakai intuisi operator vs B: model regresi (least squares)
+**Skrip 90 detik:**
+“Besok operator harus siapin bahan bakar. Kalau salah prediksi beban, bisa boros atau blackout. Kita punya data suhu dan konsumsi listrik. Pertanyaannya: ada hubungan linear nggak? Hari ini kamu belajar bikin garis regresi dengan least squares, mengukur kekuatan hubungan lewat korelasi, lalu memakai model untuk prediksi praktis. Targetnya bukan ‘gambar garis’—targetnya keputusan operasional yang lebih presisi.”
+
+---
+
+### Minggu 14–15 — Studi Kasus Lanjutan (Robust Design / Signal Detection / DOE) 
+
+**Judul:** “Noise adalah Musuh Utama”
+**Poll A/B:** A: tuning parameter pakai feeling vs B: DOE + analisis statistik
+**Skrip 90 detik:**
+“Di dunia nyata selalu ada noise: lingkungan berubah, sensor drift, proses manufaktur goyang. Produk bagus bukan yang sempurna di lab, tapi yang *robust* di lapangan. Minggu ini kamu menggabungkan semua: estimasi, uji, regresi—dipakai untuk masalah kompleks seperti desain parameter robust atau deteksi sinyal di tengah noise. Kamu tidak cuma menghitung; kamu merancang eksperimen dan memilih parameter kontrol yang menekan variansi output. Ini level ‘engineer beneran’.”
+
+---
+
+### Minggu 16 — UAS (Evaluasi Menyeluruh Semester) 
+
+**Judul:** “Season Finale: Build–Justify–Decide”
+**Skrip 60–90 detik:**
+“Final ini menilai satu hal: apakah kamu bisa memodelkan dunia yang tidak pasti lalu mengambil keputusan yang bisa dipertanggungjawabkan. Kamu akan dapat kasus besar. Tugasmu: pilih model, jalankan analisis, tulis keputusan, dan jelaskan konsekuensinya. Ini bukan akhir materi—ini awal cara berpikir.”
+
+---
