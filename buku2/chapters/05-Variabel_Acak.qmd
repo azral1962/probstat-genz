@@ -17,17 +17,9 @@ Seorang investor memiliki dua opsi investasi dengan profil risiko berbeda. Opsi 
 Menghitung E[X] (expected return) dan Variansi (risiko) dari kedua opsi. Keputusan diambil dengan memilih E[X] tertinggi yang masih berada dalam toleransi risiko (variansi) investor tersebut.
 
 ## 4. Eksplorasi Komputasi (Python)
-*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*
 
-```{python}
-# Tulis kode Python Anda di sini
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import scipy.stats as stats
 
-print("Siap untuk komputasi Minggu 05!")
-```
+{{< include ../code/c05.qmd >}}
 
 {{< include ../agenda/w05.qmd >}}
 
