@@ -1,4 +1,22 @@
 project:
+<<<<<<< HEAD
+   type: book
+
+book: 
+  author: Armrein Z. R. Langi
+  title: "Probabilitas dan Statistik Untuk Pengambilan Keputusan"
+  subtitle: "Python, Teori, dan Aplikasi"
+  chapters:
+    - index.qmd
+    
+format:
+  typst:
+    keep-typ: true
+    include-in-header: 
+       - file: main.typ
+    lang: id
+    papersize: iso-b5
+=======
   type: book
 
 book:
@@ -35,3 +53,4 @@ format:
     papersize: "iso-b5"
     include-before-body: "cover.typ"
 
+>>>>>>> 4aedb5174ad8a1e320cb44bdf5944ec088c940d6

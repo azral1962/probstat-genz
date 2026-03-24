@@ -1,0 +1,241 @@
+Untuk memecahkan semua jenis masalah dari Problem Set 1 hingga Problem Set 11, kita memerlukan arsitektur *Object-Oriented Programming* (OOP) yang mencakup probabilitas dasar, Teorema Bayes, distribusi variabel acak (diskrit & kontinu), distribusi gabungan (*joint distribution*), statistik inferensial (selang kepercayaan & uji hipotesis), regresi linear, dan ANOVA.
+
+Berikut adalah desain kelas Python yang komprehensif, modular, dan dapat digunakan ulang (*reusable*) dengan memanfaatkan pustaka `numpy` dan `scipy`.
+
+### **Arsitektur Kode Python: `ProbStatsToolkit`**
+
+```python
+import numpy as np
+import scipy.stats as stats
+import math
+
+# ==========================================
+# 1. MODUL PROBABILITAS DASAR & TABEL (PS 1)
+# ==========================================
+class ProbabilitasDasar:
+    @staticmethod
+    def union(p_a, p_b, p_intersect):
+        """Menghitung P(A U B) berdasarkan P(A) + P(B) - P(A n B)"""
+        return p_a + p_b - p_intersect
+
+    @staticmethod
+    def mutually_exclusive_check(probs):
+        """Mengecek apakah total probabilitas kejadian saling lepas melebihi 1"""
+        return sum(probs) <= 1.0
+
+# ==========================================
+# 2. MODUL TEOREMA BAYES (PS 2)
+# ==========================================
+class TeoremaBayes:
+    def __init__(self, prior_positif, tpr, fpr):
+        """
+        prior_positif: P(A) misal populasi web judi (0.05)
+        tpr: True Positive Rate / P(Positif | A) (0.98)
+        fpr: False Positive Rate / P(Positif | Bukan A) (0.02)
+        """
+        self.prior_pos = prior_positif
+        self.prior_neg = 1 - prior_positif
+        self.tpr = tpr
+        self.fpr = fpr
+        self.fnr = 1 - tpr
+        self.tnr = 1 - fpr
+
+    def prob_joint(self):
+        """Mengembalikan probabilitas irisan TP, FN, FP, TN"""
+        tp = self.tpr * self.prior_pos
+        fn = self.fnr * self.prior_pos
+        fp = self.fpr * self.prior_neg
+        tn = self.tnr * self.prior_neg
+        return tp, fn, fp, tn
+
+    def posterior_positif(self):
+        """P(A | Positif) - Website sungguh judi jika tes positif"""
+        tp, _, fp, _ = self.prob_joint()
+        prob_tes_positif = tp + fp
+        return tp / prob_tes_positif
+
+# ==========================================
+# 3. MODUL DISTRIBUSI DISKRIT (PS 3 & 4)
+# ==========================================
+class DistribusiDiskrit:
+    @staticmethod
+    def poisson_prob(lmbda, x, kumulatif=False):
+        """PMF atau CDF dari Distribusi Poisson"""
+        if kumulatif:
+            return stats.poisson.cdf(x, mu=lmbda)
+        return stats.poisson.pmf(x, mu=lmbda)
+
+    @staticmethod
+    def binomial_prob(n, p, x, kumulatif=False):
+        """PMF atau CDF dari Distribusi Binomial"""
+        if kumulatif:
+            return stats.binom.cdf(x, n, p)
+        return stats.binom.pmf(x, n, p)
+
+# ==========================================
+# 4. MODUL DISTRIBUSI KONTINU (PS 5)
+# ==========================================
+class DistribusiKontinu:
+    @staticmethod
+    def normal_prob(x, mu, sigma, batas="kurang_dari"):
+        """Menghitung probabilitas dari Distribusi Normal"""
+        if batas == "kurang_dari":
+            return stats.norm.cdf(x, loc=mu, scale=sigma)
+        elif batas == "lebih_dari":
+            return stats.norm.sf(x, loc=mu, scale=sigma)
+            
+    @staticmethod
+    def eksponensial_prob(x, mean, batas="kurang_dari"):
+        """Probabilitas dari Distribusi Eksponensial"""
+        rate = 1 / mean
+        if batas == "kurang_dari":
+            return stats.expon.cdf(x, scale=mean)
+        return stats.expon.sf(x, scale=mean)
+
+    @staticmethod
+    def weibull_prob(x, alpha, beta, batas="lebih_dari"):
+        """Distribusi Weibull: P(X > x) = exp(-alpha * x^beta)"""
+        if batas == "lebih_dari":
+            return math.exp(-alpha * (x**beta))
+        return 1 - math.exp(-alpha * (x**beta))
+
+# ==========================================
+# 5. MODUL DISTRIBUSI GABUNGAN (PS 6)
+# ==========================================
+class DistribusiGabungan:
+    @staticmethod
+    def linear_combination_mean_var(mean_x, mean_y, var_x, var_y, a, b):
+        """Menghitung E(aX + bY) dan V(aX + bY) untuk X, Y independen"""
+        e_comb = (a * mean_x) + (b * mean_y)
+        v_comb = (a**2 * var_x) + (b**2 * var_y)
+        return e_comb, v_comb
+
+# ==========================================
+# 6. MODUL STATISTIK INFERENSIAL (PS 7, 8, 9)
+# ==========================================
+class StatistikInferensial:
+    @staticmethod
+    def confidence_interval_mean(mean_sampel, std_dev, n, alpha=0.05, tipe="z"):
+        """Selang kepercayaan untuk Mean (Z atau T)"""
+        if tipe == "z":
+            z_val = stats.norm.ppf(1 - alpha/2)
+            margin = z_val * (std_dev / math.sqrt(n))
+        else:
+            t_val = stats.t.ppf(1 - alpha/2, df=n-1)
+            margin = t_val * (std_dev / math.sqrt(n))
+        return mean_sampel - margin, mean_sampel + margin
+
+    @staticmethod
+    def confidence_interval_proportion(p_hat, n, alpha=0.05):
+        """Selang kepercayaan untuk proporsi populasi"""
+        z_val = stats.norm.ppf(1 - alpha/2)
+        margin = z_val * math.sqrt((p_hat * (1 - p_hat)) / n)
+        return p_hat - margin, p_hat + margin
+
+    @staticmethod
+    def uji_hipotesis_mean(mean_sampel, mu_0, std_dev, n, tipe="z"):
+        """Menghitung P-Value untuk uji hipotesis Mean"""
+        stat_val = (mean_sampel - mu_0) / (std_dev / math.sqrt(n))
+        if tipe == "z":
+            p_val = stats.norm.sf(abs(stat_val)) * 2 # Uji 2 sisi
+        else:
+            p_val = stats.t.sf(abs(stat_val), df=n-1) * 2
+        return stat_val, p_val
+
+    @staticmethod
+    def ukuran_sampel_proporsi(error, tingkat_kepercayaan=0.95, p_estimasi=0.5):
+        """Menghitung N yang dibutuhkan untuk margin of error tertentu"""
+        alpha = 1 - tingkat_kepercayaan
+        z_val = stats.norm.ppf(1 - alpha/2)
+        return math.ceil((z_val**2 * p_estimasi * (1 - p_estimasi)) / error**2)
+
+# ==========================================
+# 7. MODUL REGRESI LINEAR (PS 10)
+# ==========================================
+class RegresiLinear:
+    def __init__(self, x_data, y_data):
+        self.x = np.array(x_data)
+        self.y = np.array(y_data)
+        self.n = len(self.x)
+        self.slope, self.intercept, self.r_val, self.p_val, self.std_err = stats.linregress(self.x, self.y)
+    
+    def get_sums(self):
+        """Menghitung Sxx, Syy, Sxy"""
+        Sxx = np.sum((self.x - np.mean(self.x))**2)
+        Syy = np.sum((self.y - np.mean(self.y))**2)
+        Sxy = np.sum((self.x - np.mean(self.x)) * (self.y - np.mean(self.y)))
+        return Sxx, Syy, Sxy
+
+    def predict(self, x_val):
+        """Prediksi y berdasarkan model regresi"""
+        return self.intercept + (self.slope * x_val)
+
+    def get_r_squared(self):
+        return self.r_val**2
+
+# ==========================================
+# 8. MODUL ANOVA (PS 11)
+# ==========================================
+class AnalisisVariansi:
+    @staticmethod
+    def uji_oneway(*grup_data):
+        """Uji ANOVA One-Way untuk membuktikan perbedaan mean antar perlakuan"""
+        f_stat, p_val = stats.f_oneway(*grup_data)
+        return f_stat, p_val
+```
+
+### **Panduan Pemakaian untuk Setiap Problem Set**
+
+**1. Menyelesaikan Kasus Machine Learning (Problem Set 2)**
+Untuk menghitung *True Positive* dan *Posterior Probability* (misal: probabilitas website benar-benar judi jika dideteksi positif oleh algoritma).
+```python
+# Diketahui: 5% web judi (Prior = 0.05), TPR 98% (0.98), FPR 2% (0.02)
+model_ml = TeoremaBayes(prior_positif=0.05, tpr=0.98, fpr=0.02)
+tp, fn, fp, tn = model_ml.prob_joint()
+print(f"Probabilitas True Positive (TP): {tp:.4f}")
+print(f"P(Judi | Dideteksi Positif): {model_ml.posterior_positif():.4f}")
+```
+
+**2. Menyelesaikan Probabilitas Cacat Wafer (Problem Set 3 & 4)**
+Untuk soal distribusi diskrit yang menguji komponen pabrik.
+```python
+# 3 wafer diuji, P(sukses) = 0.8. Berapa peluang sukses tepat 2 wafer?
+prob_2 = DistribusiDiskrit.binomial_prob(n=3, p=0.8, x=2)
+print(f"P(X = 2): {prob_2:.4f}")
+```
+
+**3. Menyelesaikan Selang Kepercayaan Mean (Problem Set 8)**
+Menghitung batas selang kepercayaan dari kekuatan komponen atau uji ban mobil.
+```python
+# Umur ban mean = 60139.7, std dev = 3645.94, n = 16. Selang kepercayaan 95%.
+batas_bawah, batas_atas = StatistikInferensial.confidence_interval_mean(
+    mean_sampel=60139.7, std_dev=3645.94, n=16, alpha=0.05, tipe="t"
+)
+print(f"CI 95%: [{batas_bawah:.2f}, {batas_atas:.2f}]")
+```
+
+**4. Menyelesaikan Regresi Linear Penjualan vs Iklan (Problem Set 10)**
+Untuk menemukan persamaan tren regresi, nilai $S_{xx}, S_{xy}, S_{yy}$, dan r-kuadrat ($r^2$).
+```python
+biaya_promosi =
+penjualan = 
+
+regresi = RegresiLinear(biaya_promosi, penjualan)
+Sxx, Syy, Sxy = regresi.get_sums()
+print(f"Persamaan: y = {regresi.intercept:.2f} + {regresi.slope:.2f}x")
+print(f"R-Squared: {regresi.get_r_squared():.4f}")
+print(f"Prediksi penjualan saat promosi=35: {regresi.predict(35):.2f}")
+```
+
+**5. Menyelesaikan Uji Hipotesis Perbedaan Mean (Problem Set 11)**
+Menggunakan analisis variansi (ANOVA) untuk membuktikan efek perlakuan, misalnya pengujian waktu gaya seret perahu pada kedalaman air berbeda.
+```python
+air_1_5 =
+air_2_0 =
+air_4_5 =
+
+f_stat, p_value = AnalisisVariansi.uji_oneway(air_1_5, air_2_0, air_4_5)
+print(f"F-Statistik: {f_stat:.2f}, P-Value: {p_value}")
+```
+
+Desain berbasis *Object-Oriented* ini memudahkan **abstraksi komputasi matematika** dengan tetap **mempertahankan notasi fungsi dan parameter yang diajarkan pada seluruh problem set**. Keseluruhan kelas ini dapat di-*import* langsung ke dalam Jupyter Notebook maupun modul otomasi evaluasi di Github Classroom.
