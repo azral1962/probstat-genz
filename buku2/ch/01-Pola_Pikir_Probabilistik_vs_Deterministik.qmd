@@ -2,15 +2,60 @@
 title: "Minggu 01: Pola Pikir Probabilistik vs Deterministik"
 ---
 
-## Tujuan Belajar 
-"Understanding Probabilistic Way of Thinking versus Deterministic Way of Thinking"
-
 
 ![“Bayangin kamu pegang stok toko. Kalau kamu bilang ‘permintaan pasti 100’, kamu terlihat rapi… sampai kenyataan menampar. Permintaan itu goyang—kadang 70, kadang 160. Nah, pertanyaan pentingnya: kamu mau terlihat yakin, atau mau benar? Probabilitas itu bukan bikin kita ragu—justru bikin kita *berani mengambil keputusan* dengan risiko yang dihitung. Hari ini kita latihan satu skill: membedakan dunia deterministik vs dunia nyata yang random. Dan keputusan kamu akan kita ukur: berapa peluang kehabisan stok kalau kamu nekat ‘pasti 100’?”](../The_Decision_Engineer.png/image1.png)
 
-### Apa yang Kita Pelajari?
+## Apa Tujuan Belajar?
+"Understanding Probabilistic Way of Thinking versus Deterministic Way of Thinking"
 
 Memahami bahwa dalam dunia nyata, fenomena seringkali mengandung ketidakpastian (randomness) dan tidak dapat diprediksi dengan kepastian mutlak (deterministik), sehingga memerlukan kerangka kerja matematika untuk mengukur ketidakpastian tersebut.
+
+Sebuah besaran berubah-waktu bisa bersifat deterministik atau acak. Bergantung dua hal: 
+
+1. apakah nilai besaran ini bisa diprediksi dengan cukup akurat
+2. apakah ada persamaan yang menentukan nilai ini. 
+
+Bila jawaban keduanya ya, maka besaran ini determnistik. Acak tidak memiliki formula untuk menhaslkan besaran, meskpin prediksi bisa dilakukn dengan akurasi ditentukan sebuah besaran probabilitas p
+
+**Simulasi Python**
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameter waktu
+t = np.linspace(0, 1, 500)  # 1 detik, 500 sampel
+
+# === Time series deterministik (sinusoid) ===
+A = 1        # amplitudo
+f = 5        # frekuensi (Hz)
+phi = 0      # fase
+
+x_det = A * np.sin(2 * np.pi * f * t + phi)
+
+# === Time series acak (random noise) ===
+np.random.seed(42)  # agar reproducible
+x_rand = np.random.normal(0, 1, len(t))  # mean=0, std=1
+
+# === Plot ===
+plt.figure(figsize=(10,6))
+
+plt.subplot(2,1,1)
+plt.plot(t, x_det)
+plt.title("Time Series Deterministik (Sinusoid)")
+plt.xlabel("Time")
+plt.ylabel("Amplitude")
+
+plt.subplot(2,1,2)
+plt.plot(t, x_rand)
+plt.title("Time Series Acak (Random Noise)")
+plt.xlabel("Time")
+plt.ylabel("Amplitude")
+
+plt.tight_layout()
+plt.show()
+```
+
 
 **Tipikal Problem** Sebuah toko ingin menentukan stok barang. Pendekatan deterministik mengasumsikan permintaan konstan (misal: pasti 100 unit), sedangkan realitanya permintaan berfluktuasi secara acak.
 
@@ -18,14 +63,13 @@ Memahami bahwa dalam dunia nyata, fenomena seringkali mengandung ketidakpastian 
 
 ## Eksplorasi Komputasi (Python)
 
-Berikut buat python code untuk mensimulasikan permintaan barang (rata-rata 100 unit perhari) dan keputusan berapa yang akan di stok tiap hari: serta akibanya pada biaya sewa gudang (bila ada yang tidak laku) dan hilangnya potensi penjualan, dan kecewanya langganan tidak terlayani (bila barang habis)
+Berikut python code untuk mensimulasikan permintaan barang (rata-rata 100 unit perhari) dan keputusan berapa yang akan di stok tiap hari, serta akibanya pada biaya sewa gudang (bila ada yang tidak laku) dan hilangnya potensi penjualan, dan kecewanya langganan tidak terlayani (bila barang habis)
 
 ```{python}
 import numpy as np
 import pandas as pd
 
 # Konfigurasi Simulasi
-np.random.seed(42)  # Agar hasil konsisten saat dijalankan ulang
 days = 30
 average_demand = 100
 std_dev_demand = 20
@@ -38,13 +82,20 @@ holding_cost_per_unit = 2   # Biaya gudang per unit sisa
 stockout_cost_per_unit = 10 # Biaya kehilangan pelanggan per unit habis
 ```
 
-KalAu kita simulasikan jumlah kebutuhan yang bersifat acak itu
+Kita simulasikan jumlah kebutuhan yang bersifat acak itu, memanfaatkan distribusi normal.
+
+Yang menjadi besaran acak adalah jumlah *demand* per hari.
+
+```python
+np.random.normal(average, std_dev)
+```
 
 ```{python}
 
 # Inisialisasi variabel simulasi
 inventory = initial_stock
 results = []
+np.random.seed(42)  # Agar hasil konsisten saat dijalankan ulang
 
 for day in range(1, days + 1):
     # 1. Simulasi Permintaan Harian
