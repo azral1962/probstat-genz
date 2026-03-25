@@ -489,9 +489,10 @@ Bandung, 25 Maret 2026 Penyusun, Armein Z. R. langi
 
 = Minggu 01: Pola Pikir Probabilistik vs Deterministik
 <minggu-01-pola-pikir-probabilistik-vs-deterministik>
-Understanding Probabilistic Way of Thinking versus Deterministic Way of Thinking
+== Tujuan Belajar
+<tujuan-belajar>
+"Understanding Probabilistic Way of Thinking versus Deterministic Way of Thinking"
 
-\
 #figure([
 #box(image("ch/../The_Decision_Engineer.png/image1.png"))
 ], caption: figure.caption(
@@ -504,7 +505,7 @@ supplement: "Gambar",
 )
 
 
-== Apa yang Kita Pelajari?
+=== Apa yang Kita Pelajari?
 <apa-yang-kita-pelajari>
 Memahami bahwa dalam dunia nyata, fenomena seringkali mengandung ketidakpastian (randomness) dan tidak dapat diprediksi dengan kepastian mutlak (deterministik), sehingga memerlukan kerangka kerja matematika untuk mengukur ketidakpastian tersebut.
 
@@ -533,7 +534,7 @@ Berikut buat python code untuk mensimulasikan permintaan barang (rata-rata 100 u
 [#NormalTok("holding_cost_per_unit ");#OperatorTok("=");#NormalTok(" ");#DecValTok("2");#NormalTok("   ");#CommentTok("# Biaya gudang per unit sisa");],
 [#NormalTok("stockout_cost_per_unit ");#OperatorTok("=");#NormalTok(" ");#DecValTok("10");#NormalTok(" ");#CommentTok("# Biaya kehilangan pelanggan per unit habis");],));
 ]
-Kalu kita simulasikan jumlah kebutuhan yang bersifat acak itu
+KalAu kita simulasikan jumlah kebutuhan yang bersifat acak itu
 
 #block[
 #Skylighting(([#CommentTok("# Inisialisasi variabel simulasi");],
@@ -652,7 +653,13 @@ Anda bisa mengubah #emph[order\_quantity] dan #emph[reorder\_point] untuk meliha
 
 == #strong[Materi Kuliah: Konsep, Aplikasi, & Komputasi]
 <materi-kuliah-konsep-aplikasi-komputasi>
-#strong[\1. Konsep Dasar] \* #strong[Deterministik vs Stokastik:] Deterministik adalah sebab-akibat pasti (Input A $arrow.r$ Output B), contoh: #NormalTok("1 + 1 = 2");. Stokastik mengandung elemen acak, contoh: Waktu kedatangan paket data di router. \* #strong[Ruang Sampel (]$Omega$): Himpunan seluruh kemungkinan hasil. Dalam #emph[load testing], $Omega$ bisa berupa {Sukses, Timeout, Error 500}. \* #strong[Hukum Bilangan Besar (LLN):] Jaminan matematis bahwa rata-rata sampel empiris akan mendekati rata-rata teoretis seiring bertambahnya jumlah percobaan.
+#strong[\1. Konsep Dasar]
+
+- #strong[Deterministik vs Stokastik:] Deterministik adalah sebab-akibat pasti (Input A $arrow.r$ Output B), contoh: #NormalTok("1 + 1 = 2");. Stokastik mengandung elemen acak, contoh: Waktu kedatangan paket data di router.
+
+- #strong[Ruang Sampel (]$Omega$): Himpunan seluruh kemungkinan hasil. Dalam #emph[load testing], $Omega$ bisa berupa {Sukses, Timeout, Error 500}.
+
+- #strong[Hukum Bilangan Besar (LLN):] Jaminan matematis bahwa rata-rata sampel empiris akan mendekati rata-rata teoretis seiring bertambahnya jumlah percobaan.
 
 #strong[\2. Aplikasi Sistem Informasi] \* #strong[Reliabilitas Infrastruktur:] Menghitung risiko kegagalan. Kegagalan dua server cadangan tidak selalu independen (misal: mati listrik satu gedung mematikan keduanya). \* #strong[Kualitas Layanan (QoS):] Probabilitas digunakan untuk menentukan bandwidth minimum agar #emph[video streaming] tidak #emph[buffering] bagi 99% user.
 
@@ -756,7 +763,7 @@ Berikut adalah 15 soal.
 [#NormalTok("average_time ");#OperatorTok("=");#NormalTok(" ");#BuiltInTok("sum");#NormalTok("(wait_times) ");#OperatorTok("/");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(wait_times)     ");],
 [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"Rata-rata waktu tunggu: ");#SpecialCharTok("{");#NormalTok("average_time");#SpecialCharTok(":.4f}");#SpecialStringTok(" detik\"");#NormalTok(")");],));
 #block[
-#Skylighting(([#NormalTok("Rata-rata waktu tunggu: 2.4895 detik");],));
+#Skylighting(([#NormalTok("Rata-rata waktu tunggu: 2.5527 detik");],));
 ]
 ]
 #strong[\13. Soal:] Buatlah simulasi Monte Carlo untuk menghitung luas area di bawah kurva fungsi acak sederhana yang merepresentasikan beban kerja server.
@@ -1594,8 +1601,6 @@ Menghitung E\[X\] (expected return) dan Variansi (risiko) dari kedua opsi. Keput
 
 == 4. Eksplorasi Komputasi (Python)
 <eksplorasi-komputasi-python-4>
-= -#emph[\- coding: utf-8 -]-
-<coding-utf-8--->
 == Konstruksi Random Variable Kontinu dari Hasil Pengamatan
 <konstruksi-random-variable-kontinu-dari-hasil-pengamatan>
 #block[
@@ -1848,7 +1853,7 @@ Week 05: Variabel Acak, Ekspektasi, dan Variansi
   [#NormalTok("samples ");#OperatorTok("=");#NormalTok(" cust_dist.rvs(size");#OperatorTok("=");#DecValTok("1000");#NormalTok(")  ");],
   [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"Sample Mean: ");#SpecialCharTok("{");#NormalTok("samples");#SpecialCharTok(".");#NormalTok("mean()");#SpecialCharTok("}");#SpecialStringTok(", Theory Mean: ");#SpecialCharTok("{");#NormalTok("cust_dist");#SpecialCharTok(".");#NormalTok("mean()");#SpecialCharTok("}");#SpecialStringTok("\"");#NormalTok(")  ");],));
   #block[
-  #Skylighting(([#NormalTok("Sample Mean: 11.126, Theory Mean: 11.1");],));
+  #Skylighting(([#NormalTok("Sample Mean: 11.081, Theory Mean: 11.1");],));
   ]
   ]
 
@@ -1880,19 +1885,18 @@ Week 05: Variabel Acak, Ekspektasi, dan Variansi
 
   - #strong[Solusi:]
 
-  #block[
   #Skylighting(([#ImportTok("import");#NormalTok(" numpy ");#ImportTok("as");#NormalTok(" np");#OperatorTok(";");#NormalTok(" ");#ImportTok("import");#NormalTok(" matplotlib.pyplot ");#ImportTok("as");#NormalTok(" plt  ");],
   [#NormalTok("n ");#OperatorTok("=");#NormalTok(" ");#DecValTok("100");],
   [#NormalTok("rolls ");#OperatorTok("=");#NormalTok(" np.random.randint(");#DecValTok("1");#NormalTok(", ");#DecValTok("7");#NormalTok(", n)  ");],
   [#BuiltInTok("print");#NormalTok("(rolls,");#StringTok("\"");#CharTok("\\n");#StringTok("\"");#NormalTok(")");],
   [#NormalTok("avgs ");#OperatorTok("=");#NormalTok(" np.cumsum(rolls) ");#OperatorTok("/");#NormalTok(" np.arange(");#DecValTok("1");#NormalTok(", n");#OperatorTok("+");#DecValTok("1");#NormalTok(")  ");],
-  [#CommentTok("# plt.plot(avgs); plt.axhline(3.5, color='r'); # plt.show()  ");],));
+  [#NormalTok("plt.plot(avgs)");#OperatorTok(";");#NormalTok(" plt.axhline(");#FloatTok("3.5");#NormalTok(", color");#OperatorTok("=");#StringTok("'r'");#NormalTok(")");#OperatorTok(";");#NormalTok("  plt.show()  ");],));
   #block[
-  #Skylighting(([#NormalTok("[5 5 3 2 6 4 5 3 5 3 6 1 1 1 5 5 5 4 4 4 2 4 6 5 3 2 3 4 2 5 5 1 2 2 6 6 2");],
-  [#NormalTok(" 6 4 3 6 4 2 6 6 6 6 4 6 5 5 1 4 1 3 2 2 5 5 5 6 5 1 4 6 6 1 2 1 5 2 4 6 4");],
-  [#NormalTok(" 2 1 4 2 3 4 6 2 5 3 4 5 6 2 6 2 3 5 3 1 1 3 1 5 1 4] ");],));
+  #Skylighting(([#NormalTok("[4 3 1 6 4 3 2 6 4 2 5 2 1 4 1 3 4 6 1 1 1 4 6 2 6 4 2 6 3 3 1 3 2 6 1 4 1");],
+  [#NormalTok(" 6 3 1 2 4 3 3 5 2 6 3 3 1 4 6 5 2 5 4 1 4 1 4 2 1 6 5 3 5 2 4 5 5 6 2 5 3");],
+  [#NormalTok(" 2 5 4 6 1 3 5 5 5 1 3 4 2 2 2 4 5 2 1 3 5 6 1 2 5 1] ");],));
   ]
-  ]
+  #box(image("ch/05-Variabel_Acak_files/figure-typst/cell-7-output-2.svg"))
 ]
 
 = Minggu 06: Variabel Acak Diskrit
@@ -1973,10 +1977,10 @@ Menggunakan rumus distribusi Binomial (atau aproksimasi Poisson jika n besar dan
 [#NormalTok("plt.tight_layout()");],
 [#NormalTok("plt.show()");],));
 #block[
-#Skylighting(([#NormalTok("rata-rata selang tiba:  10.86399157628195");],
-[#NormalTok("rata-rata selang layanan:  7.575949482041086");],
-[#NormalTok("rata-rata antrian:  10.395455065842363");],
-[#NormalTok("rata-rata total layanan:  17.97140454788344");],));
+#Skylighting(([#NormalTok("rata-rata selang tiba:  9.32235484916447");],
+[#NormalTok("rata-rata selang layanan:  5.787969242886861");],
+[#NormalTok("rata-rata antrian:  4.626373567009774");],
+[#NormalTok("rata-rata total layanan:  10.414342809896631");],));
 ]
 #box(image("ch/06-Variabel_Acak_Diskrit_files/figure-typst/cell-2-output-2.svg"))
 
@@ -2175,7 +2179,7 @@ Berikut adalah 15 soal yang diambil dari referensi #emph[Desain Kurikulum Statis
 [#NormalTok("simulasi ");#OperatorTok("=");#NormalTok(" np.random.poisson(lam");#OperatorTok("=");#DecValTok("5");#NormalTok(", size");#OperatorTok("=");#DecValTok("1000");#NormalTok(")");],
 [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"Rata-rata simulasi: ");#SpecialCharTok("{");#NormalTok("np");#SpecialCharTok(".");#NormalTok("mean(simulasi)");#SpecialCharTok("}");#SpecialStringTok("\"");#NormalTok(")");],));
 #block[
-#Skylighting(([#NormalTok("Rata-rata simulasi: 4.998");],));
+#Skylighting(([#NormalTok("Rata-rata simulasi: 5.004");],));
 ]
 ]
 #strong[\14. Soal:] Visualisasikan perubahan bentuk distribusi Binomial saat parameter $p$ bervariasi dari 0,1 hingga 0,9.
@@ -2625,7 +2629,7 @@ Week 07: Distribusi Kontinu: Kurva Normal dan Eksponensial dalam Rekayasa
   [#NormalTok("p_ref ");#OperatorTok("=");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(data[data ");#OperatorTok(">");#NormalTok(" ");#DecValTok("10");#NormalTok("]) ");#OperatorTok("/");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(data)  ");],
   [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"P(X>10): ");#SpecialCharTok("{");#NormalTok("p_ref");#SpecialCharTok(":.3f}");#SpecialStringTok(", P(X>15|X>5): ");#SpecialCharTok("{");#NormalTok("p_cond");#SpecialCharTok(":.3f}");#SpecialStringTok("\"");#NormalTok(")  ");],));
   #block[
-  #Skylighting(([#NormalTok("P(X>10): 0.366, P(X>15|X>5): 0.364");],));
+  #Skylighting(([#NormalTok("P(X>10): 0.369, P(X>15|X>5): 0.367");],));
   ]
   ]
 

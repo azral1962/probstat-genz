@@ -195,5 +195,5 @@ Week 05: Variabel Acak, Ekspektasi, dan Variansi
     rolls = np.random.randint(1, 7, n)  
     print(rolls,"\n")
     avgs = np.cumsum(rolls) / np.arange(1, n+1)  
-    # plt.plot(avgs); plt.axhline(3.5, color='r'); # plt.show()  
+    plt.plot(avgs); plt.axhline(3.5, color='r');  plt.show()  
     ```
