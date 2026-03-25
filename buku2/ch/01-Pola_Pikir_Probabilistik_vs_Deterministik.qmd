@@ -15,9 +15,10 @@ Sebuah besaran berubah-waktu bisa bersifat deterministik atau acak. Bergantung d
 1. apakah nilai besaran ini bisa diprediksi dengan cukup akurat
 2. apakah ada persamaan yang menentukan nilai ini. 
 
-Bila jawaban keduanya ya, maka besaran ini determnistik. Acak tidak memiliki formula untuk menhaslkan besaran, meskpin prediksi bisa dilakukn dengan akurasi ditentukan sebuah besaran probabilitas p
+Bila jawaban keduanya ya, maka besaran ini determnistik. Acak tidak memiliki formula untuk menghasilkan besaran, meskipun prediksi bisa dilakukan dengan akurasi ditentukan sebuah besaran probabilitas $p$.
 
 **Simulasi Python**
+Sebuah simulasi berikut adalah contoh perbandingan antara proses deterministik dan acak.
 
 ```{python}
 import numpy as np
@@ -89,6 +90,7 @@ Yang menjadi besaran acak adalah jumlah *demand* per hari.
 ```python
 np.random.normal(average, std_dev)
 ```
+Maka simulasi dilakukan dengan memanfaatkan fungsi np.random.normal di atas.
 
 ```{python}
 
@@ -180,11 +182,18 @@ Anda bisa mengubah *order_quantity* dan *reorder_point* untuk melihat skenario m
 
 - **Hukum Bilangan Besar (LLN):** Jaminan matematis bahwa rata-rata sampel empiris akan mendekati rata-rata teoretis seiring bertambahnya jumlah percobaan.
 
-**2. Aplikasi Sistem Informasi** \* **Reliabilitas Infrastruktur:** Menghitung risiko kegagalan. Kegagalan dua server cadangan tidak selalu independen (misal: mati listrik satu gedung mematikan keduanya). \* **Kualitas Layanan (QoS):** Probabilitas digunakan untuk menentukan bandwidth minimum agar *video streaming* tidak *buffering* bagi 99% user.
+**2. Aplikasi Sistem Informasi** 
 
-**3. Komputasi (Python)** \* **Generasi Angka Acak:** Menggunakan `numpy.random` untuk memodelkan ketidakpastian. \* **Simulasi Monte Carlo:** Metode komputasi untuk menaksir probabilitas dengan melakukan ribuan percobaan acak.
+- **Reliabilitas Infrastruktur:** Menghitung risiko kegagalan. Kegagalan dua server cadangan tidak selalu independen (misal: mati listrik satu gedung mematikan keduanya).
 
-------------------------------------------------------------------------
+- **Kualitas Layanan (QoS):** Probabilitas digunakan untuk menentukan bandwidth minimum agar *video streaming* tidak *buffering* bagi 99% user.
+
+**3. Komputasi (Python)** 
+
+- **Generasi Angka Acak:** Menggunakan `numpy.random` untuk memodelkan ketidakpastian. 
+
+- **Simulasi Monte Carlo:** Metode komputasi untuk menaksir probabilitas dengan melakukan ribuan percobaan acak.
+
 
 ## **Tugas Kelompok (GitHub Classroom)**
 
@@ -196,7 +205,7 @@ Anda bisa mengubah *order_quantity* dan *reorder_point* untuk melihat skenario m
 
 1.  Buat fungsi `simulate_server_uptime(days, prob_failure)` yang mengembalikan status server (Up/Down) selama n-hari.
 
-2.  2Simulasikan dua server (Server A dan B) yang bekerja paralel. Sistem Down hanya jika **keduanya** Down.
+2.  Simulasikan dua server (Server A dan B) yang bekerja paralel. Sistem Down hanya jika **keduanya** Down.
 
 3.  Bandingkan: Berapa hari sistem Down jika menggunakan 1 server vs 2 server?
 
@@ -204,7 +213,6 @@ Anda bisa mengubah *order_quantity* dan *reorder_point* untuk melihat skenario m
 
 **Submission:** Push `.ipynb` ke repo GitHub Classroom. Penilaian otomatis via GitHub Actions untuk kelengkapan kode, penilaian manual untuk analisis keputusan.
 
-------------------------------------------------------------------------
 
 ## **15 Soal & Solusi** 
 
@@ -214,49 +222,51 @@ Berikut adalah 15 soal.
 
 **1. Soal:** Jelaskan perbedaan mendasar antara fenomena deterministik (seperti operasi penjumlahan di CPU) dan fenomena probabilistik (seperti waktu kedatangan paket di router).
 
-\* **Solusi:** Fenomena deterministik selalu menghasilkan output yang sama untuk input dan kondisi awal yang sama (kepastian mutlak). Fenomena probabilistik memiliki variasi inheren di mana input yang sama bisa menghasilkan output berbeda, sehingga hanya bisa diprediksi pola atau peluangnya, bukan hasil pastinya.
+- **Solusi:** Fenomena deterministik selalu menghasilkan output yang sama untuk input dan kondisi awal yang sama (kepastian mutlak). Fenomena probabilistik memiliki variasi inheren di mana input yang sama bisa menghasilkan output berbeda, sehingga hanya bisa diprediksi pola atau peluangnya, bukan hasil pastinya.
 
 **2. Soal:** Mengapa pendekatan *Frequentist* memerlukan asumsi pengulangan eksperimen dalam kondisi yang identik?
 
-\* **Solusi:** Karena pendekatan Frequentist mendefinisikan probabilitas sebagai limit dari frekuensi relatif ($n/N$) saat jumlah percobaan ($N$) mendekati tak hingga. Tanpa pengulangan kondisi identik, frekuensi relatif tidak akan konvergen ke nilai yang bermakna.
+- **Solusi:** Karena pendekatan Frequentist mendefinisikan probabilitas sebagai limit dari frekuensi relatif ($n/N$) saat jumlah percobaan ($N$) mendekati tak hingga. Tanpa pengulangan kondisi identik, frekuensi relatif tidak akan konvergen ke nilai yang bermakna.
 
 **3. Soal:** Definisikan ruang sampel dalam konteks pengujian beban (*load testing*) sebuah situs web e-commerce.
 
-\* **Solusi:** Ruang sampel adalah himpunan semua kemungkinan status respons server terhadap satu *request*. Contoh: $\Omega = \{ \text{HTTP 200 OK}, \text{HTTP 404 Not Found}, \text{HTTP 500 Server Error}, \text{Timeout} \}$.
+- **Solusi:** Ruang sampel adalah himpunan semua kemungkinan status respons server terhadap satu *request*. Contoh: $\Omega = \{ \text{HTTP 200 OK}, \text{HTTP 404 Not Found}, \text{HTTP 500 Server Error}, \text{Timeout} \}$.
 
 **4. Soal:** Apa yang dimaksud dengan interpretasi probabilitas subjektif (Bayesian) dan bagaimana relevansinya dalam pengambilan keputusan manajerial?
 
-\* **Solusi:** Probabilitas subjektif adalah ukuran "derajat keyakinan" seseorang berdasarkan informasi yang tersedia saat ini (bukan frekuensi fisik). Ini relevan bagi manajer untuk mengambil keputusan pada kejadian yang tidak berulang (misal: "Peluang sukses peluncuran produk baru") di mana data historis mungkin tidak ada.
+- **Solusi:** Probabilitas subjektif adalah ukuran "derajat keyakinan" seseorang berdasarkan informasi yang tersedia saat ini (bukan frekuensi fisik). Ini relevan bagi manajer untuk mengambil keputusan pada kejadian yang tidak berulang (misal: "Peluang sukses peluncuran produk baru") di mana data historis mungkin tidak ada.
 
 **5. Soal:** Jelaskan peran hukum bilangan besar (Law of Large Numbers) dalam validasi simulasi sistem.
 
-\* **Solusi:** LLN menjamin bahwa hasil simulasi rata-rata (empiris) akan mendekati nilai ekspektasi teoretis sistem jika simulasi dijalankan cukup lama/banyak. Ini memvalidasi bahwa hasil simulasi komputer merepresentasikan perilaku sistem yang sebenarnya.
+- **Solusi:** LLN menjamin bahwa hasil simulasi rata-rata (empiris) akan mendekati nilai ekspektasi teoretis sistem jika simulasi dijalankan cukup lama/banyak. Ini memvalidasi bahwa hasil simulasi komputer merepresentasikan perilaku sistem yang sebenarnya.
 
 ### **B. Pertanyaan Aplikatif**
 
 **6. Soal:** Sebuah sistem Disaster Recovery Center (DRC) memiliki dua server cadangan. Jika probabilitas satu server gagal adalah 0,05, jelaskan mengapa kegagalan keduanya tidak selalu 0,0025 dalam kondisi nyata.
 
-\* **Solusi:** Angka 0,0025 ($0,05 \times 0,05$) hanya berlaku jika kegagalan kedua server **independen**. Dalam dunia nyata, sering terjadi *Common Cause Failure* (misal: pemadaman listrik satu gedung, banjir, atau *bug* software yang sama) yang membuat keduanya gagal bersamaan, sehingga probabilitasnya \> 0,0025.
+- **Solusi:** Angka 0,0025 ($0,05 \times 0,05$) hanya berlaku jika kegagalan kedua server **independen**. Dalam dunia nyata, sering terjadi *Common Cause Failure* (misal: pemadaman listrik satu gedung, banjir, atau *bug* software yang sama) yang membuat keduanya gagal bersamaan, sehingga probabilitasnya \> 0,0025.
 
 **7. Soal:** Analisis bagaimana fluktuasi jumlah pengguna aktif di platform media sosial dapat dimodelkan sebagai proses stokastik.
 
-\* **Solusi:** Jumlah pengguna tidak konstan tetapi berubah terhadap waktu secara acak. Ini dapat dimodelkan sebagai proses stokastik (misalnya Proses Poisson untuk kedatangan pengguna baru) di mana variabel acak $X(t)$ mewakili jumlah pengguna pada waktu $t$.
+- **Solusi:** Jumlah pengguna tidak konstan tetapi berubah terhadap waktu secara acak. Ini dapat dimodelkan sebagai proses stokastik (misalnya Proses Poisson untuk kedatangan pengguna baru) di mana variabel acak $X(t)$ mewakili jumlah pengguna pada waktu $t$.
 
 **8. Soal:** Gunakan konsep probabilitas untuk mengevaluasi risiko kehilangan data pada media penyimpanan RAID 0 dibandingkan RAID 1.
 
-\* **Solusi:** RAID 0 (Striping) gagal jika **salah satu** disk gagal (Sistem Seri, risiko tinggi). RAID 1 (Mirroring) gagal hanya jika **semua** disk gagal (Sistem Paralel, risiko rendah/redundansi). Probabilitas kehilangan data RAID 0 \> RAID 1.
+- **Solusi:** RAID 0 (Striping) gagal jika **salah satu** disk gagal (Sistem Seri, risiko tinggi). RAID 1 (Mirroring) gagal hanya jika **semua** disk gagal (Sistem Paralel, risiko rendah/redundansi). Probabilitas kehilangan data RAID 0 \> RAID 1.
 
-**9. Soal:** Jika sebuah algoritma enkripsi memiliki probabilitas tabrakan (*collision*) $10^{-15}$, sejauh mana tingkat kepercayaan pengembang pada integritas data? \* **Solusi:** Tingkat kepercayaan sangat tinggi (hampir absolut). Dalam skala probabilistik, $10^{-15}$ dianggap sebagai kejadian yang secara praktis mustahil terjadi dalam operasional normal, memberikan jaminan integritas data yang kuat ("Probabilistic Guarantee").
+**9. Soal:** Jika sebuah algoritma enkripsi memiliki probabilitas tabrakan (*collision*) $10^{-15}$, sejauh mana tingkat kepercayaan pengembang pada integritas data? 
+
+- **Solusi:** Tingkat kepercayaan sangat tinggi (hampir absolut). Dalam skala probabilistik, $10^{-15}$ dianggap sebagai kejadian yang secara praktis mustahil terjadi dalam operasional normal, memberikan jaminan integritas data yang kuat ("Probabilistic Guarantee").
 
 **10. Soal:** Bagaimana probabilitas digunakan dalam menentukan kapasitas bandwidth minimum untuk menjamin kualitas layanan (QoS) video streaming?
 
-\* **Solusi:** Provider tidak menyediakan bandwidth untuk *peak* teoritis semua user (mahal), melainkan menggunakan probabilitas untuk menjamin (misalnya) 99.9% waktu, bandwidth cukup. Ini dihitung menggunakan distribusi beban user agar probabilitas *congestion* \< 0.1%.
+- **Solusi:** Provider tidak menyediakan bandwidth untuk *peak* teoritis semua user (mahal), melainkan menggunakan probabilitas untuk menjamin (misalnya) 99.9% waktu, bandwidth cukup. Ini dihitung menggunakan distribusi beban user agar probabilitas *congestion* \< 0.1%.
 
 ### **C. Pertanyaan Komputasional**
 
 **11. Soal:** Tulis skrip Python untuk mensimulasikan 10.000 percobaan pelemparan koin tidak adil ($p=0,6$) dan plot konvergensi frekuensi relatifnya. 
 
-\* **Solusi:** \`\`\`python import numpy as np import matplotlib.pyplot as plt
+- **Solusi:**
 
 ```{python} 
 import matplotlib.pyplot as plt
@@ -276,7 +286,8 @@ plt.show()
 
 
 **12. Soal:** Gunakan pustaka `random` untuk menghasilkan 1.000 sampel waktu tunggu login dan hitung nilai rata-ratanya. 
-\* **Solusi:** 
+
+- **Solusi:** 
 ```{python}
 import random     
 # Asumsi: Waktu tunggu 0-5 detik     
@@ -288,7 +299,7 @@ print(f"Rata-rata waktu tunggu: {average_time:.4f} detik")
 
 **13. Soal:** Buatlah simulasi Monte Carlo untuk menghitung luas area di bawah kurva fungsi acak sederhana yang merepresentasikan beban kerja server. 
 
-\* **Solusi:** 
+- **Solusi:** 
 ```{python}
 import numpy as np     
 # Contoh fungsi beban: y = x^2 di interval     
@@ -302,7 +313,7 @@ print(f"Estimasi Luas Area: {area}")
 ```
 **14. Soal:** Implementasikan fungsi Python yang menghasilkan seluruh kemungkinan kombinasi dari 4-bit biner dan hitung probabilitas munculnya tepat dua angka '1'. 
 
-\* **Solusi:** 
+- **Solusi:** 
 ```{python}
 import itertools     # Ruang Sampel     
 outcomes = list(itertools.product([0,1], repeat=4))     # Kejadian A: Tepat dua angka '1'     
@@ -313,7 +324,7 @@ print(f"Probabilitas: {prob_A} (Seharusnya 6/16 = 0.375)")
 
 **15. Soal:** Gunakan numpy untuk mensimulasikan distribusi umur pakai 500 hard disk berdasarkan data kegagalan historis. 
 
-\* **Solusi:** 
+- **Solusi:** 
 
 ```{python}     
 import numpy as np     

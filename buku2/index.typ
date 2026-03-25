@@ -489,10 +489,6 @@ Bandung, 25 Maret 2026 Penyusun, Armein Z. R. langi
 
 = Minggu 01: Pola Pikir Probabilistik vs Deterministik
 <minggu-01-pola-pikir-probabilistik-vs-deterministik>
-== Tujuan Belajar
-<tujuan-belajar>
-"Understanding Probabilistic Way of Thinking versus Deterministic Way of Thinking"
-
 #figure([
 #box(image("ch/../The_Decision_Engineer.png/image1.png"))
 ], caption: figure.caption(
@@ -505,9 +501,56 @@ supplement: "Gambar",
 )
 
 
-=== Apa yang Kita Pelajari?
-<apa-yang-kita-pelajari>
+== Apa Tujuan Belajar?
+<apa-tujuan-belajar>
+"Understanding Probabilistic Way of Thinking versus Deterministic Way of Thinking"
+
 Memahami bahwa dalam dunia nyata, fenomena seringkali mengandung ketidakpastian (randomness) dan tidak dapat diprediksi dengan kepastian mutlak (deterministik), sehingga memerlukan kerangka kerja matematika untuk mengukur ketidakpastian tersebut.
+
+Sebuah besaran berubah-waktu bisa bersifat deterministik atau acak. Bergantung dua hal:
+
++ apakah nilai besaran ini bisa diprediksi dengan cukup akurat
++ apakah ada persamaan yang menentukan nilai ini.
+
+Bila jawaban keduanya ya, maka besaran ini determnistik. Acak tidak memiliki formula untuk menhaslkan besaran, meskpin prediksi bisa dilakukn dengan akurasi ditentukan sebuah besaran probabilitas p
+
+#strong[Simulasi Python]
+
+#Skylighting(([#ImportTok("import");#NormalTok(" numpy ");#ImportTok("as");#NormalTok(" np");],
+[#ImportTok("import");#NormalTok(" matplotlib.pyplot ");#ImportTok("as");#NormalTok(" plt");],
+[],
+[#CommentTok("# Parameter waktu");],
+[#NormalTok("t ");#OperatorTok("=");#NormalTok(" np.linspace(");#DecValTok("0");#NormalTok(", ");#DecValTok("1");#NormalTok(", ");#DecValTok("500");#NormalTok(")  ");#CommentTok("# 1 detik, 500 sampel");],
+[],
+[#CommentTok("# === Time series deterministik (sinusoid) ===");],
+[#NormalTok("A ");#OperatorTok("=");#NormalTok(" ");#DecValTok("1");#NormalTok("        ");#CommentTok("# amplitudo");],
+[#NormalTok("f ");#OperatorTok("=");#NormalTok(" ");#DecValTok("5");#NormalTok("        ");#CommentTok("# frekuensi (Hz)");],
+[#NormalTok("phi ");#OperatorTok("=");#NormalTok(" ");#DecValTok("0");#NormalTok("      ");#CommentTok("# fase");],
+[],
+[#NormalTok("x_det ");#OperatorTok("=");#NormalTok(" A ");#OperatorTok("*");#NormalTok(" np.sin(");#DecValTok("2");#NormalTok(" ");#OperatorTok("*");#NormalTok(" np.pi ");#OperatorTok("*");#NormalTok(" f ");#OperatorTok("*");#NormalTok(" t ");#OperatorTok("+");#NormalTok(" phi)");],
+[],
+[#CommentTok("# === Time series acak (random noise) ===");],
+[#NormalTok("np.random.seed(");#DecValTok("42");#NormalTok(")  ");#CommentTok("# agar reproducible");],
+[#NormalTok("x_rand ");#OperatorTok("=");#NormalTok(" np.random.normal(");#DecValTok("0");#NormalTok(", ");#DecValTok("1");#NormalTok(", ");#BuiltInTok("len");#NormalTok("(t))  ");#CommentTok("# mean=0, std=1");],
+[],
+[#CommentTok("# === Plot ===");],
+[#NormalTok("plt.figure(figsize");#OperatorTok("=");#NormalTok("(");#DecValTok("10");#NormalTok(",");#DecValTok("6");#NormalTok("))");],
+[],
+[#NormalTok("plt.subplot(");#DecValTok("2");#NormalTok(",");#DecValTok("1");#NormalTok(",");#DecValTok("1");#NormalTok(")");],
+[#NormalTok("plt.plot(t, x_det)");],
+[#NormalTok("plt.title(");#StringTok("\"Time Series Deterministik (Sinusoid)\"");#NormalTok(")");],
+[#NormalTok("plt.xlabel(");#StringTok("\"Time\"");#NormalTok(")");],
+[#NormalTok("plt.ylabel(");#StringTok("\"Amplitude\"");#NormalTok(")");],
+[],
+[#NormalTok("plt.subplot(");#DecValTok("2");#NormalTok(",");#DecValTok("1");#NormalTok(",");#DecValTok("2");#NormalTok(")");],
+[#NormalTok("plt.plot(t, x_rand)");],
+[#NormalTok("plt.title(");#StringTok("\"Time Series Acak (Random Noise)\"");#NormalTok(")");],
+[#NormalTok("plt.xlabel(");#StringTok("\"Time\"");#NormalTok(")");],
+[#NormalTok("plt.ylabel(");#StringTok("\"Amplitude\"");#NormalTok(")");],
+[],
+[#NormalTok("plt.tight_layout()");],
+[#NormalTok("plt.show()");],));
+#box(image("ch/01-Pola_Pikir_Probabilistik_vs_Deterministik_files/figure-typst/cell-2-output-1.svg"))
 
 #strong[Tipikal Problem] Sebuah toko ingin menentukan stok barang. Pendekatan deterministik mengasumsikan permintaan konstan (misal: pasti 100 unit), sedangkan realitanya permintaan berfluktuasi secara acak.
 
@@ -515,14 +558,13 @@ Memahami bahwa dalam dunia nyata, fenomena seringkali mengandung ketidakpastian 
 
 == Eksplorasi Komputasi (Python)
 <eksplorasi-komputasi-python>
-Berikut buat python code untuk mensimulasikan permintaan barang (rata-rata 100 unit perhari) dan keputusan berapa yang akan di stok tiap hari: serta akibanya pada biaya sewa gudang (bila ada yang tidak laku) dan hilangnya potensi penjualan, dan kecewanya langganan tidak terlayani (bila barang habis)
+Berikut python code untuk mensimulasikan permintaan barang (rata-rata 100 unit perhari) dan keputusan berapa yang akan di stok tiap hari, serta akibanya pada biaya sewa gudang (bila ada yang tidak laku) dan hilangnya potensi penjualan, dan kecewanya langganan tidak terlayani (bila barang habis)
 
 #block[
 #Skylighting(([#ImportTok("import");#NormalTok(" numpy ");#ImportTok("as");#NormalTok(" np");],
 [#ImportTok("import");#NormalTok(" pandas ");#ImportTok("as");#NormalTok(" pd");],
 [],
 [#CommentTok("# Konfigurasi Simulasi");],
-[#NormalTok("np.random.seed(");#DecValTok("42");#NormalTok(")  ");#CommentTok("# Agar hasil konsisten saat dijalankan ulang");],
 [#NormalTok("days ");#OperatorTok("=");#NormalTok(" ");#DecValTok("30");],
 [#NormalTok("average_demand ");#OperatorTok("=");#NormalTok(" ");#DecValTok("100");],
 [#NormalTok("std_dev_demand ");#OperatorTok("=");#NormalTok(" ");#DecValTok("20");],
@@ -534,12 +576,16 @@ Berikut buat python code untuk mensimulasikan permintaan barang (rata-rata 100 u
 [#NormalTok("holding_cost_per_unit ");#OperatorTok("=");#NormalTok(" ");#DecValTok("2");#NormalTok("   ");#CommentTok("# Biaya gudang per unit sisa");],
 [#NormalTok("stockout_cost_per_unit ");#OperatorTok("=");#NormalTok(" ");#DecValTok("10");#NormalTok(" ");#CommentTok("# Biaya kehilangan pelanggan per unit habis");],));
 ]
-KalAu kita simulasikan jumlah kebutuhan yang bersifat acak itu
+Kita simulasikan jumlah kebutuhan yang bersifat acak itu, memanfaatkan distribusi normal.
 
+Yang menjadi besaran acak adalah jumlah #emph[demand] per hari.
+
+#Skylighting(([#NormalTok("np.random.normal(average, std_dev)");],));
 #block[
 #Skylighting(([#CommentTok("# Inisialisasi variabel simulasi");],
 [#NormalTok("inventory ");#OperatorTok("=");#NormalTok(" initial_stock");],
 [#NormalTok("results ");#OperatorTok("=");#NormalTok(" []");],
+[#NormalTok("np.random.seed(");#DecValTok("42");#NormalTok(")  ");#CommentTok("# Agar hasil konsisten saat dijalankan ulang");],
 [],
 [#ControlFlowTok("for");#NormalTok(" day ");#KeywordTok("in");#NormalTok(" ");#BuiltInTok("range");#NormalTok("(");#DecValTok("1");#NormalTok(", days ");#OperatorTok("+");#NormalTok(" ");#DecValTok("1");#NormalTok("):");],
 [#NormalTok("    ");#CommentTok("# 1. Simulasi Permintaan Harian");],
@@ -752,7 +798,7 @@ Berikut adalah 15 soal.
 [#NormalTok("plt.axhline(p_head, color");#OperatorTok("=");#StringTok("'r'");#NormalTok(", linestyle");#OperatorTok("=");#StringTok("'--'");#NormalTok(") ");#CommentTok("# Garis teoretis");],
 [#NormalTok("plt.xlabel(");#StringTok("\"Jumlah Lemparan\"");#NormalTok(")");#OperatorTok(";");#NormalTok(" plt.ylabel(");#StringTok("\"Frekuensi Relatif Head\"");#NormalTok(")");],
 [#NormalTok("plt.show()");],));
-#box(image("ch/01-Pola_Pikir_Probabilistik_vs_Deterministik_files/figure-typst/cell-5-output-1.svg"))
+#box(image("ch/01-Pola_Pikir_Probabilistik_vs_Deterministik_files/figure-typst/cell-6-output-1.svg"))
 
 #strong[\12. Soal:] Gunakan pustaka #NormalTok("random"); untuk menghasilkan 1.000 sampel waktu tunggu login dan hitung nilai rata-ratanya. \* #strong[Solusi:]
 
@@ -763,7 +809,7 @@ Berikut adalah 15 soal.
 [#NormalTok("average_time ");#OperatorTok("=");#NormalTok(" ");#BuiltInTok("sum");#NormalTok("(wait_times) ");#OperatorTok("/");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(wait_times)     ");],
 [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"Rata-rata waktu tunggu: ");#SpecialCharTok("{");#NormalTok("average_time");#SpecialCharTok(":.4f}");#SpecialStringTok(" detik\"");#NormalTok(")");],));
 #block[
-#Skylighting(([#NormalTok("Rata-rata waktu tunggu: 2.5527 detik");],));
+#Skylighting(([#NormalTok("Rata-rata waktu tunggu: 2.5026 detik");],));
 ]
 ]
 #strong[\13. Soal:] Buatlah simulasi Monte Carlo untuk menghitung luas area di bawah kurva fungsi acak sederhana yang merepresentasikan beban kerja server.
@@ -810,7 +856,7 @@ Berikut adalah 15 soal.
 [#NormalTok("plt.hist(lifetimes, bins");#OperatorTok("=");#DecValTok("20");#NormalTok(")     ");],
 [#NormalTok("plt.title(");#StringTok("\"Simulasi Umur Pakai Hard Disk\"");#NormalTok(")     ");],
 [#NormalTok("plt.show()");],));
-#box(image("ch/01-Pola_Pikir_Probabilistik_vs_Deterministik_files/figure-typst/cell-9-output-1.svg"))
+#box(image("ch/01-Pola_Pikir_Probabilistik_vs_Deterministik_files/figure-typst/cell-10-output-1.svg"))
 
 = Minggu 02: Kerangka Probabilitas dan Statistik
 <minggu-02-kerangka-probabilitas-dan-statistik>
@@ -830,7 +876,7 @@ supplement: "Gambar",
 
 
 == Apa Yang Kita pelajari?
-<apa-yang-kita-pelajari-1>
+<apa-yang-kita-pelajari>
 Ruang sampel (S) sebagai himpunan semua hasil yang mungkin, kejadian (E) sebagai himpunan bagian dari ruang sampel, dan aksioma probabilitas (nilai peluang antara 0 dan 1, total peluang semesta = 1).
 
 #strong[Tipikal Problem] Dalam pengiriman data digital, kita ingin mengetahui peluang terjadinya kesalahan bit. Jika dikirim 3 bit, apa ruang sampelnya dan berapa peluang setidaknya satu bit salah?

@@ -1,0 +1,26 @@
+berrikut adalah simulasi pembuatana sampel acak 3 bit dengan bit eror dilambangkan dengan bit 1
+
+```{python}
+
+import numpy as np
+
+p = 0.1  # peluang error per bit
+n_sim = 10
+
+# Generate bit: 1 = error dengan probabilitas p
+samples = np.random.rand(n_sim, 3) < p
+
+print(samples)
+
+# Kejadian: minimal satu error
+event = np.any(samples, axis=1)
+
+# Estimasi
+P_est = np.mean(event)
+
+# Teori
+P_theory = 1 - (1 - p)**3
+
+print("Estimasi:", P_est)
+print("Teori:", P_theory)
+```
