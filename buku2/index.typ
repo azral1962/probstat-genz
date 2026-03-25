@@ -483,7 +483,7 @@ Niat penulisan buku ini membuat mahasiswa menyadari kegunaann, kekayaaan, dan ke
 
 Buku ini sebenarnya mirip buku resep masakan. Enaknya makanan yang ditulis baru benar terasaa saat resep itu di realisasikan menjadi makaanan. Demikian juga manfaat kode-kode yang ditulis baru terasa saat di ekskeusi.
 
-Semoga buku ini Mencapi tujuan penulisannya.
+Semoga buku ini mencapai tujuan penulisannya.
 
 Bandung, 25 Maret 2026 Penyusun, Armein Z. R. langi
 
@@ -493,7 +493,7 @@ Understanding Probabilistic Way of Thinking versus Deterministic Way of Thinking
 
 \
 #figure([
-#box(image("chapters/../The_Decision_Engineer.png/image1.png"))
+#box(image("ch/../The_Decision_Engineer.png/image1.png"))
 ], caption: figure.caption(
 position: bottom, 
 [
@@ -745,7 +745,7 @@ Berikut adalah 15 soal.
 [#NormalTok("plt.axhline(p_head, color");#OperatorTok("=");#StringTok("'r'");#NormalTok(", linestyle");#OperatorTok("=");#StringTok("'--'");#NormalTok(") ");#CommentTok("# Garis teoretis");],
 [#NormalTok("plt.xlabel(");#StringTok("\"Jumlah Lemparan\"");#NormalTok(")");#OperatorTok(";");#NormalTok(" plt.ylabel(");#StringTok("\"Frekuensi Relatif Head\"");#NormalTok(")");],
 [#NormalTok("plt.show()");],));
-#box(image("chapters/01-Pola_Pikir_Probabilistik_vs_Deterministik_files/figure-typst/cell-5-output-1.svg"))
+#box(image("ch/01-Pola_Pikir_Probabilistik_vs_Deterministik_files/figure-typst/cell-5-output-1.svg"))
 
 #strong[\12. Soal:] Gunakan pustaka #NormalTok("random"); untuk menghasilkan 1.000 sampel waktu tunggu login dan hitung nilai rata-ratanya. \* #strong[Solusi:]
 
@@ -756,7 +756,7 @@ Berikut adalah 15 soal.
 [#NormalTok("average_time ");#OperatorTok("=");#NormalTok(" ");#BuiltInTok("sum");#NormalTok("(wait_times) ");#OperatorTok("/");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(wait_times)     ");],
 [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"Rata-rata waktu tunggu: ");#SpecialCharTok("{");#NormalTok("average_time");#SpecialCharTok(":.4f}");#SpecialStringTok(" detik\"");#NormalTok(")");],));
 #block[
-#Skylighting(([#NormalTok("Rata-rata waktu tunggu: 2.4514 detik");],));
+#Skylighting(([#NormalTok("Rata-rata waktu tunggu: 2.4895 detik");],));
 ]
 ]
 #strong[\13. Soal:] Buatlah simulasi Monte Carlo untuk menghitung luas area di bawah kurva fungsi acak sederhana yang merepresentasikan beban kerja server.
@@ -803,7 +803,7 @@ Berikut adalah 15 soal.
 [#NormalTok("plt.hist(lifetimes, bins");#OperatorTok("=");#DecValTok("20");#NormalTok(")     ");],
 [#NormalTok("plt.title(");#StringTok("\"Simulasi Umur Pakai Hard Disk\"");#NormalTok(")     ");],
 [#NormalTok("plt.show()");],));
-#box(image("chapters/01-Pola_Pikir_Probabilistik_vs_Deterministik_files/figure-typst/cell-9-output-1.svg"))
+#box(image("ch/01-Pola_Pikir_Probabilistik_vs_Deterministik_files/figure-typst/cell-9-output-1.svg"))
 
 = Minggu 02: Kerangka Probabilitas dan Statistik
 <minggu-02-kerangka-probabilitas-dan-statistik>
@@ -811,7 +811,7 @@ Probabilistic Experiment, Sample Space, Event, Probability Definition and Axioms
 
 \
 #figure([
-#box(image("chapters/../The_Decision_Engineer.png/image2.png"))
+#box(image("ch/../The_Decision_Engineer.png/image2.png"))
 ], caption: figure.caption(
 position: bottom, 
 [
@@ -1067,7 +1067,7 @@ Berikut adalah solusi untuk 15 soal yang diambil dari #strong[Minggu 02: Kerangk
 [#CommentTok("# A only = 0.2, B only = 0.1, Irisan = 0.6");],
 [#NormalTok("venn2(subsets ");#OperatorTok("=");#NormalTok(" (");#FloatTok("0.2");#NormalTok(", ");#FloatTok("0.1");#NormalTok(", ");#FloatTok("0.6");#NormalTok("), set_labels ");#OperatorTok("=");#NormalTok(" (");#StringTok("'Sensor A'");#NormalTok(", ");#StringTok("'Sensor B'");#NormalTok("))");],
 [#NormalTok("plt.show()");],));
-#box(image("chapters/02-Kerangka_Probabilitas_dan_Statistik_files/figure-typst/cell-7-output-1.svg"))
+#box(image("ch/02-Kerangka_Probabilitas_dan_Statistik_files/figure-typst/cell-7-output-1.svg"))
 
 = Minggu 03: Studi Kasus Aplikasi Teknik
 <minggu-03-studi-kasus-aplikasi-teknik>
@@ -1075,7 +1075,7 @@ Probabilistic Framework in Engineering Application (Data Center, Generator Backu
 
 \
 #figure([
-#box(image("chapters/../The_Decision_Engineer.png/image3.png"))
+#box(image("ch/../The_Decision_Engineer.png/image3.png"))
 ], caption: figure.caption(
 position: bottom, 
 [
@@ -1196,7 +1196,27 @@ Week 03: Reliabilitas Infrastruktur IT (Teori & Simulasi SRE)
 
 #strong[Deskripsi:] Mahasiswa berperan sebagai Site Reliability Engineer (SRE). Diberikan topologi sistem yang kompleks (gabungan seri dan paralel), mahasiswa harus menghitung reliabilitas teoretis dan memvalidasinya dengan simulasi Python.
 
-#strong[Soal Python (Notebook):] 1. #strong[Modeling (30 poin):] Representasikan sistem berikut dalam fungsi Python: - Sub-sistem A: 3 Web Server (Paralel, #cite(<R>, form: "prose")=0.9). - Sub-sistem B: 1 Database Utama (R=0.99). - Sistem Total: Sub-sistem A terhubung Seri dengan Sub-sistem B. 2. #strong[Calculation (30 poin):] Hitung reliabilitas teoretis sistem total. 3. #strong[Simulation (20 poin):] Jalankan simulasi 10.000 kali. - Generate status acak untuk tiap komponen. - Cek logika: #NormalTok("(Web1 OR Web2 OR Web3) AND Database");. - Hitung frekuensi sukses empiris. 4. #strong[Analysis (20 poin):] Jika budget memungkinkan penambahan 1 komponen (Web Server lagi ATAU Database Backup), mana yang paling signifikan menaikkan reliabilitas total? Buktikan dengan angka.
+#strong[Soal Python (Notebook):]
+
++ 1. #strong[Modeling (30 poin):] Representasikan sistem berikut dalam fungsi Python:
+
+  + - Sub-sistem A: 3 Web Server (Paralel, #cite(<R>, form: "prose")=0.9).
+
+  + - Sub-sistem B: 1 Database Utama (R=0.99).
+
+  + - Sistem Total: Sub-sistem A terhubung Seri dengan Sub-sistem B.
+
++ 2. #strong[Calculation (30 poin):] Hitung reliabilitas teoretis sistem total.
+
++ 3. #strong[Simulation (20 poin):] Jalankan simulasi 10.000 kali.
+
+  + - Generate status acak untuk tiap komponen.
+
+  + - Cek logika: #NormalTok("(Web1 OR Web2 OR Web3) AND Database");.
+
+  + - Hitung frekuensi sukses empiris.
+
++ 4. #strong[Analysis (20 poin):] Jika budget memungkinkan penambahan 1 komponen (Web Server lagi ATAU Database Backup), mana yang paling signifikan menaikkan reliabilitas total? Buktikan dengan angka.
 
 #horizontalrule
 
@@ -1238,13 +1258,16 @@ Week 03: Reliabilitas Infrastruktur IT (Teori & Simulasi SRE)
 #block[
 #set enum(numbering: "1.", start: 11)
 + #strong[Soal:] Buat fungsi Python untuk menghitung reliabilitas sistem seri dengan input berupa list reliabilitas komponen.
+
   - #strong[Solusi:]
 
   #Skylighting(([#ImportTok("import");#NormalTok(" numpy ");#ImportTok("as");#NormalTok(" np  ");],
   [#KeywordTok("def");#NormalTok(" reliability_series(probs):  ");],
   [#ControlFlowTok("return");#NormalTok(" np.prod(probs)  ");],
   [#CommentTok("# Contoh: reliability_series([0.9, 0.9, 0.9]) -> 0.729  ");],));
+
 + #strong[Soal:] Implementasikan simulasi untuk membandingkan reliabilitas sistem seri vs paralel dengan jumlah komponen n dari 1 sampai 10.
+
   - #strong[Solusi:]
 
   #Skylighting(([#ImportTok("import");#NormalTok(" matplotlib.pyplot ");#ImportTok("as");#NormalTok(" plt  ");],
@@ -1255,7 +1278,9 @@ Week 03: Reliabilitas Infrastruktur IT (Teori & Simulasi SRE)
   [#NormalTok("plt.plot(n_range, r_series, label");#OperatorTok("=");#StringTok("'Seri'");#NormalTok(")  ");],
   [#NormalTok("plt.plot(n_range, r_parallel, label");#OperatorTok("=");#StringTok("'Paralel'");#NormalTok(")  ");],
   [#NormalTok("plt.legend()");#OperatorTok(";");#NormalTok(" plt.show()  ");],));
+
 + #strong[Soal:] Tulis skrip untuk menghitung jumlah minimum komponen paralel yang dibutuhkan agar reliabilitas total mencapai 0,999.
+
   - #strong[Solusi:]
 
   #Skylighting(([#NormalTok("p_component ");#OperatorTok("=");#NormalTok(" ");#FloatTok("0.9");#NormalTok("  ");],
@@ -1264,9 +1289,13 @@ Week 03: Reliabilitas Infrastruktur IT (Teori & Simulasi SRE)
   [#ControlFlowTok("while");#NormalTok(" (");#DecValTok("1");#NormalTok(" ");#OperatorTok("-");#NormalTok(" (");#DecValTok("1");#NormalTok(" ");#OperatorTok("-");#NormalTok(" p_component)");#OperatorTok("**");#NormalTok("n) ");#OperatorTok("<");#NormalTok(" target:  ");],
   [#NormalTok("n ");#OperatorTok("+=");#NormalTok(" ");#DecValTok("1");#NormalTok("  ");],
   [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"Butuh ");#SpecialCharTok("{");#NormalTok("n");#SpecialCharTok("}");#SpecialStringTok(" komponen.\"");#NormalTok(")  ");],));
+
 + #strong[Soal:] Gunakan matplotlib untuk memplot grafik hubungan antara jumlah komponen paralel dan reliabilitas sistem.
+
   - #strong[Solusi:] (Lihat solusi no 12, fokus pada garis Paralel yang melengkung asimtotik mendekati 1).
+
 + #strong[Soal:] Simulasikan kegagalan komponen secara acak dalam 10.000 iterasi untuk mengestimasi Mean Time To Failure (MTTF) sistem sederhana.
+
   - #strong[Solusi:]
 
   #Skylighting(([#ImportTok("import");#NormalTok(" numpy ");#ImportTok("as");#NormalTok(" np  ");],
@@ -1287,7 +1316,7 @@ Probability Theorems, Conditional Probability, Bayes Theorem
 
 \
 #figure([
-#box(image("chapters/../The_Decision_Engineer.png/image4.png"))
+#box(image("ch/../The_Decision_Engineer.png/image4.png"))
 ], caption: figure.caption(
 position: bottom, 
 [
@@ -1382,7 +1411,7 @@ Week 04: Teorema Bayes dan Probabilitas Kondisional
 <materi-kuliah-konsep-aplikasi-komputasi-3>
 === 1. Konsep Dasar
 <konsep-dasar-2>
-- #strong[Probabilitas Kondisional ($P \( A \| B \)$):] Peluang kejadian A terjadi mengingat kejadian B sudah terjadi. Ini menyempitkan ruang sampel dari $Omega$ menjadi B.
+- #strong[Probabilitas Kondisional (]$P \( A \| B \)$): Peluang kejadian A terjadi mengingat kejadian B sudah terjadi. Ini menyempitkan ruang sampel dari $Omega$ menjadi B.
 - #strong[Teorema Bayes:] Rumus untuk membalik probabilitas kondisional. $ P \( A \| B \) = frac(P \( B \| A \) dot.op P \( A \), P \( B \)) $ Di mana $P \( A \)$ adalah Prior (keyakinan awal) dan $P \( A \| B \)$ adalah Posterior (keyakinan setelah melihat bukti).
 - #strong[Hukum Probabilitas Total:] Digunakan untuk menghitung penyebut ($P \( B \)$) dengan memecah masalah menjadi partisi-partisi yang saling lepas.
 
@@ -1406,7 +1435,15 @@ Week 04: Teorema Bayes dan Probabilitas Kondisional
 
 #strong[Deskripsi:] Mahasiswa diberikan dataset simulasi trafik jaringan (Normal vs Serangan DDoS). Mereka harus membuat detektor sederhana dan mengevaluasi kinerjanya.
 
-#strong[Soal Python (Notebook):] 1. #strong[Analisis Manual:] Diketahui $P \( upright("DDoS") \) = 0.01$. Sebuah sistem deteksi trafik aneh memiliki True Positive Rate 95% dan False Positive Rate 5%. Hitung peluang adanya serangan DDoS sungguhan jika alarm berbunyi. 2. #strong[Bayes Function:] Implementasikan fungsi #NormalTok("bayes_update(prior, sensitivity, specificity)"); di Python. Gunakan untuk memverifikasi jawaban nomor 1. 3. #strong[Simulation:] Generate 10.000 request (gunakan #NormalTok("numpy.random");). Simulasikan alarm berdasarkan probabilitas di atas. Hitung Precision (Berapa % alarm yang benar). 4. #strong[Decision Making:] Jika biaya memblokir user asli (False Positive) adalah \$10 dan biaya membiarkan DDoS lolos (False Negative) adalah \$1000, apakah sistem deteksi ini layak dipakai? Jelaskan dengan perhitungan Expected Loss.
+#strong[Soal Python (Notebook):]
+
++ 1. #strong[Analisis Manual:] Diketahui $P \( upright("DDoS") \) = 0.01$. Sebuah sistem deteksi trafik aneh memiliki True Positive Rate 95% dan False Positive Rate 5%. Hitung peluang adanya serangan DDoS sungguhan jika alarm berbunyi.
+
++ 2. #strong[Bayes Function:] Implementasikan fungsi #NormalTok("bayes_update(prior, sensitivity, specificity)"); di Python. Gunakan untuk memverifikasi jawaban nomor 1.
+
++ 3. #strong[Simulation:] Generate 10.000 request (gunakan #NormalTok("numpy.random");). Simulasikan alarm berdasarkan probabilitas di atas. Hitung Precision (Berapa % alarm yang benar).
+
++ 4. #strong[Decision Making:] Jika biaya memblokir user asli (False Positive) adalah \$10 dan biaya membiarkan DDoS lolos (False Negative) adalah \$1000, apakah sistem deteksi ini layak dipakai? Jelaskan dengan perhitungan Expected Loss.
 
 #horizontalrule
 
@@ -1418,9 +1455,9 @@ Week 04: Teorema Bayes dan Probabilitas Kondisional
   - #strong[Solusi:] Probabilitas kondisional merefleksikan pembaruan informasi. Intuisinya adalah kita "membuang" semua hasil di ruang sampel $Omega$ yang tidak memuat B. Ruang sampel yang relevan kini hanya B, sehingga peluang A dihitung sebagai proporsi irisan $A sect B$ terhadap luas total B ($P \( A sect B \) \/ P \( B \)$).
 + #strong[Soal:] Jelaskan perbedaan antara prior probability, likelihood, dan posterior probability dalam kerangka Bayes.
   - #strong[Solusi:]
-    - #strong[Prior ($P \( A \)$):] Keyakinan awal sebelum melihat data/bukti.
-    - #strong[Likelihood ($P \( B \| A \)$):] Peluang bukti muncul jika hipotesis kita benar.
-    - #strong[Posterior ($P \( A \| B \)$):] Keyakinan yang diperbarui setelah melihat bukti.
+    - #strong[Prior (]$P \( A \)$): Keyakinan awal sebelum melihat data/bukti.
+    - #strong[Likelihood (]$P \( B \| A \)$): Peluang bukti muncul jika hipotesis kita benar.
+    - #strong[Posterior (]$P \( A \| B \)$): Keyakinan yang diperbarui setelah melihat bukti.
 + #strong[Soal:] Apa yang dimaksud dengan independensi statistik dan mengapa itu berbeda dengan kejadian saling lepas?
   - #strong[Solusi:] Dua kejadian independen berarti terjadinya satu tidak mengubah peluang terjadinya yang lain ($P \( A \| B \) = P \( A \)$). Kejadian saling lepas berarti keduanya tidak bisa terjadi bersamaan ($A sect B = nothing$). Justru, jika saling lepas, mereka sangat bergantung (jika A terjadi, B pasti tidak terjadi).
 + #strong[Soal:] Bagaimana Hukum Probabilitas Total digunakan sebagai penyebut dalam rumus Bayes?
@@ -1455,13 +1492,16 @@ Week 04: Teorema Bayes dan Probabilitas Kondisional
 #block[
 #set enum(numbering: "1.", start: 11)
 + #strong[Soal:] Implementasikan fungsi Python #NormalTok("bayes_theorem(prior, likelihood, total_prob)"); yang mengembalikan nilai posterior.
+
   - #strong[Solusi:]
 
   #Skylighting(([#KeywordTok("def");#NormalTok(" bayes_theorem(prior, likelihood, neg_likelihood):  ");],
   [#CommentTok("# neg_likelihood adalah P(B|Not A)  ");],
   [#NormalTok("p_b ");#OperatorTok("=");#NormalTok(" (likelihood ");#OperatorTok("*");#NormalTok(" prior) ");#OperatorTok("+");#NormalTok(" (neg_likelihood ");#OperatorTok("*");#NormalTok(" (");#DecValTok("1");#NormalTok(" ");#OperatorTok("-");#NormalTok(" prior))  ");],
   [#ControlFlowTok("return");#NormalTok(" (likelihood ");#OperatorTok("*");#NormalTok(" prior) ");#OperatorTok("/");#NormalTok(" p_b  ");],));
+
 + #strong[Soal:] Buatlah skrip untuk mensimulasikan masalah Monty Hall dan buktikan secara empiris mengapa berpindah pintu memberikan probabilitas menang lebih tinggi.
+
   - #strong[Solusi:]
 
   #Skylighting(([#ImportTok("import");#NormalTok(" random  ");],
@@ -1478,7 +1518,9 @@ Week 04: Teorema Bayes dan Probabilitas Kondisional
   [#ControlFlowTok("if");#NormalTok(" doors[switch] ");#OperatorTok("==");#NormalTok(" ");#DecValTok("1");#NormalTok(": wins_switch ");#OperatorTok("+=");#NormalTok(" ");#DecValTok("1");#NormalTok("  ");],
   [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"Stay: ");#SpecialCharTok("{");#NormalTok("wins_stay");#OperatorTok("/");#DecValTok("10000");#SpecialCharTok("}");#SpecialStringTok(", Switch: ");#SpecialCharTok("{");#NormalTok("wins_switch");#OperatorTok("/");#DecValTok("10000");#SpecialCharTok("}");#SpecialStringTok("\"");#NormalTok(")  ");],
   [#CommentTok("# Hasil akan mendekati Stay: 0.33, Switch: 0.66  ");],));
+
 + #strong[Soal:] Gunakan pustaka numpy untuk menghitung matriks probabilitas transisi sederhana dalam sebuah rantai Markov.
+
   - #strong[Solusi:]
 
   #Skylighting(([#ImportTok("import");#NormalTok(" numpy ");#ImportTok("as");#NormalTok(" np  ");],
@@ -1489,7 +1531,9 @@ Week 04: Teorema Bayes dan Probabilitas Kondisional
   [#NormalTok("current_state ");#OperatorTok("=");#NormalTok(" np.array([");#DecValTok("1");#NormalTok(", ");#DecValTok("0");#NormalTok("]) ");#CommentTok("# Hari ini Hujan  ");],
   [#NormalTok("next_day ");#OperatorTok("=");#NormalTok(" current_state.dot(T)  ");],
   [#BuiltInTok("print");#NormalTok("(next_day)  ");],));
+
 + #strong[Soal:] Tulis program yang mengklasifikasikan pesan singkat sebagai "Spam" atau "Ham" menggunakan algoritma Naive Bayes sederhana.
+
   - #strong[Solusi:]
 
   #Skylighting(([#CommentTok("# Sederhana: P(Spam|Word)  ");],
@@ -1501,7 +1545,9 @@ Week 04: Teorema Bayes dan Probabilitas Kondisional
   [#NormalTok("evidence ");#OperatorTok("=");#NormalTok(" (p_word_given_spam ");#OperatorTok("*");#NormalTok(" p_spam) ");#OperatorTok("+");#NormalTok(" ");#OperatorTok("\\");],
   [#NormalTok("           (p_word_given_ham ");#OperatorTok("*");#NormalTok(" (");#DecValTok("1");#NormalTok(" ");#OperatorTok("-");#NormalTok(" p_spam))  ");],
   [#ControlFlowTok("return");#NormalTok(" (p_word_given_spam ");#OperatorTok("*");#NormalTok(" p_spam) ");#OperatorTok("/");#NormalTok(" evidence  ");],));
+
 + #strong[Soal:] Visualisasikan bagaimana probabilitas posterior berubah seiring dengan bertambahnya jumlah bukti (evidence) dalam simulasi Python.
+
   - #strong[Solusi:]
 
   #Skylighting(([#ImportTok("import");#NormalTok(" matplotlib.pyplot ");#ImportTok("as");#NormalTok(" plt  ");],
@@ -1523,7 +1569,7 @@ Random Variable Definition, Probability Function, Expectation, Variance
 
 \
 #figure([
-#box(image("chapters/../The_Decision_Engineer.png/image5.png"))
+#box(image("ch/../The_Decision_Engineer.png/image5.png"))
 ], caption: figure.caption(
 position: bottom, 
 [
@@ -1548,6 +1594,91 @@ Menghitung E\[X\] (expected return) dan Variansi (risiko) dari kedua opsi. Keput
 
 == 4. Eksplorasi Komputasi (Python)
 <eksplorasi-komputasi-python-4>
+= -#emph[\- coding: utf-8 -]-
+<coding-utf-8--->
+== Konstruksi Random Variable Kontinu dari Hasil Pengamatan
+<konstruksi-random-variable-kontinu-dari-hasil-pengamatan>
+#block[
+#Skylighting(([#CommentTok("\"\"\"");],
+[#CommentTok("Created on Tue Mar 24 14:28:57 2026");],
+[],
+[#CommentTok("@author: Armein Z. R. Langi");],
+[#CommentTok("\"\"\"");],
+[],
+[#ImportTok("import");#NormalTok(" numpy ");#ImportTok("as");#NormalTok(" np");],
+[],
+[#KeywordTok("class");#NormalTok(" ContinuousRV:");],
+[#NormalTok("    ");#KeywordTok("def");#NormalTok(" ");#FunctionTok("__init__");#NormalTok("(");#VariableTok("self");#NormalTok(", cum_freq):");],
+[#NormalTok("        ");#VariableTok("self");#NormalTok(".x ");#OperatorTok("=");#NormalTok(" np.array(");#BuiltInTok("sorted");#NormalTok("(cum_freq.keys()), dtype");#OperatorTok("=");#BuiltInTok("float");#NormalTok(")");],
+[#NormalTok("        ");#VariableTok("self");#NormalTok(".F ");#OperatorTok("=");#NormalTok(" np.array([cum_freq[k] ");#ControlFlowTok("for");#NormalTok(" k ");#KeywordTok("in");#NormalTok(" ");#VariableTok("self");#NormalTok(".x], dtype");#OperatorTok("=");#BuiltInTok("float");#NormalTok(")");],
+[],
+[#NormalTok("        ");#ControlFlowTok("if");#NormalTok(" ");#VariableTok("self");#NormalTok(".F[");#OperatorTok("-");#DecValTok("1");#NormalTok("] ");#OperatorTok("!=");#NormalTok(" ");#FloatTok("1.0");#NormalTok(":");],
+[#NormalTok("            ");#ControlFlowTok("raise");#NormalTok(" ");#PreprocessorTok("ValueError");#NormalTok("(");#StringTok("\"CDF terakhir harus 1\"");#NormalTok(")");],
+[],
+[#NormalTok("        ");#VariableTok("self");#NormalTok(".pdf_grid ");#OperatorTok("=");#NormalTok(" np.gradient(");#VariableTok("self");#NormalTok(".F, ");#VariableTok("self");#NormalTok(".x)");],
+[],
+[#NormalTok("    ");#KeywordTok("def");#NormalTok(" cdf(");#VariableTok("self");#NormalTok(", t):");],
+[#NormalTok("        ");#ControlFlowTok("return");#NormalTok(" np.interp(t, ");#VariableTok("self");#NormalTok(".x, ");#VariableTok("self");#NormalTok(".F, left");#OperatorTok("=");#FloatTok("0.0");#NormalTok(", right");#OperatorTok("=");#FloatTok("1.0");#NormalTok(")");],
+[],
+[#NormalTok("    ");#KeywordTok("def");#NormalTok(" pdf(");#VariableTok("self");#NormalTok(", t):");],
+[#NormalTok("        ");#ControlFlowTok("return");#NormalTok(" np.interp(t, ");#VariableTok("self");#NormalTok(".x, ");#VariableTok("self");#NormalTok(".pdf_grid, left");#OperatorTok("=");#FloatTok("0.0");#NormalTok(", right");#OperatorTok("=");#FloatTok("0.0");#NormalTok(")");],
+[],
+[#NormalTok("    ");#KeywordTok("def");#NormalTok(" ppf(");#VariableTok("self");#NormalTok(", u):");],
+[#NormalTok("        ");#ControlFlowTok("return");#NormalTok(" np.interp(u, ");#VariableTok("self");#NormalTok(".F, ");#VariableTok("self");#NormalTok(".x)");],
+[],
+[#NormalTok("    ");#KeywordTok("def");#NormalTok(" rvs(");#VariableTok("self");#NormalTok(", size");#OperatorTok("=");#DecValTok("1");#NormalTok(", random_state");#OperatorTok("=");#VariableTok("None");#NormalTok("):");],
+[#NormalTok("        rng ");#OperatorTok("=");#NormalTok(" np.random.default_rng(random_state)");],
+[#NormalTok("        u ");#OperatorTok("=");#NormalTok(" rng.random(size)");],
+[#NormalTok("        ");#ControlFlowTok("return");#NormalTok(" ");#VariableTok("self");#NormalTok(".ppf(u)");],
+[],
+[#NormalTok("    ");#KeywordTok("def");#NormalTok(" mean(");#VariableTok("self");#NormalTok("):");],
+[#NormalTok("        ");#ControlFlowTok("return");#NormalTok(" np.trapezoid(");#VariableTok("self");#NormalTok(".x ");#OperatorTok("*");#NormalTok(" ");#VariableTok("self");#NormalTok(".pdf_grid, ");#VariableTok("self");#NormalTok(".x)");],
+[],
+[#NormalTok("    ");#KeywordTok("def");#NormalTok(" var(");#VariableTok("self");#NormalTok("):");],
+[#NormalTok("        m ");#OperatorTok("=");#NormalTok(" ");#VariableTok("self");#NormalTok(".mean()");],
+[#NormalTok("        ");#ControlFlowTok("return");#NormalTok(" np.trapezoid((");#VariableTok("self");#NormalTok(".x ");#OperatorTok("-");#NormalTok(" m)");#OperatorTok("**");#DecValTok("2");#NormalTok(" ");#OperatorTok("*");#NormalTok(" ");#VariableTok("self");#NormalTok(".pdf_grid, ");#VariableTok("self");#NormalTok(".x)");],
+[#NormalTok("    ");],
+[#NormalTok("cum_freq ");#OperatorTok("=");#NormalTok(" {");],
+[#NormalTok("    ");#DecValTok("500");#NormalTok(": ");#FloatTok("0.05");#NormalTok(",");],
+[#NormalTok("    ");#DecValTok("600");#NormalTok(": ");#FloatTok("0.10");#NormalTok(",");],
+[#NormalTok("    ");#DecValTok("700");#NormalTok(": ");#FloatTok("0.20");#NormalTok(",");],
+[#NormalTok("    ");#DecValTok("800");#NormalTok(": ");#FloatTok("0.30");#NormalTok(",");],
+[#NormalTok("    ");#DecValTok("900");#NormalTok(": ");#FloatTok("0.34");#NormalTok(",");],
+[#NormalTok("    ");#DecValTok("1000");#NormalTok(": ");#FloatTok("0.55");#NormalTok(",");],
+[#NormalTok("    ");#DecValTok("1100");#NormalTok(": ");#FloatTok("0.7");#NormalTok(",");],
+[#NormalTok("    ");#DecValTok("1200");#NormalTok(": ");#DecValTok("1");#NormalTok(",");],
+[#NormalTok("}");],
+[],
+[#NormalTok("dist ");#OperatorTok("=");#NormalTok(" ContinuousRV(cum_freq)");],
+[],
+[#BuiltInTok("print");#NormalTok("(");#StringTok("\"CDF(2500) =\"");#NormalTok(", dist.cdf(");#DecValTok("2500");#NormalTok("))");],
+[#BuiltInTok("print");#NormalTok("(");#StringTok("\"PDF(2500) =\"");#NormalTok(", dist.pdf(");#DecValTok("2500");#NormalTok("))");],
+[#BuiltInTok("print");#NormalTok("(");#StringTok("\"PPF(0.5) =\"");#NormalTok(", dist.ppf(");#FloatTok("0.5");#NormalTok("))");],
+[],
+[#NormalTok("samples ");#OperatorTok("=");#NormalTok(" dist.rvs(size");#OperatorTok("=");#DecValTok("10000");#NormalTok(", random_state");#OperatorTok("=");#DecValTok("42");#NormalTok(")");],
+[#BuiltInTok("print");#NormalTok("(samples[:");#DecValTok("10");#NormalTok("])");],
+[],
+[],
+[#CommentTok("# Mean dan Var dari Teori");],
+[#BuiltInTok("print");#NormalTok("(");#StringTok("\"Mean (integral):\"");#NormalTok(", dist.mean())");],
+[#BuiltInTok("print");#NormalTok("(");#StringTok("\"Var (integral):\"");#NormalTok(", dist.var())");],
+[],
+[#CommentTok("# bandingkan dengan sampling");],
+[#NormalTok("samples ");#OperatorTok("=");#NormalTok(" dist.rvs(");#DecValTok("100000");#NormalTok(", random_state");#OperatorTok("=");#DecValTok("42");#NormalTok(")");],
+[#BuiltInTok("print");#NormalTok("(");#StringTok("\"Mean (sampling):\"");#NormalTok(", samples.mean())");],
+[#BuiltInTok("print");#NormalTok("(");#StringTok("\"Var (sampling):\"");#NormalTok(", samples.var())");],));
+#block[
+#Skylighting(([#NormalTok("CDF(2500) = 1.0");],
+[#NormalTok("PDF(2500) = 0.0");],
+[#NormalTok("PPF(0.5) = 976.1904761904761");],
+[#NormalTok("[1124.65201619  947.08497131 1152.8659733  1098.24535271  588.35469578");],
+[#NormalTok(" 1191.87411721 1120.37990066 1128.68810176  628.11363268  952.56473233]");],
+[#NormalTok("Mean (integral): 903.5");],
+[#NormalTok("Var (integral): 39422.137500000004");],
+[#NormalTok("Mean (sampling): 928.9725930286986");],
+[#NormalTok("Var (sampling): 45303.26251723101");],));
+]
+]
 Week 05: Variabel Acak, Ekspektasi, dan Variansi
 
 == Agenda Perkuliahan Minggu 5
@@ -1639,11 +1770,11 @@ Week 05: Variabel Acak, Ekspektasi, dan Variansi
 
 + 2. #strong[Theoretical Calculation:]
 
-  - - Hitung Ekspektasi poin per tarikan ($E \[ X \]$).
+  - -Hitung Ekspektasi poin per tarikan ($E \[ X \]$).
 
-  - - Hitung Variansi poin ($V a r \( X \)$).
+  - Hitung Variansi poin ($V a r \( X \)$).
 
-  - - Jika biaya main = 100 poin, apakah pemain untung atau rugi secara rata-rata?
+  - Jika biaya main = 100 poin, apakah pemain untung atau rugi secara rata-rata?
 
 + 3. #strong[Simulation Verification:] \`
 
@@ -1717,7 +1848,7 @@ Week 05: Variabel Acak, Ekspektasi, dan Variansi
   [#NormalTok("samples ");#OperatorTok("=");#NormalTok(" cust_dist.rvs(size");#OperatorTok("=");#DecValTok("1000");#NormalTok(")  ");],
   [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"Sample Mean: ");#SpecialCharTok("{");#NormalTok("samples");#SpecialCharTok(".");#NormalTok("mean()");#SpecialCharTok("}");#SpecialStringTok(", Theory Mean: ");#SpecialCharTok("{");#NormalTok("cust_dist");#SpecialCharTok(".");#NormalTok("mean()");#SpecialCharTok("}");#SpecialStringTok("\"");#NormalTok(")  ");],));
   #block[
-  #Skylighting(([#NormalTok("Sample Mean: 11.102, Theory Mean: 11.1");],));
+  #Skylighting(([#NormalTok("Sample Mean: 11.126, Theory Mean: 11.1");],));
   ]
   ]
 
@@ -1732,7 +1863,7 @@ Week 05: Variabel Acak, Ekspektasi, dan Variansi
   [#NormalTok("plt.step(x, cdf, where");#OperatorTok("=");#StringTok("'post'");#NormalTok(", label");#OperatorTok("=");#StringTok("'CDF'");#NormalTok(")  ");],
   [#NormalTok("plt.bar(x, p, label");#OperatorTok("=");#StringTok("'PMF'");#NormalTok(", alpha");#OperatorTok("=");#FloatTok("0.5");#NormalTok(")  ");],
   [#NormalTok("plt.legend()");#OperatorTok(";");#NormalTok(" plt.show()  ");],));
-  #box(image("chapters/05-Variabel_Acak_files/figure-typst/cell-4-output-1.svg"))
+  #box(image("ch/05-Variabel_Acak_files/figure-typst/cell-5-output-1.svg"))
 
 + #strong[Soal:] Implementasikan fungsi untuk menghitung variansi menggunakan rumus $E \[ X^2 \] - \( E \[ X \] \)^2$.
 
@@ -1757,9 +1888,9 @@ Week 05: Variabel Acak, Ekspektasi, dan Variansi
   [#NormalTok("avgs ");#OperatorTok("=");#NormalTok(" np.cumsum(rolls) ");#OperatorTok("/");#NormalTok(" np.arange(");#DecValTok("1");#NormalTok(", n");#OperatorTok("+");#DecValTok("1");#NormalTok(")  ");],
   [#CommentTok("# plt.plot(avgs); plt.axhline(3.5, color='r'); # plt.show()  ");],));
   #block[
-  #Skylighting(([#NormalTok("[5 1 1 5 3 4 2 1 4 6 3 6 5 6 3 3 2 4 5 3 3 4 4 3 4 2 4 1 2 4 2 5 6 3 6 4 1");],
-  [#NormalTok(" 5 5 1 3 3 6 2 3 3 5 1 5 3 6 5 6 3 2 4 5 5 5 3 1 5 5 4 3 5 6 2 1 5 2 5 3 5");],
-  [#NormalTok(" 2 1 4 5 6 2 4 6 4 2 2 2 6 6 6 5 1 5 2 5 2 6 2 2 3 6] ");],));
+  #Skylighting(([#NormalTok("[5 5 3 2 6 4 5 3 5 3 6 1 1 1 5 5 5 4 4 4 2 4 6 5 3 2 3 4 2 5 5 1 2 2 6 6 2");],
+  [#NormalTok(" 6 4 3 6 4 2 6 6 6 6 4 6 5 5 1 4 1 3 2 2 5 5 5 6 5 1 4 6 6 1 2 1 5 2 4 6 4");],
+  [#NormalTok(" 2 1 4 2 3 4 6 2 5 3 4 5 6 2 6 2 3 5 3 1 1 3 1 5 1 4] ");],));
   ]
   ]
 ]
@@ -1770,7 +1901,7 @@ Binomial Distribution, Poisson Distribution
 
 \
 #figure([
-#box(image("chapters/../The_Decision_Engineer.png/image6.png"))
+#box(image("ch/../The_Decision_Engineer.png/image6.png"))
 ], caption: figure.caption(
 position: bottom, 
 [
@@ -1842,12 +1973,12 @@ Menggunakan rumus distribusi Binomial (atau aproksimasi Poisson jika n besar dan
 [#NormalTok("plt.tight_layout()");],
 [#NormalTok("plt.show()");],));
 #block[
-#Skylighting(([#NormalTok("rata-rata selang tiba:  10.780643192767375");],
-[#NormalTok("rata-rata selang layanan:  7.403786924949515");],
-[#NormalTok("rata-rata antrian:  10.620655612359553");],
-[#NormalTok("rata-rata total layanan:  18.024442537309074");],));
+#Skylighting(([#NormalTok("rata-rata selang tiba:  10.86399157628195");],
+[#NormalTok("rata-rata selang layanan:  7.575949482041086");],
+[#NormalTok("rata-rata antrian:  10.395455065842363");],
+[#NormalTok("rata-rata total layanan:  17.97140454788344");],));
 ]
-#box(image("chapters/06-Variabel_Acak_Diskrit_files/figure-typst/cell-2-output-2.svg"))
+#box(image("ch/06-Variabel_Acak_Diskrit_files/figure-typst/cell-2-output-2.svg"))
 
 Week 06: Distribusi Probabilitas Diskrit (Binomial & Poisson)
 
@@ -1883,7 +2014,7 @@ Week 06: Distribusi Probabilitas Diskrit (Binomial & Poisson)
 <pertemuan-2-rabu-2-jam-simulation-lab-1>
 #emph[Fokus: Menggunakan Python untuk menghitung risiko kegagalan sistem dan kapasitas server.]
 
-- #strong[00:00 -- 00:20 | Micro-Lecture: Kapan Binomial $approx$ Poisson?]
+- #strong[00:00 -- 00:20 | Micro-Lecture: Kapan Binomial] $approx$ Poisson?
   - #strong[Hukum Kejadian Jarang:] Tunjukkan lewat kode bahwa jika $n$ besar (1000) dan $p$ kecil (0.001), grafik Binomial dan Poisson ($lambda = n dot.op p$) akan berimpit. Ini memudahkan perhitungan di sistem #emph[real-time].
 - #strong[00:20 -- 01:10 | Pod Challenge: "Capacity & Anomaly"]
   - #strong[Skenario:] Anda admin server. Rata-rata #emph[request] per detik adalah $lambda = 50$. Kapasitas server 70 req/detik.
@@ -1906,9 +2037,9 @@ Week 06: Distribusi Probabilitas Diskrit (Binomial & Poisson)
 === #strong[\1. Konsep Dasar]
 <konsep-dasar-4>
 - #strong[Distribusi Bernoulli:] Unit dasar. 1 percobaan, Sukses ($p$) atau Gagal ($1 - p$).
-- #strong[Distribusi Binomial ($n \, p$):] Jumlah sukses $k$ dalam $n$ percobaan Bernoulli yang saling independen.
+- #strong[Distribusi Binomial (]$n \, p$): Jumlah sukses $k$ dalam $n$ percobaan Bernoulli yang saling independen.
   - Rumus: $P \( X = k \) = binom(n, k) p^k \( 1 - p \)^(n - k)$.
-- #strong[Distribusi Poisson ($lambda$):] Jumlah kejadian dalam interval waktu/ruang tertentu.
+- #strong[Distribusi Poisson (]$lambda$): Jumlah kejadian dalam interval waktu/ruang tertentu.
   - Rumus: $P \( X = k \) = frac(e^(- lambda) lambda^k, k !)$.
   - #strong[Hukum Kejadian Jarang:] Poisson adalah limit dari Binomial saat $n arrow.r oo$ dan $p arrow.r 0$.
 
@@ -1934,123 +2065,191 @@ Week 06: Distribusi Probabilitas Diskrit (Binomial & Poisson)
 
 #strong[Deskripsi:] Mahasiswa diberikan log data simulasi jaringan. Mereka harus memodelkan pola trafik normal dan membuat skrip otomatis untuk mendeteksi anomali.
 
-#strong[Set Soal (Notebook):] 1. #strong[Modeling (30 poin):] \* Analisis data historis: Hitung rata-rata request/detik ($lambda$). \* Visualisasikan histogram data vs kurva teoritis Poisson($lambda$). Apakah cocok? 2. #strong[Capacity Planning (30 poin):] \* Perusahaan ingin menjamin 99.9% waktu server aman. \* Cari nilai $C$ (kapasitas) sedemikian rupa sehingga $P \( X lt.eq C \) gt.eq 0.999$. 3. #strong[Anomaly Detection (40 poin):] \* Buat fungsi #NormalTok("is_anomaly(current_requests)");. \* Jika probabilitas kejadian tersebut $< 0.05 %$ berdasarkan distribusi Poisson, kembalikan #NormalTok("True");. \* Uji fungsi tersebut pada dataset serangan (dataset kedua).
+#strong[Set Soal (Notebook):]
+
++ 1. #strong[Modeling (30 poin):]
+
+  + \* Analisis data historis: Hitung rata-rata request/detik ($lambda$).
+
+  + \* Visualisasikan histogram data vs kurva teoritis Poisson($lambda$). Apakah cocok?
+
++ 2. #strong[Capacity Planning (30 poin):]
+
+  + \* Perusahaan ingin menjamin 99.9% waktu server aman.
+
+  + \* Cari nilai $C$ (kapasitas) sedemikian rupa sehingga $P \( X lt.eq C \) gt.eq 0.999$.
+
++ 3. #strong[Anomaly Detection (40 poin):]
+
+  + \* Buat fungsi #NormalTok("is_anomaly(current_requests)");.
+
+  + \* Jika probabilitas kejadian tersebut $< 0.05 %$ berdasarkan distribusi Poisson, kembalikan #NormalTok("True");.
+
+  + \* Uji fungsi tersebut pada dataset serangan (dataset kedua).
 
 #horizontalrule
 
-== #strong[15 Soal & Solusi (Sumber: "Desain Kurikulum…")]
-<soal-solusi-sumber-desain-kurikulum>
+== #strong[15 Soal & Solusi]
+<soal-solusi-4>
 Berikut adalah 15 soal yang diambil dari referensi #emph[Desain Kurikulum Statistika Generasi Z] (Bagian Minggu 06)--.
 
 === #strong[A. Pertanyaan Konseptual]
 <a.-pertanyaan-konseptual-5>
 #strong[\1. Soal:] Apa syarat-syarat utama agar sebuah eksperimen dapat dimodelkan dengan distribusi Binomial?
 
-{{<pause>}}
 - #strong[Solusi:] Eksperimen terdiri dari $n$ percobaan identik, setiap percobaan hanya memiliki dua hasil (sukses/gagal), probabilitas sukses $p$ konstan untuk setiap percobaan, dan setiap percobaan saling independen.
 
-#pagebreak() #strong[\2. Soal:] Mengapa distribusi Poisson sering disebut sebagai distribusi untuk kejadian langka? \* #strong[Solusi:] Karena Poisson sering diturunkan dari distribusi Binomial di mana jumlah percobaan $n$ sangat besar (menuju tak hingga) namun probabilitas sukses $p$ sangat kecil (menuju nol), sehingga kejadian "sukses" relatif jarang terjadi dibanding total kemungkinan.
+#strong[\2. Soal:] Mengapa distribusi Poisson sering disebut sebagai distribusi untuk kejadian langka?
 
-#strong[\3. Soal:] Jelaskan hubungan antara distribusi Binomial dan distribusi Bernoulli. \* #strong[Solusi:] Distribusi Bernoulli adalah kasus khusus dari distribusi Binomial dengan jumlah percobaan $n = 1$. Distribusi Binomial adalah penjumlahan dari $n$ variabel acak Bernoulli yang independen dan identik.
+- #strong[Solusi:] Karena Poisson sering diturunkan dari distribusi Binomial di mana jumlah percobaan $n$ sangat besar (menuju tak hingga) namun probabilitas sukses $p$ sangat kecil (menuju nol), sehingga kejadian "sukses" relatif jarang terjadi dibanding total kemungkinan.
 
-#strong[\4. Soal:] Dalam kondisi apa distribusi Poisson dapat digunakan sebagai pendekatan untuk distribusi Binomial? \* #strong[Solusi:] Ketika jumlah percobaan $n$ sangat besar ($n gt.eq 30$ atau $n arrow.r oo$) dan probabilitas sukses $p$ sangat kecil ($p lt.eq 0.05$ atau $p arrow.r 0$), serta rata-rata $n p$ tetap konstan sebagai $lambda$.
+#strong[\3. Soal:] Jelaskan hubungan antara distribusi Binomial dan distribusi Bernoulli.
 
-#strong[\5. Soal:] Apa makna parameter $lambda$ dalam distribusi Poisson dalam konteks lalu lintas paket data? \* #strong[Solusi:] Parameter $lambda$ merepresentasikan rata-rata jumlah paket data yang tiba atau diproses per satuan waktu (misalnya: paket per detik) atau per satuan ruang.
+- #strong[Solusi:] Distribusi Bernoulli adalah kasus khusus dari distribusi Binomial dengan jumlah percobaan $n = 1$. Distribusi Binomial adalah penjumlahan dari $n$ variabel acak Bernoulli yang independen dan identik.
+
+#strong[\4. Soal:] Dalam kondisi apa distribusi Poisson dapat digunakan sebagai pendekatan untuk distribusi Binomial?
+
+- #strong[Solusi:] Ketika jumlah percobaan $n$ sangat besar ($n gt.eq 30$ atau $n arrow.r oo$) dan probabilitas sukses $p$ sangat kecil ($p lt.eq 0.05$ atau $p arrow.r 0$), serta rata-rata $n p$ tetap konstan sebagai $lambda$.
+
+#strong[\5. Soal:] Apa makna parameter $lambda$ dalam distribusi Poisson dalam konteks lalu lintas paket data?
+
+- #strong[Solusi:] Parameter $lambda$ merepresentasikan rata-rata jumlah paket data yang tiba atau diproses per satuan waktu (misalnya: paket per detik) atau per satuan ruang.
 
 === #strong[B. Pertanyaan Aplikatif]
 <b.-pertanyaan-aplikatif-5>
-#strong[\6. Soal:] Sebuah sistem mengirimkan 10 paket data. Jika probabilitas satu paket rusak adalah 0,1, berapa probabilitas tepat 2 paket rusak? \* #strong[Solusi:] Gunakan Binomial($n = 10 \, p = 0.1$). $P \( X = 2 \) = binom(10, 2) \( 0.1 \)^2 \( 0.9 \)^8 = 45 dot.op 0.01 dot.op 0.430 = 0.1937$.
+#strong[\6. Soal:] Sebuah sistem mengirimkan 10 paket data. Jika probabilitas satu paket rusak adalah 0,1, berapa probabilitas tepat 2 paket rusak?
 
-#strong[\7. Soal:] Rata-rata serangan siber yang terdeteksi pada firewall adalah 2 per jam. Berapa probabilitas tidak ada serangan dalam satu jam ke depan? \* #strong[Solusi:] Gunakan Poisson($lambda = 2$). $P \( X = 0 \) = frac(e^(- 2) 2^0, 0 !) = e^(- 2) approx 0.1353$.
+- #strong[Solusi:] Gunakan Binomial($n = 10 \, p = 0.1$). $P \( X = 2 \) = binom(10, 2) \( 0.1 \)^2 \( 0.9 \)^8 = 45 dot.op 0.01 dot.op 0.430 = 0.1937$.
 
-#strong[\8. Soal:] Dalam pengujian software, probabilitas menemukan bug pada satu baris kode adalah 0,001. Jika ada 1.000 baris kode, gunakan pendekatan Poisson untuk menghitung probabilitas ada tepat 1 bug. \* #strong[Solusi:] $lambda = n dot.op p = 1000 dot.op 0.001 = 1$. $P \( X = 1 \) = frac(e^(- 1) 1^1, 1 !) = e^(- 1) approx 0.3679$.
+#strong[\7. Soal:] Rata-rata serangan siber yang terdeteksi pada firewall adalah 2 per jam. Berapa probabilitas tidak ada serangan dalam satu jam ke depan?
 
-#strong[\9. Soal:] Sebuah database melayani rata-rata 50 query per detik. Hitung probabilitas server menerima lebih dari 60 query dalam satu detik tertentu. \* #strong[Solusi:] Gunakan Poisson($lambda = 50$). Kita cari $P \( X > 60 \) = 1 - P \( X lt.eq 60 \)$. Ini biasanya dihitung menggunakan tabel atau komputer (#NormalTok("1 - poisson.cdf(60, 50)");), hasilnya sekitar 0.072 (7.2%).
+- #strong[Solusi:] Gunakan Poisson($lambda = 2$). $P \( X = 0 \) = frac(e^(- 2) 2^0, 0 !) = e^(- 2) approx 0.1353$.
 
-#strong[\10. Soal:] Analisis probabilitas jumlah user yang mengklik iklan dalam 100 impresi jika #emph[click-through rate] (CTR) adalah 2%. \* #strong[Solusi:] Ini model Binomial($n = 100 \, p = 0.02$). Kita bisa menghitung peluang untuk berbagai jumlah klik (0, 1, 2, dst) untuk memprediksi performa iklan. Rata-rata klik yang diharapkan adalah $E \[ X \] = 100 dot.op 0.02 = 2$ klik.
+#strong[\8. Soal:] Dalam pengujian software, probabilitas menemukan bug pada satu baris kode adalah 0,001. Jika ada 1.000 baris kode, gunakan pendekatan Poisson untuk menghitung probabilitas ada tepat 1 bug.
+
+- #strong[Solusi:] $lambda = n dot.op p = 1000 dot.op 0.001 = 1$. $P \( X = 1 \) = frac(e^(- 1) 1^1, 1 !) = e^(- 1) approx 0.3679$.
+
+#strong[\9. Soal:] Sebuah database melayani rata-rata 50 query per detik. Hitung probabilitas server menerima lebih dari 60 query dalam satu detik tertentu.
+
+- #strong[Solusi:] Gunakan Poisson($lambda = 50$). Kita cari $P \( X > 60 \) = 1 - P \( X lt.eq 60 \)$. Ini biasanya dihitung menggunakan tabel atau komputer (#NormalTok("1 - poisson.cdf(60, 50)");), hasilnya sekitar 0.072 (7.2%).
+
+#strong[\10. Soal:] Analisis probabilitas jumlah user yang mengklik iklan dalam 100 impresi jika #emph[click-through rate] (CTR) adalah 2%.
+
+- #strong[Solusi:] Ini model Binomial($n = 100 \, p = 0.02$). Kita bisa menghitung peluang untuk berbagai jumlah klik (0, 1, 2, dst) untuk memprediksi performa iklan. Rata-rata klik yang diharapkan adalah $E \[ X \] = 100 dot.op 0.02 = 2$ klik.
 
 === #strong[C. Pertanyaan Komputasional]
 <c.-pertanyaan-komputasional-5>
-#strong[\11. Soal:] Gunakan #NormalTok("scipy.stats.binom.pmf"); untuk memplot probabilitas jumlah sukses dari 0 hingga 20 dalam eksperimen dengan $n = 20$ dan $p = 0.5$. \* #strong[Solusi:]
+#strong[\11. Soal:] Gunakan #NormalTok("scipy.stats.binom.pmf"); untuk memplot probabilitas jumlah sukses dari 0 hingga 20 dalam eksperimen dengan $n = 20$ dan $p = 0.5$. \*
 
-#Skylighting(([#NormalTok("::: {.cell execution_count=2}");],
-[#NormalTok("``` {.python .cell-code}");],
-[#NormalTok("from scipy.stats import binom");],
-[#NormalTok("import matplotlib.pyplot as plt");],
-[#NormalTok("x = range(21)");],
-[#NormalTok("plt.bar(x, binom.pmf(x, 20, 0.5))");],
-[#NormalTok("plt.show()");],
-[#NormalTok("```");],
+- #strong[Solusi:]
+
+#Skylighting(([#ImportTok("from");#NormalTok(" scipy.stats ");#ImportTok("import");#NormalTok(" binom");],
+[#ImportTok("import");#NormalTok(" matplotlib.pyplot ");#ImportTok("as");#NormalTok(" plt");],
+[#NormalTok("x ");#OperatorTok("=");#NormalTok(" ");#BuiltInTok("range");#NormalTok("(");#DecValTok("21");#NormalTok(")");],
+[#NormalTok("plt.bar(x, binom.pmf(x, ");#DecValTok("20");#NormalTok(", ");#FloatTok("0.5");#NormalTok("))");],
+[#NormalTok("plt.show()");],));
+#box(image("ch/06-Variabel_Acak_Diskrit_files/figure-typst/cell-3-output-1.svg"))
+
+#strong[\12. Soal:] Tulis program Python yang membandingkan hasil perhitungan distribusi Binomial dan pendekatan Poisson untuk $n = 100$ dan $p = 0.01$.
+
+- #strong[Solusi:]
+
+#block[
+#Skylighting(([#ImportTok("from");#NormalTok(" scipy.stats ");#ImportTok("import");#NormalTok(" binom, poisson");],
+[#NormalTok("n, p ");#OperatorTok("=");#NormalTok(" ");#DecValTok("100");#NormalTok(", ");#FloatTok("0.01");],
+[#NormalTok("mu ");#OperatorTok("=");#NormalTok(" n ");#OperatorTok("*");#NormalTok(" p");],
+[#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"Binom P(X=2): ");#SpecialCharTok("{");#NormalTok("binom");#SpecialCharTok(".");#NormalTok("pmf(");#DecValTok("2");#NormalTok(", n, p)");#SpecialCharTok("}");#SpecialStringTok("\"");#NormalTok(")");],
+[#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"Poisson P(X=2): ");#SpecialCharTok("{");#NormalTok("poisson");#SpecialCharTok(".");#NormalTok("pmf(");#DecValTok("2");#NormalTok(", mu)");#SpecialCharTok("}");#SpecialStringTok("\"");#NormalTok(")");],));
+#block[
+#Skylighting(([#NormalTok("Binom P(X=2): 0.18486481882486347");],
+[#NormalTok("Poisson P(X=2): 0.18393972058572114");],));
+]
+]
+#strong[\13. Soal:] Simulasikan proses kedatangan Poisson dengan membangkitkan bilangan acak dan hitung jumlah kejadian dalam interval waktu tertentu.
+
+- #strong[Solusi:]
+
+#block[
+#Skylighting(([#ImportTok("import");#NormalTok(" numpy ");#ImportTok("as");#NormalTok(" np");],
+[#CommentTok("# Simulasi 1000 jam, rata-rata 5 event/jam");],
+[#NormalTok("simulasi ");#OperatorTok("=");#NormalTok(" np.random.poisson(lam");#OperatorTok("=");#DecValTok("5");#NormalTok(", size");#OperatorTok("=");#DecValTok("1000");#NormalTok(")");],
+[#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"Rata-rata simulasi: ");#SpecialCharTok("{");#NormalTok("np");#SpecialCharTok(".");#NormalTok("mean(simulasi)");#SpecialCharTok("}");#SpecialStringTok("\"");#NormalTok(")");],));
+#block[
+#Skylighting(([#NormalTok("Rata-rata simulasi: 4.998");],));
+]
+]
+#strong[\14. Soal:] Visualisasikan perubahan bentuk distribusi Binomial saat parameter $p$ bervariasi dari 0,1 hingga 0,9.
+
+- #strong[Solusi:]
+
+#Skylighting(([#NormalTok("n ");#OperatorTok("=");#NormalTok(" ");#DecValTok("20");],
+[#ControlFlowTok("for");#NormalTok(" p ");#KeywordTok("in");#NormalTok(" [");#FloatTok("0.1");#NormalTok(", ");#FloatTok("0.5");#NormalTok(", ");#FloatTok("0.9");#NormalTok("]:");],
+[#NormalTok("    plt.plot(binom.pmf(");#BuiltInTok("range");#NormalTok("(n");#OperatorTok("+");#DecValTok("1");#NormalTok("), n, p), label");#OperatorTok("=");#SpecialStringTok("f'p=");#SpecialCharTok("{");#NormalTok("p");#SpecialCharTok("}");#SpecialStringTok("'");#NormalTok(")");],
+[#NormalTok("plt.legend()");#OperatorTok(";");#NormalTok(" plt.show()");],));
+#box(image("ch/06-Variabel_Acak_Diskrit_files/figure-typst/cell-6-output-1.svg"))
+
+#strong[\15. Soal:] Implementasikan fungsi untuk menghitung probabilitas kumulatif Binomial tanpa menggunakan pustaka eksternal.
+
+#strong[Solusi:]
+
+#block[
+#Skylighting(([#KeywordTok("def");#NormalTok(" factorial(n):");],
+[#NormalTok("    result ");#OperatorTok("=");#NormalTok(" ");#DecValTok("1");],
+[#NormalTok("    ");#ControlFlowTok("for");#NormalTok(" i ");#KeywordTok("in");#NormalTok(" ");#BuiltInTok("range");#NormalTok("(");#DecValTok("2");#NormalTok(", n ");#OperatorTok("+");#NormalTok(" ");#DecValTok("1");#NormalTok("):");],
+[#NormalTok("        result ");#OperatorTok("*=");#NormalTok(" i");],
+[#NormalTok("    ");#ControlFlowTok("return");#NormalTok(" result");],
 [],
-[#NormalTok("::: {.cell-output .cell-output-display}");],
-[#NormalTok("![](06-Variabel_Acak_Diskrit_files/figure-typst/cell-3-output-1.svg){}");],
-[#NormalTok(":::");],
-[#NormalTok(":::");],));
-#strong[\12. Soal:] Tulis program Python yang membandingkan hasil perhitungan distribusi Binomial dan pendekatan Poisson untuk $n = 100$ dan $p = 0.01$. \* #strong[Solusi:]
-
-#Skylighting(([#NormalTok("::: {.cell execution_count=3}");],
-[#NormalTok("``` {.python .cell-code}");],
-[#NormalTok("from scipy.stats import binom, poisson");],
-[#NormalTok("n, p = 100, 0.01");],
-[#NormalTok("mu = n * p");],
-[#NormalTok("print(f\"Binom P(X=2): {binom.pmf(2, n, p)}\")");],
-[#NormalTok("print(f\"Poisson P(X=2): {poisson.pmf(2, mu)}\")");],
-[#NormalTok("```");],
 [],
-[#NormalTok("::: {.cell-output .cell-output-stdout}");],
-[#NormalTok("```");],
-[#NormalTok("Binom P(X=2): 0.18486481882486347");],
-[#NormalTok("Poisson P(X=2): 0.18393972058572114");],
-[#NormalTok("```");],
-[#NormalTok(":::");],
-[#NormalTok(":::");],));
-#strong[\13. Soal:] Simulasikan proses kedatangan Poisson dengan membangkitkan bilangan acak dan hitung jumlah kejadian dalam interval waktu tertentu. \* #strong[Solusi:]
-
-#Skylighting(([#NormalTok("::: {.cell execution_count=4}");],
-[#NormalTok("``` {.python .cell-code}");],
-[#NormalTok("import numpy as np");],
-[#NormalTok("# Simulasi 1000 jam, rata-rata 5 event/jam");],
-[#NormalTok("simulasi = np.random.poisson(lam=5, size=1000)");],
-[#NormalTok("print(f\"Rata-rata simulasi: {np.mean(simulasi)}\")");],
-[#NormalTok("```");],
+[#KeywordTok("def");#NormalTok(" combination(n, k):");],
+[#NormalTok("    ");#ControlFlowTok("return");#NormalTok(" factorial(n) ");#OperatorTok("//");#NormalTok(" (factorial(k) ");#OperatorTok("*");#NormalTok(" factorial(n ");#OperatorTok("-");#NormalTok(" k))");],
 [],
-[#NormalTok("::: {.cell-output .cell-output-stdout}");],
-[#NormalTok("```");],
-[#NormalTok("Rata-rata simulasi: 4.955");],
-[#NormalTok("```");],
-[#NormalTok(":::");],
-[#NormalTok(":::");],));
-#strong[\14. Soal:] Visualisasikan perubahan bentuk distribusi Binomial saat parameter $p$ bervariasi dari 0,1 hingga 0,9. \* #strong[Solusi:]
-
-#Skylighting(([#NormalTok("::: {.cell execution_count=5}");],
-[#NormalTok("``` {.python .cell-code}");],
-[#NormalTok("n = 20");],
-[#NormalTok("for p in [0.1, 0.5, 0.9]:");],
-[#NormalTok("    plt.plot(binom.pmf(range(n+1), n, p), label=f'p={p}')");],
-[#NormalTok("plt.legend(); plt.show()");],
-[#NormalTok("```");],
 [],
-[#NormalTok("::: {.cell-output .cell-output-display}");],
-[#NormalTok("![](06-Variabel_Acak_Diskrit_files/figure-typst/cell-6-output-1.svg){}");],
-[#NormalTok(":::");],
-[#NormalTok(":::");],));
-#strong[\15. Soal:] Implementasikan fungsi untuk menghitung probabilitas kumulatif Binomial tanpa menggunakan pustaka eksternal. \* #strong[Solusi:]
+[#KeywordTok("def");#NormalTok(" binomial_pmf(n, k, p):");],
+[#NormalTok("    ");#ControlFlowTok("return");#NormalTok(" combination(n, k) ");#OperatorTok("*");#NormalTok(" (p ");#OperatorTok("**");#NormalTok(" k) ");#OperatorTok("*");#NormalTok(" ((");#DecValTok("1");#NormalTok(" ");#OperatorTok("-");#NormalTok(" p) ");#OperatorTok("**");#NormalTok(" (n ");#OperatorTok("-");#NormalTok(" k))");],
+[],
+[],
+[#KeywordTok("def");#NormalTok(" binomial_cdf(n, k, p):");],
+[#NormalTok("    total ");#OperatorTok("=");#NormalTok(" ");#DecValTok("0");],
+[#NormalTok("    ");#ControlFlowTok("for");#NormalTok(" i ");#KeywordTok("in");#NormalTok(" ");#BuiltInTok("range");#NormalTok("(k ");#OperatorTok("+");#NormalTok(" ");#DecValTok("1");#NormalTok("):");],
+[#NormalTok("        total ");#OperatorTok("+=");#NormalTok(" binomial_pmf(n, i, p)");],
+[#NormalTok("    ");#ControlFlowTok("return");#NormalTok(" total");],
+[],
+[#NormalTok("n ");#OperatorTok("=");#NormalTok(" ");#DecValTok("10");#NormalTok("      ");#CommentTok("# jumlah percobaan");],
+[#NormalTok("p ");#OperatorTok("=");#NormalTok(" ");#FloatTok("0.5");#NormalTok("     ");#CommentTok("# probabilitas sukses");],
+[#NormalTok("k ");#OperatorTok("=");#NormalTok(" ");#DecValTok("3");#NormalTok("       ");#CommentTok("# batas kumulatif");],
+[],
+[#NormalTok("prob ");#OperatorTok("=");#NormalTok(" binomial_cdf(n, k, p)");],
+[#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"P(X <= ");#SpecialCharTok("{");#NormalTok("k");#SpecialCharTok("}");#SpecialStringTok(") = ");#SpecialCharTok("{");#NormalTok("prob");#SpecialCharTok("}");#SpecialStringTok("\"");#NormalTok(")");],));
+#block[
+#Skylighting(([#NormalTok("P(X <= 3) = 0.171875");],));
+]
+]
+Versi lebih stabil tanpa factorial
 
-#Skylighting(([#NormalTok("::: {.cell execution_count=6}");],
-[#NormalTok("``` {.python .cell-code}");],
-[#NormalTok("def fact(n): return 1 if n<=1 else n*fact(n-1)");],
-[#NormalTok("def comb(n, k): return fact(n) // (fact(k) * fact(n-k))");],
-[#NormalTok("def binom_cdf(k, n, p):");],
-[#NormalTok("    return sum(comb(n, i) * (p**i) * ((1-p)**(n-i)) for i in range(k+1))");],
-[#NormalTok("```");],
-[#NormalTok(":::");],));
+#block[
+#Skylighting(([#KeywordTok("def");#NormalTok(" binomial_cdf_stable(n, k, p):");],
+[#NormalTok("    ");#CommentTok("# mulai dari P(X=0)");],
+[#NormalTok("    prob ");#OperatorTok("=");#NormalTok(" (");#DecValTok("1");#NormalTok(" ");#OperatorTok("-");#NormalTok(" p) ");#OperatorTok("**");#NormalTok(" n");],
+[#NormalTok("    total ");#OperatorTok("=");#NormalTok(" prob");],
+[],
+[#NormalTok("    ");#ControlFlowTok("for");#NormalTok(" i ");#KeywordTok("in");#NormalTok(" ");#BuiltInTok("range");#NormalTok("(");#DecValTok("0");#NormalTok(", k):");],
+[#NormalTok("        prob ");#OperatorTok("=");#NormalTok(" prob ");#OperatorTok("*");#NormalTok(" (n ");#OperatorTok("-");#NormalTok(" i) ");#OperatorTok("/");#NormalTok(" (i ");#OperatorTok("+");#NormalTok(" ");#DecValTok("1");#NormalTok(") ");#OperatorTok("*");#NormalTok(" (p ");#OperatorTok("/");#NormalTok(" (");#DecValTok("1");#NormalTok(" ");#OperatorTok("-");#NormalTok(" p))");],
+[#NormalTok("        total ");#OperatorTok("+=");#NormalTok(" prob");],
+[],
+[#NormalTok("    ");#ControlFlowTok("return");#NormalTok(" total");],
+[],
+[#BuiltInTok("print");#NormalTok("(binomial_cdf_stable(");#DecValTok("10");#NormalTok(", ");#DecValTok("3");#NormalTok(", ");#FloatTok("0.5");#NormalTok("))");],));
+#block[
+#Skylighting(([#NormalTok("0.171875");],));
+]
+]
 = Minggu 07: Variabel Acak Kontinu
 <minggu-07-variabel-acak-kontinu>
 Normal Distribution, Exponential Distribution
 
 \
 #figure([
-#box(image("chapters/../The_Decision_Engineer.png/image7.png"))
+#box(image("ch/../The_Decision_Engineer.png/image7.png"))
 ], caption: figure.caption(
 position: bottom, 
 [
@@ -2302,12 +2501,36 @@ Week 07: Distribusi Kontinu: Kurva Normal dan Eksponensial dalam Rekayasa
 
 #strong[Deskripsi:] Mahasiswa berperan sebagai tim Analis Risiko untuk peluncuran Smart Lamp baru. Mereka harus menyeimbangkan antara daya tarik marketing (garansi lama) dan risiko kebangkrutan (klaim garansi meledak).
 
-#strong[Set Soal (Notebook):] 1. #strong[Analisis Normal (30 poin):] - Diketahui umur lampu $N \( mu = 10.000 upright(" jam") \, sigma = 1.000 upright(" jam") \)$. - Hitung probabilitas lampu mati sebelum 8.000 jam. - Cari "titik aman" jam ke berapa sehingga 95% lampu masih hidup. 2. #strong[Analisis Eksponensial (30 poin):] - Modul Wi-Fi pada lampu memiliki laju kegagalan $lambda = 0.00005$ per jam. - Hitung probabilitas modul ini bertahan lebih dari 20.000 jam. - Buktikan sifat #emph[memoryless] dengan simulasi: Bandingkan peluang bertahan 1000 jam lagi untuk modul baru vs modul yang sudah nyala 5000 jam. 3. #strong[Keputusan Bisnis (40 poin):] - Biaya produksi = \$5. Harga jual = \$15. Biaya ganti rugi garansi = \$10 (rugi total). - Simulasikan profit total untuk 10.000 unit dengan opsi Garansi A (9.000 jam) vs Garansi B (8.000 jam). - Buat rekomendasi: Mana yang memberikan profit bersih terbesar?
+#strong[Set Soal (Notebook):]
+
++ 1. #strong[Analisis Normal (30 poin):]
+
+  + - Diketahui umur lampu $N \( mu = 10.000 upright(" jam") \, sigma = 1.000 upright(" jam") \)$.
+
+  + - Hitung probabilitas lampu mati sebelum 8.000 jam.
+
+  + - Cari "titik aman" jam ke berapa sehingga 95% lampu masih hidup.
+
++ 2. #strong[Analisis Eksponensial (30 poin):]
+
+  + - Modul Wi-Fi pada lampu memiliki laju kegagalan $lambda = 0.00005$ per jam.
+
+  + - Hitung probabilitas modul ini bertahan lebih dari 20.000 jam.
+
+  + - Buktikan sifat #emph[memoryless] dengan simulasi: Bandingkan peluang bertahan 1000 jam lagi untuk modul baru vs modul yang sudah nyala 5000 jam.
+
++ 3. #strong[Keputusan Bisnis (40 poin):]
+
+  + - Biaya produksi = \$5. Harga jual = \$15. Biaya ganti rugi garansi = \$10 (rugi total).
+
+  + - Simulasikan profit total untuk 10.000 unit dengan opsi Garansi A (9.000 jam) vs Garansi B (8.000 jam).
+
+  + - Buat rekomendasi: Mana yang memberikan profit bersih terbesar?
 
 #horizontalrule
 
 == 15 Soal & Solusi
-<soal-solusi-4>
+<soal-solusi-5>
 === A. Pertanyaan Konseptual
 <a.-pertanyaan-konseptual-6>
 + #strong[Soal:] Mengapa probabilitas $P \( X = x \)$ pada distribusi kontinu selalu bernilai nol?
@@ -2344,83 +2567,79 @@ Week 07: Distribusi Kontinu: Kurva Normal dan Eksponensial dalam Rekayasa
 #block[
 #set enum(numbering: "1.", start: 11)
 + #strong[Soal:] Gunakan #NormalTok("scipy.stats.norm.cdf"); untuk menghitung probabilitas di antara dua nilai pada distribusi Normal.
-  - #strong[Solusi:]
-]
 
-#block[
-#Skylighting(([#ImportTok("from");#NormalTok(" scipy.stats ");#ImportTok("import");#NormalTok(" norm  ");],
-[#NormalTok("mu, sigma ");#OperatorTok("=");#NormalTok(" ");#DecValTok("100");#NormalTok(", ");#DecValTok("15");#NormalTok("  ");],
-[#CommentTok("# P(85 < X < 115)  ");],
-[#NormalTok("prob ");#OperatorTok("=");#NormalTok(" norm.cdf(");#DecValTok("115");#NormalTok(", mu, sigma) ");#OperatorTok("-");#NormalTok(" norm.cdf(");#DecValTok("85");#NormalTok(", mu, sigma)  ");],
-[#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"Probabilitas: ");#SpecialCharTok("{");#NormalTok("prob");#SpecialCharTok(":.4f}");#SpecialStringTok("\"");#NormalTok(")  ");],));
-#block[
-#Skylighting(([#NormalTok("Probabilitas: 0.6827");],));
-]
-]
-#block[
-#set enum(numbering: "1.", start: 12)
+  - #strong[Solusi:]
+
+  #block[
+  #Skylighting(([#ImportTok("from");#NormalTok(" scipy.stats ");#ImportTok("import");#NormalTok(" norm  ");],
+  [#NormalTok("mu, sigma ");#OperatorTok("=");#NormalTok(" ");#DecValTok("100");#NormalTok(", ");#DecValTok("15");#NormalTok("  ");],
+  [#CommentTok("# P(85 < X < 115)  ");],
+  [#NormalTok("prob ");#OperatorTok("=");#NormalTok(" norm.cdf(");#DecValTok("115");#NormalTok(", mu, sigma) ");#OperatorTok("-");#NormalTok(" norm.cdf(");#DecValTok("85");#NormalTok(", mu, sigma)  ");],
+  [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"Probabilitas: ");#SpecialCharTok("{");#NormalTok("prob");#SpecialCharTok(":.4f}");#SpecialStringTok("\"");#NormalTok(")  ");],));
+  #block[
+  #Skylighting(([#NormalTok("Probabilitas: 0.6827");],));
+  ]
+  ]
+
 + #strong[Soal:] Tulis skrip Python untuk menghasilkan plot distribusi Normal Standar dan arsirlah area di bawah kurva untuk $P \( - 1 < Z < 1 \)$.
+
   - #strong[Solusi:]
-]
 
-#Skylighting(([#ImportTok("import");#NormalTok(" numpy ");#ImportTok("as");#NormalTok(" np");#OperatorTok(";");#NormalTok(" ");#ImportTok("import");#NormalTok(" matplotlib.pyplot ");#ImportTok("as");#NormalTok(" plt  ");],
-[#ImportTok("from");#NormalTok(" scipy.stats ");#ImportTok("import");#NormalTok(" norm  ");],
-[#NormalTok("x ");#OperatorTok("=");#NormalTok(" np.linspace(");#OperatorTok("-");#DecValTok("3");#NormalTok(", ");#DecValTok("3");#NormalTok(", ");#DecValTok("100");#NormalTok(")  ");],
-[#NormalTok("plt.plot(x, norm.pdf(x))  ");],
-[#NormalTok("x_fill ");#OperatorTok("=");#NormalTok(" np.linspace(");#OperatorTok("-");#DecValTok("1");#NormalTok(", ");#DecValTok("1");#NormalTok(", ");#DecValTok("100");#NormalTok(")  ");],
-[#NormalTok("plt.fill_between(x_fill, norm.pdf(x_fill), alpha");#OperatorTok("=");#FloatTok("0.5");#NormalTok(")  ");],
-[#NormalTok("plt.show()  ");],));
-#box(image("chapters/07-Variabel_Acak_Kontinu_files/figure-typst/cell-4-output-1.svg"))
+  #Skylighting(([#ImportTok("import");#NormalTok(" numpy ");#ImportTok("as");#NormalTok(" np");#OperatorTok(";");#NormalTok(" ");#ImportTok("import");#NormalTok(" matplotlib.pyplot ");#ImportTok("as");#NormalTok(" plt  ");],
+  [#ImportTok("from");#NormalTok(" scipy.stats ");#ImportTok("import");#NormalTok(" norm  ");],
+  [#NormalTok("x ");#OperatorTok("=");#NormalTok(" np.linspace(");#OperatorTok("-");#DecValTok("3");#NormalTok(", ");#DecValTok("3");#NormalTok(", ");#DecValTok("100");#NormalTok(")  ");],
+  [#NormalTok("plt.plot(x, norm.pdf(x))  ");],
+  [#NormalTok("x_fill ");#OperatorTok("=");#NormalTok(" np.linspace(");#OperatorTok("-");#DecValTok("1");#NormalTok(", ");#DecValTok("1");#NormalTok(", ");#DecValTok("100");#NormalTok(")  ");],
+  [#NormalTok("plt.fill_between(x_fill, norm.pdf(x_fill), alpha");#OperatorTok("=");#FloatTok("0.5");#NormalTok(")  ");],
+  [#NormalTok("plt.show()  ");],));
+  #box(image("ch/07-Variabel_Acak_Kontinu_files/figure-typst/cell-4-output-1.svg"))
 
-#block[
-#set enum(numbering: "1.", start: 13)
 + #strong[Soal:] Implementasikan fungsi untuk menghitung skor-Z dari sekumpulan data numerik menggunakan numpy.
-  - #strong[Solusi:]
-]
 
-#block[
-#Skylighting(([#ImportTok("import");#NormalTok(" numpy ");#ImportTok("as");#NormalTok(" np  ");],
-[#KeywordTok("def");#NormalTok(" calculate_z_scores(data):  ");],
-[#NormalTok("    ");#ControlFlowTok("return");#NormalTok(" (data ");#OperatorTok("-");#NormalTok(" np.mean(data)) ");#OperatorTok("/");#NormalTok(" np.std(data)  ");],
-[#NormalTok("data ");#OperatorTok("=");#NormalTok(" [");#DecValTok("1");#NormalTok(", ");#DecValTok("2");#NormalTok(", ");#DecValTok("3");#NormalTok(", ");#DecValTok("4");#NormalTok(", ");#DecValTok("5");#NormalTok("]  ");],
-[#BuiltInTok("print");#NormalTok("(calculate_z_scores(data))  ");],));
-#block[
-#Skylighting(([#NormalTok("[-1.41421356 -0.70710678  0.          0.70710678  1.41421356]");],));
-]
-]
-#block[
-#set enum(numbering: "1.", start: 14)
+  - #strong[Solusi:]
+
+  #block[
+  #Skylighting(([#ImportTok("import");#NormalTok(" numpy ");#ImportTok("as");#NormalTok(" np  ");],
+  [#KeywordTok("def");#NormalTok(" calculate_z_scores(data):  ");],
+  [#NormalTok("    ");#ControlFlowTok("return");#NormalTok(" (data ");#OperatorTok("-");#NormalTok(" np.mean(data)) ");#OperatorTok("/");#NormalTok(" np.std(data)  ");],
+  [#NormalTok("data ");#OperatorTok("=");#NormalTok(" [");#DecValTok("1");#NormalTok(", ");#DecValTok("2");#NormalTok(", ");#DecValTok("3");#NormalTok(", ");#DecValTok("4");#NormalTok(", ");#DecValTok("5");#NormalTok("]  ");],
+  [#BuiltInTok("print");#NormalTok("(calculate_z_scores(data))  ");],));
+  #block[
+  #Skylighting(([#NormalTok("[-1.41421356 -0.70710678  0.          0.70710678  1.41421356]");],));
+  ]
+  ]
+
 + #strong[Soal:] Buat simulasi untuk membuktikan sifat memoryless dari distribusi Eksponensial dengan membangkitkan data acak.
-  - #strong[Solusi:]
-]
 
-#block[
-#Skylighting(([#ImportTok("from");#NormalTok(" scipy.stats ");#ImportTok("import");#NormalTok(" expon  ");],
-[#NormalTok("data ");#OperatorTok("=");#NormalTok(" expon.rvs(scale");#OperatorTok("=");#DecValTok("10");#NormalTok(", size");#OperatorTok("=");#DecValTok("10000");#NormalTok(") ");#CommentTok("# Mean=10  ");],
-[#CommentTok("# Peluang X > 15  ");],
-[#NormalTok("p_tot ");#OperatorTok("=");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(data[data ");#OperatorTok(">");#NormalTok(" ");#DecValTok("15");#NormalTok("]) ");#OperatorTok("/");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(data)  ");],
-[#CommentTok("# Peluang X > 15 GIVEN X > 5 (sisa 10)  ");],
-[#NormalTok("subset ");#OperatorTok("=");#NormalTok(" data[data ");#OperatorTok(">");#NormalTok(" ");#DecValTok("5");#NormalTok("]  ");],
-[#NormalTok("p_cond ");#OperatorTok("=");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(subset[subset ");#OperatorTok(">");#NormalTok(" ");#DecValTok("15");#NormalTok("]) ");#OperatorTok("/");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(subset)  ");],
-[#CommentTok("# Bandingkan dengan P(X > 10)  ");],
-[#NormalTok("p_ref ");#OperatorTok("=");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(data[data ");#OperatorTok(">");#NormalTok(" ");#DecValTok("10");#NormalTok("]) ");#OperatorTok("/");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(data)  ");],
-[#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"P(X>10): ");#SpecialCharTok("{");#NormalTok("p_ref");#SpecialCharTok(":.3f}");#SpecialStringTok(", P(X>15|X>5): ");#SpecialCharTok("{");#NormalTok("p_cond");#SpecialCharTok(":.3f}");#SpecialStringTok("\"");#NormalTok(")  ");],));
-#block[
-#Skylighting(([#NormalTok("P(X>10): 0.372, P(X>15|X>5): 0.369");],));
-]
-]
-#block[
-#set enum(numbering: "1.", start: 15)
+  - #strong[Solusi:]
+
+  #block[
+  #Skylighting(([#ImportTok("from");#NormalTok(" scipy.stats ");#ImportTok("import");#NormalTok(" expon  ");],
+  [#NormalTok("data ");#OperatorTok("=");#NormalTok(" expon.rvs(scale");#OperatorTok("=");#DecValTok("10");#NormalTok(", size");#OperatorTok("=");#DecValTok("10000");#NormalTok(") ");#CommentTok("# Mean=10  ");],
+  [#CommentTok("# Peluang X > 15  ");],
+  [#NormalTok("p_tot ");#OperatorTok("=");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(data[data ");#OperatorTok(">");#NormalTok(" ");#DecValTok("15");#NormalTok("]) ");#OperatorTok("/");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(data)  ");],
+  [#CommentTok("# Peluang X > 15 GIVEN X > 5 (sisa 10)  ");],
+  [#NormalTok("subset ");#OperatorTok("=");#NormalTok(" data[data ");#OperatorTok(">");#NormalTok(" ");#DecValTok("5");#NormalTok("]  ");],
+  [#NormalTok("p_cond ");#OperatorTok("=");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(subset[subset ");#OperatorTok(">");#NormalTok(" ");#DecValTok("15");#NormalTok("]) ");#OperatorTok("/");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(subset)  ");],
+  [#CommentTok("# Bandingkan dengan P(X > 10)  ");],
+  [#NormalTok("p_ref ");#OperatorTok("=");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(data[data ");#OperatorTok(">");#NormalTok(" ");#DecValTok("10");#NormalTok("]) ");#OperatorTok("/");#NormalTok(" ");#BuiltInTok("len");#NormalTok("(data)  ");],
+  [#BuiltInTok("print");#NormalTok("(");#SpecialStringTok("f\"P(X>10): ");#SpecialCharTok("{");#NormalTok("p_ref");#SpecialCharTok(":.3f}");#SpecialStringTok(", P(X>15|X>5): ");#SpecialCharTok("{");#NormalTok("p_cond");#SpecialCharTok(":.3f}");#SpecialStringTok("\"");#NormalTok(")  ");],));
+  #block[
+  #Skylighting(([#NormalTok("P(X>10): 0.366, P(X>15|X>5): 0.364");],));
+  ]
+  ]
+
 + #strong[Soal:] Visualisasikan bagaimana perubahan $sigma$ mempengaruhi "keruncingan" kurva Normal menggunakan matplotlib.
-  - #strong[Solusi:]
-]
 
-#Skylighting(([#NormalTok("x ");#OperatorTok("=");#NormalTok(" np.linspace(");#OperatorTok("-");#DecValTok("10");#NormalTok(", ");#DecValTok("10");#NormalTok(", ");#DecValTok("200");#NormalTok(")  ");],
-[#NormalTok("plt.plot(x, norm.pdf(x, ");#DecValTok("0");#NormalTok(", ");#DecValTok("1");#NormalTok("), label");#OperatorTok("=");#StringTok("'Sigma=1'");#NormalTok(")  ");],
-[#NormalTok("plt.plot(x, norm.pdf(x, ");#DecValTok("0");#NormalTok(", ");#FloatTok("0.5");#NormalTok("), label");#OperatorTok("=");#StringTok("'Sigma=0.5 (Lancip)'");#NormalTok(")  ");],
-[#NormalTok("plt.plot(x, norm.pdf(x, ");#DecValTok("0");#NormalTok(", ");#DecValTok("2");#NormalTok("), label");#OperatorTok("=");#StringTok("'Sigma=2 (Landai)'");#NormalTok(")  ");],
-[#NormalTok("plt.legend()");#OperatorTok(";");#NormalTok(" plt.show()  ");],));
-#box(image("chapters/07-Variabel_Acak_Kontinu_files/figure-typst/cell-7-output-1.svg"))
+  - #strong[Solusi:]
+
+  #Skylighting(([#NormalTok("x ");#OperatorTok("=");#NormalTok(" np.linspace(");#OperatorTok("-");#DecValTok("10");#NormalTok(", ");#DecValTok("10");#NormalTok(", ");#DecValTok("200");#NormalTok(")  ");],
+  [#NormalTok("plt.plot(x, norm.pdf(x, ");#DecValTok("0");#NormalTok(", ");#DecValTok("1");#NormalTok("), label");#OperatorTok("=");#StringTok("'Sigma=1'");#NormalTok(")  ");],
+  [#NormalTok("plt.plot(x, norm.pdf(x, ");#DecValTok("0");#NormalTok(", ");#FloatTok("0.5");#NormalTok("), label");#OperatorTok("=");#StringTok("'Sigma=0.5 (Lancip)'");#NormalTok(")  ");],
+  [#NormalTok("plt.plot(x, norm.pdf(x, ");#DecValTok("0");#NormalTok(", ");#DecValTok("2");#NormalTok("), label");#OperatorTok("=");#StringTok("'Sigma=2 (Landai)'");#NormalTok(")  ");],
+  [#NormalTok("plt.legend()");#OperatorTok(";");#NormalTok(" plt.show()  ");],));
+  #box(image("ch/07-Variabel_Acak_Kontinu_files/figure-typst/cell-7-output-1.svg"))
+]
 
 = Minggu 08: Ujian Tengah Semester
 <minggu-08-ujian-tengah-semester>
@@ -2428,7 +2647,7 @@ Midterm Exam
 
 \
 #figure([
-#box(image("chapters/../The_Decision_Engineer.png/image8.png"))
+#box(image("ch/../The_Decision_Engineer.png/image8.png"))
 ], caption: figure.caption(
 position: bottom, 
 [
@@ -2554,7 +2773,7 @@ Week 08: Pengujian Hipotesis Statistik
 #horizontalrule
 
 == 15 Soal & Solusi
-<soal-solusi-5>
+<soal-solusi-6>
 === A. Pertanyaan Konseptual
 <a.-pertanyaan-konseptual-7>
 + #strong[Soal:] Jelaskan perbedaan filosofis antara hipotesis nol ($H_0$) dan hipotesis alternatif ($H_1$).
@@ -2655,7 +2874,7 @@ Function of Random Variables, PDF of new random variable
 
 \
 #figure([
-#box(image("chapters/../The_Decision_Engineer.png/image9.png"))
+#box(image("ch/../The_Decision_Engineer.png/image9.png"))
 ], caption: figure.caption(
 position: bottom, 
 [
@@ -2776,7 +2995,7 @@ Week 09: Fungsi Variabel Acak dan Distribusi Bivariat
 #horizontalrule
 
 == 15 Soal & Solusi
-<soal-solusi-6>
+<soal-solusi-7>
 === A. Pertanyaan Konseptual
 <a.-pertanyaan-konseptual-8>
 + #strong[Soal:] Apa yang dimaksud dengan fungsi padat probabilitas gabungan (joint PDF) dan bagaimana cara mendapatkan PDF marginal darinya?
@@ -2860,7 +3079,7 @@ Sampling Distribution, Central Limit Theorem (CLT)
 
 \
 #figure([
-#box(image("chapters/../The_Decision_Engineer.png/image10.png"))
+#box(image("ch/../The_Decision_Engineer.png/image10.png"))
 ], caption: figure.caption(
 position: bottom, 
 [
@@ -2992,7 +3211,7 @@ Week 10: Distribusi Sampling dan Teorema Limit Pusat
 #horizontalrule
 
 == 15 Soal & Solusi
-<soal-solusi-7>
+<soal-solusi-8>
 === A. Pertanyaan Konseptual
 <a.-pertanyaan-konseptual-9>
 + #strong[Soal:] Apa perbedaan mendasar antara parameter populasi dan statistik sampel?
@@ -3084,7 +3303,7 @@ Estimation, Confidence Interval
 
 \
 #figure([
-#box(image("chapters/../The_Decision_Engineer.png/image11.png"))
+#box(image("ch/../The_Decision_Engineer.png/image11.png"))
 ], caption: figure.caption(
 position: bottom, 
 [
@@ -3218,7 +3437,7 @@ Week 11: Estimasi Statistik dan Interval Kepercayaan
 #horizontalrule
 
 == 15 Soal & Solusi
-<soal-solusi-8>
+<soal-solusi-9>
 === A. Pertanyaan Konseptual
 <a.-pertanyaan-konseptual-10>
 + #strong[Soal:] Apa kriteria pengestimasi titik yang baik? Jelaskan konsep unbiasedness dan efisiensi.
@@ -3319,7 +3538,7 @@ Hypothesis Testing Procedure, Error Types
 
 \
 #figure([
-#box(image("chapters/../The_Decision_Engineer.png/image12.png"))
+#box(image("ch/../The_Decision_Engineer.png/image12.png"))
 ], caption: figure.caption(
 position: bottom, 
 [
@@ -3452,7 +3671,7 @@ Week 12: Pengujian Hipotesis Statistik dan A/B Testing
 #horizontalrule
 
 == 15 Soal & Solusi
-<soal-solusi-9>
+<soal-solusi-10>
 === A. Pertanyaan Konseptual
 <a.-pertanyaan-konseptual-11>
 + #strong[Soal:] Jelaskan perbedaan filosofis antara hipotesis nol ($H_0$) dan hipotesis alternatif ($H_1$).
@@ -3552,7 +3771,7 @@ Regression Line, Coefficient of Correlation
 
 \
 #figure([
-#box(image("chapters/../The_Decision_Engineer.png/image13.png"))
+#box(image("ch/../The_Decision_Engineer.png/image13.png"))
 ], caption: figure.caption(
 position: bottom, 
 [
@@ -3679,7 +3898,7 @@ Week 13: Regresi Linear Sederhana dan Korelasi
 #horizontalrule
 
 == 15 Soal & Solusi
-<soal-solusi-10>
+<soal-solusi-11>
 === A. Pertanyaan Konseptual
 <a.-pertanyaan-konseptual-12>
 + #strong[Soal:] Apa perbedaan antara korelasi dan regresi dalam hal tujuan analisisnya?
@@ -3761,7 +3980,7 @@ Advanced Case Studies (Application in Computing/Electrical Engineering)
 
 \
 #figure([
-#box(image("chapters/../The_Decision_Engineer.png/image14.png"))
+#box(image("ch/../The_Decision_Engineer.png/image14.png"))
 ], caption: figure.caption(
 position: bottom, 
 [
@@ -3884,7 +4103,7 @@ Week 14: Aplikasi Statistika Lanjutan (A/B Testing, Anomaly Detection)
 #horizontalrule
 
 == 15 Soal & Solusi
-<soal-solusi-11>
+<soal-solusi-12>
 === A. Pertanyaan Konseptual
 <a.-pertanyaan-konseptual-13>
 + #strong[Soal:] Bagaimana statistika membantu dalam optimasi algoritma pencarian di web?
@@ -3977,7 +4196,7 @@ Advanced Case Studies (Application in Computing/Electrical Engineering)
 
 \
 #figure([
-#box(image("chapters/../The_Decision_Engineer.png/image14.png"))
+#box(image("ch/../The_Decision_Engineer.png/image14.png"))
 ], caption: figure.caption(
 position: bottom, 
 [
@@ -4099,7 +4318,7 @@ Week 15: Simulasi Monte Carlo dan Teori Keputusan Strategis
 #horizontalrule
 
 == 15 Soal & Solusi
-<soal-solusi-12>
+<soal-solusi-13>
 === A. Pertanyaan Konseptual
 <a.-pertanyaan-konseptual-14>
 + #strong[Soal:] Jelaskan konsep Expected Loss dalam pengambilan keputusan klasifikasi pada machine learning.
@@ -4195,7 +4414,7 @@ Final Exam
 
 \
 #figure([
-#box(image("chapters/../The_Decision_Engineer.png/image15.png"))
+#box(image("ch/../The_Decision_Engineer.png/image15.png"))
 ], caption: figure.caption(
 position: bottom, 
 [

@@ -1,0 +1,56 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Minggu 16: Ujian Akhir Semester\"\n",
+        "subtitle: \"Final Exam\"\n",
+        "\n",
+        "---\n",
+        "\n",
+        "![“Final ini menilai satu hal: apakah kamu bisa memodelkan dunia yang tidak pasti lalu mengambil keputusan yang bisa dipertanggungjawabkan. Kamu akan dapat kasus besar. Tugasmu: pilih model, jalankan analisis, tulis keputusan, dan jelaskan konsekuensinya. Ini bukan akhir materi—ini awal cara berpikir.”](../The_Decision_Engineer.png/image15.png)\n",
+        "\n",
+        "## 1. Konsep Pengetahuan\n",
+        "Evaluasi menyeluruh materi satu semester.\n",
+        "\n",
+        "## 2. Tipikal Problem\n",
+        "Ujian komprehensif studi kasus.\n",
+        "\n",
+        "## 3. Solusi & Pengambilan Keputusan\n",
+        "Menerapkan seluruh konsep probabilitas dan statistik untuk menyelesaikan masalah rekayasa.\n",
+        "\n",
+        "## 4. Eksplorasi Komputasi (Python)\n",
+        "*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*"
+      ],
+      "id": "493ae0f5"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Tulis kode Python Anda di sini\n",
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "import scipy.stats as stats\n",
+        "\n",
+        "print(\"Siap untuk komputasi Minggu 16!\")"
+      ],
+      "id": "c7b52f22",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\armein\\AppData\\Local\\Programs\\Python\\Python313\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

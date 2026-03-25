@@ -207,4 +207,51 @@ plt.legend(); plt.show()
 
 **Solusi:**
 
-`{python} def fact(n): return 1 if n<=1 else n*fact(n-1) def comb(n, k): return fact(n) // (fact(k) * fact(n-k)) def binom_cdf(k, n, p):     return sum(comb(n, i) * (p**i) * ((1-p)**(n-i)) for i in range(k+1))`S
+```{python} 
+
+
+def factorial(n):
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
+
+
+def combination(n, k):
+    return factorial(n) // (factorial(k) * factorial(n - k))
+
+
+def binomial_pmf(n, k, p):
+    return combination(n, k) * (p ** k) * ((1 - p) ** (n - k))
+
+
+def binomial_cdf(n, k, p):
+    total = 0
+    for i in range(k + 1):
+        total += binomial_pmf(n, i, p)
+    return total
+
+n = 10      # jumlah percobaan
+p = 0.5     # probabilitas sukses
+k = 3       # batas kumulatif
+
+prob = binomial_cdf(n, k, p)
+print(f"P(X <= {k}) = {prob}")
+```
+
+Versi lebih stabil tanpa factorial
+```{python}
+
+def binomial_cdf_stable(n, k, p):
+    # mulai dari P(X=0)
+    prob = (1 - p) ** n
+    total = prob
+
+    for i in range(0, k):
+        prob = prob * (n - i) / (i + 1) * (p / (1 - p))
+        total += prob
+
+    return total
+
+print(binomial_cdf_stable(10, 3, 0.5))
+```

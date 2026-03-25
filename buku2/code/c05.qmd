@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 ## Konstruksi Random Variable Kontinu dari Hasil Pengamatan
 ```{python}
