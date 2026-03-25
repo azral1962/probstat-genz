@@ -1,0 +1,12 @@
+# Pengantar {.unnumbered}
+Ada begitu banyak buku dan situs tentang probabilitas dan statistika, mengapa buku ini? Buku ini ditulis untuk mahasiswa tingkat 2 dengan tujuan spesifik: menguasai simulasi Python, menguasai teori, dan menguasai aplikasi. dengan urutan prioritas seperti itu.
+
+Niat penulisan buku ini membuat mahasiswa menyadari kegunaann, kekayaaan, dan keindahan konsep probabilitas dan statistika. Tema yang dpilih adalah pengambilan keputusan (*decision making*). Jadi setiap bab dimulai dengan problem yang mengandung ketidak-pastian. Problem ini kemudian dimodelkan secara probabiltas da statistika, sehingga logika probabilitas dan statistika dapat digunaan sebagai dasar pengambilan keputusan.
+
+Buku ini sebenarnya mirip buku resep masakan. Enaknya makanan yang ditulis baru benar terasaa saat resep itu di realisasikan menjadi makaanan. Demikian juga manfaat kode-kode yang ditulis baru terasa saat di ekskeusi.
+
+Semoga buku ini Mencapi tujuan penulisannya.
+
+Bandung, 25 Maret 2026
+Penyusun,
+Armein Z. R. langi

@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.35">
+<meta name="generator" content="quarto-1.9.31">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Minggu 02: Kerangka Probabilitas dan Statistik – Probabilitas &amp; Statistika (Python)</title>
+<title>Ruang Sampel &amp; Kejadian – Probabilitas &amp; Statistika (Python)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -76,9 +76,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-22b4aaf4c2978829df3684e8f2c068db.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7c69b197886ae2a34062761d21e44731.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-2a9a3f180cf500eef5b976fdc6f22fdf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7c69b197886ae2a34062761d21e44731.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-ffc4c3fc79587ee79da4865b6a08975e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -113,6 +113,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -434,10 +463,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link active" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">3.1</span> 1. Konsep Pengetahuan</a></li>
-  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">3.2</span> 2. Tipikal Problem</a></li>
-  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">3.3</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
-  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">3.4</span> 4. Eksplorasi Komputasi (Python)</a></li>
+  <li><a href="#agenda-perkuliahan-minggu-2" id="toc-agenda-perkuliahan-minggu-2" class="nav-link active" data-scroll-target="#agenda-perkuliahan-minggu-2"><span class="header-section-number">3.1</span> <strong>Agenda Perkuliahan Minggu 2</strong></a>
+  <ul class="collapse">
+  <li><a href="#pertemuan-1-senin-1-jam-the-framework-intuition" id="toc-pertemuan-1-senin-1-jam-the-framework-intuition" class="nav-link" data-scroll-target="#pertemuan-1-senin-1-jam-the-framework-intuition"><span class="header-section-number">3.1.1</span> <strong>Pertemuan 1: Senin (1 Jam) – <em>The Framework &amp; Intuition</em></strong></a></li>
+  <li><a href="#pertemuan-2-rabu-2-jam-simulation-lab" id="toc-pertemuan-2-rabu-2-jam-simulation-lab" class="nav-link" data-scroll-target="#pertemuan-2-rabu-2-jam-simulation-lab"><span class="header-section-number">3.1.2</span> <strong>Pertemuan 2: Rabu (2 Jam) – <em>Simulation Lab</em></strong></a></li>
+  </ul></li>
+  <li><a href="#materi-kuliah-konsep-aplikasi-komputasi" id="toc-materi-kuliah-konsep-aplikasi-komputasi" class="nav-link" data-scroll-target="#materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">3.2</span> <strong>Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</strong></a>
+  <ul class="collapse">
+  <li><a href="#konsep-dasar" id="toc-konsep-dasar" class="nav-link" data-scroll-target="#konsep-dasar"><span class="header-section-number">3.2.1</span> <strong>1. Konsep Dasar</strong></a></li>
+  <li><a href="#aplikasi-sistem-informasi" id="toc-aplikasi-sistem-informasi" class="nav-link" data-scroll-target="#aplikasi-sistem-informasi"><span class="header-section-number">3.2.2</span> <strong>2. Aplikasi Sistem Informasi</strong></a></li>
+  <li><a href="#komputasi-python" id="toc-komputasi-python" class="nav-link" data-scroll-target="#komputasi-python"><span class="header-section-number">3.2.3</span> <strong>3. Komputasi (Python)</strong></a></li>
+  </ul></li>
+  <li><a href="#tugas-kelompok-github-classroom" id="toc-tugas-kelompok-github-classroom" class="nav-link" data-scroll-target="#tugas-kelompok-github-classroom"><span class="header-section-number">3.3</span> <strong>Tugas Kelompok (GitHub Classroom)</strong></a></li>
+  <li><a href="#soal-solusi-sumber-desain-kurikulum-statistika-generasi-z" id="toc-soal-solusi-sumber-desain-kurikulum-statistika-generasi-z" class="nav-link" data-scroll-target="#soal-solusi-sumber-desain-kurikulum-statistika-generasi-z"><span class="header-section-number">3.4</span> <strong>15 Soal &amp; Solusi (Sumber: “Desain Kurikulum Statistika Generasi Z”)</strong></a>
+  <ul class="collapse">
+  <li><a href="#a.-pertanyaan-konseptual" id="toc-a.-pertanyaan-konseptual" class="nav-link" data-scroll-target="#a.-pertanyaan-konseptual"><span class="header-section-number">3.4.1</span> <strong>A. Pertanyaan Konseptual</strong></a></li>
+  <li><a href="#b.-pertanyaan-aplikatif" id="toc-b.-pertanyaan-aplikatif" class="nav-link" data-scroll-target="#b.-pertanyaan-aplikatif"><span class="header-section-number">3.4.2</span> <strong>B. Pertanyaan Aplikatif</strong></a></li>
+  <li><a href="#c.-pertanyaan-komputasional" id="toc-c.-pertanyaan-komputasional" class="nav-link" data-scroll-target="#c.-pertanyaan-komputasional"><span class="header-section-number">3.4.3</span> <strong>C. Pertanyaan Komputasional</strong></a></li>
+  </ul></li>
+  <li><a href="#konsep-pengetahuan" id="toc-konsep-pengetahuan" class="nav-link" data-scroll-target="#konsep-pengetahuan"><span class="header-section-number">3.5</span> 1. Konsep Pengetahuan</a></li>
+  <li><a href="#tipikal-problem" id="toc-tipikal-problem" class="nav-link" data-scroll-target="#tipikal-problem"><span class="header-section-number">3.6</span> 2. Tipikal Problem</a></li>
+  <li><a href="#solusi-pengambilan-keputusan" id="toc-solusi-pengambilan-keputusan" class="nav-link" data-scroll-target="#solusi-pengambilan-keputusan"><span class="header-section-number">3.7</span> 3. Solusi &amp; Pengambilan Keputusan</a></li>
+  <li><a href="#eksplorasi-komputasi-python" id="toc-eksplorasi-komputasi-python" class="nav-link" data-scroll-target="#eksplorasi-komputasi-python"><span class="header-section-number">3.8</span> 4. Eksplorasi Komputasi (Python)</a></li>
   </ul>
 </nav>
     </div>
@@ -447,7 +494,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Minggu 02: Kerangka Probabilitas dan Statistik</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Ruang Sampel &amp; Kejadian</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 <p class="subtitle lead">Probabilistic Experiment, Sample Space, Event, Probability Definition and Axioms</p>
 </div>
 
@@ -471,31 +518,199 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption>“Kamu kirim 3 bit data. Kedengarannya kecil… tapi ada ‘semesta’ di belakangnya: semua kombinasi yang mungkin. Kalau kamu nggak mendefinisikan ruang sampel dan event dengan benar, kamu bakal salah hitung kualitas sistem komunikasi. Hari ini kita bikin cara pikir yang rapi: apa itu eksperimen, apa itu sample space, apa itu event, dan kenapa aksioma probabilitas itu ‘aturan main semesta’. Setelah ini, kamu bukan cuma bisa hitung peluang—kamu bisa <em>merancang</em> perhitungan peluang.”</figcaption>
 </figure>
 </div>
-<section id="konsep-pengetahuan" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">3.1</span> 1. Konsep Pengetahuan</h2>
-<p>Ruang sampel (S) sebagai himpunan semua hasil yang mungkin, kejadian (E) sebagai himpunan bagian dari ruang sampel, dan aksioma probabilitas (nilai peluang antara 0 dan 1, total peluang semesta = 1).</p>
+<p>Minggu 2: Kerangka Probabilitas dan Operasi Kejadian**</p>
+<section id="agenda-perkuliahan-minggu-2" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="agenda-perkuliahan-minggu-2"><span class="header-section-number">3.1</span> <strong>Agenda Perkuliahan Minggu 2</strong></h2>
+<p><strong>Tema Misi:</strong> <em>“Mapping the Glitch: From Chaos to Logical Sets”</em></p>
+<section id="pertemuan-1-senin-1-jam-the-framework-intuition" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="pertemuan-1-senin-1-jam-the-framework-intuition"><span class="header-section-number">3.1.1</span> <strong>Pertemuan 1: Senin (1 Jam) – <em>The Framework &amp; Intuition</em></strong></h3>
+<p><em>Fokus: Membangun mental model tentang “Semesta Kemungkinan” (<span class="math inline">\(\Omega\)</span>) dan menerjemahkan logika sistem menjadi Himpunan.</em></p>
+<ul>
+<li><strong>00:00 – 00:10 | The Hook: “The Glitch in the Matrix”</strong>
+<ul>
+<li><strong>Aktivitas:</strong> Tampilkan visual <em>glitch</em> pada video streaming atau pesan teks yang rusak.</li>
+<li><strong>Pertanyaan:</strong> “Komputer bicara dengan 0 dan 1. Jika kita kirim 3 bit dan ada gangguan sinyal, apa saja <em>universe of possibilities</em> yang mungkin diterima?”</li>
+<li><strong>Relevansi:</strong> Mengenalkan <strong>Ruang Sampel (<span class="math inline">\(\Omega\)</span>)</strong> bukan sebagai definisi buku, tapi sebagai daftar semua skenario sistem.</li>
+</ul></li>
+<li><strong>00:10 – 00:30 | Live Coding: Membangun Semesta</strong>
+<ul>
+<li><strong>Dosen (Python Demo):</strong> Gunakan <code>itertools.product</code> untuk men-generate semua kombinasi bit (000, 001, …, 111).</li>
+<li><strong>Konsep:</strong> Tunjukkan bahwa ukuran semesta adalah <span class="math inline">\(2^n\)</span>. Definisikan “Kejadian” (<span class="math inline">\(E\)</span>) sebagai filter/query: misal <em>Event A = Error lebih dari 1 bit</em>.</li>
+</ul></li>
+<li><strong>00:30 – 00:50 | Konsep: Logika Himpunan = Logika Data</strong>
+<ul>
+<li>Hubungkan operator Python dengan Diagram Venn:
+<ul>
+<li><strong>AND (<span class="math inline">\(\cap\)</span>):</strong> Irisan (User Aktif <code>&amp;</code> User Premium).</li>
+<li><strong>OR (<span class="math inline">\(\cup\)</span>):</strong> Gabungan (Login via Web <code>|</code> Login via App).</li>
+<li><strong>NOT (<span class="math inline">\(^c\)</span>):</strong> Komplemen (Bukan Spam).</li>
+</ul></li>
+<li><strong>Aksioma Kolmogorov:</strong> Jelaskan 3 aturan main yang “haram” dilanggar (Non-negatif, Total=1, Aditivitas).</li>
+</ul></li>
+<li><strong>00:50 – 01:00 | Pod Formation &amp; Mission Brief</strong>
+<ul>
+<li>Jelaskan misi GitHub: <em>“The Security Filter Project”</em> (Mendeteksi anomali menggunakan logika himpunan).</li>
+</ul></li>
+</ul>
 </section>
-<section id="tipikal-problem" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">3.2</span> 2. Tipikal Problem</h2>
-<p>Dalam pengiriman data digital, kita ingin mengetahui peluang terjadinya kesalahan bit. Jika dikirim 3 bit, apa ruang sampelnya dan berapa peluang setidaknya satu bit salah?</p>
+<section id="pertemuan-2-rabu-2-jam-simulation-lab" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="pertemuan-2-rabu-2-jam-simulation-lab"><span class="header-section-number">3.1.2</span> <strong>Pertemuan 2: Rabu (2 Jam) – <em>Simulation Lab</em></strong></h3>
+<p><em>Fokus: Hands-on Python untuk memanipulasi himpunan dan memverifikasi hukum probabilitas.</em></p>
+<ul>
+<li><strong>00:00 – 00:20 | Setup &amp; Micro-Lecture: Jebakan “OR”</strong>
+<ul>
+<li><strong>Masalah:</strong> Mengapa <span class="math inline">\(P(A \cup B) \neq P(A) + P(B)\)</span>?</li>
+<li><strong>Visual:</strong> Tunjukkan <em>double counting</em> pada irisan diagram Venn. Perkenalkan Prinsip Inklusi-Eksklusi.</li>
+</ul></li>
+<li><strong>00:20 – 01:00 | Pod Challenge: “User Segmentation Analytics”</strong>
+<ul>
+<li><strong>Skenario:</strong> Mahasiswa diberikan data dummy 1.000 user dengan atribut (iOS/Android, Paid/Free, Active/Churn).</li>
+<li><strong>Tugas (Python):</strong>
+<ol type="1">
+<li>Hitung peluang user adalah (iOS <strong>DAN</strong> Paid).</li>
+<li>Hitung peluang user adalah (Android <strong>ATAU</strong> Churn).</li>
+<li>Verifikasi Hukum De Morgan secara empiris: Apakah <code>not (A or B)</code> sama dengan <code>(not A) and (not B)</code>?.</li>
+</ol></li>
+</ul></li>
+<li><strong>01:00 – 01:30 | Deep Dive: Partisi &amp; Probabilitas Total</strong>
+<ul>
+<li>Diskusi kasus: “Jika user dipartisi menjadi Low/Mid/High spender, apakah seorang user bisa berada di dua grup?” (Konsep <em>Mutually Exclusive</em> &amp; <em>Collectively Exhaustive</em>).</li>
+</ul></li>
+<li><strong>01:30 – 01:50 | Showcase &amp; Code Review</strong>
+<ul>
+<li>Perwakilan Pods menunjukkan <em>snippet code</em> operasi himpunan mereka.</li>
+</ul></li>
+<li><strong>01:50 – 02:00 | Exit Ticket</strong>
+<ul>
+<li>Pertanyaan: “Berikan satu contoh nyata di aplikasi favoritmu di mana dua kejadian bersifat <em>Mutually Exclusive</em>.”</li>
+</ul></li>
+</ul>
+<hr>
 </section>
-<section id="solusi-pengambilan-keputusan" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">3.3</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
-<p>Mendaftar ruang sampel S = {000, 001, …, 111}. Jika kejadian E adalah ‘setidaknya satu error’, kita hitung jumlah elemen di E dibagi total elemen di S untuk mendapatkan probabilitasnya, yang digunakan untuk menentukan kualitas saluran komunikasi.</p>
 </section>
-<section id="eksplorasi-komputasi-python" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">3.4</span> 4. Eksplorasi Komputasi (Python)</h2>
-<p><em>Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.</em></p>
-<div id="5cf64a63" class="cell" data-execution_count="1">
+<section id="materi-kuliah-konsep-aplikasi-komputasi" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="materi-kuliah-konsep-aplikasi-komputasi"><span class="header-section-number">3.2</span> <strong>Materi Kuliah: Konsep, Aplikasi, &amp; Komputasi</strong></h2>
+<section id="konsep-dasar" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="konsep-dasar"><span class="header-section-number">3.2.1</span> <strong>1. Konsep Dasar</strong></h3>
+<ul>
+<li><strong>Ruang Sampel (<span class="math inline">\(\Omega\)</span>):</strong> Himpunan seluruh hasil yang mungkin dari eksperimen acak. Dalam sistem digital, ini sering kali diskrit (kombinasi bit, status server).</li>
+<li><strong>Kejadian (<span class="math inline">\(E\)</span>):</strong> Himpunan bagian dari <span class="math inline">\(\Omega\)</span>. Contoh: Kejadian “Server Down” berisi hasil {Error 500, Error 502, Timeout}.</li>
+<li><strong>Logika Probabilitas:</strong>
+<ul>
+<li><strong>Irisan (<span class="math inline">\(\cap\)</span>):</strong> Terjadi bersamaan (AND).</li>
+<li><strong>Gabungan (<span class="math inline">\(\cup\)</span>):</strong> Salah satu terjadi (OR).</li>
+<li><strong>Saling Lepas (<em>Mutually Exclusive</em>):</strong> <span class="math inline">\(A \cap B = \emptyset\)</span>. Tidak bisa terjadi bersamaan (misal: Status Transaksi Sukses vs Gagal).</li>
+</ul></li>
+</ul>
+</section>
+<section id="aplikasi-sistem-informasi" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="aplikasi-sistem-informasi"><span class="header-section-number">3.2.2</span> <strong>2. Aplikasi Sistem Informasi</strong></h3>
+<ul>
+<li><strong>Segmentasi User:</strong> Menggunakan operasi himpunan untuk menargetkan fitur. Misal: <span class="math inline">\(A = \text{Mobile Users}\)</span>, <span class="math inline">\(B = \text{High Value}\)</span>. Target promo = <span class="math inline">\(A \cap B\)</span>.</li>
+<li><strong>Sistem Keamanan:</strong> Sensor redundan. Jika Sensor A mendeteksi intrusi OR Sensor B mendeteksi intrusi (<span class="math inline">\(A \cup B\)</span>), maka alarm bunyi. Perhitungan peluangnya harus membuang irisan agar tidak <em>double count</em>.</li>
+<li><strong>Query Database:</strong> SQL <code>WHERE condition1 AND condition2</code> adalah implementasi langsung dari irisan himpunan probabilistik.</li>
+</ul>
+</section>
+<section id="komputasi-python" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="komputasi-python"><span class="header-section-number">3.2.3</span> <strong>3. Komputasi (Python)</strong></h3>
+<ul>
+<li><strong>Tipe Data <code>set</code>:</strong> Python memiliki tipe data native untuk operasi himpunan matematika.</li>
+<li><strong>Visualisasi Venn:</strong> Library <code>matplotlib-venn</code> sangat berguna untuk memvisualisasikan proporsi irisan data.</li>
+<li><strong>Simulasi De Morgan:</strong> Membuktikan identitas logika <span class="math inline">\((A \cup B)^c = A^c \cap B^c\)</span> dengan data acak.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="tugas-kelompok-github-classroom" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="tugas-kelompok-github-classroom"><span class="header-section-number">3.3</span> <strong>Tugas Kelompok (GitHub Classroom)</strong></h2>
+<p><strong>Judul:</strong> <em>Week 2: The Logic of Glitches - Set Theory in Action</em></p>
+<p><strong>Deskripsi:</strong> Anda adalah <em>Data Engineer</em> di sebuah platform streaming. Sistem logging Anda mencatat status ribuan sesi user. Tugas Anda adalah membersihkan data dan menghitung probabilitas anomali menggunakan Teori Himpunan.</p>
+<p><strong>Soal Python (Notebook):</strong> 1. <strong>Generate Data:</strong> Buat 10.000 data dummy sesi dengan atribut acak: <code>region</code> (ID/SG/US), <code>device</code> (Mobile/Desktop), dan <code>status</code> (Success/Buffering/Error). 2. <strong>Filter Himpunan:</strong> Buat <code>set</code> Python untuk kejadian: * <span class="math inline">\(A\)</span>: Sesi dari Indonesia (ID). * <span class="math inline">\(B\)</span>: Sesi yang mengalami Error. 3. <strong>Analisis Logika:</strong> * Hitung <span class="math inline">\(P(A \cap B)\)</span>: Peluang error di Indonesia. * Hitung <span class="math inline">\(P(A \cup B)\)</span>: Peluang sesi berasal dari Indonesia ATAU mengalami error. Gunakan rumus inklusi-eksklusi dan bandingkan hasilnya dengan fungsi <code>len(A.union(B))</code>. 4. <strong>Verifikasi De Morgan:</strong> Buktikan dengan kode bahwa “Tidak (ID atau Error)” sama dengan “Bukan ID dan Bukan Error”.</p>
+<hr>
+</section>
+<section id="soal-solusi-sumber-desain-kurikulum-statistika-generasi-z" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="soal-solusi-sumber-desain-kurikulum-statistika-generasi-z"><span class="header-section-number">3.4</span> <strong>15 Soal &amp; Solusi (Sumber: “Desain Kurikulum Statistika Generasi Z”)</strong></h2>
+<p>Berikut adalah solusi untuk 15 soal yang diambil dari <strong>Minggu 02: Kerangka Probabilitas dan Operasi Kejadian</strong>.</p>
+<section id="a.-pertanyaan-konseptual" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="a.-pertanyaan-konseptual"><span class="header-section-number">3.4.1</span> <strong>A. Pertanyaan Konseptual</strong></h3>
+<p><strong>1. Soal:</strong> Jelaskan mengapa aksioma probabilitas Kolmogorov mengharuskan nilai probabilitas berada di rentang $<span class="math inline">\(.
+*   **Solusi:** Probabilitas adalah ukuran ("measure") dari sebuah himpunan. Nilai non-negatif (\)</span>P(A) <span class="math inline">\() adalah syarat mutlak ukuran fisik/matematis (tidak ada panjang atau berat negatif). Nilai maksimal 1 (\)</span>P()=1$) adalah hasil dari normalisasi, yang menetapkan bahwa “sesuatu dalam semesta pasti terjadi”.</p>
+<p><strong>2. Soal:</strong> Apa perbedaan antara kejadian saling lepas (<em>mutually exclusive</em>) dan kejadian kolektif lengkap (<em>collectively exhaustive</em>)? * <strong>Solusi:</strong> * <em>Saling Lepas:</em> Kejadian tidak memiliki irisan (<span class="math inline">\(A \cap B = \emptyset\)</span>). Tidak bisa terjadi bersamaan. * <em>Kolektif Lengkap:</em> Gabungan kejadian mencakup seluruh ruang sampel (<span class="math inline">\(A \cup B = \Omega\)</span>). Salah satu pasti terjadi. * <em>Partisi:</em> Jika kejadian bersifat keduanya sekaligus.</p>
+<p><strong>3. Soal:</strong> Buktikan secara grafis menggunakan diagram Venn mengapa <span class="math inline">\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</span>. * <strong>Solusi:</strong> Bayangkan dua lingkaran <span class="math inline">\(A\)</span> dan <span class="math inline">\(B\)</span> yang tumpang tindih. Jika kita menjumlahkan luas <span class="math inline">\(A\)</span> dan luas <span class="math inline">\(B\)</span>, area irisan di tengah (<span class="math inline">\(A \cap B\)</span>) terhitung dua kali. Oleh karena itu, kita harus mengurangkan satu kali area irisan tersebut agar total luasnya akurat.</p>
+<p><strong>4. Soal:</strong> Mengapa probabilitas dari ruang sampel <span class="math inline">\(\Omega\)</span> harus bernilai 1? * <strong>Solusi:</strong> Ini adalah Aksioma Normalisasi. <span class="math inline">\(\Omega\)</span> mendefinisikan “seluruh kemungkinan hasil”. Probabilitas 1 merepresentasikan kepastian mutlak bahwa <em>salah satu</em> dari hasil tersebut akan terjadi setelah eksperimen dilakukan.</p>
+<p><strong>5. Soal:</strong> Jelaskan konsep partisi ruang sampel dalam konteks segmentasi pengguna aplikasi. * <strong>Solusi:</strong> Partisi membagi seluruh user base (<span class="math inline">\(\Omega\)</span>) menjadi kelompok-kelompok yang tidak tumpang tindih (misal: Basic, Pro, Enterprise) dan mencakup semua user (tidak ada user tanpa status). Ini memungkinkan analisis total probabilitas dengan menjumlahkan perilaku tiap segmen secara terpisah.</p>
+</section>
+<section id="b.-pertanyaan-aplikatif" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="b.-pertanyaan-aplikatif"><span class="header-section-number">3.4.2</span> <strong>B. Pertanyaan Aplikatif</strong></h3>
+<p><strong>6. Soal:</strong> Sebuah aplikasi mendeteksi user menggunakan sistem operasi Android (A) atau iOS (I). Jika 60% menggunakan A, 30% menggunakan I, dan 10% menggunakan sistem lain, apakah A dan I saling lepas? * <strong>Solusi:</strong> Ya, dalam konteks satu <em>device</em> tertentu pada satu waktu, sebuah device tidak bisa berstatus Android dan iOS sekaligus. Secara himpunan <span class="math inline">\(A \cap I = \emptyset\)</span>, sehingga mereka saling lepas.</p>
+<p><strong>7. Soal:</strong> Dalam sistem keamanan, sensor A memiliki probabilitas deteksi 0,8 dan sensor B 0,7. Jika probabilitas keduanya mendeteksi adalah 0,6, hitung probabilitas setidaknya satu sensor bekerja. * <strong>Solusi:</strong> Gunakan Inklusi-Eksklusi: <span class="math inline">\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</span> <span class="math inline">\(P(A \cup B) = 0,8 + 0,7 - 0,6 = 0,9\)</span>.</p>
+<p><strong>8. Soal:</strong> Analisis probabilitas kegagalan sistem redundan di mana komponen A dan B harus mati secara bersamaan agar sistem lumpuh. * <strong>Solusi:</strong> Ini adalah logika irisan (<span class="math inline">\(A \cap B\)</span>). Karena sistem redundan (paralel), kejadian sistem mati adalah irisan dari matinya komponen-komponen penyusunnya. Probabilitasnya jauh lebih kecil daripada komponen tunggal.</p>
+<p><strong>9. Soal:</strong> Jika sebuah perusahaan memiliki dua ISP (Indosat dan Telkom), gambarkan ruang sampel status koneksi internet perusahaan tersebut. * <strong>Solusi:</strong> Ruang sampel terdiri dari kombinasi status kedua ISP (Misal 1=Up, 0=Down): <span class="math inline">\(\Omega = \{ (Indosat=1, Telkom=1), (1,0), (0,1), (0,0) \}\)</span>. Kejadian “Internet Mati Total” hanya terjadi pada outcome <span class="math inline">\((0,0)\)</span>.</p>
+<p><strong>10. Soal:</strong> Sebuah database mencatat user yang aktif (A) dan user yang membayar (B). Deskripsikan dalam bahasa himpunan kejadian “user aktif yang tidak membayar”. * <strong>Solusi:</strong> User aktif (<span class="math inline">\(A\)</span>) <strong>DAN</strong> User tidak membayar (<span class="math inline">\(B^c\)</span>). Notasi himpunan: <span class="math inline">\(A \cap B^c\)</span> (atau <span class="math inline">\(A - B\)</span>).</p>
+</section>
+<section id="c.-pertanyaan-komputasional" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="c.-pertanyaan-komputasional"><span class="header-section-number">3.4.3</span> <strong>C. Pertanyaan Komputasional</strong></h3>
+<p><strong>11. Soal:</strong> Implementasikan fungsi Python untuk menghitung probabilitas gabungan dari dua kejadian menggunakan input <span class="math inline">\(P(A)\)</span>, <span class="math inline">\(P(B)\)</span>, dan <span class="math inline">\(P(A \cap B)\)</span>. * <strong>Solusi:</strong> ```python def prob_union(p_a, p_b, p_intersection): return p_a + p_b - p_intersection</p>
+<pre><code># Contoh
+print(prob_union(0.8, 0.7, 0.6)) # Output: 0.9
+```</code></pre>
+<p><strong>12. Soal:</strong> Gunakan tipe data <code>set</code> di Python untuk mensimulasikan operasi irisan dan gabungan pada 1.000 data sampel identitas user. * <strong>Solusi:</strong> ```python # Misal user_id 1-500 grup A, 300-800 grup B Group_A = set(range(1, 501)) Group_B = set(range(300, 801))</p>
+<pre><code>Intersection = Group_A &amp; Group_B # Irisan
+Union = Group_A | Group_B # Gabungan
+print(f"Jumlah Irisan: {len(Intersection)}") # 201 user (300-500)
+```</code></pre>
+<p><strong>13. Soal:</strong> Buat program yang memverifikasi hukum De Morgan secara empiris melalui simulasi acak. * <strong>Solusi:</strong> ```python import random Omega = set(range(100)) # Semesta 0-99 A = set(random.sample(list(Omega), 40)) B = set(random.sample(list(Omega), 50))</p>
+<pre><code># Hukum 1: (A U B)^c = A^c n B^c
+LHS = Omega - (A | B)
+RHS = (Omega - A) &amp; (Omega - B)
+
+print(f"De Morgan Valid? {LHS == RHS}")
+```</code></pre>
+<p><strong>14. Soal:</strong> Tulis skrip untuk menghitung probabilitas komplemen dari sekumpulan kejadian yang diberikan dalam bentuk list. * <strong>Solusi:</strong> <code>python     events_prob = [0.1, 0.2, 0.05] # P(E1), P(E2)... diasumsikan disjoint     prob_union = sum(events_prob)     prob_complement = 1 - prob_union     print(f"Probabilitas Komplemen (None of the above): {prob_complement}")</code></p>
+<p><strong>15. Soal:</strong> Visualisasikan diagram Venn untuk dua kejadian menggunakan pustaka <code>matplotlib-venn</code>. * <strong>Solusi:</strong> ```python from matplotlib_venn import venn2 import matplotlib.pyplot as plt</p>
+<pre><code># Subset sizes: (Ab, aB, AB) -&gt; (A only, B only, Intersection)
+# Jika P(A)=0.8, P(B)=0.7, Irisan=0.6:
+# A only = 0.2, B only = 0.1, Irisan = 0.6
+venn2(subsets = (0.2, 0.1, 0.6), set_labels = ('Sensor A', 'Sensor B'))
+plt.show()
+```</code></pre>
+<div id="03555ea4" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Lihat kode</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 02!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(itertools.product([<span class="st">"H"</span>,<span class="st">"T"</span>], repeat<span class="op">=</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>[('H', 'H'), ('H', 'T'), ('T', 'H'), ('T', 'T')]</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="konsep-pengetahuan" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="konsep-pengetahuan"><span class="header-section-number">3.5</span> 1. Konsep Pengetahuan</h2>
+<p>Ruang sampel (S) sebagai himpunan semua hasil yang mungkin, kejadian (E) sebagai himpunan bagian dari ruang sampel, dan aksioma probabilitas (nilai peluang antara 0 dan 1, total peluang semesta = 1).</p>
+</section>
+<section id="tipikal-problem" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="tipikal-problem"><span class="header-section-number">3.6</span> 2. Tipikal Problem</h2>
+<p>Dalam pengiriman data digital, kita ingin mengetahui peluang terjadinya kesalahan bit. Jika dikirim 3 bit, apa ruang sampelnya dan berapa peluang setidaknya satu bit salah?</p>
+</section>
+<section id="solusi-pengambilan-keputusan" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="solusi-pengambilan-keputusan"><span class="header-section-number">3.7</span> 3. Solusi &amp; Pengambilan Keputusan</h2>
+<p>Mendaftar ruang sampel S = {000, 001, …, 111}. Jika kejadian E adalah ‘setidaknya satu error’, kita hitung jumlah elemen di E dibagi total elemen di S untuk mendapatkan probabilitasnya, yang digunakan untuk menentukan kualitas saluran komunikasi.</p>
+</section>
+<section id="eksplorasi-komputasi-python" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="eksplorasi-komputasi-python"><span class="header-section-number">3.8</span> 4. Eksplorasi Komputasi (Python)</h2>
+<p><em>Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.</em></p>
+<div id="6551e6bf" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Lihat kode</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 02!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Siap untuk komputasi Minggu 02!</code></pre>
@@ -989,36 +1204,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minggu 02: Kerangka Probabilitas dan Statistik"</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Probabilistic Experiment, Sample Space, Event, Probability Definition and Axioms"</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="al">![“Kamu kirim 3 bit data. Kedengarannya kecil… tapi ada ‘semesta’ di belakangnya: semua kombinasi yang mungkin. Kalau kamu nggak mendefinisikan ruang sampel dan event dengan benar, kamu bakal salah hitung kualitas sistem komunikasi. Hari ini kita bikin cara pikir yang rapi: apa itu eksperimen, apa itu sample space, apa itu event, dan kenapa aksioma probabilitas itu ‘aturan main semesta’. Setelah ini, kamu bukan cuma bisa hitung peluang—kamu bisa *merancang* perhitungan peluang.”](../The_Decision_Engineer.png/image2.png)</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>Ruang sampel (S) sebagai himpunan semua hasil yang mungkin, kejadian (E) sebagai himpunan bagian dari ruang sampel, dan aksioma probabilitas (nilai peluang antara 0 dan 1, total peluang semesta = 1).</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>Dalam pengiriman data digital, kita ingin mengetahui peluang terjadinya kesalahan bit. Jika dikirim 3 bit, apa ruang sampelnya dan berapa peluang setidaknya satu bit salah?</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>Mendaftar ruang sampel S = {000, 001, ..., 111}. Jika kejadian E adalah 'setidaknya satu error', kita hitung jumlah elemen di E dibagi total elemen di S untuk mendapatkan probabilitasnya, yang digunakan untuk menentukan kualitas saluran komunikasi.</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 02!"</span>)</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Minggu 02: Kerangka Probabilitas dan Statistik"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Probabilistic Experiment, Sample Space, Event, Probability Definition and Axioms"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="al">![“Kamu kirim 3 bit data. Kedengarannya kecil… tapi ada ‘semesta’ di belakangnya: semua kombinasi yang mungkin. Kalau kamu nggak mendefinisikan ruang sampel dan event dengan benar, kamu bakal salah hitung kualitas sistem komunikasi. Hari ini kita bikin cara pikir yang rapi: apa itu eksperimen, apa itu sample space, apa itu event, dan kenapa aksioma probabilitas itu ‘aturan main semesta’. Setelah ini, kamu bukan cuma bisa hitung peluang—kamu bisa *merancang* perhitungan peluang.”](../The_Decision_Engineer.png/image2.png)</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../agenda/w02.qmd &gt;}}</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../hands_on_py/02-sample-space.qmd &gt;}}</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Konsep Pengetahuan</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>Ruang sampel (S) sebagai himpunan semua hasil yang mungkin, kejadian (E) sebagai himpunan bagian dari ruang sampel, dan aksioma probabilitas (nilai peluang antara 0 dan 1, total peluang semesta = 1).</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Tipikal Problem</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>Dalam pengiriman data digital, kita ingin mengetahui peluang terjadinya kesalahan bit. Jika dikirim 3 bit, apa ruang sampelnya dan berapa peluang setidaknya satu bit salah?</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Solusi &amp; Pengambilan Keputusan</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>Mendaftar ruang sampel S = {000, 001, ..., 111}. Jika kejadian E adalah 'setidaknya satu error', kita hitung jumlah elemen di E dibagi total elemen di S untuk mendapatkan probabilitasnya, yang digunakan untuk menentukan kualitas saluran komunikasi.</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Eksplorasi Komputasi (Python)</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>*Gunakan sel di bawah ini untuk mengimplementasikan simulasi atau penyelesaian masalah di atas menggunakan Python.*</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Tulis kode Python Anda di sini</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Siap untuk komputasi Minggu 02!"</span>)</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

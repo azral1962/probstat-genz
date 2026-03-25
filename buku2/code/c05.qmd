@@ -1,0 +1,73 @@
+# -*- coding: utf-8 -*-
+
+## Konstruksi Random Variable Kontinu dari Hasil Pengamatan
+```{python}
+"""
+Created on Tue Mar 24 14:28:57 2026
+
+@author: Armein Z. R. Langi
+"""
+
+import numpy as np
+
+class ContinuousRV:
+    def __init__(self, cum_freq):
+        self.x = np.array(sorted(cum_freq.keys()), dtype=float)
+        self.F = np.array([cum_freq[k] for k in self.x], dtype=float)
+
+        if self.F[-1] != 1.0:
+            raise ValueError("CDF terakhir harus 1")
+
+        self.pdf_grid = np.gradient(self.F, self.x)
+
+    def cdf(self, t):
+        return np.interp(t, self.x, self.F, left=0.0, right=1.0)
+
+    def pdf(self, t):
+        return np.interp(t, self.x, self.pdf_grid, left=0.0, right=0.0)
+
+    def ppf(self, u):
+        return np.interp(u, self.F, self.x)
+
+    def rvs(self, size=1, random_state=None):
+        rng = np.random.default_rng(random_state)
+        u = rng.random(size)
+        return self.ppf(u)
+
+    def mean(self):
+        return np.trapezoid(self.x * self.pdf_grid, self.x)
+
+    def var(self):
+        m = self.mean()
+        return np.trapezoid((self.x - m)**2 * self.pdf_grid, self.x)
+    
+cum_freq = {
+    500: 0.05,
+    600: 0.10,
+    700: 0.20,
+    800: 0.30,
+    900: 0.34,
+    1000: 0.55,
+    1100: 0.7,
+    1200: 1,
+}
+
+dist = ContinuousRV(cum_freq)
+
+print("CDF(2500) =", dist.cdf(2500))
+print("PDF(2500) =", dist.pdf(2500))
+print("PPF(0.5) =", dist.ppf(0.5))
+
+samples = dist.rvs(size=10000, random_state=42)
+print(samples[:10])
+
+
+# Mean dan Var dari Teori
+print("Mean (integral):", dist.mean())
+print("Var (integral):", dist.var())
+
+# bandingkan dengan sampling
+samples = dist.rvs(100000, random_state=42)
+print("Mean (sampling):", samples.mean())
+print("Var (sampling):", samples.var())
+```
